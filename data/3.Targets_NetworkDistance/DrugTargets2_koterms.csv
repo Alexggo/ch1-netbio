@@ -1,0 +1,143 @@
+TARGET_UNIPROT,KEGG_ID,KO_ID,KEGG_NAME,KEGG_eco,UNIPROT_eco
+P43304,hsa:2820,K00111,GPD2; glycerol-3-phosphate dehydrogenase 2,eco:b3426,P13035
+P43304,hsa:2820,K00111,GPD2; glycerol-3-phosphate dehydrogenase 2,eco:b2241,P0A9C0
+P0AEK4,eco:b1288,K00208,fabI; enoyl-[acyl-carrier-protein] reductase,eco:b1288,P0AEK4
+P0ABQ4,eco:b0048,K00287,folA; dihydrofolate reductase,eco:b0048,P0ABQ4
+P23219,hsa:5742,K00509,PTGS1; prostaglandin-endoperoxide synthase 1,,
+P26358,hsa:1786,K00558,DNMT1; DNA methyltransferase 1,eco:b1961,P0AED9
+P12461,cal:CAALFM_C205190WA,K00560,CDC21; thymidylate synthase,eco:b2827,P0A884
+P0CS13,cnb:CNBJ2230,K00560,hypothetical protein,eco:b2827,P0A884
+P0A749,eco:b3189,K00790,murA; UDP-N-acetylglucosamine 1-carboxyvinyltransferase,eco:b3189,P0A749
+P03956,hsa:4312,K01388,MMP1; matrix metallopeptidase 1,,
+P09237,hsa:4316,K01397,MMP7; matrix metallopeptidase 7,,
+P22894,hsa:4317,K01402,MMP8; matrix metallopeptidase 8,,
+Q99YW3,spy:SPy_1513,K01870,ileS; putative isoleucyl-tRNA synthetase,eco:b0026,P00956
+P0AES4,eco:b2231,K02469,gyrA; DNA gyrase subunit A,eco:b2231,P0AES4
+P43700,hin:HI_1264,K02469,"DNA gyrase, subunit A (gyrA)",eco:b2231,P0AES4
+Q5HK04,ser:SERP2548,K02469,"gyrA; DNA gyrase, A subunit",eco:b2231,P0AES4
+P72524,spn:SP_1219,K02469,"gyrA; DNA gyrase, A subunit",eco:b2231,P0AES4
+P0AES6,eco:b3699,K02470,gyrB; DNA gyrase subunit B,eco:b3699,P0AES6
+Q5HK03,ser:SERP2549,K02470,"gyrB; DNA gyrase, B subunit",eco:b3699,P0AES6
+P0A4L9,spn:SP_0806,K02470,gyrB; DNA gyrase subunit B,eco:b3699,P0AES6
+P0AFI2,eco:b3019,K02621,parC; DNA topoisomerase IV subunit A,eco:b3019,P0AFI2
+P43702,hin:HI_1529,K02621,"topoisomerase IV, subunit A (parC)",eco:b3019,P0AFI2
+P72525,spn:SP_0855,K02621,"parC; topoisomerase IV, subunit A",eco:b3019,P0AFI2
+P20083,eco:b3030,K02622,parE; DNA topoisomerase IV subunit B,eco:b3030,P20083
+Q59961,spn:SP_0852,K02622,"parE; topoisomerase IV, subunit B",eco:b3030,P20083
+P0A7J6,sfl:SF4058,K02864,rplJ; 50S ribosomal protein L10,eco:b3985,P0A7J3
+P0A7V8,eco:b3296,K02986,rpsD; 30S ribosomal subunit protein S4,eco:b3296,P0A7V8
+P0A7X3,eco:b3230,K02996,rpsI; 30S ribosomal subunit protein S9,eco:b3230,P0A7X3
+P0A8V2,eco:b3987,K03043,rpoB; RNA polymerase subunit beta,eco:b3987,P0A8V2
+P0A8T7,eco:b3988,K03046,rpoC; RNA polymerase subunit beta',eco:b3988,P0A8T7
+P11388,hsa:7153,K03164,TOP2A; DNA topoisomerase II alpha,,
+Q86VL8,hsa:146802,K03327,SLC47A2; solute carrier family 47 member 2,eco:b4044,P28303
+Q86VL8,hsa:146802,K03327,SLC47A2; solute carrier family 47 member 2,eco:b1663,P37340
+Q96FL8,hsa:55244,K03327,SLC47A1; solute carrier family 47 member 1,eco:b4044,P28303
+Q96FL8,hsa:55244,K03327,SLC47A1; solute carrier family 47 member 1,eco:b1663,P37340
+P0AD68,eco:b0084,K03587,ftsI; peptidoglycan DD-transpeptidase FtsI,eco:b0084,P0AD68
+P03886,hsa:4535,K03878,ND1; NADH dehydrogenase subunit 1,,
+P03891,hsa:4536,K03879,ND2; NADH dehydrogenase subunit 2,,
+P03897,hsa:4537,K03880,ND3; NADH dehydrogenase subunit 3,,
+P03905,hsa:4538,K03881,ND4; NADH dehydrogenase subunit 4,,
+P03901,hsa:4539,K03882,ND4L; NADH dehydrogenase subunit 4L,,
+P03915,hsa:4540,K03883,ND5; NADH dehydrogenase subunit 5,,
+P03923,hsa:4541,K03884,ND6; NADH dehydrogenase subunit 6,,
+P28331,hsa:4719,K03934,NDUFS1; NADH:ubiquinone oxidoreductase core subunit S1,,
+O75306,hsa:4720,K03935,NDUFS2; NADH:ubiquinone oxidoreductase core subunit S2,,
+O75489,hsa:4722,K03936,NDUFS3; NADH:ubiquinone oxidoreductase core subunit S3,,
+O43181,hsa:4724,K03937,NDUFS4; NADH:ubiquinone oxidoreductase subunit S4,,
+O43920,hsa:4725,K03938,NDUFS5; NADH:ubiquinone oxidoreductase subunit S5,,
+O75380,hsa:4726,K03939,NDUFS6; NADH:ubiquinone oxidoreductase subunit S6,,
+O75251,hsa:374291,K03940,NDUFS7; NADH:ubiquinone oxidoreductase core subunit S7,,
+O00217,hsa:4728,K03941,NDUFS8; NADH:ubiquinone oxidoreductase core subunit S8,,
+P49821,hsa:4723,K03942,NDUFV1; NADH:ubiquinone oxidoreductase core subunit V1,,
+P19404,hsa:4729,K03943,NDUFV2; NADH:ubiquinone oxidoreductase core subunit V2,,
+P56181,hsa:4731,K03944,NDUFV3; NADH:ubiquinone oxidoreductase subunit V3,,
+O15239,hsa:4694,K03945,NDUFA1; NADH:ubiquinone oxidoreductase subunit A1,,
+O43678,hsa:4695,K03946,NDUFA2; NADH:ubiquinone oxidoreductase subunit A2,,
+O95167,hsa:4696,K03947,NDUFA3; NADH:ubiquinone oxidoreductase subunit A3,,
+O00483,hsa:4697,K03948,NDUFA4; NDUFA4 mitochondrial complex associated,,
+Q9NRX3,hsa:56901,K03948,NDUFA4L2; NDUFA4 mitochondrial complex associated like 2,,
+Q16718,hsa:4698,K03949,NDUFA5; NADH:ubiquinone oxidoreductase subunit A5,,
+P56556,hsa:4700,K03950,NDUFA6; NADH:ubiquinone oxidoreductase subunit A6,,
+O95182,hsa:4701,K03951,NDUFA7; NADH:ubiquinone oxidoreductase subunit A7,,
+P51970,hsa:4702,K03952,NDUFA8; NADH:ubiquinone oxidoreductase subunit A8,,
+Q16795,hsa:4704,K03953,NDUFA9; NADH:ubiquinone oxidoreductase subunit A9,,
+O95299,hsa:4705,K03954,NDUFA10; NADH:ubiquinone oxidoreductase subunit A10,,
+O14561,hsa:4706,K03955,NDUFAB1; NADH:ubiquinone oxidoreductase subunit AB1,,
+Q86Y39,hsa:126328,K03956,NDUFA11; NADH:ubiquinone oxidoreductase subunit A11,,
+O75438,hsa:4707,K03957,NDUFB1; NADH:ubiquinone oxidoreductase subunit B1,,
+O95178,hsa:4708,K03958,NDUFB2; NADH:ubiquinone oxidoreductase subunit B2,,
+O43676,hsa:4709,K03959,NDUFB3; NADH:ubiquinone oxidoreductase subunit B3,,
+O95168,hsa:4710,K03960,NDUFB4; NADH:ubiquinone oxidoreductase subunit B4,,
+O43674,hsa:4711,K03961,NDUFB5; NADH:ubiquinone oxidoreductase subunit B5,,
+O95139,hsa:4712,K03962,NDUFB6; NADH:ubiquinone oxidoreductase subunit B6,,
+P17568,hsa:4713,K03963,NDUFB7; NADH:ubiquinone oxidoreductase subunit B7,,
+O95169,hsa:4714,K03964,NDUFB8; NADH:ubiquinone oxidoreductase subunit B8,,
+Q9Y6M9,hsa:4715,K03965,NDUFB9; NADH:ubiquinone oxidoreductase subunit B9,,
+O96000,hsa:4716,K03966,NDUFB10; NADH:ubiquinone oxidoreductase subunit B10,,
+O43677,hsa:4717,K03967,NDUFC1; NADH:ubiquinone oxidoreductase subunit C1,,
+O95298,hsa:4718,K03968,NDUFC2; NADH:ubiquinone oxidoreductase subunit C2,,
+P35372,hsa:4988,K04215,OPRM1; opioid receptor mu 1,,
+P30542,hsa:134,K04265,ADORA1; adenosine A1 receptor,,
+P29274,hsa:135,K04266,ADORA2A; adenosine A2a receptor,,
+P29275,hsa:136,K04267,ADORA2B; adenosine A2b receptor,,
+P0DMS8,hsa:140,K04268,ADORA3; adenosine A3 receptor,,
+P15056,hsa:673,K04365,"BRAF; B-Raf proto-oncogene, serine/threonine kinase",,
+Q09472,hsa:2033,K04498,EP300; E1A binding protein p300,,
+P49768,hsa:5663,K04505,PSEN1; presenilin 1,,
+P49810,hsa:5664,K04522,PSEN2; presenilin 2,,
+P35498,hsa:6323,K04833,SCN1A; sodium voltage-gated channel alpha subunit 1,,
+Q99250,hsa:6326,K04834,SCN2A; sodium voltage-gated channel alpha subunit 2,,
+Q9NY46,hsa:6328,K04836,SCN3A; sodium voltage-gated channel alpha subunit 3,,
+P35499,hsa:6329,K04837,SCN4A; sodium voltage-gated channel alpha subunit 4,,
+Q14524,hsa:6331,K04838,SCN5A; sodium voltage-gated channel alpha subunit 5,,
+Q01118,hsa:6332,K04839,SCN7A; sodium voltage-gated channel alpha subunit 7,,
+Q9UQD0,hsa:6334,K04840,SCN8A; sodium voltage-gated channel alpha subunit 8,,
+Q15858,hsa:6335,K04841,SCN9A; sodium voltage-gated channel alpha subunit 9,,
+Q9Y5Y9,hsa:6336,K04842,SCN10A; sodium voltage-gated channel alpha subunit 10,,
+Q13936,hsa:775,K04850,CACNA1C; calcium voltage-gated channel subunit alpha1 C,,
+Q01668,hsa:776,K04851,CACNA1D; calcium voltage-gated channel subunit alpha1 D,,
+O60840,hsa:778,K04853,CACNA1F; calcium voltage-gated channel subunit alpha1 F,,
+O43497,hsa:8913,K04854,CACNA1G; calcium voltage-gated channel subunit alpha1 G,,
+O95180,hsa:8912,K04855,CACNA1H; calcium voltage-gated channel subunit alpha1 H,,
+Q9P0X4,hsa:8911,K04856,CACNA1I; calcium voltage-gated channel subunit alpha1 I,,
+Q13698,hsa:779,K04857,CACNA1S; calcium voltage-gated channel subunit alpha1 S,,
+O15554,hsa:3783,K04945,KCNN4; potassium calcium-activated channel subfamily N member 4,,
+Q8NET8,hsa:162514,K04972,TRPV3; transient receptor potential cation channel subfamily V member 3,,
+P02919,eco:b0149,K05365,mrcB; peptidoglycan glycosyltransferase/peptidoglycan DD-transpeptidase MrcB,eco:b0149,P02919
+P02918,eco:b3396,K05366,mrcA; peptidoglycan glycosyltransferase/peptidoglycan DD-transpeptidase MrcA,eco:b3396,P02918
+P0AD65,eco:b0635,K05515,mrdA; peptidoglycan DD-transpeptidase MrdA,eco:b0635,P0AD65
+Q92831,hsa:8850,K06062,KAT2B; lysine acetyltransferase 2B,,
+P0AEB2,eco:b0632,K07258,dacA; D-alanyl-D-alanine carboxypeptidase DacA,eco:b0632,P0AEB2
+P08506,eco:b0839,K07258,dacC; D-alanyl-D-alanine carboxypeptidase DacC,eco:b0839,P08506
+P24228,eco:b3182,K07259,dacB; peptidoglycan DD-endopeptidase DacB,eco:b3182,P24228
+Q9UI33,hsa:11280,K07605,SCN11A; sodium voltage-gated channel alpha subunit 11,,
+P45452,hsa:4322,K07994,MMP13; matrix metallopeptidase 13,,
+Q05940,hsa:6571,K08155,SLC18A2; solute carrier family 18 member A2,,
+Q13627,hsa:1859,K08825,DYRK1A; dual specificity tyrosine phosphorylation regulated kinase 1A,,
+Q9BU61,hsa:25915,K09008,NDUFAF3; NADH:ubiquinone oxidoreductase complex assembly factor 3,,
+Q9NX14,hsa:54539,K11351,NDUFB11; NADH:ubiquinone oxidoreductase subunit B11,,
+Q9UI09,hsa:55967,K11352,NDUFA12; NADH:ubiquinone oxidoreductase subunit A12,,
+Q9P0J0,hsa:51079,K11353,NDUFA13; NADH:ubiquinone oxidoreductase subunit A13,,
+P35354,hsa:5743,K11987,PTGS2; prostaglandin-endoperoxide synthase 2,,
+Q53725,sao:SAOUHSC_01145,K12552,penicillin-binding protein 1,,
+Q9XDB3,saur:SABB_00472,K12553,penicillin-binding protein 3,,
+P27815,hsa:5141,K13293,PDE4A; phosphodiesterase 4A,,
+Q07343,hsa:5142,K13293,PDE4B; phosphodiesterase 4B,,
+Q08493,hsa:5143,K13293,PDE4C; phosphodiesterase 4C,,
+Q08499,hsa:5144,K13293,PDE4D; phosphodiesterase 4D,,
+Q13370,hsa:5140,K13296,PDE3B; phosphodiesterase 3B,,
+Q6YBV0,hsa:120103,K14209,SLC36A4; solute carrier family 36 member 4,,
+Q495M3,hsa:153201,K14209,SLC36A2; solute carrier family 36 member 2,,
+Q7Z2H8,hsa:206358,K14209,SLC36A1; solute carrier family 36 member 1,,
+Q495N2,hsa:285641,K14209,SLC36A3; solute carrier family 36 member 3,,
+Q9Y375,hsa:51103,K18159,NDUFAF1; NADH:ubiquinone oxidoreductase complex assembly factor 1,,
+Q8N183,hsa:91942,K18160,NDUFAF2; NADH:ubiquinone oxidoreductase complex assembly factor 2,,
+Q9P032,hsa:29078,K18161,NDUFAF4; NADH:ubiquinone oxidoreductase complex assembly factor 4,,
+Q14432,hsa:5139,K19021,PDE3A; phosphodiesterase 3A,,
+P0C1U9,,,,,
+P41972,,,,,
+P72355,,,,,
+Q53707,,,,,
+Q53729,,,,,

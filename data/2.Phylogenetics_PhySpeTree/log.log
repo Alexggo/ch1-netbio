@@ -1,0 +1,16 @@
+Tue, 09 Feb 2021 00:46:27 Checking organisms[line:185] [32mINFO[0m The organism: 284812 can't match in SSU rRNA database
+Tue, 09 Feb 2021 00:46:27 Checking organisms[line:185] [32mINFO[0m The organism: 284813 can't match in SSU rRNA database
+Tue, 09 Feb 2021 00:46:27 Checking organisms[line:186] [31mWARNING[0m These species can't match in SSU rRNA database so removing and reconstructing phylogenetic tree.
+Tue, 09 Feb 2021 00:46:27 SSU rRNA DB[line:49] [32mINFO[0m Read organisms names success
+Tue, 09 Feb 2021 00:46:28 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '559292' SSU rRNA sequence was successful
+Tue, 09 Feb 2021 00:46:28 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '237561' SSU rRNA sequence was successful
+Tue, 09 Feb 2021 00:46:29 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '214684' SSU rRNA sequence was successful
+Tue, 09 Feb 2021 00:46:29 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '367775' SSU rRNA sequence was successful
+Tue, 09 Feb 2021 00:46:29 Used time[line:280] [32mINFO[0m Retrieving SSU rRNA sequences used time: 1.9765384197235107 Seconds
+Tue, 09 Feb 2021 00:46:30 muscle[line:61] DEBUG muscle result path:/home/ubuntu/projects/ch3-netbio/data/PhySpeTree/temp/rna_alignment20210209004629/rna_sequence.fasta
+Tue, 09 Feb 2021 00:46:30 muscle[line:62] [32mINFO[0m Multiple sequence alignment by Muscle was completed.
+Tue, 09 Feb 2021 00:46:30 Gblocks[line:63] [32mINFO[0m Select conserved blocks by Gblocks was completed
+Tue, 09 Feb 2021 00:46:30 Gblocks[line:64] DEBUG Gblocks path:/home/ubuntu/projects/ch3-netbio/data/PhySpeTree/temp/rna_alignment20210209004629/rna_sequence.fasta-gb1
+Tue, 09 Feb 2021 00:46:30 convert[line:71] [32mINFO[0m Fasta format converted to PHYLIP format was completed
+Tue, 09 Feb 2021 00:46:30 iqtree[line:50] [32mINFO[0m Phylogenetic species tree reconstructed by iqtree was completed
+Tue, 09 Feb 2021 00:46:30 Used time[line:313] [32mINFO[0m Constructing species tree used time: 0.6240561008453369 Seconds

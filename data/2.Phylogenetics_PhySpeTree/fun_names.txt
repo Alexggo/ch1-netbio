@@ -1,0 +1,6 @@
+sce Saccharomyces cerevisiae (budding yeast)
+cal Candida albicans
+spo Schizosaccharomyces pombe (fission yeast)
+cne Cryptococcus neoformans var. neoformans JEC21
+cgi Cryptococcus gattii
+ecu Encephalitozoon cuniculi

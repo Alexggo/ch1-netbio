@@ -1,0 +1,20 @@
+﻿MIC,,,,
+Compound,S.cerevisiae.BY4741,C.albicans.DSY654,C.neoformansH99,C.gattii.R265
+Fluconazole,32,8,64,32
+Albendazole,>128,>128,0.5,0.5
+Amphotericin B,2,2,1,1
+Azaperone,>128,>128,>128,>128
+Caspofungin,0.25,1,32,32
+Clofazimine,32,32,>128,>128
+Clomiphene,16,64,16,8
+L-cycloserine,128,>128,>128,>128
+Fenpropidin,0.5,256,32,>128
+Kawain,>128,>128,>128,>128
+Ketoconazole,8,<0.12,4,4
+Lynestrenol,>128,2,8,4
+Mitoxantrone,32,>128,64,128
+Sertraline,>128,>128,>128,>128
+Suloctidil,8,64,32,32
+Tamoxifen,32,32,16,8
+Terbinafine,64,4,1,2
+Trifluoperazine,256,>128,64,128

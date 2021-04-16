@@ -1,0 +1,81 @@
+﻿,,,,,Species,,,Highest drug concentration µg/ml,,,,,,Replicated drugs (R) or a dditional concentrations test concentration µg/ml,,,,,,Lowest fitness in screen - single drug treatment,,,,,,Sensitive or Resistant - single drug treatment,,,,,
+Drug,Drug category,Tageted cellular process,Use,3 leter code,EC,ST,PA,E. coli BW25113,E. coli iAi1,ST LT2,ST14028,PAO1,PA14,E. coli BW25113,E. coli iAi1,ST LT2,ST14028,PAO1,PA14,E. coli BW25113,E. coli iAi1,ST LT2,ST14028,PAO1,PA14,E. coli BW25113,E. coli iAi1,ST LT2,ST14028,PAO1,PA14
+Amoxicillin,beta-lactam,cell wall,antibiotic,AMX,array/query,array/query,array/query,2,2,0.3,0.3,4,4,R,R,R,,,,0.45,0,0.84,0.76,0.89,0.92,S,S,R,R,R,R
+Oxacillin,beta-lactam,cell wall,antibiotic,OXA,array/query,array/query,array/query,5,5,5,5,2,2,R,,,R,,,0.78,0.83,0.85,0.86,0.88,0.93,R,R,R,R,R,R
+Cefotaxime,beta-lactam,cell wall,antibiotic,CTX,array/query,array/query,array/query,0.01,0.01,0.01,0.01,5,5,R,R,,,,,0.57,0.39,0.71,0.79,0,0.76,S,S,R,R,S,R
+Cefaclor,beta-lactam,cell wall,antibiotic,CEC,array/query,array/query,array/query,1,1,0.5,0.5,4,4,R,R,,,,,0.47,0.55,0,0,0.9,0.92,S,S,S,S,R,R
+Cefsulodin,beta-lactam,cell wall,antibiotic,CFS,array/query,array/query,array/query,15,15,15,15,1,2,R,R,R,R,,,0.62,0.86,0.82,0.89,0,0,S,R,R,R,S,S
+Piperacillin,beta-lactam,cell wall,antibiotic,PIP,array/query,array/query,array/query,0.3,0.3,1,1,2,3,,,,,,,0.8,0.68,0.6,0.62,0,0,R,S,S,S,S,S
+Penicillin G,beta-lactam,cell wall,antibiotic,PEN,array/query,array/query,array/query,5,5,1.25,1.25,10,10,,,,,,,0.8,0.67,0.62,0.62,0.93,0.91,R,S,S,S,R,R
+Imipenem,beta-lactam,cell wall,antibiotic,IPM,array/query,array/query,array/query,0.125,0.125,0.125,0.125,3,0.75,,,,,,0.375,0.28,0.44,0.07,0,0,0,S,S,S,S,S,S
+Mecillinam,beta-lactam,cell wall,antibiotic,MEC,array/query,array/query,array/query,0.06,0.06,0.06,0.06,2,2,R,R,,,,,0,0,0,0,0.9,0.91,S,S,S,S,R,R
+Aztreonam,beta-lactam,cell wall,antibiotic,ATM,array/query,array/query,array/query,0.05,0.05,0.05,0.05,3,5,,,,,1.5,,0,0,0,0,0,0,S,S,S,S,S,S
+Cephalexin,beta-lactam,cell wall,antibiotic,LEX,array/query,array/query,array/query,10,10,10,10,16,16,,,,,,R,0.84,0.88,0.86,0.87,0.9,0.9,R,R,R,R,R,R
+A22,other cell wall,cell wall,research used drug,A22,array/query,array/query,array/query,1.2,1.2,1.2,1.2,10,3,R,R,,,,,0,0.31,0.55,0.51,0.85,0.52,S,S,S,S,R,S
+Cycloserine D,other cell wall,cell wall,antibiotic,DCS,array/query,array/query,array/query,8,8,20,20,35,35,,,R,,,,0.58,0.67,0.89,0,0.86,0.84,S,S,R,S,R,R
+Teicoplanin,other cell wall,cell wall,antibiotic,TEC,array/query,array/query,array/query,0.3,0.3,0.3,0.3,5,5,,,,,,,0.88,0.88,0.85,0.87,0.82,0.83,R,R,R,R,R,R
+Bacitracin,other cell wall,cell wall,antibiotic,BAC,array/query,array/query,array/query,300,300,300,300,300,300,,,,,,,0.73,0.79,0.83,0.78,0.9,0.91,R,R,R,R,R,R
+Fosfomycin,other cell wall,cell wall,antibiotic,FOF,array/query,array/query,array/query,0.1,0.1,0.05,0.05,15,5,,,R,R,,,0.39,0.49,0.65,0.77,0,0,S,S,S,R,S,S
+Metronidazole,other DNA,DNA,antibiotic,MTZ,array/query,array/query,array/query,1,1,1,1,20,20,,,,,,,0.81,0.86,0.85,0.85,0.86,0.85,R,R,R,R,R,R
+Clofazimine,other DNA,DNA,antibiotic,CLO,array/query,array/query,array/query,4,4,4,4,4,4,,,,,,,0.88,0.9,0.9,0.9,0.82,0.83,R,R,R,R,R,R
+Doxorubicin,other DNA,DNA,human-targeted drug,DXR,array/query,array/query,array/query,2.5,2.5,2.5,2.5,5,5,,,5,5,R,R,0.81,0.86,0.81,0.84,0.9,0.91,R,R,R,R,R,R
+Mitomycin C,other DNA,DNA,research used drug,MMC,array/query,array/query,array/query,0.5,0.5,0.25,0.25,1.5,0.2,,,,,,0.1,0.34,0,0.33,0.54,0.4,0,S,S,S,S,S,S
+Rifampicin,RNA polymerase,DNA,antibiotic,RIF,array/query,array/query,array/query,8,8,8,8,16,20,,,R,R,,,0.41,0,0.17,0,0,0.87,S,S,S,S,S,R
+Ciprofloxacin,quinolones,DNA,antibiotic,CIP,array/query,array/query,array/query,0.01,0.01,0.015,0.015,1.25,0.08,,,R,,0.625,,0,0,0,0,0,0,S,S,S,S,S,S
+Novobiocin,quinolones,DNA,antibiotic,NVB,array/query,array/query,array/query,20,20,20,20,20,20,,R,50,"R,50",50,50,0.45,0,0.85,0.28,0.86,0.91,S,S,R,S,R,R
+Levofloxacin,DNA gyrase,DNA,antibiotic,LCX,array/query,array/query,array/query,0.04,0.04,0.08,0.08,2,0.5,,,,,0.5,,0,0,0,0,0,0,S,S,S,S,S,S
+Trimethoprim,folic acid biosynthesis,DNA,antibiotic,TMP,array/query,array/query,array/query,0.5,0.5,0.5,0.5,1,1,,R,,,,,0.49,0.46,0.53,0.46,0.83,0.85,S,S,S,S,R,R
+Sulfamonomethoxine,folic acid biosynthesis,DNA,antibiotic,SMM,array/query,array/query,array/query,50,50,50,50,100,100,,,,,,,0.88,0.88,0.85,0.88,0.77,0.81,R,R,R,R,R,R
+Nitrofurantoin,multiple,DNA,antibiotic,NIT,array/query,array/query,array/query,4,4,4,4,32,32,,,,,,,0.55,0.4,0.75,0.81,0.35,0.71,S,S,R,R,S,R
+Bleomycin,multiple,DNA,human-targeted drug,BLM,array/query,array/query,array/query,0.3,0.3,0.3,0.3,3,3,,,,,,,0.34,0.28,0.47,0.77,0.91,0.88,S,S,S,R,R,R
+Polymyxin B,LPS,membrane,antibiotic,PMB,array/query,array/query,array/query,0.3,0.3,0.3,0.3,0.5,0.5,,,,,0.25,0.25,0.29,0.79,0.84,0.85,0.76,0.08,S,R,R,R,R,S
+Chlorhexidine,LPS,membrane,antiseptic,CHG,array/query,array/query,array/query,0.5,0.5,2,2,10,10,3,3,,,,,0,0.12,0.85,0.83,0,0,S,S,R,R,S,S
+Benzalkonium,other membrane,membrane,antiseptic,BZK,array/query,array/query,array/query,15,15,15,15,50,50,R,R,R,R,,,0,0,0.65,0.7,0,0,S,S,S,S,S,S
+EGCG,fatty acid biosynthesis,membrane,food additive,EGCG,array/query,array/query,array/query,20,20,20,20,23,23,,,,,,,0.8,0.76,0.88,0.8,0.46,0.7,R,R,R,R,S,R
+Cerulenin,fatty acid biosynthesis,membrane,anti-infective,CER,array/query,array/query,array/query,10,10,10,10,10,10,,,,,,,0.8,0.81,0.8,0.84,0.89,0.86,R,R,R,R,R,R
+Nisin,PMF,PMF,antibiotic,NSN,array/query,array/query,array/query,25,25,25,25,20,20,,,,,,,0.83,0.92,0.85,0.87,0.84,0.88,R,R,R,R,R,R
+Daptomycin,PMF,PMF,antibiotic,DAP,array/query,array/query,array/query,1,1,1,1,1,1,,R,,,,,0.84,0.89,0.88,0.9,0.88,0.9,R,R,R,R,R,R
+CCCP,PMF,PMF,research used drug,CCCP,array/query,array/query,array/query,5,5,5,5,5,5,10,10,10,10,0.3125,10,0.26,0.04,0.61,0.37,0.85,0.85,S,S,S,S,R,R
+Nonactin,PMF,PMF,antibiotic,NON,array/query,array/query,array/query,1,1,1,1,2,2,,,,,,,0.88,0.89,0.93,0.91,0.81,0.83,R,R,R,R,R,R
+Paraquat,oxidative stress,oxidative stress,research used drug,PQ,array/query,array/query,array/query,5,5,10,10,10,10,,,,,,,0.76,0.75,0.82,0.83,0.87,0.86,R,R,R,R,R,R
+Fusidic acid,other protein synthesis inhibitor,protein synthesis inhibitor,antibiotic,FUS,array/query,array/query,array/query,100,100,100,100,100,100,,,,,,,0.56,0.43,0.86,0.73,0.83,0.84,S,S,R,R,R,R
+Puromycin,other protein synthesis inhibitor,protein synthesis inhibitor,antibiotic,PUR,array/query,array/query,array/query,25,25,25,25,25,25,,,,,,,0.63,0,0.78,0.72,0.78,0.77,S,S,R,R,R,R
+Chloramphenicol,other protein synthesis inhibitor,protein synthesis inhibitor,antibiotic,CHL,array/query,array/query,array/query,1,1,1,1,4,4,,,R,,62,62,0.51,0,0.63,0.63,0.87,0,S,S,S,S,R,S
+Linezolid,other protein synthesis inhibitor,protein synthesis inhibitor,antibiotic,LZD,array/query,array/query,array/query,2,2,2,2,2,2,,,,,,,0.88,0.88,0.85,0.89,0.8,0.83,R,R,R,R,R,R
+Clindamycin,other protein synthesis inhibitor,protein synthesis inhibitor,antibiotic,CLI,array/query,array/query,array/query,2,2,2,2,2,2,,,,,,,0.78,0.76,0.6,0.64,0.87,0.9,R,R,S,S,R,R
+Doxycycline,tetracycline,protein synthesis inhibitor,antibiotic,DOX,array/query,array/query,array/query,0.5,0.5,1,1,4,4,,,R,,R,,0.42,0,0.55,0.4,0.85,0.5,S,S,S,S,R,S
+Minocycline,tetracycline,protein synthesis inhibitor,antibiotic,MIN,array/query,array/query,array/query,0.5,0.5,1,1,40,20,R,R,,,20,10,0.7,0.66,0.82,0.71,0,0,S,S,R,R,S,S
+Tigecycline,tetracycline,protein synthesis inhibitor,antibiotic,TGC,array/query,array/query,array/query,0.04,0.04,0.04,0.04,10,0.1,0.625,1.25,1.25,1.25,1.25,0.5,0.84,0.89,0.88,0.88,0.72,0.87,R,R,R,R,R,R
+Spectinomycin,aminoglycoside,protein synthesis inhibitor,antibiotic,SPT,array/query,array/query,array/query,6,6,16,16,32,32,,,,,,,0.51,0.53,0.58,0.66,0.72,0.67,S,S,S,S,R,S
+Amikacin,aminoglycoside,protein synthesis inhibitor,antibiotic,AMK,array/query,array/query,array/query,0.75,0.75,1,1,0.75,1,R,,R,R,R,,0,0.77,0.36,0.72,0,0,S,R,S,R,S,S
+Tobramycin,aminoglycoside,protein synthesis inhibitor,antibiotic,TOB,array/query,array/query,array/query,1,1,2,2,1,1,,,,,R,R,0,0.83,0,0.85,0,0,S,R,S,R,S,S
+Spiramycin,macrolide,protein synthesis inhibitor,antibiotic,SPM,array/query,array/query,array/query,20,20,20,20,20,20,,,,,,,0.73,0.79,0.8,0.84,0.86,0.88,R,R,R,R,R,R
+Erythromycin,macrolide,protein synthesis inhibitor,antibiotic,ERI,array/query,array/query,array/query,15,15,32,32,32,32,,R,,,,,0.54,0.65,0.52,0.49,0.61,0.59,S,S,S,S,S,S
+Clarithromycin,macrolide,protein synthesis inhibitor,antibiotic,CLR,array/query,array/query,array/query,30,30,30,30,60,60,,,,,,,0.45,0.57,0.6,0.54,0.36,0.44,S,S,S,S,S,S
+Caffeine,food additive,human,food additive,CAF,array/query,array/query,array/query,200,200,200,200,200,200,,,,,,,0.85,0.88,0.84,0.86,0.85,0.85,R,R,R,R,R,R
+Vanillin,food additive,human,food additive,VNL,array/query,array/query,array/query,200,200,200,200,200,200,,,,,,,0.85,0.85,0.86,0.79,0.69,0.75,R,R,R,R,S,R
+Reserpine,human drug,human,human-targeted drug,RSP,array/query,array/query,array/query,100,100,100,100,100,100,,,,,,,0.86,0.9,0.88,0.87,0.74,0.84,R,R,R,R,R,R
+Procaine,human drug,human,human-targeted drug,PRC,array/query,array/query,array/query,10910.8,10910.8,10910.8,10910.8,10910.8,10910.8,R,R,,,,,0.42,0.5,0.4,0.26,0.2,0.38,S,S,S,S,S,S
+Theophylline,human drug,human,human-targeted drug,TPH,array/query,array/query,array/query,10,10,10,10,20,20,,,,,,,0.87,0.9,0.87,0.87,0.89,0.91,R,R,R,R,R,R
+Loperamide,human drug,human,human-targeted drug,LOP,array/query,array/query,array/query,200,200,200,200,200,200,R,R,,,,,0.59,0.66,0.82,0.85,0.71,0.79,S,S,R,R,R,R
+Verapamil,human drug,human,human-targeted drug,VPM,array/query,array/query,array/query,500,500,500,500,500,500,,,,,,,0.87,0.8,0.85,0.86,0.78,0.83,R,R,R,R,R,R
+PMS,oxidative stress,oxidative stress,research used drug,PMS,array/query,array/query,,10,10,15,15,,,,,,,,,0.46,0,0.7,0.68,NA,NA,S,S,R,S,R,R
+Pyocyanin,oxidative stress,oxidative stress,research used drug,PYO,array/query,array/query,,10,10,10,10,,,,,,,,,0.25,0,0.69,0.81,NA,NA,S,S,S,R,R,R
+Pseudomonic acid,oxidative stress,oxidative stress,research used drug,PSA,array/query,array/query,,2,2,1,1,,,,,,,,,0.71,0.6,0.72,0.84,NA,NA,R,S,R,R,R,R
+Meropenem,beta-lactam,cell wall,antibiotic,MEM,query,query,array/query,0.08,0.04,0.08,0.04,1,0.25,,,,,2,0.5,0.09,0.12,0,0,0,0,S,S,S,S,S,S
+Colistin,LPS,membrane,antibiotic,CST,query,query,array/query,0.4,0.4,0.6,0.6,1.25,1.25,,,,,0.3,0.3,0.84,0.97,0.99,0.92,0,0,R,R,R,R,S,S
+Flucytosine,antifungal,human,anti-infective,5FC,,,array/query,,,,,15,15,,,,,,,NA,NA,NA,NA,0.78,0.91,R,R,R,R,R,R
+CHIR-90,LPS,membrane,research used drug,CHIR90,query,query,query,0.06,0.06,0.125,0.125,0.125,0.125,,,,,,,0,0.18,0,0.45,0.99,0,S,S,S,S,R,S
+Triclosan,other membrane,membrane,anti-infective,TRI,query,query,query,0.04,0.04,0.04,0.04,0.04,0.04,,,,,,,1,1,0.98,1,0.97,0.99,R,R,R,R,R,R
+Gentamicin,aminoglycoside,protein synthesis inhibitor,antibiotic,GEN,query,query,query,1,1,1.5,1.5,1.5,1.5,,,,,,,0.01,0.67,0,0.5,0,0,S,S,S,S,S,S
+Azithromycin,macrolide,protein synthesis inhibitor,antibiotic,AZM,query,query,query,2.5,2.5,5,5,5,10,,,,,,,0.51,0.61,0.34,0.53,0.73,0.55,S,S,S,S,R,S
+Curcumin,food additive,human,food additive,CCM,query,query,query,200,200,200,200,200,200,,,,,,,0.89,0.91,0.99,1,0.55,0.77,R,R,R,R,S,R
+Berberine,food additive,human,food additive,BBR,query,query,query,200,200,200,200,200,200,,,,,,,0.8,0.85,0.9,0.89,0.76,0.88,R,R,R,R,R,R
+Metformin,human drug,human,human-targeted drug,MF,query,query,query,12916,12916,38748,38748,25832,25832,,,,,,,0.54,0.27,0.67,0.63,0.48,0.58,S,S,S,S,S,S
+Phenformin,human drug,human,research used drug,PHM,query,query,query,3,3,20,20,10,10,,,,,,R,0.95,1,1,1,1,0,R,R,R,R,R,S
+Streptozotocin,human drug,human,human-targeted drug,STZ,query,query,query,10,10,10,10,10,10,,,,,,,0.84,0.79,0.55,0.7,1,0.98,R,R,S,R,R,R
+Diclofenac,human drug,human,human-targeted drug,DIC,query,query,query,100,100,100,100,100,100,,,,,,,0.97,0.97,0.97,0.99,0.96,0.99,R,R,R,R,R,R
+Acetylsalisylic acid,human drug,human,human-targeted drug,ASA,query,query,query,750,750,750,750,750,750,R,R,,,,,0.68,0.75,0.67,0.89,0.78,0.84,S,R,S,R,R,R
+Ciclopirox,human drug,human,human-targeted drug,CPO,query,query,query,10,10,10,10,10,10,,,,,,,0.27,0.15,0.3,0.27,0.58,0.75,S,S,S,S,S,R
+Moxifloxacin,quinolones,DNA,antibiotic,MXF,query,query,query,0.08,0.08,0.08,0.08,0.5,0.5,,,,,,,0,0.04,0.64,0,0.96,0.67,S,S,S,S,R,S
+Phleomycin,multiple,DNA,human-targeted drug,PLM,query,query,query,5,5,5,5,0.625,0.625,,,,,,,0.17,0.16,0,0.54,1,1,S,S,S,S,R,R

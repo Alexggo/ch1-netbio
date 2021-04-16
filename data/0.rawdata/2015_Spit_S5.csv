@@ -1,0 +1,65 @@
+strain,compound,antifungal,cid,MIC_ACM,FIC_ACM,MIC_Antifungal,FIC_Antifungal,FIC_index
+C.albicans,AHC,caspofungin,75451,25,0.13,0.5,0.13,0.3
+C.albicans,Asiatic Acid,caspofungin,119034,50,0.13,0.5,0.06,0.2
+C.albicans,Clofazimine,caspofungin,2794,>100,0.03,0.5,0.13,0.2
+C.albicans,Cyclosporin A,caspofungin,5284373,>50,0.06,0.5,0.06,0.1
+C.albicans,PCC,caspofungin,62529,25,0.5,0.5,0.5,1
+C.albicans,Suloctidil,caspofungin,5354,>100,0.5,0.5,0.06,0.6
+C.albicans,Thapsigargin,caspofungin,446378,>50,0.5,0.5,0.06,0.6
+C.albicans,Tomatidine,caspofungin,65576,25,0.5,0.5,0.06,0.6
+S.cerevisiae,AHC,caspofungin,75451,6.25,0.25,0.5,0.06,0.3
+S.cerevisiae,Asiatic Acid,caspofungin,119034,>50,0.25,0.5,0.13,0.4
+S.cerevisiae,Clofazimine,caspofungin,2794,>100,0.03,0.5,0.06,0.1
+S.cerevisiae,Cyclosporin A,caspofungin,5284373,>50,0.06,0.5,0.06,0.1
+S.cerevisiae,PCC,caspofungin,62529,6.25,0.5,0.5,0.25,0.8
+S.cerevisiae,Suloctidil,caspofungin,5354,25,0.5,0.5,0.06,0.6
+S.cerevisiae,Thapsigargin,caspofungin,446378,>50,0.5,0.5,0.06,0.6
+S.cerevisiae,Tomatidine,caspofungin,65576,12.5,0.25,0.5,0.25,0.5
+S.pombe,AHC,caspofungin,75451,6.25,0.5,4,0.5,1
+S.pombe,Asiatic Acid,caspofungin,119034,50,1,4,0.5,1.5
+S.pombe,Clofazimine,caspofungin,2794,>100,0.5,4,0.13,0.6
+S.pombe,Cyclosporin A,caspofungin,5284373,>50,0.06,4,0.25,0.3
+S.pombe,PCC,caspofungin,62529,6.25,0.5,4,0.25,0.8
+S.pombe,Suloctidil,caspofungin,5354,12.5,0.5,4,0.02,0.5
+S.pombe,Thapsigargin,caspofungin,446378,>50,1,4,1,2
+S.pombe,Tomatidine,caspofungin,65576,3.125,0.5,4,0.13,0.6
+C.neoformans,AHC,caspofungin,75451,6.25,0.5,>4,0.5,1
+C.neoformans,Asiatic Acid,caspofungin,119034,25,2,>4,0.5,2.5
+C.neoformans,Clofazimine,caspofungin,2794,>100,0.25,>4,0.13,0.4
+C.neoformans,Cyclosporin A,caspofungin,5284373,>50,1,>4,1,2
+C.neoformans,PCC,caspofungin,62529,12,1,>4,1,2
+C.neoformans,Suloctidil,caspofungin,5354,50,0.5,>4,0.5,1
+C.neoformans,Thapsigargin,caspofungin,446378,>50,1,>4,1,2
+C.neoformans,Tomatidine,caspofungin,65576,25,1,>4,1,2
+C.albicans,AHC,fluconazole,75451,25,0.5,2,1,1.5
+C.albicans,Asiatic Acid,fluconazole,119034,50,0.5,2,1,1.5
+C.albicans,Clofazimine,fluconazole,2794,>100,1,2,1,2
+C.albicans,Cyclosporin A,fluconazole,5284373,>50,0.5,2,0.5,1
+C.albicans,PCC,fluconazole,62529,25,0.5,2,0.25,0.8
+C.albicans,Suloctidil,fluconazole,5354,>100,0.5,2,0.5,1
+C.albicans,Thapsigargin,fluconazole,446378,>50,1,2,1,2
+C.albicans,Tomatidine,fluconazole,65576,25,0.13,2,0.25,0.4
+S.cerevisiae,AHC,fluconazole,75451,6.25,0.5,32,0.5,1
+S.cerevisiae,Asiatic Acid,fluconazole,119034,>50,1,32,1,2
+S.cerevisiae,Clofazimine,fluconazole,2794,>100,0.06,32,0.25,0.3
+S.cerevisiae,Cyclosporin A,fluconazole,5284373,>50,1,32,1,2
+S.cerevisiae,PCC,fluconazole,62529,6.25,0.5,32,0.13,0.6
+S.cerevisiae,Suloctidil,fluconazole,5354,25,0.5,32,0.02,0.5
+S.cerevisiae,Thapsigargin,fluconazole,446378,>50,0.5,32,0.5,1
+S.cerevisiae,Tomatidine,fluconazole,65576,12.5,0.25,32,0.03,0.3
+S.pombe,AHC,fluconazole,75451,6.25,0.5,64,0.5,1
+S.pombe,Asiatic Acid,fluconazole,119034,50,1,64,1,2
+S.pombe,Clofazimine,fluconazole,2794,>100,0.5,64,0.25,0.8
+S.pombe,Cyclosporin A,fluconazole,5284373,>50,1,64,1,2
+S.pombe,PCC,fluconazole,62529,6.25,0.5,64,0.5,1
+S.pombe,Suloctidil,fluconazole,5354,12.5,0.5,64,0.02,0.5
+S.pombe,Thapsigargin,fluconazole,446378,>50,1,64,1,2
+S.pombe,Tomatidine,fluconazole,65576,3.125,0.5,64,0.13,0.6
+C.neoformans,AHC,fluconazole,75451,6.25,0.5,16,0.02,0.5
+C.neoformans,Asiatic Acid,fluconazole,119034,25,1,16,1,2
+C.neoformans,Clofazimine,fluconazole,2794,>100,0.25,16,0.13,0.4
+C.neoformans,Cyclosporin A,fluconazole,5284373,>50,1,16,1,2
+C.neoformans,PCC,fluconazole,62529,12,1,16,1,2
+C.neoformans,Suloctidil,fluconazole,5354,50,0.5,16,0.06,0.6
+C.neoformans,Thapsigargin,fluconazole,446378,>50,1,16,1,2
+C.neoformans,Tomatidine,fluconazole,65576,25,0.25,16,0.06,0.3
