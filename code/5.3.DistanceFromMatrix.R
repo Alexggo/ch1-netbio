@@ -2,12 +2,8 @@
 args = commandArgs(trailingOnly=TRUE)
 
 #' ---
-#' title: "4.Heatmaps_PCA_BlombergK"
+#' title: 3.3.DistanceFromMatrix.
 #' author: "Alex Gil"
-#' date: "1/26/2021"
-#' output: html_document
-#' 
-#' # 3.3.DistanceFromMatrix.
 #' 
 #' 
 ## -----------------------------------------------------------------------------
@@ -53,25 +49,24 @@ library("ggbiplot")
 #' 
 ## -----------------------------------------------------------------------------
 
-mat <- read.csv("data/processed/Broc2018_maindataset.csv") %>%
+mat <- read.csv("data/1.processed/Broc2018_maindataset.csv") %>%
   filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau))
 
-clust <- read.csv("results/tSNE_Clustermembership_p706.csv")
-colnames(clust)[1] <- "drug_pair"
+clust <- read.csv("data/4.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.csv")
 
-mat1 <- full_join(mat,clust,by="drug_pair")
+mat1 <- full_join(mat,clust,by="drugdrug")
 
 # Read phylogenetic tree
 species <- c("ebw","ecr","stm","seo","pae","pau")
 
 treetype <- "bac_species.txt.hcp"
-treefile <- file.path('data/PhySpeTree',treetype,"iqtree.tree.treefile")
+treefile <- file.path('data/2.Phylogenetics_PhySpeTree',treetype,"iqtree.tree.treefile")
 tree_nw <- read.tree(treefile)
 # Drop the species that are not needed.
 not.species <- tree_nw$tip.label[!(tree_nw$tip.label %in% species)]
 tree_nw <- drop.tip(tree_nw,not.species)
 
-phylofile <- file.path("data/PhySpeTree","dist_bac_hcp.csv")
+phylofile <- file.path("data/2.Phylogenetics_PhySpeTree","dist_bac_hcp.csv")
 PD_dist <- read.csv(file=phylofile)%>%
   mutate(ID=paste0(Sp1,"-",Sp2)) %>% 
   filter(PhyloDist!=0) 
@@ -154,8 +149,7 @@ ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   geom_smooth(method = "lm", se=FALSE, color="black")+
   labs(x="Phylogenetic Distance",
        y="Chemical Patristic Distance from Dendrogram",
-       title="Chemical divergence accumulates with time",
-       caption=paste("R^2=",round(gla$r.squared,4)))+
+       title="Chemical divergence accumulates with time")+
   scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
                 labels = trans_format("log10", math_format(10^.x)))+
   annotation_logticks(sides="b")+
@@ -164,6 +158,4 @@ ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   theme(axis.line = element_line(colour = "black"),
         panel.border = element_rect(colour = "black", fill=NA, size=1))+
   facet_wrap(.~cluster)
-g1
-ggplotly(g1)
 

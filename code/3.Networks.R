@@ -53,7 +53,7 @@ tab1 <- inner_join(tab1,drug_target1,by="Uniprot2")
 tab1 <- tab1 %>% filter(tab1$Drug1!=tab1$Drug2)%>% distinct()
 
 y <- tab1 %>% group_by(Drug1,Drug2) %>% 
-  summarise(min.length=mean(Length))
+  summarise(min.length=min(Length))
 
 # Convert to square matrix, to obtain upper diagonal values.
 z <- y %>% pivot_wider(names_from=Drug2,values_from=min.length) %>% 
@@ -74,8 +74,7 @@ drug_mat <- drug_mat %>%
 drug_mat1 <- drug_mat  %>% 
   pivot_longer(names_to="D2",values_to="Min_distance",2:(dim(drug_mat)[2]))%>%
   filter(!is.na(Min_distance)) %>% 
-  filter(Min_distance!=0) %>% 
-  filter(Min_distance!=Inf)
+  filter(Min_distance!=0) 
 drug_mat2 <- drug_mat1 %>% mutate(drugdrug=paste0(D1,"-",D2))
 
 write.csv(drug_mat2,"data/3.Targets_NetworkDistance/DrugTargets4_distance.csv",row.names = F)
