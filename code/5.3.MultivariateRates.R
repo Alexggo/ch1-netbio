@@ -4,6 +4,7 @@ library(broom)
 library(OUwie)
 library(phytools)
 library(ggx)
+library(ape)
 
 
 mat <- read.csv("data/1.processed/Broc2018_maindataset.csv")
@@ -23,7 +24,6 @@ not.species <- tree_nw$tip.label[!(tree_nw$tip.label %in% species)]
 tree_nw <- drop.tip(tree_nw,not.species)
 
 
-# Run test for tSNE clusters
 dat <- mat2 %>% select(ebw,ecr,seo,stm,pae,pau) %>% t() 
 
 # Run test for drug categories
@@ -35,20 +35,27 @@ RT_c <- compare.multi.evol.rates(A=dat,gp=mat2$drug_category,phy=tree_nw,iter=99
 RT_p <- compare.multi.evol.rates(A=dat,gp=mat2$targeted_process,phy=tree_nw,iter=999)
 RT_u <- compare.multi.evol.rates(A=dat,gp=mat2$use,phy=tree_nw,iter=999)
 str(RT_tSNE)
-## With network distance.
-distance <- read.csv("data/3.Targets_NetworkDistance/DrugTargets4_distance.csv")
 
-mat1 <- full_join(mat,distance,by="drugdrug")
+
+#### With networkdist/k.edge.connectivity
+connect <- read.csv(file.path("data/3.Targets_NetworkDistance","EcoliNet.v1.benchmark.txtconnectmat.csv"))
+connect <- connect %>% mutate(drugdrug=paste0(Drug1,"-",Drug2))
+
+
+mat1 <- full_join(mat,connect,by="drugdrug")
 mat2 <- mat1 %>% 
   filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau)) %>% 
-  filter(!is.na(Min_distance))
+  filter(!is.na(value))
 
-x <- mat2 %>% select(Min_distance,ebw,ecr,stm,seo,pae,pau)
+x <- mat2 %>% select(value,ebw,ecr,stm,seo,pae,pau)
 y <- x %>% select(ebw,ecr,stm,seo,pae,pau) %>% t()
-RT_dist <- compare.multi.evol.rates(A=y,gp=x$Min_distance,phy=tree_nw,iter=999)
+RT_conn <- compare.multi.evol.rates(A=y,gp=x$value,phy=tree_nw,iter=999)
+
+
+
 
 ####
-RT <- RT_tSNE
+RT <- RT_conn
 df <- data.frame(rates=RT$sigma.d.gp,
            groups=RT$groups)
 ggplot(df,aes(x=as.numeric(df$groups),y=df$rates))+
@@ -58,10 +65,9 @@ ggplot(df,aes(x=as.numeric(df$groups),y=df$rates))+
   theme(axis.text.x = element_text(angle = 90)) 
 
 
-summary(RT_uu)
-plot(RT_tSNE)
-
-
+summary(RT_conn)
+plot(RT_conn)
+hist(connect$value)
 
 
 
@@ -86,3 +92,58 @@ rat_mat %>% group_by(Min_distance) %>%
   ggplot(aes(x=Min_distance,y=mean_rate))+
   geom_point()+
   theme_minimal()
+
+
+#First, calculate the phylogenetic mean for each variable.
+Sigma1 <- vcv(tree_nw) #This is the variance-covariance matrix for the tree.
+
+gls.Ymean<-function(Y,Sigma){
+  n<-length(Y)
+  #Standardize sigma to reduce rounding errors
+  #      tr<-sum(diag(Sigma))
+  #      Sigma<-n*Sigma/tr
+  #Input
+  invSigma<-solve(Sigma)
+  #pgls mean and variance
+  X1<-rep(1,n)
+  q<-2          # correct if multivariate!!
+  C1<-solve(t(X1)%*%invSigma%*%X1)
+  Y_PGLSmean<-C1%*%t(X1)%*%invSigma%*%Y
+  Y_PGLSdeviations = Y - c(Y_PGLSmean)
+  Y_PGLSvariance = (t(Y_PGLSdeviations)%*%invSigma%*%Y_PGLSdeviations)/(n-1)
+  SE_Y_mean = sqrt(Y_PGLSvariance/n)
+  #Save model
+  results<-cbind(Y_PGLSmean,SE_Y_mean,Y_PGLSvariance)
+  colnames(results)<-c("Ymean","YSE","Y_PGLSvariance")
+  return(results)
+}
+
+list1 <- list()
+for (i in 1:dim(dat)[2]){
+  list1[[i]] <- gls.Ymean(dat[,i],Sigma=Sigma1)
+}
+df1 <- as.data.frame(do.call(rbind, list1))
+df1$cluster <- mat2$clusters
+
+
+#Calculate standard arithmetic mean across variables that belong to different clusters.
+df2 <- df1 %>% group_by(cluster) %>% 
+  summarise(Ymean.mean=mean(Ymean),
+            YSE.mean=mean(YSE),
+            Y_PGLSvariance.mean=mean(Y_PGLSvariance))
+
+#Paired sample t tests among the means of each cluster
+df1.1 <- df1 %>% filter(cluster==1) %>% select(Ymean)
+df1.2 <- df1 %>% filter(cluster==2) %>% select(Ymean)
+
+# This works for every two traits. But I have 2655
+phyl.pairedttest(tree=tree_nw,x1=dat[,1],x2=dat[,2])
+# We want to compare two vectors that are paired, x1 and x2. 
+# Where the means in the test are the means in the clusters.
+# This may be a problem, what is the tree in here? 
+# Should I use a simple t-test comparing phylogenetic means across clusters?
+# In this case the t-test would not be paired.
+
+#Account for multiple testing
+p.adjust(p, method = BH, n = length(p))
+
