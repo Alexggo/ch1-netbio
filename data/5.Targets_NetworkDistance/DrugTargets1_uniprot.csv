@@ -1,0 +1,250 @@
+Drug,PubChem_CID,CHEMBL_ID,MECHANISM_OF_ACTION,TARGET_PREF_NAME,TARGET_UNIPROT,TARGET_INFO
+A22,16741200,,Presellin inhibitor,Presellin-1,P49768,
+A22,16741200,,Presellin inhibitor,Presellin-2,P49810,
+Acetylsalisylic acid,2244,CHEMBL25,Cyclooxygenase inhibitor,Cyclooxygenase,P23219,Prostaglandin G/H synthase 1
+Acetylsalisylic acid,2244,CHEMBL25,Cyclooxygenase inhibitor,Cyclooxygenase,P35354,Prostaglandin G/H synthase 2
+Amikacin,37768,CHEMBL177,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,16S ribosomal RNA
+Amoxicillin,33613,CHEMBL1082,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02918,Penicillin-binding protein 1A
+Amoxicillin,33613,CHEMBL1082,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02919,Penicillin-binding protein 1B
+Amoxicillin,33613,CHEMBL1082,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P08506,D-alanyl-D-alanine carboxypeptidase DacC
+Amoxicillin,33613,CHEMBL1082,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD65,Penicillin-binding protein 2
+Amoxicillin,33613,CHEMBL1082,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD68,Peptidoglycan synthase FtsI
+Amoxicillin,33613,CHEMBL1082,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AEB2,D-alanyl-D-alanine carboxypeptidase DacA
+Amoxicillin,33613,CHEMBL1082,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P24228,D-alanyl-D-alanine carboxypeptidase DacB
+Azithromycin,447043,CHEMBL529,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,23S ribosomal RNA
+Aztreonam,5742832,CHEMBL158,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02918,Penicillin-binding protein 1A
+Aztreonam,5742832,CHEMBL158,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02919,Penicillin-binding protein 1B
+Aztreonam,5742832,CHEMBL158,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P08506,D-alanyl-D-alanine carboxypeptidase DacC
+Aztreonam,5742832,CHEMBL158,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD65,Penicillin-binding protein 2
+Aztreonam,5742832,CHEMBL158,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD68,Peptidoglycan synthase FtsI
+Aztreonam,5742832,CHEMBL158,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AEB2,D-alanyl-D-alanine carboxypeptidase DacA
+Aztreonam,5742832,CHEMBL158,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P24228,D-alanyl-D-alanine carboxypeptidase DacB
+Bacitracin,11980094,CHEMBL1200558,C55-isoprenyl pyrophosphate inhibitor,C55-isoprenyl pyrophosphate,,C55-isoprenyl pyrophosphate
+Benzalkonium,70519829,CHEMBL1187417,Cell membrane inhibitor,Cell membrane,,
+Berberine,2353,CHEMBL295124,AMP-activated protein kinase (AMPK) activator,,,AMP-activated protein kinase (AMPK) activator
+Bleomycin,5360373,CHEMBL403664,DNA inhibitor,DNA,,DNA
+Caffeine,2519,CHEMBL113,Adenosine receptor antagonist,Adenosine receptor,O15554,Intermediate conductance calcium-activated potassium channel protein 4
+Caffeine,2519,CHEMBL113,Adenosine receptor antagonist,Adenosine receptor,P0DMS8,Adenosine receptor A3
+Caffeine,2519,CHEMBL113,Adenosine receptor antagonist,Adenosine receptor,P29274,Adenosine receptor A2a
+Caffeine,2519,CHEMBL113,Adenosine receptor antagonist,Adenosine receptor,P29275,Adenosine receptor A2b
+Caffeine,2519,CHEMBL113,Adenosine receptor antagonist,Adenosine receptor,P30542,Adenosine receptor A1
+Caffeine,2519,CHEMBL113,Adenosine receptor antagonist,Adenosine receptor,Q07343,"cAMP-specific 3',5'-cyclic phosphodiesterase 4B"
+CCCP,2603,CHEMBL224214,,,,
+Cefaclor,51039,CHEMBL680,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02918,Penicillin-binding protein 1A
+Cefaclor,51039,CHEMBL680,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02919,Penicillin-binding protein 1B
+Cefaclor,51039,CHEMBL680,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P08506,D-alanyl-D-alanine carboxypeptidase DacC
+Cefaclor,51039,CHEMBL680,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD65,Penicillin-binding protein 2
+Cefaclor,51039,CHEMBL680,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD68,Peptidoglycan synthase FtsI
+Cefaclor,51039,CHEMBL680,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AEB2,D-alanyl-D-alanine carboxypeptidase DacA
+Cefaclor,51039,CHEMBL680,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P24228,D-alanyl-D-alanine carboxypeptidase DacB
+Cefotaxime,5742673,CHEMBL1730,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02918,Penicillin-binding protein 1A
+Cefotaxime,5742673,CHEMBL1730,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02919,Penicillin-binding protein 1B
+Cefotaxime,5742673,CHEMBL1730,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P08506,D-alanyl-D-alanine carboxypeptidase DacC
+Cefotaxime,5742673,CHEMBL1730,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD65,Penicillin-binding protein 2
+Cefotaxime,5742673,CHEMBL1730,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD68,Peptidoglycan synthase FtsI
+Cefotaxime,5742673,CHEMBL1730,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AEB2,D-alanyl-D-alanine carboxypeptidase DacA
+Cefotaxime,5742673,CHEMBL1730,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P24228,D-alanyl-D-alanine carboxypeptidase DacB
+Cefsulodin,656575,CHEMBL3351077,Bacterial penicillin-binding protein,Bacterial penicillin-binding protein,,
+Cephalexin,27447,CHEMBL1727,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02918,Penicillin-binding protein 1A
+Cephalexin,27447,CHEMBL1727,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02919,Penicillin-binding protein 1B
+Cephalexin,27447,CHEMBL1727,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P08506,D-alanyl-D-alanine carboxypeptidase DacC
+Cephalexin,27447,CHEMBL1727,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD65,Penicillin-binding protein 2
+Cephalexin,27447,CHEMBL1727,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD68,Peptidoglycan synthase FtsI
+Cephalexin,27447,CHEMBL1727,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AEB2,D-alanyl-D-alanine carboxypeptidase DacA
+Cephalexin,27447,CHEMBL1727,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P24228,D-alanyl-D-alanine carboxypeptidase DacB
+Cerulenin,5282054,CHEMBL45627,,,,
+CHIR-90,11656518,CHEMBL558752,v-raf murine sarcoma viral oncogene homolog B1,v-raf murine sarcoma viral oncogene homolog B1,P15056,v-raf murine sarcoma viral oncogene homolog B1
+Chloramphenicol,5959,CHEMBL130,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,23S ribosomal RNA
+Chlorhexidine,9552079,CHEMBL790,Cell membrane inhibitor,Cell membrane,,Cell membrane
+Ciclopirox,2749,CHEMBL1413,Iron chelating agent,Iron,,Iron
+Ciprofloxacin,2764,CHEMBL8,Bacterial DNA gyrase inhibitor,Bacterial DNA gyrase,P0AES4,DNA gyrase subunit A
+Ciprofloxacin,2764,CHEMBL8,Bacterial DNA gyrase inhibitor,Bacterial DNA gyrase,P0AES6,DNA gyrase subunit B
+Ciprofloxacin,2764,CHEMBL8,Bacterial DNA gyrase inhibitor,Bacterial DNA gyrase,P0C1U9,DNA topoisomerase 4 subunit A
+Clarithromycin,84029,CHEMBL1741,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,23S ribosomal RNA
+Clindamycin,446598,CHEMBL1753,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,P0A7J6,50S ribosomal protein L10
+Clindamycin,446598,CHEMBL1753,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,23S ribosomal RNA
+Clofazimine,2794,CHEMBL1292,DNA inhibitor,DNA,,DNA
+Colistin,5311054,CHEMBL499783,Cell outer membrane inhibitor,Cell outer membrane,,Cell outer membrane
+Curcumin,969516,CHEMBL140,E1A binding protein p300,E1A binding protein p300,Q09472,E1A binding protein p300
+Cycloserine D,6234,CHEMBL771,Proton-coupled Amino acid Transporter 1,Proton-coupled Amino acid Transporter 1,Q7Z2H8,PAT1
+Cycloserine D,6234,CHEMBL771,Proton-coupled Amino acid Transporter 2,Proton-coupled Amino acid Transporter 2,Q495M3,PAT2
+Cycloserine D,6234,CHEMBL771,Proton-coupled Amino acid Transporter 3,Proton-coupled Amino acid Transporter 3,Q495N2,PAT3
+Cycloserine D,6234,CHEMBL771,Proton-coupled Amino acid Transporter 4,Proton-coupled Amino acid Transporter 4,Q6YBV0,PAT4
+Daptomycin,16134395,CHEMBL387675,Cell membrane inhibitor,Cell membrane,,Cell membrane
+Diclofenac,3033,CHEMBL139,Cyclooxygenase inhibitor,Cyclooxygenase,P23219,Prostaglandin G/H synthase 1
+Diclofenac,3033,CHEMBL139,Cyclooxygenase inhibitor,Cyclooxygenase,P35354,Prostaglandin G/H synthase 2
+Doxorubicin,31703,CHEMBL53463,DNA topoisomerase II alpha inhibitor,DNA topoisomerase II alpha,P11388,DNA topoisomerase 2-alpha
+Doxorubicin,31703,CHEMBL53463,DNA topoisomerase II alpha inhibitor,DNA topoisomerase II alpha,P11388,DNA topoisomerase 2-alpha
+Doxycycline,54671203,CHEMBL1433,Matrix metalloproteinase-1,Matrix metalloproteinase-1,P03956,Interstitial collagenase
+Doxycycline,54671203,CHEMBL1433,Matrix metalloproteinase 7,Matrix metalloproteinase 7,P09237,Matrilysin
+Doxycycline,54671203,CHEMBL1433,30S ribosomal protein S4,30S ribosomal protein S4,P0A7V8,30S ribosomal protein S4
+Doxycycline,54671203,CHEMBL1433,30S ribosomal protein S9,30S ribosomal protein S9,P0A7X3,30S ribosomal protein S9
+Doxycycline,54671203,CHEMBL1433,Matrix metalloproteinase 8,Matrix metalloproteinase 8,P22894,Neutrophil collagenase
+Doxycycline,54671203,CHEMBL1433,Matrix metalloproteinase 13,Matrix metalloproteinase 13,P45452,Collagenase 3
+EGCG,65064,CHEMBL297453,dual specificity tyrosine phosphorylation regulated kinase 1A,dual specificity tyrosine phosphorylation regulated kinase 1A,Q13627,dual specificity tyrosine phosphorylation regulated kinase 1A
+EGCG,65064,CHEMBL297453,lysine acetyltransferase 2B,lysine acetyltransferase 2B,Q92831,lysine acetyltransferase 2B
+EGCG,65064,CHEMBL297453,E1A binding protein p300,E1A binding protein p300,Q09472,E1A binding protein p300
+Erythromycin,12560,CHEMBL532,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,23S ribosomal RNA
+Flucytosine,3366,CHEMBL1463,Thymidylate synthase inhibitor,Thymidylate synthase,P0CS13,Thymidylate synthase
+Flucytosine,3366,CHEMBL1463,Thymidylate synthase inhibitor,Thymidylate synthase,P12461,Thymidylate synthase
+Flucytosine,3366,CHEMBL1463,Thymidylate synthase inhibitor,DNA (cytosine-5)-methyltransferase 1,P26358,DNA (cytosine-5)-methyltransferase 1
+Fosfomycin,446987,CHEMBL1757,UDP-N-acetylglucosamine 1-carboxyvinyltransferase inhibitor,UDP-N-acetylglucosamine 1-carboxyvinyltransferase,P0A749,UDP-N-acetylglucosamine 1-carboxyvinyltransferase
+Fusidic acid,3000226,CHEMBL374975,,,,
+Gentamicin,3467,CHEMBL329592,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,16S ribosomal RNA
+Imipenem,104838,CHEMBL148,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02918,Penicillin-binding protein 1A
+Imipenem,104838,CHEMBL148,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02919,Penicillin-binding protein 1B
+Imipenem,104838,CHEMBL148,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P08506,D-alanyl-D-alanine carboxypeptidase DacC
+Imipenem,104838,CHEMBL148,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD65,Penicillin-binding protein 2
+Imipenem,104838,CHEMBL148,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD68,Peptidoglycan synthase FtsI
+Imipenem,104838,CHEMBL148,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AEB2,D-alanyl-D-alanine carboxypeptidase DacA
+Imipenem,104838,CHEMBL148,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P24228,D-alanyl-D-alanine carboxypeptidase DacB
+Levofloxacin,149096,CHEMBL33,DNA gyrase inhibitor,DNA gyrase,P0A4L9,DNA gyrase subunit B
+Levofloxacin,149096,CHEMBL33,DNA gyrase inhibitor,DNA gyrase subunit A,P43700,DNA gyrase subunit A
+Levofloxacin,149096,CHEMBL33,DNA gyrase inhibitor,DNA topoisomerase 4 subunit A,P43702,DNA topoisomerase 4 subunit A
+Levofloxacin,149096,CHEMBL33,DNA gyrase inhibitor,DNA gyrase,P72524,DNA gyrase subunit A
+Levofloxacin,149096,CHEMBL33,DNA gyrase inhibitor,Topoisomerase IV,P72525,DNA topoisomerase 4 subunit A
+Levofloxacin,149096,CHEMBL33,DNA gyrase inhibitor,Topoisomerase IV,Q59961,DNA topoisomerase 4 subunit B
+Linezolid,441401,CHEMBL126,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,
+Loperamide,3955,CHEMBL841,Mu opioid receptor agonist,Mu opioid receptor,P35372,Mu-type opioid receptor
+Mecillinam,36273,CHEMBL530,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,,
+Meropenem,441130,CHEMBL127,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02918,Penicillin-binding protein 1A
+Meropenem,441130,CHEMBL127,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02919,Penicillin-binding protein 1B
+Meropenem,441130,CHEMBL127,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P08506,D-alanyl-D-alanine carboxypeptidase DacC
+Meropenem,441130,CHEMBL127,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD65,Penicillin-binding protein 2
+Meropenem,441130,CHEMBL127,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD68,Peptidoglycan synthase FtsI
+Meropenem,441130,CHEMBL127,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AEB2,D-alanyl-D-alanine carboxypeptidase DacA
+Meropenem,441130,CHEMBL127,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P24228,D-alanyl-D-alanine carboxypeptidase DacB
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O00217,"NADH dehydrogenase [ubiquinone] iron-sulfur protein 8, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O00483,Cytochrome c oxidase subunit NDUFA4
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O14561,"Acyl carrier protein, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O15239,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 1
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O43181,"NADH dehydrogenase [ubiquinone] iron-sulfur protein 4, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O43674,"NADH dehydrogenase [ubiquinone] 1 beta subcomplex subunit 5, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O43676,NADH dehydrogenase [ubiquinone] 1 beta subcomplex subunit 3
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O43677,"NADH dehydrogenase [ubiquinone] 1 subunit C1, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O43678,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 2
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O43920,NADH dehydrogenase [ubiquinone] iron-sulfur protein 5
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O75251,"NADH dehydrogenase [ubiquinone] iron-sulfur protein 7, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O75306,"NADH dehydrogenase [ubiquinone] iron-sulfur protein 2, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O75380,"NADH dehydrogenase [ubiquinone] iron-sulfur protein 6, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O75438,NADH dehydrogenase [ubiquinone] 1 beta subcomplex subunit 1
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O75489,"NADH dehydrogenase [ubiquinone] iron-sulfur protein 3, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O95139,NADH dehydrogenase [ubiquinone] 1 beta subcomplex subunit 6
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O95167,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 3
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O95168,NADH dehydrogenase [ubiquinone] 1 beta subcomplex subunit 4
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O95169,"NADH dehydrogenase [ubiquinone] 1 beta subcomplex subunit 8, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O95178,"NADH dehydrogenase [ubiquinone] 1 beta subcomplex subunit 2, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O95182,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 7
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O95298,NADH dehydrogenase [ubiquinone] 1 subunit C2
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O95299,"NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 10, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),O96000,NADH dehydrogenase [ubiquinone] 1 beta subcomplex subunit 10
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P03886,NADH-ubiquinone oxidoreductase chain 1
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P03891,NADH-ubiquinone oxidoreductase chain 2
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P03897,NADH-ubiquinone oxidoreductase chain 3
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P03901,NADH-ubiquinone oxidoreductase chain 4L
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P03905,NADH-ubiquinone oxidoreductase chain 4
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P03915,NADH-ubiquinone oxidoreductase chain 5
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P03923,NADH-ubiquinone oxidoreductase chain 6
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P17568,NADH dehydrogenase [ubiquinone] 1 beta subcomplex subunit 7
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P19404,"NADH dehydrogenase [ubiquinone] flavoprotein 2, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P28331,"NADH-ubiquinone oxidoreductase 75 kDa subunit, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial glycerol-3-phosphate dehydrogenase inhibitor,Mitochondrial glycerol-3-phosphate dehydrogenase,P43304,"Glycerol-3-phosphate dehydrogenase, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P49821,"NADH dehydrogenase [ubiquinone] flavoprotein 1, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P51970,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 8
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P56181,"NADH dehydrogenase [ubiquinone] flavoprotein 3, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),P56556,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 6
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),Q16718,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 5
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),Q16795,"NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 9, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),Q86Y39,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 11
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),Q8N183,"Mimitin, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),Q9BU61,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex assembly factor 3
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),Q9NRX3,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 4-like 2
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),Q9NX14,"NADH dehydrogenase [ubiquinone] 1 beta subcomplex subunit 11, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),Q9P032,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex assembly factor 4
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),Q9P0J0,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 13
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),Q9UI09,NADH dehydrogenase [ubiquinone] 1 alpha subcomplex subunit 12
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),Q9Y375,"Complex I intermediate-associated protein 30, mitochondrial"
+Metformin,4091,CHEMBL1431,Mitochondrial complex I (NADH dehydrogenase) inhibitor,Mitochondrial complex I (NADH dehydrogenase),Q9Y6M9,NADH dehydrogenase [ubiquinone] 1 beta subcomplex subunit 9
+Metronidazole,4173,CHEMBL137,DNA inhibitor,DNA,,DNA
+Minocycline,54675783,CHEMBL1434,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,16S ribosomal RNA
+Mitomycin C,5746,CHEMBL105,DNA inhibitor,DNA,,DNA
+Moxifloxacin,152946,CHEMBL32,Bacterial DNA gyrase inhibitor,Bacterial DNA gyrase,P0AES4,DNA gyrase subunit A
+Moxifloxacin,152946,CHEMBL32,Bacterial DNA gyrase inhibitor,Bacterial DNA gyrase,P0AES6,DNA gyrase subunit B
+Moxifloxacin,152946,CHEMBL32,Topoisomerase IV inhibitor,Topoisomerase IV,P0AFI2,DNA topoisomerase 4 subunit A
+Moxifloxacin,152946,CHEMBL32,Topoisomerase IV inhibitor,Topoisomerase IV,P20083,DNA topoisomerase 4 subunit B
+Moxifloxacin,152946,CHEMBL32,Topoisomerase IV inhibitor,DNA gyrase subunit A,P43700,DNA gyrase subunit A
+Moxifloxacin,152946,CHEMBL32,Topoisomerase IV inhibitor,DNA topoisomerase 4 subunit A,P43702,DNA topoisomerase 4 subunit A
+Nisin,16219761,CHEMBL526744,,,,
+Nitrofurantoin,6604200,CHEMBL572,DNA inhibitor,DNA,,DNA
+Nonactin,72519,CHEMBL415914,,,,
+Novobiocin,54675769,CHEMBL36506,DNA gyrase inhibitor,DNA gyrase,Q5HK03,DNA gyrase subunit B
+Novobiocin,54675769,CHEMBL36506,DNA gyrase inhibitor,DNA gyrase,Q5HK04,DNA gyrase subunit A
+Oxacillin,6196,CHEMBL819,Penicillin-binding protein inhibitor,Penicillin-binding protein,P72355,Penicillin-binding protein 4
+Oxacillin,6196,CHEMBL819,Penicillin-binding protein inhibitor,Penicillin-binding protein,Q53707,MecA PBP2' (penicillin binding protein 2')
+Oxacillin,6196,CHEMBL819,Penicillin-binding protein inhibitor,Penicillin-binding protein,Q53725,PASTA domain protein
+Oxacillin,6196,CHEMBL819,Penicillin-binding protein inhibitor,Penicillin-binding protein,Q53729,Penicillin binding protein 2
+Oxacillin,6196,CHEMBL819,Penicillin-binding protein inhibitor,Penicillin-binding protein,Q9XDB3,Penicillin binding transpeptidase domain protein
+Paraquat,15939,CHEMBL74469,Multidrug and toxin extrusion protein,multidrug and toxin extrusion protein 1,Q96FL8,MATE1
+Paraquat,15939,CHEMBL74469,Multidrug and toxin extrusion protein,multidrug and toxin extrusion protein 2,Q86VL8,MATE2
+Penicillin G,5904,CHEMBL29,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02918,Penicillin-binding protein 1A
+Penicillin G,5904,CHEMBL29,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02919,Penicillin-binding protein 1B
+Penicillin G,5904,CHEMBL29,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P08506,D-alanyl-D-alanine carboxypeptidase DacC
+Penicillin G,5904,CHEMBL29,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD65,Penicillin-binding protein 2
+Penicillin G,5904,CHEMBL29,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD68,Peptidoglycan synthase FtsI
+Penicillin G,5904,CHEMBL29,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AEB2,D-alanyl-D-alanine carboxypeptidase DacA
+Penicillin G,5904,CHEMBL29,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P24228,D-alanyl-D-alanine carboxypeptidase DacB
+Phenformin,8249,CHEMBL170988,,,,
+Phleomycin,72511,CHEMBL1744448,DNA inhibitor,DNA,,
+Piperacillin,43672,CHEMBL702,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02918,Penicillin-binding protein 1A
+Piperacillin,43672,CHEMBL702,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02919,Penicillin-binding protein 1B
+Piperacillin,43672,CHEMBL702,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P08506,D-alanyl-D-alanine carboxypeptidase DacC
+Piperacillin,43672,CHEMBL702,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD65,Penicillin-binding protein 2
+Piperacillin,43672,CHEMBL702,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AD68,Peptidoglycan synthase FtsI
+Piperacillin,43672,CHEMBL702,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P0AEB2,D-alanyl-D-alanine carboxypeptidase DacA
+Piperacillin,43672,CHEMBL702,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P24228,D-alanyl-D-alanine carboxypeptidase DacB
+PMS,9285,CHEMBL6322,,,,
+Polymyxin B,49800004,CHEMBL3989738,Cell outer membrane inhibitor,Cell outer membrane,,Cell outer membrane
+Procaine,4914,CHEMBL569,Sodium channel alpha subunit blocker,Sodium channel alpha subunit,P35498,Sodium channel protein type 1 subunit alpha
+Procaine,4914,CHEMBL569,Sodium channel alpha subunit blocker,Sodium channel alpha subunit,P35499,Sodium channel protein type 4 subunit alpha
+Procaine,4914,CHEMBL569,Sodium channel alpha subunit blocker,Sodium channel alpha subunit,Q01118,Sodium channel protein type 7 subunit alpha
+Procaine,4914,CHEMBL569,Sodium channel alpha subunit blocker,Sodium channel alpha subunit,Q14524,Sodium channel protein type 5 subunit alpha
+Procaine,4914,CHEMBL569,Sodium channel alpha subunit blocker,Sodium channel alpha subunit,Q15858,Sodium channel protein type 9 subunit alpha
+Procaine,4914,CHEMBL569,Sodium channel alpha subunit blocker,Sodium channel alpha subunit,Q99250,Sodium channel protein type 2 subunit alpha
+Procaine,4914,CHEMBL569,Sodium channel alpha subunit blocker,Sodium channel alpha subunit,Q9NY46,Sodium channel protein type 3 subunit alpha
+Procaine,4914,CHEMBL569,Sodium channel alpha subunit blocker,Sodium channel alpha subunit,Q9UI33,Sodium channel protein type 11 subunit alpha
+Procaine,4914,CHEMBL569,Sodium channel alpha subunit blocker,Sodium channel alpha subunit,Q9UQD0,Sodium channel protein type 8 subunit alpha
+Procaine,4914,CHEMBL569,Sodium channel alpha subunit blocker,Sodium channel alpha subunit,Q9Y5Y9,Sodium channel protein type 10 subunit alpha
+Pseudomonic acid,446596,CHEMBL719,Isoleucyl-tRNA synthetase inhibitor,Isoleucyl-tRNA synthetase,P41972,Isoleucine--tRNA ligase
+Pseudomonic acid,446596,CHEMBL719,Isoleucyl-tRNA synthetase inhibitor,Isoleucyl-tRNA synthetase,Q99YW3,Isoleucine--tRNA ligase
+Puromycin,439530,CHEMBL469912,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,Bacterial 70S ribosome
+Pyocyanin,6817,CHEMBL2289232,,,,
+Reserpine,5770,CHEMBL772,Synaptic vesicular amine transporter inhibitor,Synaptic vesicular amine transporter,Q05940,Synaptic vesicular amine transporter
+Rifampicin,135398735,CHEMBL374478,Bacterial DNA-directed RNA polymerase inhibitor,Bacterial DNA-directed RNA polymerase,P0A8T7,DNA-directed RNA polymerase subunit beta'
+Rifampicin,135398735,CHEMBL374478,Bacterial DNA-directed RNA polymerase inhibitor,Bacterial DNA-directed RNA polymerase,P0A8V2,DNA-directed RNA polymerase subunit beta
+Spectinomycin,15541,CHEMBL1167,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,16S ribosomal RNA
+Spiramycin,6419898,CHEMBL453514,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,Bacterial 70S ribosome
+Streptozotocin,29327,CHEMBL1603,DNA inhibitor,DNA,,DNA
+Sulfamonomethoxine,5332,CHEMBL462990,,,,
+Teicoplanin,133065662,CHEMBL4297166,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,,
+Theophylline,2153,CHEMBL190,Adenosine receptor antagonist,Adenosine receptor,P0DMS8,Adenosine receptor A3
+Theophylline,2153,CHEMBL190,Phosphodiesterase 4 inhibitor,Phosphodiesterase 4,P27815,"cAMP-specific 3',5'-cyclic phosphodiesterase 4A"
+Theophylline,2153,CHEMBL190,Adenosine receptor antagonist,Adenosine receptor,P29274,Adenosine receptor A2a
+Theophylline,2153,CHEMBL190,Adenosine receptor antagonist,Adenosine receptor,P29275,Adenosine receptor A2b
+Theophylline,2153,CHEMBL190,Adenosine receptor antagonist,Adenosine receptor,P30542,Adenosine receptor A1
+Theophylline,2153,CHEMBL190,Phosphodiesterase 4 inhibitor,Phosphodiesterase 4,Q07343,"cAMP-specific 3',5'-cyclic phosphodiesterase 4B"
+Theophylline,2153,CHEMBL190,Phosphodiesterase 4 inhibitor,Phosphodiesterase 4,Q08493,"cAMP-specific 3',5'-cyclic phosphodiesterase 4C"
+Theophylline,2153,CHEMBL190,Phosphodiesterase 4 inhibitor,Phosphodiesterase 4,Q08499,"cAMP-specific 3',5'-cyclic phosphodiesterase 4D"
+Theophylline,2153,CHEMBL190,Phosphodiesterase 3 inhibitor,Phosphodiesterase 3,Q13370,"cGMP-inhibited 3',5'-cyclic phosphodiesterase B"
+Theophylline,2153,CHEMBL190,Phosphodiesterase 3 inhibitor,Phosphodiesterase 3,Q14432,"cGMP-inhibited 3',5'-cyclic phosphodiesterase A"
+Tigecycline,54686904,CHEMBL376140,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,16S ribosomal RNA
+Tobramycin,36294,CHEMBL1747,70S ribosome inhibitor,70S ribosome,,23S ribosomal RNA
+Triclosan,5564,CHEMBL849,Bacterial enoyl-[acyl-carrier-protein] reductase inhibitor,Bacterial enoyl-[acyl-carrier-protein] reductase,P0AEK4,Enoyl-[acyl-carrier-protein] reductase [NADH] FabI
+Trimethoprim,5578,CHEMBL22,Bacterial dihydrofolate reductase inhibitor,Bacterial dihydrofolate reductase,P0ABQ4,Dihydrofolate reductase
+Vanillin,1183,CHEMBL13883,"transient receptor potential cation channel, subfamily V, member 3","transient receptor potential cation channel, subfamily V, member 3",Q8NET8,"transient receptor potential cation channel, subfamily V, member 3"
+Verapamil,2520,CHEMBL6966,Voltage-gated L-type calcium channel blocker,Voltage-gated T-type calcium channel,O43497,Voltage-dependent T-type calcium channel subunit alpha-1G
+Verapamil,2520,CHEMBL6966,Voltage-gated L-type calcium channel blocker,Voltage-gated L-type calcium channel,O60840,Voltage-dependent L-type calcium channel subunit alpha-1F
+Verapamil,2520,CHEMBL6966,Voltage-gated L-type calcium channel blocker,Voltage-gated T-type calcium channel,O95180,Voltage-dependent T-type calcium channel subunit alpha-1H
+Verapamil,2520,CHEMBL6966,Voltage-gated L-type calcium channel blocker,Voltage-gated L-type calcium channel,Q01668,Voltage-dependent L-type calcium channel subunit alpha-1D
+Verapamil,2520,CHEMBL6966,Voltage-gated L-type calcium channel blocker,Voltage-gated L-type calcium channel,Q13698,Voltage-dependent L-type calcium channel subunit alpha-1S
+Verapamil,2520,CHEMBL6966,Voltage-gated L-type calcium channel blocker,Voltage-gated L-type calcium channel,Q13936,Voltage-dependent L-type calcium channel subunit alpha-1C
+Verapamil,2520,CHEMBL6966,Voltage-gated L-type calcium channel blocker,Voltage-gated T-type calcium channel,Q9P0X4,Voltage-dependent T-type calcium channel subunit alpha-1I

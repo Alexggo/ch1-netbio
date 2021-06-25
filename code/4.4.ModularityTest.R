@@ -35,7 +35,7 @@ mod1
 
 
 # 4 Clusters
-clusters <- read.csv("data/4.InteractionScores_tSNE/tSNE_Clustermembership_ppx825.csv")
+clusters <- read.csv("data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx825.csv")
 
 mat1 <- full_join(mat,clusters,by="drugdrug")
 mat2 <- mat1[,12:17] %>% t()
