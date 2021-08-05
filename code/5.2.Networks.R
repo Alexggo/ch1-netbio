@@ -37,7 +37,6 @@ filename <- c("EcoCyc.goldstandardset.txt","EcoliNet.v1.txt","GN.INT.EcoliNet.35
 rates <- "dataset1_ratios.csv"
 rates <- read.csv(file.path("data/4.PhylogeneticComparativeMethods",rates))
 
-
 list1 <- list()
 for (i in 1:11){
   t <- file.path("data/5.Targets_NetworkDistance",paste0(filename[i],"net.txt"))
@@ -72,7 +71,7 @@ for (i in 1:11){
   r <- rates %>% 
     select(clusters,sigma.rate) %>%
     distinct() %>% 
-    arrange(sigma.rate,decr=TRUE)
+    arrange(sigma.rate)
   r$clusters <- factor(r$clusters, levels = r$clusters[order(r$sigma.rate)])
   
   tot <- inner_join(a,rates,by="drug_pair") %>% 
@@ -83,13 +82,13 @@ for (i in 1:11){
   list1[[i]] <- tot
 }
 
-df_tot <- df_tot <- bind_rows(list1, .id = "id") %>% 
+df_tot <- bind_rows(list1, .id = "id") %>% 
   mutate(adjancency=as.factor(adjancency)) %>% 
   mutate(connection_groups=cut_interval(K.edge, 6)) %>% 
   mutate(connection_groups=ifelse(is.na(connection_groups),0,connection_groups)) %>% 
   mutate(connection_onoff=ifelse(is.na(K.edge),"disconnected","connected")) %>% 
   rowwise() %>% 
-  mutate(mean.ddi=mean(ebw,ecr,seo,stm,pae,pau)) %>% 
+  mutate(mean.ddi=mean(c(ebw,ecr,seo,stm,pae,pau))) %>% 
   mutate(sd.ddi=sd(c(ebw,ecr,seo,stm,pae,pau))) %>% 
   mutate(network=ifelse(network=="EcoCyc.goldstandardset.txt","Co-functional gene pairs (EcoCyc)",
                          ifelse(network=="EcoliNet.v1.txt","EN: integration of all networks",
@@ -188,6 +187,7 @@ for (i in 1:11){
 wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
            listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]])
 
+# Rates ~ Interaction Type.
 df_tot %>% ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
        group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif", 
@@ -197,13 +197,41 @@ df_tot %>% ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
   ylab("Sigma rate")+
   theme_minimal()
 
+df_tot %>% ggline(x = "path.length", y = "sigma.rate", add = "mean_se",
+                  group = "network", palette = "jco")+
+  stat_compare_means(aes(group = network), label = "p.signif", 
+                     label.y = c(40, 40, 40))+
+  facet_wrap(~network)+
+  xlab("Minimum distance between targets")+
+  ylab("Sigma rate")+
+  theme_minimal()
+
+df_tot %>% ggline(x = "K.edge", y = "sigma.rate", add = "mean_se",
+                  group = "network", palette = "jco")+
+  stat_compare_means(aes(group = network), label = "p.signif", 
+                     label.y = c(40, 40, 40))+
+  facet_wrap(~network,scales="free")+
+  xlab("K-edge connectivity between proteins")+
+  ylab("Sigma rate")+
+  theme_minimal()
+
+
+df_tot %>% ggline(x = "mean_deg", y = "sigma.rate", add = "mean_se",
+                  group = "network", palette = "jco")+
+  stat_compare_means(aes(group = network), label = "p.signif", 
+                     label.y = c(40, 40, 40))+
+  facet_wrap(~network)+
+  xlab("Average node degree between target proteins")+
+  ylab("Sigma rate")+
+  theme_minimal()
+
 #Rate~Connectivity
 df_tot %>% ggline(x = "connection_onoff", y = "sigma.rate", add = "mean_se",
                   group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif", 
                      label.y = c(40, 40, 40))+
   facet_wrap(~network)+
-  xlab("Type of interaction")+
+  xlab("Interconnectedness of nodes")+
   ylab("Sigma rate")+
   theme_minimal()
 
@@ -251,21 +279,8 @@ df_tot %>% filter(int_sign_ebw=="Antagonism") %>% ggplot(aes(x=clusters,fill=int
   facet_wrap(.~network)
 
 
-#Rate~network, interaction and distance.
-df_tot  %>% 
-  ggplot(aes(x=path.length,
-             y=sigma.rate,
-             col=int_sign_ebw))+
-  geom_jitter()+
-  theme_minimal()+
-  facet_wrap(.~network)
 
 
 
-
-#Rate~network interaction and connectivity.
-df_tot %>% 
-
-#Rate~network interaction and average node degree.
 
 

@@ -115,7 +115,7 @@ bdm.wtt.plot(list2[[index]])
 
 ## Plot labels in the graph.
 labels <- dataset %>% 
-  select(drug_pair) %>% pull() # Select your clustering label processprocess, useuse, categorycategory.
+  select(categorycategory) %>% pull() # Select your clustering label processprocess, useuse, categorycategory.
 ID <- dataset %>% 
   select(drugdrug) %>% pull()
 

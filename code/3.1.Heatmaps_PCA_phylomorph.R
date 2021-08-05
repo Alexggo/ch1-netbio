@@ -137,8 +137,9 @@ tree_nw$tip.label <- c("E. coli-EBW","E. coli-ECR",
 #Phylomorphospace plots.
 phylomorphospace(tree_nw, pca$x[,1:2], 
                  label = "horizontal", node.size=c(.5,1),
-                 xlim=c(-50,60))
-
+                 xlim=c(-50,60),
+                 xlab="PC1 (47.01%)",
+                 ylab="PC2 (21.54%)")
 
 
 #phylomorphospace3d(tree_nw,pca.x[,c(1,2,3)],method="static")
