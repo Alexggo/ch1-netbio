@@ -2,7 +2,6 @@
 #' title: "5.0.Standardize networks"
 #' author: "Alex Gil"
 #' 
-library(plyr)
 library(igraph)
 library(tidyverse)
 library(BioNet)
@@ -47,8 +46,10 @@ writeLines(keggid_1,file.path("data/5.Targets_NetworkDistance","kegg.ids.txt"))
 x2 <- read.delim(file.path("data/5.Targets_NetworkDistance","kegg.ids.uniprot.tab"))
 colnames(x2)[1] <- "name"
 x2 <- x2 %>% select(Entry,name)
-x3.node1 <- x2 %>% rename(node1=name)
-x3.node2 <- x2 %>% rename(node2=name)
+x3.node1 <- x2 %>% 
+  rename(node1 = name)
+x3.node2 <- x2 %>% 
+  rename(node2 = name)
 
 #Substitute KEGG_ID codes for Uniprot_ID codes in each network.
 for (i in 1:length(filename)){

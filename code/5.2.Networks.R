@@ -90,14 +90,14 @@ df_tot <- bind_rows(list1, .id = "id") %>%
   rowwise() %>% 
   mutate(mean.ddi=mean(c(ebw,ecr,seo,stm,pae,pau))) %>% 
   mutate(sd.ddi=sd(c(ebw,ecr,seo,stm,pae,pau))) %>% 
-  mutate(network=ifelse(network=="EcoCyc.goldstandardset.txt","Co-functional gene pairs (EcoCyc)",
-                         ifelse(network=="EcoliNet.v1.txt","EN: integration of all networks",
+  mutate(network=ifelse(network=="EcoCyc.goldstandardset.txt","Co-functional (EcoCyc)",
+                         ifelse(network=="EcoliNet.v1.txt","EN: all networks",
                                 ifelse(network=="GN.INT.EcoliNet.3568gene.23439link.txt","Similar genomic context",
-                                       ifelse(network=="GO-BP.goldstandardset.txt","Co-functional gene pairs (GO-BP)",
+                                       ifelse(network=="GO-BP.goldstandardset.txt","Co-functional (GO-BP)",
                                               ifelse(network=="CC.EcoliNet.v1.2296gene.50528link.txt","Co-citation",
                                                      ifelse(network=="CX.INT.EcoliNet.v1.4039gene.67494link.txt","Co-expression",
-                                                            ifelse(network=="DC.EcoliNet.2283gene.9643link.txt","Co-occurence of protein domains",
-                                                                   ifelse(network=="EcoliNet.v1.benchmark.txt","Co-functional gene pairs (EcoCyc/GO-BP)",
+                                                            ifelse(network=="DC.EcoliNet.2283gene.9643link.txt","Co-occurence of prot. domains",
+                                                                   ifelse(network=="EcoliNet.v1.benchmark.txt","Co-functional (EcoCyc/GO-BP)",
                                                                           ifelse(network=="HT.INT.EcoliNet.3209gene.15543link.txt","High-throughput PPI",
                                                                                  ifelse(network=="LC.INT.EcoliNet.764gene.1073link.txt","Small/medium-scale PPI",
                                                                                         ifelse(network=="PG.INT.EcoliNet.v1.1817gene.17504link.txt","Similar phylogenetic profiles","NA")))))))))))) %>% 
@@ -108,11 +108,13 @@ my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"
 net <- df_tot$network %>% unique()
 listA <- list()
 for (i in 1:11){
+  
+  font_size <- 2
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
     ggboxplot(x = "int_sign_ebw", y = "path.length",
               fill = "int_sign_ebw")+ 
     stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    stat_compare_means(label.y = -3) +
+    stat_compare_means(label.y = -3,size=font_size) +
     stat_summary(fun=mean, geom="point", shape=20, size=4, color="red", fill="red")+
     theme_minimal()+
     scale_fill_brewer(palette="Set2")+
@@ -120,6 +122,9 @@ for (i in 1:11){
     ylab("Minimum path length between proteins")+
     theme(legend.position = "none")+
     ggtitle(net[i])
+  
+  listA[[i]]$layers[[2]]$aes_params$textsize <- font_size
+  
 }
 
 wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
@@ -171,11 +176,13 @@ wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
 net <- df_tot$network %>% unique()
 listA <- list()
 for (i in 1:11){
+  font_size <- 3
+  
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
     ggboxplot(x = "int_sign_ebw", y = "sigma.rate",
               fill = "int_sign_ebw")+ 
     stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    stat_compare_means(label.y = -3) +
+    stat_compare_means(label.y = -3,size=font_size) +
     stat_summary(fun=mean, geom="point", shape=20, size=4, color="red", fill="red")+
     theme_minimal()+
     scale_fill_brewer(palette="Set2")+
@@ -183,6 +190,8 @@ for (i in 1:11){
     ylab("Sigma rate")+
     theme(legend.position = "none")+
     ggtitle(net[i])
+  
+  listA[[i]]$layers[[2]]$aes_params$textsize <- font_size
 }
 wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
            listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]])

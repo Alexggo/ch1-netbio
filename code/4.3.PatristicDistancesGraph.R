@@ -29,6 +29,7 @@ library("hrbrthemes")
 library("ggforce")
 library("ComplexHeatmap")
 library("ggbiplot")
+library("patchwork")
 
 
 #' Input files, phylogenetic tree and matrix.
@@ -56,6 +57,7 @@ clust <- read.csv("data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.c
 
 mat1 <- full_join(mat,clust,by="drugdrug")
 
+
 # Read phylogenetic tree
 species <- c("ebw","ecr","stm","seo","pae","pau")
 
@@ -73,7 +75,7 @@ PD_dist <- read.csv(file=phylofile)%>%
 
 #Euclidean chemical distances.
 g <- mat1 %>% select(12:17) %>% t()
-dend <- hclust(dist(m,method="euclidean"),method="average")  %>% 
+dend <- hclust(dist(g,method="euclidean"),method="average")  %>% 
   as.phylo()
 PatristicDistMatrix<-cophenetic(dend)
 tabnew<- PatristicDistMatrix %>% as.data.frame()
@@ -108,30 +110,34 @@ tid <- tidy(lmod)
 aug <- augment(lmod)
 gla <- glance(lmod)
 
-ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
+g1 <- ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   geom_point(aes(color=class))+
   geom_text_repel()+
   geom_smooth(method = "lm", formula=y~log(x),se=FALSE, color="black")+
   labs(x="Phylogenetic Distance",
-       y="Chemical Patristic Distance from Dendrogram",
-       title="Chemical divergence accumulates with time")+
+       y="Chemical Patristic Distance from Dendrogram")+
   theme_ipsum_rc(grid="XY")+
   theme_minimal()+
   theme(axis.line = element_line(colour = "black"),
-        panel.border = element_rect(colour = "black", fill=NA, size=1))
+        panel.border = element_rect(colour = "black", fill=NA, size=1))+
+  theme(legend.position = "none")+
+  geom_mark_circle(aes(fill = class,label=class))
 
-ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
+g2 <- ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   geom_point(aes(color=class))+
   geom_text_repel()+
   geom_smooth(method = "lm", se=FALSE, color="black")+
   labs(x="Phylogenetic Distance",
-       y="Chemical Patristic Distance from Dendrogram",
-       title="Chemical divergence accumulates with time")+
+       y="Chemical Patristic Distance from Dendrogram")+
   scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
                 labels = trans_format("log10", math_format(10^.x)))+
   annotation_logticks(sides="b")+
   theme_ipsum_rc(grid="XY")+
   theme_minimal()+
   theme(axis.line = element_line(colour = "black"),
-        panel.border = element_rect(colour = "black", fill=NA, size=1))
+        panel.border = element_rect(colour = "black", fill=NA, size=1))+
+  theme(legend.position = "none")+
+  geom_mark_circle(aes(fill = class,label=class))
 
+
+g1+g2

@@ -163,9 +163,7 @@ for (i in 1:length(filename)){
   write.csv(tab1,file.path("data/5.Targets_NetworkDistance",paste0(filename[i],"netvalues_target.csv")),row.names = F)
 }
 
-pdf(file = file.path("data/5.Targets_NetworkDistance","network_graphs_notext.pdf"))
-
-
+pdf(file = file.path("data/5.Targets_NetworkDistance","network_graphs.pdf"))
 
 for (i in 1:11){
   g1 <- list.graph[[i]]
@@ -186,7 +184,9 @@ for (i in 1:11){
   mtext(side=3, line=2, at=-0.07, adj=0, cex=0.7, mysubtitle1)
   mtext(side=3, line=1, at=-0.07, adj=0, cex=0.7, mysubtitle2)
 }
+dev.off()
 
+pdf(file = file.path("data/5.Targets_NetworkDistance","network_graphs_notext.pdf"))
 
 for (i in 1:11){
   g1 <- list.graph[[i]]
@@ -201,8 +201,4 @@ for (i in 1:11){
   mean.length <- average.path.length(g1)
   plot(g1,vertex.label="",vertex.size=2)
 }
-
-
-
 dev.off()
-
