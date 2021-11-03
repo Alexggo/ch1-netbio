@@ -70,21 +70,24 @@ dend <- hclust(dist(mat_red,method="euclidean"),method="average")
 annot <- dataset %>% select(drug_pair,drug_category1,drug_category2,categorycategory,
                             targeted_cellular_process1,targeted_cellular_process2,processprocess,
                             use1,use2,useuse,
-                            drug_category,targeted_process,use) %>% 
+                            drug_category,targeted_process,use,clusters,
+                            sigma.rate)   %>% 
         as.matrix()
 rownames(annot) <- annot[,1]
 
-ha = rowAnnotation(category_category=annot[,4])#Category
-ha = rowAnnotation(process_process=annot[,7])#Process
-ha = rowAnnotation(use_use=annot[,10])#Use
-ha = rowAnnotation(category=annot[,11],
+row_right_ha = rowAnnotation(category=annot[,11],
                    process=annot[,12],
-                       #process_process=annot[,7],
                        use=annot[,13],
+                       rate=anno_points((as.numeric(annot[,15])),
                        col = list(category = c("Same" = "red", "Different" = "black"),
                                   process = c("Same" = "red", "Different" = "black"),
                                   use = c("Same" = "red", "Different" = "black")))
-
+c("13","5","3","11","7","6",
+  "9","10","4","8","2","12","1")
+row_left_ha = rowAnnotation(cluster=anno_block(gpar(fill = 1:13),
+                            labels=c("13","5","3","11","7","6",
+                                     "9","10","4","8","2","12","1"),
+                            labels_gp = gpar(col = "white", fontsize = 10)))
 
 Heatmap(mat_red,show_column_names = T,
         show_row_names = F,
@@ -93,7 +96,9 @@ Heatmap(mat_red,show_column_names = T,
         column_title_side = "top",column_title = "Strains",column_names_side = "top",
         row_names_gp = gpar(cex=0.75),row_dend_width = unit(2,"cm"),
         name = "Interaction score",col=rev(brewer.pal(10,'RdBu')),
-        right_annotation = ha)
+        right_annotation = row_right_ha,
+        left_annotation = row_left_ha,
+        row_split = annot[,14])
 
 
 ## Plot PCA DDI~strain.
