@@ -17,7 +17,7 @@ not.species <- tree_nw$tip.label[!(tree_nw$tip.label %in% species)]
 tree_nw <- drop.tip(tree_nw,not.species)
 
 # 13 Clusters
-clusters <- read.csv("data/4.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.csv")
+clusters <- read.csv("data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.csv")
 
 mat1 <- full_join(mat,clusters,by="drugdrug")
 mat2 <- mat1[,12:17] %>% t()

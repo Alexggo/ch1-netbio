@@ -4831,8 +4831,6 @@ eco:dUMP
 eco:dUMP exchange
 eco:dUTP
 eco:E-3-carboxy-2-pentenedioate 6-methyl ester
-eco:E. coli biomass objective function (iJO1366) - core - with 53.95 GAM estimate
-eco:E. coli biomass objective function (iJO1366) - WT - with 53.95 GAM estimate
 eco:Enoylglutaryl-[acyl-carrier protein] methyl ester
 eco:Enoylpimeloyl-[acyl-carrier protein] methyl ester
 eco:Enterochelin

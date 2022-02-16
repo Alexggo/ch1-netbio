@@ -105,7 +105,7 @@ Levofloxacin,149096,CHEMBL33,DNA gyrase inhibitor,Topoisomerase IV,P72525,DNA to
 Levofloxacin,149096,CHEMBL33,DNA gyrase inhibitor,Topoisomerase IV,Q59961,DNA topoisomerase 4 subunit B,spn:SP_0852,K02622,parE; DNA topoisomerase IV subunit B,eco:b3030,P20083,PARE_ECOLI
 Linezolid,441401,CHEMBL126,Bacterial 70S ribosome inhibitor,Bacterial 70S ribosome,,,,,,,,
 Loperamide,3955,CHEMBL841,Mu opioid receptor agonist,Mu opioid receptor,P35372,Mu-type opioid receptor,hsa:4988,K04215,OPRM1; opioid receptor mu 1,,,
-Mecillinam,36273,CHEMBL530,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,,,,,,,,
+Mecillinam,36273,CHEMBL530,Bacterial penicillin-binding protein 2 inhibitor,Bacterial penicillin-binding protein 2,P0AD65,Penicillin-binding protein 2,eco:b0635,K05515,penicillin-binding protein 2,eco:b0635,P0AD65,MRDA_ECOLI
 Meropenem,441130,CHEMBL127,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02918,Penicillin-binding protein 1A,eco:b3396,K05366,mrcA; peptidoglycan glycosyltransferase/peptidoglycan DD-transpeptidase MrcA,eco:b3396,P02918,PBPA_ECOLI
 Meropenem,441130,CHEMBL127,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P02919,Penicillin-binding protein 1B,eco:b0149,K05365,mrcB; peptidoglycan glycosyltransferase/peptidoglycan DD-transpeptidase MrcB,eco:b0149,P02919,PBPB_ECOLI
 Meropenem,441130,CHEMBL127,Bacterial penicillin-binding protein inhibitor,Bacterial penicillin-binding protein,P08506,D-alanyl-D-alanine carboxypeptidase DacC,eco:b0839,K07258,dacA; D-alanyl-D-alanine carboxypeptidase DacA,eco:b0839,P08506,DACC_ECOLI

@@ -49,12 +49,16 @@ for (i in 1:length(filename)){
   deg <-  igraph::degree(g1)
   degree_distribution(g1) %>% plot()
   mean.length <- average.path.length(g1)
+  #Calculate shortest path
   dist_mat <- shortest.paths(g1)
   print(filename[i])
-  print(dist_mat)
   # Filter columns and rows for known targets
   r <- rownames(dist_mat) %in% nodes1
   c <- colnames(dist_mat) %in% nodes1
+  # How many targets have drugs in Brochado?
+  print("Number of targets in Brochado")
+  rownames(dist_mat) %in% nodes1 %>% sum()
+  # Small matrix of targets from Brochado
   distnew2 <- dist_mat[r,c] %>% 
     as.data.frame()
   # Convert matrix to table
@@ -63,7 +67,6 @@ for (i in 1:length(filename)){
   distnew2 <- distnew2 %>%
     arrange(Uniprot1) %>% 
     select(-Uniprot1)
-  
   distnew2[lower.tri(distnew2)] <- NA
   distnew2$Uniprot1 <- colnames(distnew2)
   distnew2 <- distnew2 %>%
@@ -71,9 +74,9 @@ for (i in 1:length(filename)){
   distnew2 <- distnew2  %>% 
     pivot_longer(names_to="Uniprot2",values_to="path.length",2:(dim(distnew2)[2]))%>%
     filter(!is.na(path.length))
+  
   #k.edge.connectivity for known nodes that are in g1
   selection <- nodes1[nodes1 %in% rownames(dist_mat)]
-  
   t <- matrix(nrow = length(selection),ncol=length(selection))
   for (j in 1:length(selection)){
     for (k in 1:length(selection)){
@@ -86,7 +89,7 @@ for (i in 1:length(filename)){
   colnames(t) <- selection
   rownames(t) <- selection
   
-  # Convert matrix to table
+  # Convert K matrix to table
   connnew <- t %>% as.data.frame()
   connnew <- connnew[ , order(names(connnew))]
   connnew$Uniprot1 <- rownames(connnew)
@@ -102,11 +105,14 @@ for (i in 1:length(filename)){
     filter(!is.na(K.edge)) %>% 
     filter(K.edge!=0) 
   # Merge distance and connectivity results
-  distnew2 <- distnew2 %>% mutate(U_ID=paste0(Uniprot1,"-",Uniprot2))
-  connnew2 <- connnew2 %>% mutate(U_ID=paste0(Uniprot1,"-",Uniprot2))
+  distnew2 <- distnew2 %>% 
+    mutate(U_ID=paste0(Uniprot1,"-",Uniprot2))
+  connnew2 <- connnew2 %>% 
+    mutate(U_ID=paste0(Uniprot1,"-",Uniprot2))
   
   dist_conn <- full_join(distnew2,connnew2,by="U_ID")
-  dist_conn <- dist_conn %>% select(Uniprot1.x,Uniprot2.x,path.length,K.edge) %>% 
+  dist_conn <- dist_conn %>% 
+    select(Uniprot1.x,Uniprot2.x,path.length,K.edge) %>% 
     rename(Uniprot1=Uniprot1.x,
            Uniprot2=Uniprot2.x,
            path.length=path.length) %>% 
@@ -125,18 +131,24 @@ for (i in 1:length(filename)){
   tabnew2$mean_deg <- apply(tabnew2[,5:6],1,mean)
   tabnew2$min_deg <- apply(tabnew2[,5:6],1,min)
   tabnew2$max_deg <- apply(tabnew2[,5:6],1,max)
-  tabnew2 <- tabnew2 %>% mutate(mean_deg=round(mean_deg))
+  tabnew2 <- tabnew2 %>% mutate(mean_deg=round(mean_deg)) %>% 
+    distinct()
   
-  # Map Targets to Drugs.
-  unique_targets <- c(tabnew2$Uniprot1,tabnew2$Uniprot2) %>% unique()
+  # Map Targets to Drugs. 
+  # One target can have multiple drugs.
+  unique_targets <- c(tabnew2$Uniprot1,tabnew2$Uniprot2) %>%
+    unique()
   drug_target <-nodes %>%
     filter(KEGG_eco %in% unique_targets)
   
   drug_target1 <- drug_target %>% 
     select(Drug,KEGG_eco)
   colnames(drug_target1) <- c("drug1","Uniprot1")
+  print("How many drugs?")
+  drug_target1$drug1 %>% unique() %>% sort()
   
-  tab1 <- inner_join(tabnew2,drug_target1,by="Uniprot1")
+  tab1 <- inner_join(tabnew2,drug_target1,by="Uniprot1") %>% 
+    distinct()
   colnames(drug_target1) <- c("drug2","Uniprot2")
   tab1 <- inner_join(tab1,drug_target1,by="Uniprot2")
   
@@ -147,7 +159,7 @@ for (i in 1:length(filename)){
     
     tab1$drug_pair[l] <- paste0(nam, collapse="_")
   }
-  
+  tab1 <- tab1 %>% select(-c(drug1,drug2)) %>% distinct()
   y <- tab1 %>% group_by(drug_pair) %>% 
     summarise(mean.path.length=round(mean(path.length,na.rm=TRUE)),
               mean.k.edge=round(mean(K.edge,na.rm=TRUE)),
@@ -178,8 +190,8 @@ for (i in 1:12){
   mean.length <- average.path.length(g1)
   plot(g1,vertex.label="",vertex.size=2)
   mytitle = paste(filename[i])
-  mysubtitle1 = paste("Average path length =",round(mean.length,4),". Number of vertexes =",v.number)
-  mysubtitle2 = paste("Number of targets =",value1,". Number of drugs =",value2)
+  mysubtitle1 = paste0("Average path length =",round(mean.length,4),". Number of vertexes =",v.number)
+  mysubtitle2 = paste0("Number of targets =",value1,". Number of drugs =",value2)
   mtext(side=3, line=3, at=-0.07, adj=0, cex=1, mytitle)
   mtext(side=3, line=2, at=-0.07, adj=0, cex=0.7, mysubtitle1)
   mtext(side=3, line=1, at=-0.07, adj=0, cex=0.7, mysubtitle2)

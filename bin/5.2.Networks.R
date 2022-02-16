@@ -10,6 +10,7 @@ library("matrixStats")
 library("ComplexHeatmap")
 library(ggpubr)
 library(plotrix)
+library(tidymodels)
 
 #- EcoCyc.goldstandardset.txt
 #- EcoliNet.v1.txt
@@ -22,13 +23,13 @@ library(plotrix)
 #- HT.INT.EcoliNet.3209gene.15543link.txt
 #- LC.INT.EcoliNet.764gene.1073link.txt
 #- PG.INT.EcoliNet.v1.1817gene.17504link.txt
-#- ecoli_core_model_reactions.csvnet.txt
+#- MODEL1108160000_edgelist.txt
 
 filename <- c("EcoCyc.goldstandardset.txt","EcoliNet.v1.txt","GN.INT.EcoliNet.3568gene.23439link.txt",
               "GO-BP.goldstandardset.txt","CC.EcoliNet.v1.2296gene.50528link.txt","CX.INT.EcoliNet.v1.4039gene.67494link.txt",
               "DC.EcoliNet.2283gene.9643link.txt","EcoliNet.v1.benchmark.txt","HT.INT.EcoliNet.3209gene.15543link.txt",
-              "LC.INT.EcoliNet.764gene.1073link.txt","PG.INT.EcoliNet.v1.1817gene.17504link.txt"
-              #,"ecoli_core_model_reactions.csvnet.txt"
+              "LC.INT.EcoliNet.764gene.1073link.txt","PG.INT.EcoliNet.v1.1817gene.17504link.txt",
+              "MODEL1108160000_edgelist.txt"
 )
 
 
@@ -37,7 +38,7 @@ rates <- "dataset1_ratios.csv"
 rates <- read.csv(file.path("data/4.PhylogeneticComparativeMethods",rates))
 
 list1 <- list()
-for (i in 1:11){
+for (i in 1:12){
   # Load each network
   t <- file.path("data/5.Targets_NetworkDistance",paste0(filename[i],"net.txt"))
   x1 <- read_csv(t)
@@ -58,8 +59,8 @@ for (i in 1:11){
   distnew2 <- distnew2 %>%
     select(dim(distnew2)[2],1:(dim(distnew2)[2]-1))
   distnew3 <- distnew2  %>% 
-    pivot_longer(names_to="Uniprot2",values_to="adjancency",2:(dim(distnew2)[2]))%>%
-    filter(!is.na(adjancency)) %>% 
+    pivot_longer(names_to="Uniprot2",values_to="adjacency",2:(dim(distnew2)[2]))%>%
+    filter(!is.na(adjacency)) %>% 
     mutate(U_ID=paste0(Uniprot1,"-",Uniprot2))
   # Drug targets.
   nodes <- read.csv(file.path("data/5.Targets_NetworkDistance",paste0(filename[i],"netvalues_target.csv")))
@@ -81,10 +82,13 @@ for (i in 1:11){
   
   list1[[i]] <- tot
 }
+names(list1) <- filename
+
+
 # List 1 contains the complete dataset for each network.
 # df_tot contains all networks combined.
-df_tot <- bind_rows(list1, .id = "id") %>% 
-  mutate(adjancency=as.factor(adjancency)) %>% 
+df_tot <- bind_rows(list1, .id = "network") %>% 
+  mutate(adjacency=as.factor(adjacency)) %>% 
   mutate(connection_groups=cut_interval(K.edge, 6)) %>% 
   mutate(connection_groups=ifelse(is.na(connection_groups),0,connection_groups)) %>% 
   mutate(connection_onoff=ifelse(is.na(K.edge),"disconnected","connected"))  %>% 
@@ -98,7 +102,8 @@ df_tot <- bind_rows(list1, .id = "id") %>%
                                                                    ifelse(network=="EcoliNet.v1.benchmark.txt","Co-functional (EcoCyc/GO-BP)",
                                                                           ifelse(network=="HT.INT.EcoliNet.3209gene.15543link.txt","High-throughput PPI",
                                                                                  ifelse(network=="LC.INT.EcoliNet.764gene.1073link.txt","Small/medium-scale PPI",
-                                                                                        ifelse(network=="PG.INT.EcoliNet.v1.1817gene.17504link.txt","Similar phylogenetic profiles","NA")))))))))))) %>% 
+                                                                                        ifelse(network=="PG.INT.EcoliNet.v1.1817gene.17504link.txt","Similar phylogenetic profiles",
+                                                                                               ifelse(network=="MODEL1108160000_edgelist.txt","Metabolic model","NA"))))))))))))) %>% 
   mutate(int_sign_ebw = factor(int_sign_ebw,levels = c("Synergy","Additivity","Antagonism"))) %>% 
   mutate(drug_cat=ifelse(drug_category=="Same",1,0)) %>% 
   mutate(targ=ifelse(targeted_process=="Same",1,0)) %>% 
@@ -122,14 +127,15 @@ df_tot <- bind_rows(list1, .id = "id") %>%
                       ifelse(int_sign_pau=="Additivity",0,
                              ifelse(int_sign_pau=="Synergy",-1,NA)))) %>% 
   rowwise() %>% 
-  mutate(sum_g=ebw_g+ecr_g+seo_g+stm_g+pae_g+pau_g)  
-  
+  mutate(sum_g=ebw_g+ecr_g+seo_g+stm_g+pae_g+pau_g)
 
-# Relation between minimum distance and interaction type (ebw). 
+net <- df_tot$network %>% unique()
+
+# Minimum path ~ interaction type (ebw). 
 my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
 net <- df_tot$network %>% unique()
 listA <- list()
-for (i in 1:11){
+for (i in 1:12){
   
   font_size <- 2
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
@@ -149,11 +155,25 @@ for (i in 1:11){
   
 }
 wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
-           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]])
+           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]],listA[[12]])
 listA[[10]]
+listA[[12]]
+wrap_plots(listA[[10]],listA[[12]])
 
 
-# Relation between minimum distance and interaction type (all strains sum)
+df_tot %>% 
+  filter(network==net[10]) %>% 
+  ggplot(aes(x = int_sign_ebw, y = path.length,
+             fill = int_sign_ebw))+
+  theme_minimal()+
+  scale_fill_brewer(palette="Set2")+
+  xlab("Type of interaction")+
+  ylab("Minimum path length between proteins")+
+  geom_violin()
+# Synergies occur closer in the network.
+
+
+# Min path ~ interaction type (all strains sum)
 my_comparisons <- list(c("-4","-3"),c("-3","-2"),c("-2","-1"),
                        c("-1","0"),c("0","1"),c("1","2"),c("2","3"),c("3","4"),
                        c("-4","-2"),c("-3","-1"),c("-2","0"),c("-1","1"),
@@ -161,7 +181,7 @@ my_comparisons <- list(c("-4","-3"),c("-3","-2"),c("-2","-1"),
   
 net <- df_tot$network %>% unique()
 listA <- list()
-for (i in 1:11){
+for (i in 1:12){
   font_size <- 2
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
     ggboxplot(x = "sum_g", y = "path.length",
@@ -180,15 +200,17 @@ for (i in 1:11){
   
 }
 wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
-           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]])
-listA[[10]]
+           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]],listA[[12]])
+wrap_plots(listA[[10]],listA[[12]])
+# Synergies occur closer in the network.
 
 
 
-# Relation between connectivity and interaction type (ebw). 
+# Connectivity ~ interaction type (ebw).
+my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
 net <- df_tot$network %>% unique()
 listA <- list()
-for (i in 1:11){
+for (i in 1:12){
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
     ggboxplot(x = "int_sign_ebw", y = "K.edge",
               fill = "int_sign_ebw")+ 
@@ -204,11 +226,14 @@ for (i in 1:11){
 }
 
 wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
-           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]])
+           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]],listA[[12]])
 listA[[10]]
+listA[[12]]
+wrap_plots(listA[[10]],listA[[12]])
+#Con is lower in antagonisms but only in metabolic model.
 
 
-# Relation between connectivity and interaction type (all strains sum)
+# connectivity ~ interaction type (all strains sum)
 my_comparisons <- list(c("-4","-3"),c("-3","-2"),c("-2","-1"),
                        c("-1","0"),c("0","1"),c("1","2"),c("2","3"),c("3","4"),
                        c("-4","-2"),c("-3","-1"),c("-2","0"),c("-1","1"),
@@ -216,7 +241,7 @@ my_comparisons <- list(c("-4","-3"),c("-3","-2"),c("-2","-1"),
 
 net <- df_tot$network %>% unique()
 listA <- list()
-for (i in 1:11){
+for (i in 1:12){
   font_size <- 2
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
     ggboxplot(x = "sum_g", y = "K.edge",
@@ -235,14 +260,17 @@ for (i in 1:11){
   
 }
 wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
-           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]])
+           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]],listA[[12]])
 listA[[10]]
+listA[[12]]
+wrap_plots(listA[[10]],listA[[12]])
 
 
-# Relation between node degree and interaction type (ebw). 
+# Node degree ~ interaction type (ebw). 
+my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
 net <- df_tot$network %>% unique()
 listA <- list()
-for (i in 1:11){
+for (i in 1:12){
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
     ggboxplot(x = "int_sign_ebw", y = "mean_deg",
               fill = "int_sign_ebw")+ 
@@ -258,18 +286,26 @@ for (i in 1:11){
 }
 
 wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
-           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]])
+           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]],listA[[12]])
 listA[[10]]
+listA[[12]]
+wrap_plots(listA[[10]],listA[[12]])
+# Significant differences (mean degree) between interactions in the metabolic network.
 
-# Relation between node degree and interaction type (all strains sum)
+# Node degree ~ interaction type (all strains sum)
 my_comparisons <- list(c("-4","-3"),c("-3","-2"),c("-2","-1"),
                        c("-1","0"),c("0","1"),c("1","2"),c("2","3"),c("3","4"),
                        c("-4","-2"),c("-3","-1"),c("-2","0"),c("-1","1"),
                        c("0","2"),c("1","3"),c("2","4"))
 
+my_comparisons <- list(c("-4","-3"),c("-3","-2"),c("-2","-1"),
+                       c("-1","0"),c("0","1"),c("1","2"),
+                       c("-4","-2"),c("-3","-1"),c("-2","0"),c("-1","1"),
+                       c("0","2"))
+
 net <- df_tot$network %>% unique()
 listA <- list()
-for (i in 1:11){
+for (i in 1:12){
   font_size <- 2
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
     ggboxplot(x = "sum_g", y = "mean_deg",
@@ -288,51 +324,127 @@ for (i in 1:11){
   
 }
 wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
-           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]])
+           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]],listA[[12]])
 listA[[10]]
+wrap_plots(listA[[10]],listA[[12]])
 
 # % Connected ~ Type
+# For each type of DDI, how many have its targets connected?
+listA <- list()
+listB <- list()
+for (i in 1:12){
 d1 <- df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
-  select(drug_pair,U_ID,connection_onoff,int_sign_ebw,sum_g)  %>% 
-  mutate(connect_01=ifelse(connection_onoff=="disconnected",0,
-                      ifelse(connection_onoff=="connected",1,NA))) %>% 
-  mutate(connect_01=as.numeric(connect_01)) %>% 
-  group_by(int_sign_ebw) %>% 
-  summarise(mean_conn=mean(connect_01)) %>% as.data.frame()
+    filter(network==net[i]) %>% 
+    select(drug_pair,U_ID,connection_onoff,int_sign_ebw,sum_g)  %>% 
+    mutate(connect_01=ifelse(connection_onoff=="disconnected",0,
+                             ifelse(connection_onoff=="connected",1,NA))) %>% 
+    mutate(connect_01=as.numeric(connect_01)) %>% 
+    group_by(int_sign_ebw) 
+  listA[[i]] <- d1
   
-d1 %>% ggplot(aes(x = int_sign_ebw, y = mean_conn))+
-  geom_point()+
+d2 <- d1 %>% ggplot(aes(x = int_sign_ebw, fill = connection_onoff))+
+    geom_bar(position = "dodge")+
+    theme_minimal()+
+    scale_fill_brewer(palette="Set2")+
+    xlab("Type of interaction")+
+    ylab("Number of target connections")+
+    theme(legend.position = "none")+
+    ggtitle(net[i])
+  listB[[i]] <- d2
+}
+wrap_plots(listB[[1]],listB[[2]],listB[[3]],listB[[4]],listB[[5]],listB[[6]],
+           listB[[7]],listB[[8]],listB[[9]],listB[[10]],listB[[11]],listB[[12]])
+
+wrap_plots(listB[[10]],listB[[12]])
+#connected green, disconnected orange
+
+# % Adjacency ~ Type
+# For each type of DDI, how many have its targets connected?
+listA <- list()
+listB <- list()
+for (i in 1:12){
+  d1 <- df_tot %>%
+    filter(network==net[i]) %>% 
+    select(drug_pair,U_ID,adjacency,int_sign_ebw,sum_g)  %>% 
+    mutate(adja=ifelse(adjacency==0,"not adjacent",
+                             ifelse(adjacency==1,"adjacent",NA))) %>% 
+    group_by(int_sign_ebw) 
+  listA[[i]] <- d1
+  
+  d2 <- d1 %>% ggplot(aes(x = int_sign_ebw, fill = adja))+
+    geom_bar(position = "dodge")+
+    theme_minimal()+
+    scale_fill_brewer(palette="Set2")+
+    xlab("Type of interaction")+
+    ylab("Number of target connections")+
+    theme(legend.position = "none")+
+    ggtitle(net[i])
+  listB[[i]] <- d2
+}
+wrap_plots(listB[[1]],listB[[2]],listB[[3]],listB[[4]],listB[[5]],listB[[6]],
+           listB[[7]],listB[[8]],listB[[9]],listB[[10]],listB[[11]],listB[[12]])
+
+wrap_plots(listB[[10]],listB[[12]])
+#Adjacent green, not adjacent orange
+
+# Rate ~ Conn/Adj
+listCon <- list()
+listAdj <- list()
+for (i in 1:12){
+  # Rate ~ connected/non connected
+  listAdj[[i]] <- df_tot %>%
+  filter(network==net[i]) %>% 
+  ggplot(aes(y=sigma.rate,x=adjacency,
+             fill=adjacency))+
+  geom_boxplot()+
   theme_minimal()+
-  scale_fill_brewer(palette="Set2")+
-  xlab("Type of interaction")+
-  ylab("Percentage connection")+
-  theme(legend.position = "none")
-  
-# int_sign_ebw mean_conn
-# 1      Synergy 0.6631579
-# 2   Additivity 0.8236301
-# 3   Antagonism 1.0000000
+  theme(legend.position = "none")+
+  ggtitle(net[i])+
+  ylab("Sigma rate")+
+  xlab("Connectedness")
+# Rates ~ adjacent/non adjacent
+  listCon[[i]] <- df_tot %>%
+  filter(network==net[i]) %>% 
+  ggplot(aes(y=sigma.rate,x=connection_onoff,
+             fill=connection_onoff))+
+  geom_boxplot()+
+  theme_minimal()+
+  theme(legend.position = "none")+
+  ggtitle(net[i])+
+  ylab("Sigma rate")+
+  xlab("Adjacency")
+}
+
+wrap_plots(listCon[[10]],listCon[[12]])
+wrap_plots(listAdj[[10]],listAdj[[12]])
+
+
+
+
 
 ############################################
 # For each cluster, calculate:
-# number of unique DDIs per cluster
-df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
-  select(sigma.rate,clusters,drug_pair,connection_onoff,int_sign_ebw,sum_g) %>% 
-  distinct() %>% 
-  group_by(sigma.rate) %>%
-  summarise(count = n_distinct(drug_pair)) %>% 
-  ggplot(aes(x=sigma.rate,y=count,group=sigma.rate))+geom_point()+theme_minimal()
-# number of unique target pairs
-df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
-  select(sigma.rate,clusters,drug_pair,U_ID,connection_onoff,int_sign_ebw,sum_g) %>% 
-  group_by(sigma.rate) %>%
-  summarise(count = n_distinct(U_ID)) %>% 
-  ggplot(aes(x=sigma.rate,y=count))+geom_point()+theme_minimal()
 
-# average min path length
+# number of unique DDIs per cluster
+df_tot  %>% 
+  select(network,sigma.rate,clusters,drug_pair,connection_onoff,int_sign_ebw,sum_g) %>% 
+  distinct() %>% 
+  group_by(sigma.rate,network) %>%
+  summarise(count = n_distinct(drug_pair)) %>% 
+  ggplot(aes(x=sigma.rate,y=count,group=sigma.rate))+geom_point()+theme_minimal()+
+  facet_wrap(.~network)+
+  ylab("Number of DDIs")
+# number of unique target pairs
+df_tot %>% 
+  select(network,sigma.rate,clusters,drug_pair,U_ID,connection_onoff,int_sign_ebw,sum_g) %>% 
+  group_by(network,sigma.rate) %>%
+  summarise(count = n_distinct(U_ID)) %>% 
+  ggplot(aes(x=sigma.rate,y=count))+geom_point()+
+  facet_wrap(~network)+
+  theme_minimal()+
+  ylab("Number of targets")
+
+# average min path length per cluster
 df_tot %>%
   filter(network=="Small/medium-scale PPI") %>% 
   select(sigma.rate,clusters,drug_pair,connection_onoff,int_sign_ebw,sum_g,
@@ -341,14 +453,15 @@ df_tot %>%
   ggplot(aes(x=sigma.rate,y=path.length,group=sigma.rate))+geom_boxplot()+
   theme_minimal()
 
-# average k edge
+# average k edge per cluster
 df_tot %>%
   filter(network=="Small/medium-scale PPI") %>% 
   select(sigma.rate,clusters,drug_pair,connection_onoff,int_sign_ebw,sum_g,
          K.edge)  %>% 
   distinct() %>% 
-  ggplot(aes(x=sigma.rate,y=K.edge,group=sigma.rate))+geom_boxplot()+
-  geom_jitter()+theme_minimal()
+  ggplot(aes(x=sigma.rate,y=K.edge,group=sigma.rate))+
+  geom_boxplot()+
+  theme_minimal()
 # average node degree
 df_tot %>%
   filter(network=="Small/medium-scale PPI") %>% 
@@ -356,10 +469,7 @@ df_tot %>%
          mean_deg)  %>% 
   distinct() %>% 
   ggplot(aes(x=sigma.rate,y=mean_deg,group=sigma.rate))+geom_boxplot()+
-  geom_jitter()+theme_minimal()
-# % of connected vs disconnected
-
-# % synergies, % additivities, % antagonisms
+  theme_minimal()
 
 # average sum_g
 df_tot %>%
@@ -369,12 +479,13 @@ df_tot %>%
   distinct() %>% 
   ggplot(aes(x=sigma.rate,y=sum_g,group=sigma.rate))+geom_boxplot()+
   geom_jitter()+theme_minimal()
+# clusters with higher rates are mainly a single int type.
 
 
-# mean path by type of interaction (Syn,Ant,Add,Add-Ant,Ant-Syn,Add-Syn,Add-Ant-Syn)
+# mean path ~ interaction (Syn,Ant,Add,Add-Ant,Ant-Syn,Add-Syn,Add-Ant-Syn)
 r <- c()
 for (i in 1:dim(df_tot)[1]){
-  x <- df_tot[i,35:40] %>% t() %>% as.vector()
+  x <- df_tot[i,33:38] %>% t() %>% as.vector()
   x <- x %>% unique() %>% sort()
   r[i] <- paste0(x,collapse = "-")
 }
@@ -383,14 +494,14 @@ df_tot$type <- r
 
 # Mean.path
 df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
-  select(sigma.rate,clusters,drug_pair,connection_onoff,type,path.length)  %>% 
+  filter(network==net[10]|network==net[12]) %>% 
+  select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,path.length)  %>% 
   distinct() %>% 
-  group_by(type) %>% 
+  group_by(type,network) %>% 
   summarise(Mean.path=mean(path.length),
             sem.path=std.error(path.length)) %>% 
   ungroup() %>% 
-  ggplot(aes(x=type,y=Mean.path,fill=type))+
+  ggplot(aes(x=type,y=Mean.path,fill=network,group=network))+
   geom_bar(position=position_dodge(), stat="identity",
            colour='black',width=0.5)+
   geom_errorbar(position=position_dodge(0.5),aes(ymin=Mean.path-sem.path, ymax=Mean.path+sem.path), width=.2)+
@@ -399,17 +510,18 @@ df_tot %>%
   xlab("Interaction type across all strains")+
   ylab("Minimum path distance")+
   theme(legend.position = "none")
+ 
 
 # Mean.rate
 df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
-  select(sigma.rate,clusters,drug_pair,connection_onoff,type,path.length)  %>% 
+  filter(network==net[10]|network==net[12]) %>% 
+  select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,path.length)  %>% 
   distinct() %>% 
-  group_by(type) %>% 
+  group_by(network,type) %>% 
   summarise(Mean.rate=mean(sigma.rate),
             sem.rate=std.error(sigma.rate)) %>% 
   ungroup() %>% 
-  ggplot(aes(x=type,y=Mean.rate,fill=type))+
+  ggplot(aes(x=type,y=Mean.rate,fill=network))+
   geom_bar(position=position_dodge(), stat="identity",
            colour='black',width=0.5)+
   geom_errorbar(position=position_dodge(0.5),aes(ymin=Mean.rate-sem.rate, ymax=Mean.rate+sem.rate), width=.2)+
@@ -417,18 +529,18 @@ df_tot %>%
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   xlab("Interaction type across all strains")+
   ylab("Sigma rate")+
-  theme(legend.position = "none")
+  theme(legend.position = "left")
 
 
 df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
-  select(sigma.rate,clusters,drug_pair,connection_onoff,type,path.length,K.edge)  %>% 
+  filter(network==net[10]|network==net[12]) %>% 
+  select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,path.length,K.edge)  %>% 
   distinct() %>% 
-  group_by(type) %>% 
+  group_by(type,network) %>% 
   summarise(Mean.K.edge=mean(K.edge,na.rm=T),
             sem.K.edge=std.error(K.edge)) %>% 
   ungroup() %>% 
-  ggplot(aes(x=type,y=Mean.K.edge,fill=type))+
+  ggplot(aes(x=type,y=Mean.K.edge,fill=network))+
   geom_bar(position=position_dodge(), stat="identity",
            colour='black',width=0.5)+
   geom_errorbar(position=position_dodge(0.5),aes(ymin=Mean.K.edge-sem.K.edge, ymax=Mean.K.edge+sem.K.edge), width=.2)+
@@ -437,15 +549,15 @@ df_tot %>%
 
 
 df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
-  select(sigma.rate,clusters,drug_pair,connection_onoff,type,path.length,
+  filter(network==net[10]|network==net[12]) %>% 
+  select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,path.length,
          mean_deg)  %>% 
   distinct() %>% 
-  group_by(type) %>% 
+  group_by(type,network) %>% 
   summarise(Mean.mean_deg=mean(mean_deg,na.rm=T),
             sem.mean_deg=std.error(mean_deg)) %>% 
   ungroup() %>% 
-  ggplot(aes(x=type,y=Mean.mean_deg,fill=type))+
+  ggplot(aes(x=type,y=Mean.mean_deg,fill=network))+
   geom_bar(position=position_dodge(), stat="identity",
            colour='black',width=0.5)+
   geom_errorbar(position=position_dodge(0.5),aes(ymin=Mean.mean_deg-sem.mean_deg, ymax=Mean.mean_deg+sem.mean_deg), width=.2)+
@@ -453,28 +565,12 @@ df_tot %>%
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 
-
-df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
-  select(sigma.rate,clusters,drug_pair,connection_onoff,type,path.length)  %>% 
-  distinct() %>% 
-  ggplot(aes(x=type,y=sigma.rate))+geom_boxplot()+
-  geom_jitter(aes(col=clusters))+theme_minimal()
-
-df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
-  select(sigma.rate,clusters,drug_pair,connection_onoff,type,path.length)  %>% 
-  distinct() %>% 
-  ggplot(aes(x=type,y=as.numeric(as.character(clusters))))+geom_boxplot()+
-  geom_jitter(aes(col=clusters))+theme_minimal()
-
-
-# Evolutionary rates ~ int_type/distance/connectivity/node [Circular]
+# Evolutionary rates ~ int_type/distance/connectivity/node 
 
 # Relation between sigma rate and interaction type (ebw). 
 net <- df_tot$network %>% unique()
 listA <- list()
-for (i in 1:11){
+for (i in 1:12){
   font_size <- 3
   
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
@@ -493,9 +589,9 @@ for (i in 1:11){
   listA[[i]]$layers[[2]]$aes_params$textsize <- font_size
 }
 wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
-           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]])
+           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]],listA[[12]])
 listA[[10]]
-
+wrap_plots(listA[[10]],listA[[12]])
 
 # Relation between sigma rate and interaction type (all strains sum)
 my_comparisons <- list(c("-4","-3"),c("-3","-2"),c("-2","-1"),
@@ -505,7 +601,7 @@ my_comparisons <- list(c("-4","-3"),c("-3","-2"),c("-2","-1"),
 
 net <- df_tot$network %>% unique()
 listA <- list()
-for (i in 1:11){
+for (i in 1:12){
   font_size <- 2
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
     ggboxplot(x = "sum_g", y = "sigma.rate",
@@ -524,7 +620,7 @@ for (i in 1:11){
   
 }
 wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
-           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]])
+           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]],listA[[12]])
 listA[[10]]
 
 # Rates ~ Interaction Type (ebw) (all networks).
@@ -547,33 +643,29 @@ df_tot %>% ggline(x = "sum_g", y = "sigma.rate", add = "mean_se",
   ylab("Sigma rate")+
   theme_minimal()
 
-# Rates ~ Interaction Type (ebw) (PPI). [This is circular]
+# Rates ~ Interaction Type (ebw) (PPI).
 df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
+  filter(network==net[10]|network==net[12]) %>% 
   ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
-                  group = "network", palette = "jco")+
-  stat_compare_means(aes(group = network), label = "p.signif", 
-                     label.y = c(40, 40, 40))+
-  facet_wrap(~network)+
+                  group = "network", col="network")+
   xlab("Type of interaction")+
   ylab("Sigma rate")+
-  theme_minimal()
+  theme_minimal()+
+  theme(legend.position = "none")
 
-# Rates ~ Interaction Type (all strains) (PPI). [This is circular]
+# Rates ~ Interaction Type (all strains) (PPI).
 df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
+  filter(network==net[10]|network==net[12]) %>% 
   ggline(x = "sum_g", y = "sigma.rate", add = "mean_se",
-         group = "network", palette = "jco")+
-  stat_compare_means(aes(group = network), label = "p.signif", 
-                     label.y = c(40, 40, 40))+
-  facet_wrap(~network)+
+         group = "network",col="network")+
   xlab("Type of interaction")+
   ylab("Sigma rate")+
-  theme_minimal()
+  theme_minimal()+
+  theme(legend.position = "none")
 
 # Rates ~ Distance (PPI).
 df_tot %>% 
-  filter(network=="Small/medium-scale PPI") %>% 
+  filter(network==net[10]|network==net[12]) %>% 
   mutate(path.length.corr=ifelse(path.length==0,"0",
                                  ifelse(path.length==1,"1",
                                         ifelse(path.length==2,"2",
@@ -582,13 +674,11 @@ df_tot %>%
                                                              ifelse(path.length==5,"5","6+"))))))) %>% 
   mutate(path.length.corr=factor(path.length.corr,levels=c("0","1","2","3","4","5","6+"))) %>% 
   ggline(x = "path.length.corr", y = "sigma.rate", add = "mean_se", 
-         group = "network",palette = "jco")+
-  stat_compare_means(aes(group = network), label = "p.signif", 
-                     label.y = c(40, 40, 40))+
-  facet_wrap(~network)+
+         group = "network",col="network")+
   xlab("Minimum distance between targets")+
   ylab("Sigma rate")+
-  theme_minimal()
+  theme_minimal()+
+  theme(legend.position = "none")
 
 
 # Rates ~ Distance (all networks).
@@ -618,6 +708,7 @@ df_tot %>% ggline(x = "K.edge", y = "sigma.rate", add = "mean_se",
   ylab("Sigma rate")+
   theme_minimal()
 
+
 # Rates ~ Node degree (all networks).
 df_tot %>% ggline(x = "mean_deg", y = "sigma.rate", add = "mean_se",
                   group = "network", palette = "jco")+
@@ -638,7 +729,7 @@ df_tot %>% ggline(x = "connection_onoff", y = "sigma.rate", add = "mean_se",
   theme_minimal()
 
 # Rate ~ Adjacency (all networks)
-df_tot %>% ggline(x = "adjancency", y = "sigma.rate", add = "mean_se",
+df_tot %>% ggline(x = "adjacency", y = "sigma.rate", add = "mean_se",
                   col = "network")+
   stat_compare_means(aes(group = network), label = "p.signif", 
                      label.y = c(40, 40, 40))+
@@ -649,7 +740,7 @@ df_tot %>% ggline(x = "adjancency", y = "sigma.rate", add = "mean_se",
 # Rate ~ interaction type (across species)
 # sum_g just adds the scores of interaction types (-1:antagonism,0:additive,+1:synergy)
 df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
+  filter(network==net[10]) %>% 
   ggline(x = "sum_g", y = "sigma.rate", add = "mean_se",
          group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif", 
@@ -658,32 +749,4 @@ df_tot %>%
   xlab("Type of interaction")+
   ylab("Sigma rate")+
   theme_minimal()
-
-df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
-  select(sum_g) %>% pull() %>% hist()
-
-# Cluster ~ interaction type
-df_tot %>%
-  filter(network=="Small/medium-scale PPI") %>% 
-  ggplot(aes(x=clusters,y=sd_g,#sd_g, sum_g
-             group=clusters,
-             fill=sigma.rate))+
-  geom_boxplot()+
-  theme_minimal()
-
-
-# clusters with low sigma rates have different categories.
-# clusters with high sigma rates come from the same category.
-# Cluster 13 has most synergies, cluster 2 has most antagonisms. They have the highest
-# rates.
-df_tot %>% 
-  select(int_sign_ebw,int_sign_ecr,
-         int_sign_seo,int_sign_stm,
-         int_sign_pae,int_sign_pau,
-         sigma.rate) %>% 
-  pivot_longer(names_to="species",values_to = "signs",1:6) %>% 
-  ggplot(aes(x=signs,y=sigma.rate))+
-  geom_point()+
-  geom_violin()
 
