@@ -127,8 +127,7 @@ df_tot <- bind_rows(list1, .id = "network") %>%
                       ifelse(int_sign_pau=="Additivity",0,
                              ifelse(int_sign_pau=="Synergy",-1,NA)))) %>% 
   rowwise() %>% 
-  mutate(sum_g=ebw_g+ecr_g+seo_g+stm_g+pae_g+pau_g)
-
+  mutate(sum_g=ebw_g+ecr_g+seo_g+stm_g+pae_g+pau_g) 
 net <- df_tot$network %>% unique()
 
 # Minimum path ~ interaction type (ebw). 
@@ -139,8 +138,9 @@ for (i in 1:12){
   
   font_size <- 2
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
-    ggboxplot(x = "int_sign_ebw", y = "path.length",
-              fill = "int_sign_ebw")+ 
+    ggplot(aes(x=int_sign_ebw,y=path.length,fill=int_sign_ebw))+
+    geom_violin()+
+    geom_boxplot(width=0.01,fill="white")+
     stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
     stat_compare_means(label.y = -3,size=font_size) +
     stat_summary(fun=mean, geom="point", shape=20, size=4, color="red", fill="red")+
@@ -159,51 +159,7 @@ wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
 listA[[10]]
 listA[[12]]
 wrap_plots(listA[[10]],listA[[12]])
-
-
-df_tot %>% 
-  filter(network==net[10]) %>% 
-  ggplot(aes(x = int_sign_ebw, y = path.length,
-             fill = int_sign_ebw))+
-  theme_minimal()+
-  scale_fill_brewer(palette="Set2")+
-  xlab("Type of interaction")+
-  ylab("Minimum path length between proteins")+
-  geom_violin()
 # Synergies occur closer in the network.
-
-
-# Min path ~ interaction type (all strains sum)
-my_comparisons <- list(c("-4","-3"),c("-3","-2"),c("-2","-1"),
-                       c("-1","0"),c("0","1"),c("1","2"),c("2","3"),c("3","4"),
-                       c("-4","-2"),c("-3","-1"),c("-2","0"),c("-1","1"),
-                       c("0","2"),c("1","3"),c("2","4"))
-  
-net <- df_tot$network %>% unique()
-listA <- list()
-for (i in 1:12){
-  font_size <- 2
-  listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
-    ggboxplot(x = "sum_g", y = "path.length",
-              fill = "sum_g")+ 
-    stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    stat_compare_means(label.y = -3,size=font_size) +
-    stat_summary(fun=mean, geom="point", shape=20, size=4, color="red", fill="red")+
-    theme_minimal()+
-    scale_fill_brewer(palette="Set2")+
-    xlab("Type of interaction")+
-    ylab("Minimum path length between proteins")+
-    theme(legend.position = "none")+
-    ggtitle(net[i])
-  
-  listA[[i]]$layers[[2]]$aes_params$textsize <- font_size
-  
-}
-wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
-           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]],listA[[12]])
-wrap_plots(listA[[10]],listA[[12]])
-# Synergies occur closer in the network.
-
 
 
 # Connectivity ~ interaction type (ebw).
@@ -212,8 +168,9 @@ net <- df_tot$network %>% unique()
 listA <- list()
 for (i in 1:12){
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
-    ggboxplot(x = "int_sign_ebw", y = "K.edge",
-              fill = "int_sign_ebw")+ 
+    ggplot(aes(x=int_sign_ebw,y=K.edge,fill=int_sign_ebw))+
+    geom_violin()+
+    geom_boxplot(width=0.01,fill="white")+
     stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
     stat_compare_means(label.y = -3) +
     stat_summary(fun=mean, geom="point", shape=20, size=4, color="red", fill="red")+
@@ -233,47 +190,16 @@ wrap_plots(listA[[10]],listA[[12]])
 #Con is lower in antagonisms but only in metabolic model.
 
 
-# connectivity ~ interaction type (all strains sum)
-my_comparisons <- list(c("-4","-3"),c("-3","-2"),c("-2","-1"),
-                       c("-1","0"),c("0","1"),c("1","2"),c("2","3"),c("3","4"),
-                       c("-4","-2"),c("-3","-1"),c("-2","0"),c("-1","1"),
-                       c("0","2"),c("1","3"),c("2","4"))
-
-net <- df_tot$network %>% unique()
-listA <- list()
-for (i in 1:12){
-  font_size <- 2
-  listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
-    ggboxplot(x = "sum_g", y = "K.edge",
-              fill = "sum_g")+ 
-    stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    stat_compare_means(label.y = -3,size=font_size) +
-    stat_summary(fun=mean, geom="point", shape=20, size=4, color="red", fill="red")+
-    theme_minimal()+
-    scale_fill_brewer(palette="Set2")+
-    xlab("Type of interaction")+
-    ylab("K edge connectivity between proteins")+
-    theme(legend.position = "none")+
-    ggtitle(net[i])
-  
-  listA[[i]]$layers[[2]]$aes_params$textsize <- font_size
-  
-}
-wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
-           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]],listA[[12]])
-listA[[10]]
-listA[[12]]
-wrap_plots(listA[[10]],listA[[12]])
-
-
 # Node degree ~ interaction type (ebw). 
 my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
 net <- df_tot$network %>% unique()
 listA <- list()
 for (i in 1:12){
   listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
-    ggboxplot(x = "int_sign_ebw", y = "mean_deg",
-              fill = "int_sign_ebw")+ 
+    ggplot(aes(x = int_sign_ebw, y = mean_deg,
+              fill = int_sign_ebw))+ 
+    geom_violin()+
+    geom_boxplot(width=0.01,fill="white")+
     stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
     stat_compare_means(label.y = -3) +
     stat_summary(fun=mean, geom="point", shape=20, size=4, color="red", fill="red")+
@@ -292,41 +218,7 @@ listA[[12]]
 wrap_plots(listA[[10]],listA[[12]])
 # Significant differences (mean degree) between interactions in the metabolic network.
 
-# Node degree ~ interaction type (all strains sum)
-my_comparisons <- list(c("-4","-3"),c("-3","-2"),c("-2","-1"),
-                       c("-1","0"),c("0","1"),c("1","2"),c("2","3"),c("3","4"),
-                       c("-4","-2"),c("-3","-1"),c("-2","0"),c("-1","1"),
-                       c("0","2"),c("1","3"),c("2","4"))
 
-my_comparisons <- list(c("-4","-3"),c("-3","-2"),c("-2","-1"),
-                       c("-1","0"),c("0","1"),c("1","2"),
-                       c("-4","-2"),c("-3","-1"),c("-2","0"),c("-1","1"),
-                       c("0","2"))
-
-net <- df_tot$network %>% unique()
-listA <- list()
-for (i in 1:12){
-  font_size <- 2
-  listA[[i]] <- df_tot %>% filter(network==net[i]) %>% 
-    ggboxplot(x = "sum_g", y = "mean_deg",
-              fill = "sum_g")+ 
-    stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    stat_compare_means(label.y = -3,size=font_size) +
-    stat_summary(fun=mean, geom="point", shape=20, size=4, color="red", fill="red")+
-    theme_minimal()+
-    scale_fill_brewer(palette="Set2")+
-    xlab("Type of interaction")+
-    ylab("Mean degree between proteins")+
-    theme(legend.position = "none")+
-    ggtitle(net[i])
-  
-  listA[[i]]$layers[[2]]$aes_params$textsize <- font_size
-  
-}
-wrap_plots(listA[[1]],listA[[2]],listA[[3]],listA[[4]],listA[[5]],listA[[6]],
-           listA[[7]],listA[[8]],listA[[9]],listA[[10]],listA[[11]],listA[[12]])
-listA[[10]]
-wrap_plots(listA[[10]],listA[[12]])
 
 # % Connected ~ Type
 # For each type of DDI, how many have its targets connected?
@@ -356,7 +248,8 @@ wrap_plots(listB[[1]],listB[[2]],listB[[3]],listB[[4]],listB[[5]],listB[[6]],
            listB[[7]],listB[[8]],listB[[9]],listB[[10]],listB[[11]],listB[[12]])
 
 wrap_plots(listB[[10]],listB[[12]])
-#connected green, disconnected orange
+#connected green, disconnected orange.
+#Connected is more common than disconnected in all categories.
 
 # % Adjacency ~ Type
 # For each type of DDI, how many have its targets connected?
@@ -377,7 +270,7 @@ for (i in 1:12){
     scale_fill_brewer(palette="Set2")+
     xlab("Type of interaction")+
     ylab("Number of target connections")+
-    theme(legend.position = "none")+
+    theme(legend.position = "bottom")+
     ggtitle(net[i])
   listB[[i]] <- d2
 }
@@ -386,28 +279,36 @@ wrap_plots(listB[[1]],listB[[2]],listB[[3]],listB[[4]],listB[[5]],listB[[6]],
 
 wrap_plots(listB[[10]],listB[[12]])
 #Adjacent green, not adjacent orange
+#Not adjacent is more common than adjacent, in all categories.
 
 # Rate ~ Conn/Adj
+my_comparisons <- list(c("0","1"))
 listCon <- list()
 listAdj <- list()
 for (i in 1:12){
   # Rate ~ connected/non connected
-  listAdj[[i]] <- df_tot %>%
+  listCon[[i]] <- df_tot %>%
   filter(network==net[i]) %>% 
   ggplot(aes(y=sigma.rate,x=adjacency,
              fill=adjacency))+
   geom_boxplot()+
+    stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+    stat_compare_means(label.y = -3,size=font_size) +
+    stat_summary(fun=mean, geom="point", shape=20, size=4, color="red", fill="red")+
   theme_minimal()+
   theme(legend.position = "none")+
   ggtitle(net[i])+
   ylab("Sigma rate")+
   xlab("Connectedness")
 # Rates ~ adjacent/non adjacent
-  listCon[[i]] <- df_tot %>%
+  listAdj[[i]] <- df_tot %>%
   filter(network==net[i]) %>% 
   ggplot(aes(y=sigma.rate,x=connection_onoff,
              fill=connection_onoff))+
   geom_boxplot()+
+    stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+    stat_compare_means(label.y = -3,size=font_size) +
+    stat_summary(fun=mean, geom="point", shape=20, size=4, color="red", fill="red")+
   theme_minimal()+
   theme(legend.position = "none")+
   ggtitle(net[i])+
@@ -415,6 +316,7 @@ for (i in 1:12){
   xlab("Adjacency")
 }
 
+#Sup. Fig 3,4
 wrap_plots(listCon[[10]],listCon[[12]])
 wrap_plots(listAdj[[10]],listAdj[[12]])
 

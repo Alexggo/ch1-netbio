@@ -30,7 +30,7 @@ filename <- c("EcoCyc.goldstandardset.txt","EcoliNet.v1.txt","GN.INT.EcoliNet.35
 
 
 # Map drugs to targets (for those that are known)
-nodes <- read.csv("data/5.Targets_NetworkDistance/DrugTargets3_ecoli.csv")
+nodes <- read.csv("data/5.Targets_NetworkDistance/DrugTargets3_ecoli.csv.csv")
 nodes1 <- nodes %>%
   select(KEGG_eco)%>%
   unique() %>%
@@ -57,7 +57,7 @@ for (i in 1:length(filename)){
   c <- colnames(dist_mat) %in% nodes1
   # How many targets have drugs in Brochado?
   print("Number of targets in Brochado")
-  rownames(dist_mat) %in% nodes1 %>% sum()
+  rownames(dist_mat) %in% nodes1 %>% sum() %>% print()
   # Small matrix of targets from Brochado
   distnew2 <- dist_mat[r,c] %>% 
     as.data.frame()
@@ -145,7 +145,7 @@ for (i in 1:length(filename)){
     select(Drug,KEGG_eco)
   colnames(drug_target1) <- c("drug1","Uniprot1")
   print("How many drugs?")
-  drug_target1$drug1 %>% unique() %>% sort()
+  drug_target1$drug1 %>% unique() %>% sort() %>% print()
   
   tab1 <- inner_join(tabnew2,drug_target1,by="Uniprot1") %>% 
     distinct()
