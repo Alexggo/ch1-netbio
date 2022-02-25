@@ -7,29 +7,11 @@ args = commandArgs(trailingOnly=TRUE)
 #' 
 #' 
 ## -----------------------------------------------------------------------------
-library("plyr")
-library("tidyverse")
-library("broom")
-library("ape")
-library("phangorn")
-library('phytools')
-library("treeio")
-library("ggtree")
-library('plotly')
-library("dendextend")
-library("RColorBrewer")
-library("car")
-library("factoextra")
-library("OUwie")
-library("ouch")
-library("factoextra")
-library("geiger")
-library("ggrepel")
-library("hrbrthemes")
-library("ggforce")
-library("ComplexHeatmap")
-library("ggbiplot")
-library("patchwork")
+library(pacman)
+p_load(plyr,tidyverse,broom,ape,phangorn,phytools,treeio,ggtree,plotly,
+dendextend,RColorBrewer,car,factoextra,OUwie,ouch,factoextra,geiger,ggrepel,
+hrbrthemes,ggforce,ComplexHeatmap,ggbiplot,patchwork)
+
 
 
 #' Input files, phylogenetic tree and matrix.
@@ -54,7 +36,6 @@ mat <- read.csv("data/1.processed/Broc2018_maindataset.csv") %>%
   filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau))
 
 clust <- read.csv("data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.csv")
-
 mat1 <- full_join(mat,clust,by="drugdrug")
 
 

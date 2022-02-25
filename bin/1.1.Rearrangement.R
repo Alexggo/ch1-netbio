@@ -5,22 +5,42 @@
 #
 #Rearranges data from Brochado to generate maindataset.
 ## -----------------------------------------------------------------------------
-library("plyr")
-library("tidyverse")
-library("broom")
+library(pacman)
+p_load(tidyverse,broom)
 
-x <- read_csv(file.path("data/1.processed","2018_Broc_ED09C.csv"))
+x <- read_csv(file.path("data/1.processed","2018_Broc_ED09C.csv")) %>% 
+  separate(drug_pair,into=c("Drug1","Drug2")) 
+for (i in 1:dim(x)[1]){
+  a <- x[i,]$Drug1
+  b <- x[i,]$Drug2
+  ab <- sort(c(a,b))
+  x[i,]$Drug1 <- ab[1]
+  x[i,]$Drug2 <- ab[2]
+}
+x <- x %>% mutate(drug_pair=paste0(Drug1,"_",Drug2))
+
 y <- read_csv(file.path("data/1.processed","2018_Broc_SuppTable1.csv"))%>% select(1:5)
-z <- read_csv(file.path("data/1.processed","2018_Broc_SuppTable2.csv"))
+z <- read_csv(file.path("data/1.processed","2018_Broc_SuppTable2.csv")) %>%
+  as_tibble() %>% 
+  dplyr::rename(Drug1=drug1) %>% 
+  dplyr::rename(Drug2=drug2) 
+
+for (i in 1:dim(z)[1]){
+  a <- z[i,]$Drug1
+  b <- z[i,]$Drug2
+  ab <- sort(c(a,b))
+  z[i,]$Drug1 <- ab[1]
+  z[i,]$Drug2 <- ab[2]
+}
 
 # Rearrange
-y_red1 <- y %>% mutate(drug1=drug,
+y_red1 <- y %>% mutate(Drug1=drug,
                            drug_category1=drug_category,
                            targeted_cellular_process1=targeted_cellular_process,
                            use1=use,
                            code_3letter1=code_3letter) %>% 
   select(-c(1:5))
-y_red2 <- y %>% mutate(drug2=drug,
+y_red2 <- y %>% mutate(Drug2=drug,
                            drug_category2=drug_category,
                            targeted_cellular_process2=targeted_cellular_process,
                            use2=use,
@@ -28,23 +48,19 @@ y_red2 <- y %>% mutate(drug2=drug,
   select(-c(1:5))
 
 
-x <- x %>% 
-  separate(drug_pair, c("drug1", "drug2"), "_") %>% 
-  mutate(drug_pair=paste0(drug1,"_",drug2))
+y1 <- full_join(y_red2,x,by="Drug2")
+y2 <- full_join(y_red1,y1,by="Drug1") 
 
-y1 <- full_join(y_red2,x,by="drug2")
-y2 <- full_join(y_red1,y1,by="drug1") 
-
-z1 <- z %>% select(drug1,drug2,8:19) %>% 
-  mutate(drug_pair=paste0(drug1,"_",drug2))
+z1 <- z %>% select(Drug1,Drug2,8:19) %>% 
+  mutate(drug_pair=paste0(Drug1,"_",Drug2))
 
 
 a <- full_join(y2,z1,by="drug_pair") %>% 
   select(-c(paste0("int_score_",c("ebw","ecr","seo","stm","pae","pau")))) %>% 
   filter(!is.na(drug_pair)) %>% 
-  mutate(drug1=drug1.x,drug2=drug2.x) %>% 
-  select(-c("drug1.y","drug2.y","drug1.x","drug2.x")) %>% 
-  select(drug_pair,drug1,drug2,code_3letter1,code_3letter2,drug_category1,
+  mutate(Drug1=Drug1.x,Drug2=Drug2.x) %>% 
+  select(-c("Drug1.y","Drug2.y","Drug1.x","Drug2.x")) %>% 
+  select(drug_pair,Drug1,Drug2,code_3letter1,code_3letter2,drug_category1,
          drug_category2,targeted_cellular_process1,targeted_cellular_process2,
          use1,use2,ebw,ecr,seo,stm,pae,pau,int_sign_ebw,int_sign_ecr,int_sign_seo,int_sign_stm,int_sign_pae,int_sign_pau) %>% 
   mutate(drug_category=ifelse(drug_category1==drug_category2,"Same","Different"),
@@ -52,10 +68,8 @@ a <- full_join(y2,z1,by="drug_pair") %>%
          use=ifelse(use1==use2,"Same","Different"))
 
 
-
-
 d <- a %>% as.data.frame()
-dd <- d %>% select(drug1,drug2)
+dd <- d %>% select(Drug1,Drug2)
 cc <- d %>% select(drug_category1,drug_category2)
 pp <- d %>% select(targeted_cellular_process1,targeted_cellular_process2)
 uu <- d %>% select(use1,use2)

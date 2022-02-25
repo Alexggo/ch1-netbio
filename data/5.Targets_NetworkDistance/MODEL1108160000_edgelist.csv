@@ -1,0 +1,5766 @@
+node1,node2
+eco:b0784,MoaD Protein with carboxylate
+eco:b0785,MoaD Protein with carboxylate
+eco:b0784,molybdopterin
+eco:b0785,molybdopterin
+eco:b0784,Cu2+
+eco:b0785,Cu2+
+eco:b0784,cyclic pyranopterin monophosphate
+eco:b0785,cyclic pyranopterin monophosphate
+eco:b0784,MoaD Protein with thiocarboxylate
+eco:b0785,MoaD Protein with thiocarboxylate
+eco:b0784,moaD
+eco:b0785,moaD
+eco:b0784,moaE
+eco:b0785,moaE
+eco:b0784,MoaD Protein with thiocarboxylate
+eco:b0785,MoaD Protein with thiocarboxylate
+eco:b0784,molybdopterin
+eco:b0785,molybdopterin
+eco:b0784,MoaD Protein with carboxylate
+eco:b0785,MoaD Protein with carboxylate
+eco:b0784,cyclic pyranopterin monophosphate
+eco:b0785,cyclic pyranopterin monophosphate
+eco:b0784,Cu2+
+eco:b0785,Cu2+
+eco:b1262,CO2
+eco:b1262,C'-(3-Indolyl)-glycerol 3-phosphate
+eco:b1262,trpC
+eco:b1262,1-(2-Carboxyphenylamino)-1-deoxy-D-ribulose 5-phosphate
+eco:b1262,1-(2-Carboxyphenylamino)-1-deoxy-D-ribulose 5-phosphate
+eco:b1262,CO2
+eco:b1262,C'-(3-Indolyl)-glycerol 3-phosphate
+eco:b2836,Palmitoyl-ACP (n-C16:0ACP)
+eco:b1094,Palmitoyl-ACP (n-C16:0ACP)
+eco:b2836,AMP
+eco:b1094,AMP
+eco:b2836,Diphosphate
+eco:b1094,Diphosphate
+eco:b2836,ATP
+eco:b1094,ATP
+eco:b2836,Hexadecanoate (n-C16:0)
+eco:b1094,Hexadecanoate (n-C16:0)
+eco:b2836,acpP
+eco:b1094,acpP
+eco:b2836,acyl carrier protein
+eco:b1094,acyl carrier protein
+eco:b2836,aas
+eco:b1094,aas
+eco:b2836,Palmitoyl-ACP (n-C16:0ACP)
+eco:b1094,Palmitoyl-ACP (n-C16:0ACP)
+eco:b2836,AMP
+eco:b1094,AMP
+eco:b2836,Diphosphate
+eco:b1094,Diphosphate
+eco:b2836,ATP
+eco:b1094,ATP
+eco:b2836,Hexadecanoate (n-C16:0)
+eco:b1094,Hexadecanoate (n-C16:0)
+eco:b2836,acyl carrier protein
+eco:b1094,acyl carrier protein
+eco:b2750,ATP
+eco:b2750,Adenosine 5'-phosphosulfate
+eco:b2750,ADP
+eco:b2750,3'-Phosphoadenylyl sulfate
+eco:b2750,ATP
+eco:b2750,ADP
+eco:b2750,3'-Phosphoadenylyl sulfate
+eco:b2750,Adenosine 5'-phosphosulfate
+eco:b2750,cysC
+eco:b3997,Coproporphyrinogen III
+eco:b3997,Uroporphyrinogen III
+eco:b3997,CO2
+eco:b3997,CO2
+eco:b3997,hemE
+eco:b3997,Coproporphyrinogen III
+eco:b3997,Uroporphyrinogen III
+eco:b2687,"4,5-dihydroxy-2,3-pentanedione"
+eco:b2687,L-Homocysteine
+eco:b2687,L-Homocysteine
+eco:b2687,S-Ribosyl-L-homocysteine
+eco:b2687,luxS
+eco:b2687,S-Ribosyl-L-homocysteine
+eco:b2687,"4,5-dihydroxy-2,3-pentanedione"
+eco:s0001,"(2R,4S)-2-methyl-2,3,3,4-tetrahydroxytetrahydrofuran"
+eco:s0001,"(2R,4S)-2-methyl-2,3,3,4-tetrahydroxytetrahydrofuran"
+eco:s0001,"(2R,4S)-2-methyl-2,4-dihydroxydihydrofuran-3-one"
+eco:s0001,"(2R,4S)-2-methyl-2,4-dihydroxydihydrofuran-3-one"
+eco:b2476,(S)-2-[5-Amino-1-(5-phospho-D-ribosyl)imidazole-4-carboxamido]succinate
+eco:b2476,ATP
+eco:b2476,ADP
+eco:b2476,5-amino-1-(5-phospho-D-ribosyl)imidazole-4-carboxylate
+eco:b2476,L-Aspartate
+eco:b2476,ADP
+eco:b2476,(S)-2-[5-Amino-1-(5-phospho-D-ribosyl)imidazole-4-carboxamido]succinate
+eco:b2476,Phosphate
+eco:b2476,L-Aspartate
+eco:b2476,ATP
+eco:b2476,Phosphate
+eco:b2476,5-amino-1-(5-phospho-D-ribosyl)imidazole-4-carboxylate
+eco:b2476,purC
+eco:b0417,Thiamine diphosphate
+eco:b0417,ADP
+eco:b0417,ATP
+eco:b0417,Thiamin monophosphate
+eco:b0417,ADP
+eco:b0417,thiL
+eco:b0417,Thiamine diphosphate
+eco:b0417,ATP
+eco:b0417,Thiamin monophosphate
+eco:b0910,CDP
+eco:b0910,CMP
+eco:b0910,ATP
+eco:b0910,ADP
+eco:b0910,CDP
+eco:b0910,cmk
+eco:b0910,ATP
+eco:b0910,ADP
+eco:b0910,CMP
+eco:b3177,Dihydropteroate
+eco:b3177,6-hydroxymethyl-dihydropterin pyrophosphate
+eco:b3177,Diphosphate
+eco:b3177,folP
+eco:b3177,4-Aminobenzoate
+eco:b3177,6-hydroxymethyl-dihydropterin pyrophosphate
+eco:b3177,Diphosphate
+eco:b3177,Dihydropteroate
+eco:b3177,4-Aminobenzoate
+eco:b1093,(R)-3-Hydroxytetradecanoyl-[acyl-carrier protein]
+eco:b1093,Nicotinamide adenine dinucleotide phosphate
+eco:b1093,fabG
+eco:b1093,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1093,3-Oxotetradecanoyl-[acyl-carrier protein]
+eco:b1093,(R)-3-Hydroxytetradecanoyl-[acyl-carrier protein]
+eco:b1093,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1093,Nicotinamide adenine dinucleotide phosphate
+eco:b1093,3-Oxotetradecanoyl-[acyl-carrier protein]
+eco:b0179,acyl carrier protein
+eco:b0179,"UDP-2,3-bis(3-hydroxytetradecanoyl)glucosamine"
+eco:b0179,lpxD
+eco:b0179,UDP-3-O-(3-hydroxytetradecanoyl)-D-glucosamine
+eco:b0179,(R)-3-Hydroxytetradecanoyl-[acyl-carrier protein]
+eco:b0179,acyl carrier protein
+eco:b0179,UDP-3-O-(3-hydroxytetradecanoyl)-D-glucosamine
+eco:b0179,"UDP-2,3-bis(3-hydroxytetradecanoyl)glucosamine"
+eco:b0179,(R)-3-Hydroxytetradecanoyl-[acyl-carrier protein]
+eco:b3846,(S)-3-Hydroxydecanoyl-CoA
+eco:b2341,(S)-3-Hydroxydecanoyl-CoA
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,3-Oxodecanoyl-CoA
+eco:b2341,3-Oxodecanoyl-CoA
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,3-Oxodecanoyl-CoA
+eco:b2341,3-Oxodecanoyl-CoA
+eco:b3846,(S)-3-Hydroxydecanoyl-CoA
+eco:b2341,(S)-3-Hydroxydecanoyl-CoA
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b0241,Molybdate
+eco:b0929,Molybdate
+eco:b1377,Molybdate
+eco:b2215,Molybdate
+eco:b0241,Molybdate
+eco:b0929,Molybdate
+eco:b1377,Molybdate
+eco:b2215,Molybdate
+eco:b0241,Molybdate
+eco:b0929,Molybdate
+eco:b1377,Molybdate
+eco:b2215,Molybdate
+eco:b0241,Molybdate
+eco:b0929,Molybdate
+eco:b1377,Molybdate
+eco:b2215,Molybdate
+eco:b1277,"2,5-Diamino-6-(ribosylamino)-4-(3H)-pyrimidinone 5'-phosphate"
+eco:b1277,Diphosphate
+eco:b1277,Formate
+eco:b1277,ribA
+eco:b1277,Diphosphate
+eco:b1277,GTP
+eco:b1277,"2,5-Diamino-6-(ribosylamino)-4-(3H)-pyrimidinone 5'-phosphate"
+eco:b1277,Formate
+eco:b1277,GTP
+eco:b3115,ADP
+eco:b2296,ADP
+eco:b1849,ADP
+eco:b3115,ATP
+eco:b2296,ATP
+eco:b1849,ATP
+eco:b3115,Acetyl phosphate
+eco:b2296,Acetyl phosphate
+eco:b1849,Acetyl phosphate
+eco:b3115,ackA
+eco:b2296,ackA
+eco:b1849,ackA
+eco:b3115,Acetate
+eco:b2296,Acetate
+eco:b1849,Acetate
+eco:b3115,purT
+eco:b2296,purT
+eco:b1849,purT
+eco:b3115,ADP
+eco:b2296,ADP
+eco:b1849,ADP
+eco:b3115,Acetyl phosphate
+eco:b2296,Acetyl phosphate
+eco:b1849,Acetyl phosphate
+eco:b3115,tdcD
+eco:b2296,tdcD
+eco:b1849,tdcD
+eco:b3115,Acetate
+eco:b2296,Acetate
+eco:b1849,Acetate
+eco:b3115,ATP
+eco:b2296,ATP
+eco:b1849,ATP
+formate-tetrahydrofolate ligase,Phosphate
+formate-tetrahydrofolate ligase,"5,6,7,8-Tetrahydrofolate"
+formate-tetrahydrofolate ligase,ADP
+formate-tetrahydrofolate ligase,10-Formyltetrahydrofolate
+formate-tetrahydrofolate ligase,ATP
+formate-tetrahydrofolate ligase,Phosphate
+formate-tetrahydrofolate ligase,Formate
+formate-tetrahydrofolate ligase,10-Formyltetrahydrofolate
+formate-tetrahydrofolate ligase,ADP
+formate-tetrahydrofolate ligase,ATP
+formate-tetrahydrofolate ligase,"5,6,7,8-Tetrahydrofolate"
+formate-tetrahydrofolate ligase,Formate
+eco:s0001,1-Pyrroline-5-carboxylate
+eco:s0001,L-Glutamate 5-semialdehyde
+eco:s0001,L-Glutamate 5-semialdehyde
+eco:s0001,1-Pyrroline-5-carboxylate
+eco:b0087,"Undecaprenyl-diphospho-N-acetylmuramoyl-L-alanyl-D-glutamyl-meso-2,6-diaminopimeloyl-D-alanyl-D-alanine"
+eco:b0087,UMP
+eco:b0087,mraY
+eco:b0087,"UDP-N-acetylmuramoyl-L-alanyl-D-glutamyl-meso-2,6-diaminopimeloyl-D-alanyl-D-alanine"
+eco:b0087,Undecaprenyl phosphate
+eco:b0087,"Undecaprenyl-diphospho-N-acetylmuramoyl-L-alanyl-D-glutamyl-meso-2,6-diaminopimeloyl-D-alanyl-D-alanine"
+eco:b0087,"UDP-N-acetylmuramoyl-L-alanyl-D-glutamyl-meso-2,6-diaminopimeloyl-D-alanyl-D-alanine"
+eco:b0087,UMP
+eco:b0087,Undecaprenyl phosphate
+eco:b2895,1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate
+eco:b2515,1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate
+eco:b0684,1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate
+eco:b2895,Flavodoxin reduced
+eco:b2515,Flavodoxin reduced
+eco:b0684,Flavodoxin reduced
+eco:b2895,flavodoxin semi oxidized
+eco:b2515,flavodoxin semi oxidized
+eco:b0684,flavodoxin semi oxidized
+eco:b2895,ispG
+eco:b2515,ispG
+eco:b0684,ispG
+eco:b2895,"2-C-methyl-D-erythritol 2,4-cyclodiphosphate"
+eco:b2515,"2-C-methyl-D-erythritol 2,4-cyclodiphosphate"
+eco:b0684,"2-C-methyl-D-erythritol 2,4-cyclodiphosphate"
+eco:b2895,fldB
+eco:b2515,fldB
+eco:b0684,fldB
+eco:b2895,1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate
+eco:b2515,1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate
+eco:b0684,1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate
+eco:b2895,flavodoxin semi oxidized
+eco:b2515,flavodoxin semi oxidized
+eco:b0684,flavodoxin semi oxidized
+eco:b2895,fldA
+eco:b2515,fldA
+eco:b0684,fldA
+eco:b2895,"2-C-methyl-D-erythritol 2,4-cyclodiphosphate"
+eco:b2515,"2-C-methyl-D-erythritol 2,4-cyclodiphosphate"
+eco:b0684,"2-C-methyl-D-erythritol 2,4-cyclodiphosphate"
+eco:b2895,Flavodoxin reduced
+eco:b2515,Flavodoxin reduced
+eco:b0684,Flavodoxin reduced
+eco:b0907,2-Oxoglutarate
+eco:b0907,O-Phospho-4-hydroxy-L-threonine
+eco:b0907,serC
+eco:b0907,2-Oxo-3-hydroxy-4-phosphobutanoate
+eco:b0907,L-Glutamate
+eco:b0907,2-Oxoglutarate
+eco:b0907,2-Oxo-3-hydroxy-4-phosphobutanoate
+eco:b0907,O-Phospho-4-hydroxy-L-threonine
+eco:b0907,L-Glutamate
+eco:b1131,Fumarate
+eco:b1131,AMP
+eco:b1131,purB
+eco:b1131,"N6-(1,2-Dicarboxyethyl)-AMP"
+eco:b1131,"N6-(1,2-Dicarboxyethyl)-AMP"
+eco:b1131,Fumarate
+eco:b1131,AMP
+eco:b1377,Methanol
+eco:b0929,Methanol
+eco:b2215,Methanol
+eco:b0241,Methanol
+eco:b1377,Methanol
+eco:b0929,Methanol
+eco:b2215,Methanol
+eco:b0241,Methanol
+eco:b1377,Methanol
+eco:b0929,Methanol
+eco:b2215,Methanol
+eco:b0241,Methanol
+eco:b1210,Nicotinamide adenine dinucleotide phosphate
+eco:b1210,L-Glutamate 1-semialdehyde
+eco:b1210,tRNA (Glu)
+eco:b1210,L-Glutamyl-tRNA(Glu)
+eco:b1210,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1210,Nicotinamide adenine dinucleotide phosphate
+eco:b1210,hemA
+eco:b1210,tRNA (Glu)
+eco:b1210,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1210,L-Glutamyl-tRNA(Glu)
+eco:b1210,L-Glutamate 1-semialdehyde
+eco:b0159,Adenine
+eco:b0159,S-Adenosyl-L-homocysteine
+eco:b0159,S-Ribosyl-L-homocysteine
+eco:b0159,S-Ribosyl-L-homocysteine
+eco:b0159,mtnN
+eco:b0159,Adenine
+eco:b0159,S-Adenosyl-L-homocysteine
+eco:b2508,Nicotinamide adenine dinucleotide - reduced
+eco:b2508,Xanthosine 5'-phosphate
+eco:b2508,guaB
+eco:b2508,Nicotinamide adenine dinucleotide
+eco:b2508,IMP
+eco:b2508,Nicotinamide adenine dinucleotide - reduced
+eco:b2508,Nicotinamide adenine dinucleotide
+eco:b2508,Xanthosine 5'-phosphate
+eco:b2508,IMP
+eco:b0841,Undecaprenyl phosphate
+eco:b1278,Undecaprenyl phosphate
+eco:b3057,Undecaprenyl phosphate
+eco:b0841,Undecaprenyl diphosphate
+eco:b1278,Undecaprenyl diphosphate
+eco:b3057,Undecaprenyl diphosphate
+eco:b0841,ybjG
+eco:b1278,ybjG
+eco:b3057,ybjG
+eco:b0841,Phosphate
+eco:b1278,Phosphate
+eco:b3057,Phosphate
+eco:b0841,uppP
+eco:b1278,uppP
+eco:b3057,uppP
+eco:b0841,pgpB
+eco:b1278,pgpB
+eco:b3057,pgpB
+eco:b0841,Undecaprenyl diphosphate
+eco:b1278,Undecaprenyl diphosphate
+eco:b3057,Undecaprenyl diphosphate
+eco:b0841,Undecaprenyl phosphate
+eco:b1278,Undecaprenyl phosphate
+eco:b3057,Undecaprenyl phosphate
+eco:b0841,Phosphate
+eco:b1278,Phosphate
+eco:b3057,Phosphate
+eco:b0009,molybdopterin
+eco:b0009,Diphosphate
+eco:b0009,adenylated molybdopterin
+eco:b0009,mog
+eco:b0009,Diphosphate
+eco:b0009,ATP
+eco:b0009,molybdopterin
+eco:b0009,adenylated molybdopterin
+eco:b0009,ATP
+eco:b4006,5-Formamido-1-(5-phospho-D-ribosyl)imidazole-4-carboxamide
+eco:b4006,5-Amino-1-(5-Phospho-D-ribosyl)imidazole-4-carboxamide
+eco:b4006,"5,6,7,8-Tetrahydrofolate"
+eco:b4006,purH
+eco:b4006,10-Formyltetrahydrofolate
+eco:b4006,5-Amino-1-(5-Phospho-D-ribosyl)imidazole-4-carboxamide
+eco:b4006,"5,6,7,8-Tetrahydrofolate"
+eco:b4006,5-Formamido-1-(5-phospho-D-ribosyl)imidazole-4-carboxamide
+eco:b4006,10-Formyltetrahydrofolate
+eco:b3846,trans-Tetradec-2-enoyl-CoA
+eco:b2341,trans-Tetradec-2-enoyl-CoA
+eco:b3846,(S)-3-Hydroxytetradecanoyl-CoA
+eco:b2341,(S)-3-Hydroxytetradecanoyl-CoA
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,trans-Tetradec-2-enoyl-CoA
+eco:b2341,trans-Tetradec-2-enoyl-CoA
+eco:b3846,(S)-3-Hydroxytetradecanoyl-CoA
+eco:b2341,(S)-3-Hydroxytetradecanoyl-CoA
+eco:b3993,4-Methyl-5-(2-phosphoethyl)-thiazole
+eco:b3993,Thiamin monophosphate
+eco:b3993,Diphosphate
+eco:b3993,thiE
+eco:b3993,Thiamin monophosphate
+eco:b3993,2-Methyl-4-amino-5-hydroxymethylpyrimidine diphosphate
+eco:b3993,4-Methyl-5-(2-phosphoethyl)-thiazole
+eco:b3993,Diphosphate
+eco:b3993,2-Methyl-4-amino-5-hydroxymethylpyrimidine diphosphate
+eco:b2414,Acetate
+eco:b2421,Acetate
+eco:b2414,L-Cysteine
+eco:b2421,L-Cysteine
+eco:b2414,cysK
+eco:b2421,cysK
+eco:b2414,Hydrogen sulfide
+eco:b2421,Hydrogen sulfide
+eco:b2414,O-Acetyl-L-serine
+eco:b2421,O-Acetyl-L-serine
+eco:b2414,L-Cysteine
+eco:b2421,L-Cysteine
+eco:b2414,Acetate
+eco:b2421,Acetate
+eco:b2414,cysM
+eco:b2421,cysM
+eco:b2414,O-Acetyl-L-serine
+eco:b2421,O-Acetyl-L-serine
+eco:b2414,Hydrogen sulfide
+eco:b2421,Hydrogen sulfide
+eco:b2153,Formate
+eco:b2153,folE
+eco:b2153,"2-Amino-4-hydroxy-6-(erythro-1,2,3-trihydroxypropyl)dihydropteridine triphosphate"
+eco:b2153,GTP
+eco:b2153,"2-Amino-4-hydroxy-6-(erythro-1,2,3-trihydroxypropyl)dihydropteridine triphosphate"
+eco:b2153,GTP
+eco:b2153,Formate
+eco:b2836,Dodecanoyl-ACP (n-C12:0ACP)
+eco:b1094,Dodecanoyl-ACP (n-C12:0ACP)
+eco:b2836,Diphosphate
+eco:b1094,Diphosphate
+eco:b2836,ATP
+eco:b1094,ATP
+eco:b2836,AMP
+eco:b1094,AMP
+eco:b2836,Dodecanoate (n-C12:0)
+eco:b1094,Dodecanoate (n-C12:0)
+eco:b2836,aas
+eco:b1094,aas
+eco:b2836,acpP
+eco:b1094,acpP
+eco:b2836,acyl carrier protein
+eco:b1094,acyl carrier protein
+eco:b2836,Dodecanoyl-ACP (n-C12:0ACP)
+eco:b1094,Dodecanoyl-ACP (n-C12:0ACP)
+eco:b2836,Diphosphate
+eco:b1094,Diphosphate
+eco:b2836,ATP
+eco:b1094,ATP
+eco:b2836,AMP
+eco:b1094,AMP
+eco:b2836,Dodecanoate (n-C12:0)
+eco:b1094,Dodecanoate (n-C12:0)
+eco:b2836,acyl carrier protein
+eco:b1094,acyl carrier protein
+eco:b0945,Orotate
+eco:b0945,(S)-Dihydroorotate
+eco:b0945,Menaquinol 8
+eco:b0945,Menaquinone 8
+eco:b0945,Orotate
+eco:b0945,Menaquinol 8
+eco:b0945,pyrD
+eco:b0945,(S)-Dihydroorotate
+eco:b0945,Menaquinone 8
+eco:b0241,Mn2+
+eco:b0929,Mn2+
+eco:b1377,Mn2+
+eco:b2215,Mn2+
+eco:b0241,Mn2+
+eco:b0929,Mn2+
+eco:b1377,Mn2+
+eco:b2215,Mn2+
+eco:b0241,Mn2+
+eco:b0929,Mn2+
+eco:b1377,Mn2+
+eco:b2215,Mn2+
+eco:b0241,Mn2+
+eco:b0929,Mn2+
+eco:b1377,Mn2+
+eco:b2215,Mn2+
+eco:b0775,5'-Deoxyadenosine
+eco:b0775,L-Methionine
+eco:b0775,[2Fe-1S] desulfurated iron-sulfur cluster
+eco:b0775,Dethiobiotin
+eco:b0775,Biotin
+eco:b0775,[2Fe-2S] iron-sulfur cluster
+eco:b0775,S-Adenosyl-L-methionine
+eco:b0775,5'-Deoxyadenosine
+eco:b0775,bioB
+eco:b0775,L-Methionine
+eco:b0775,[2Fe-1S] desulfurated iron-sulfur cluster
+eco:b0775,Dethiobiotin
+eco:b0775,Biotin
+eco:b0775,[2Fe-2S] iron-sulfur cluster
+eco:b0775,S-Adenosyl-L-methionine
+eco:b0052,Nicotinamide adenine dinucleotide - reduced
+eco:b2564,Nicotinamide adenine dinucleotide - reduced
+eco:b0052,Phosphate
+eco:b2564,Phosphate
+eco:b0052,Pyridoxine 5'-phosphate
+eco:b2564,Pyridoxine 5'-phosphate
+eco:b0052,O-Phospho-4-hydroxy-L-threonine
+eco:b2564,O-Phospho-4-hydroxy-L-threonine
+eco:b0052,Nicotinamide adenine dinucleotide
+eco:b2564,Nicotinamide adenine dinucleotide
+eco:b0052,CO2
+eco:b2564,CO2
+eco:b0052,pdxA
+eco:b2564,pdxA
+eco:b0052,1-deoxy-D-xylulose 5-phosphate
+eco:b2564,1-deoxy-D-xylulose 5-phosphate
+eco:b0052,Pyridoxine 5'-phosphate
+eco:b2564,Pyridoxine 5'-phosphate
+eco:b0052,pdxJ
+eco:b2564,pdxJ
+eco:b0052,Phosphate
+eco:b2564,Phosphate
+eco:b0052,CO2
+eco:b2564,CO2
+eco:b0052,O-Phospho-4-hydroxy-L-threonine
+eco:b2564,O-Phospho-4-hydroxy-L-threonine
+eco:b0052,Nicotinamide adenine dinucleotide - reduced
+eco:b2564,Nicotinamide adenine dinucleotide - reduced
+eco:b0052,1-deoxy-D-xylulose 5-phosphate
+eco:b2564,1-deoxy-D-xylulose 5-phosphate
+eco:b0052,Nicotinamide adenine dinucleotide
+eco:b2564,Nicotinamide adenine dinucleotide
+eco:s0001,4-Methyl-2-oxopentanoate
+eco:s0001,CO2
+eco:s0001,4-Methyl-2-oxopentanoate
+eco:s0001,3-Carboxy-4-methyl-2-oxopentanoate
+eco:s0001,CO2
+eco:s0001,3-Carboxy-4-methyl-2-oxopentanoate
+eco:b4054,L-Tyrosine
+eco:b0928,L-Tyrosine
+eco:b4054,L-Glutamate
+eco:b0928,L-Glutamate
+eco:b4054,3-(4-Hydroxyphenyl)pyruvate
+eco:b0928,3-(4-Hydroxyphenyl)pyruvate
+eco:b4054,2-Oxoglutarate
+eco:b0928,2-Oxoglutarate
+eco:b4054,tyrB
+eco:b0928,tyrB
+eco:b4054,aspC
+eco:b0928,aspC
+eco:b4054,L-Glutamate
+eco:b0928,L-Glutamate
+eco:b4054,L-Tyrosine
+eco:b0928,L-Tyrosine
+eco:b4054,2-Oxoglutarate
+eco:b0928,2-Oxoglutarate
+eco:b4054,3-(4-Hydroxyphenyl)pyruvate
+eco:b0928,3-(4-Hydroxyphenyl)pyruvate
+eco:b0025,Flavin adenine dinucleotide oxidized
+eco:b0025,Diphosphate
+eco:b0025,ribF
+eco:b0025,FMN
+eco:b0025,ATP
+eco:b0025,Flavin adenine dinucleotide oxidized
+eco:b0025,FMN
+eco:b0025,Diphosphate
+eco:b0025,ATP
+eco:b2574,Hydrogen peroxide
+eco:b2574,O2
+eco:b2574,Iminoaspartate
+eco:b2574,nadB
+eco:b2574,L-Aspartate
+eco:b2574,O2
+eco:b2574,Iminoaspartate
+eco:b2574,Hydrogen peroxide
+eco:b2574,L-Aspartate
+eco:b4055,L-Serine
+eco:b4055,O-Phospho-L-serine
+eco:b4055,Phosphate
+eco:b4055,L-Serine
+eco:b4055,serB
+eco:b4055,aphA
+eco:b4055,O-Phospho-L-serine
+eco:b4055,Phosphate
+eco:b2323,3-Oxo-pimeloyl-[acyl-carrier protein] methyl ester
+eco:b2323,Malonyl-[acyl-carrier protein]
+eco:b2323,CO2
+eco:b2323,acyl carrier protein
+eco:b2323,fabB
+eco:b2323,3-Oxo-pimeloyl-[acyl-carrier protein] methyl ester
+eco:b2323,Glutaryl-[acyl-carrier protein] methyl ester
+eco:b2323,acyl carrier protein
+eco:b2323,CO2
+eco:b2323,Malonyl-[acyl-carrier protein]
+eco:b2323,Glutaryl-[acyl-carrier protein] methyl ester
+eco:b0351,Nicotinamide adenine dinucleotide
+eco:b1241,Nicotinamide adenine dinucleotide
+eco:b0351,Nicotinamide adenine dinucleotide - reduced
+eco:b1241,Nicotinamide adenine dinucleotide - reduced
+eco:b0351,Acetyl-CoA
+eco:b1241,Acetyl-CoA
+eco:b0351,Acetaldehyde
+eco:b1241,Acetaldehyde
+eco:b0351,adhE
+eco:b1241,adhE
+eco:b0351,Coenzyme A
+eco:b1241,Coenzyme A
+eco:b0351,Nicotinamide adenine dinucleotide - reduced
+eco:b1241,Nicotinamide adenine dinucleotide - reduced
+eco:b0351,mhpF
+eco:b1241,mhpF
+eco:b0351,Coenzyme A
+eco:b1241,Coenzyme A
+eco:b0351,Acetyl-CoA
+eco:b1241,Acetyl-CoA
+eco:b0351,Nicotinamide adenine dinucleotide
+eco:b1241,Nicotinamide adenine dinucleotide
+eco:b0351,Acetaldehyde
+eco:b1241,Acetaldehyde
+eco:b4006,purH
+eco:b4006,IMP
+eco:b4006,5-Formamido-1-(5-phospho-D-ribosyl)imidazole-4-carboxamide
+eco:b4006,5-Formamido-1-(5-phospho-D-ribosyl)imidazole-4-carboxamide
+eco:b4006,IMP
+eco:b0650,Phosphate
+eco:b4161,Phosphate
+eco:b0650,ATP
+eco:b4161,ATP
+eco:b0650,ADP
+eco:b4161,ADP
+eco:b0650,Phosphate
+eco:b4161,Phosphate
+eco:b0650,hscC
+eco:b4161,hscC
+eco:b0650,rsgA
+eco:b4161,rsgA
+eco:b0650,ATP
+eco:b4161,ATP
+eco:b0650,ADP
+eco:b4161,ADP
+eco:b4301,D-Xylulose 5-phosphate
+eco:b3386,D-Xylulose 5-phosphate
+eco:b4301,rpe
+eco:b3386,rpe
+eco:b4301,D-Ribulose 5-phosphate
+eco:b3386,D-Ribulose 5-phosphate
+eco:b4301,D-Ribulose 5-phosphate
+eco:b3386,D-Ribulose 5-phosphate
+eco:b4301,sgcE
+eco:b3386,sgcE
+eco:b4301,D-Xylulose 5-phosphate
+eco:b3386,D-Xylulose 5-phosphate
+eco:b3729,D-Glucosamine 6-phosphate
+eco:b3729,L-Glutamate
+eco:b3729,D-Fructose 6-phosphate
+eco:b3729,glmS
+eco:b3729,L-Glutamine
+eco:b3729,D-Glucosamine 6-phosphate
+eco:b3729,L-Glutamate
+eco:b3729,L-Glutamine
+eco:b3729,D-Fructose 6-phosphate
+eco:b3846,(S)-3-Hydroxyoctanoyl-CoA
+eco:b2341,(S)-3-Hydroxyoctanoyl-CoA
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,trans-Oct-2-enoyl-CoA
+eco:b2341,trans-Oct-2-enoyl-CoA
+eco:b3846,trans-Oct-2-enoyl-CoA
+eco:b2341,trans-Oct-2-enoyl-CoA
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,(S)-3-Hydroxyoctanoyl-CoA
+eco:b2341,(S)-3-Hydroxyoctanoyl-CoA
+eco:b0174,Diphosphate
+eco:b0174,Undecaprenyl diphosphate
+eco:b0174,uppS
+eco:b0174,Isopentenyl diphosphate
+eco:b0174,Farnesyl diphosphate
+eco:b0174,Diphosphate
+eco:b0174,Isopentenyl diphosphate
+eco:b0174,Undecaprenyl diphosphate
+eco:b0174,Farnesyl diphosphate
+eco:b0241,magnesium
+eco:b0929,magnesium
+eco:b1377,magnesium
+eco:b2215,magnesium
+eco:b0241,magnesium
+eco:b0929,magnesium
+eco:b1377,magnesium
+eco:b2215,magnesium
+eco:b0241,magnesium
+eco:b0929,magnesium
+eco:b1377,magnesium
+eco:b2215,magnesium
+eco:b0241,magnesium
+eco:b0929,magnesium
+eco:b1377,magnesium
+eco:b2215,magnesium
+eco:b1062,N-Carbamoyl-L-aspartate
+eco:b1062,(S)-Dihydroorotate
+eco:b1062,(S)-Dihydroorotate
+eco:b1062,N-Carbamoyl-L-aspartate
+eco:b1062,pyrC
+eco:b0118,Isocitrate
+eco:b1276,Isocitrate
+eco:b0118,acnB
+eco:b1276,acnB
+eco:b0118,cis-Aconitate
+eco:b1276,cis-Aconitate
+eco:b0118,cis-Aconitate
+eco:b1276,cis-Aconitate
+eco:b0118,acnA
+eco:b1276,acnA
+eco:b0118,Isocitrate
+eco:b1276,Isocitrate
+eco:b0827,Cu2+
+eco:b0827,molybdenum cofactor
+eco:b0827,adenylated molybdopterin
+eco:b0827,Molybdate
+eco:b0827,AMP
+eco:b0827,molybdenum cofactor
+eco:b0827,moeA
+eco:b0827,adenylated molybdopterin
+eco:b0827,Cu2+
+eco:b0827,AMP
+eco:b0827,Molybdate
+eco:b4177,"N6-(1,2-Dicarboxyethyl)-AMP"
+eco:b4177,Phosphate
+eco:b4177,GDP
+eco:b4177,GTP
+eco:b4177,L-Aspartate
+eco:b4177,IMP
+eco:b4177,Phosphate
+eco:b4177,purA
+eco:b4177,IMP
+eco:b4177,GDP
+eco:b4177,"N6-(1,2-Dicarboxyethyl)-AMP"
+eco:b4177,L-Aspartate
+eco:b4177,GTP
+eco:b0166,N-Succinyl-2-L-amino-6-oxoheptanedioate
+eco:b0166,Coenzyme A
+eco:b0166,Succinyl-CoA
+eco:b0166,"2,3,4,5-Tetrahydrodipicolinate"
+eco:b0166,Coenzyme A
+eco:b0166,dapD
+eco:b0166,N-Succinyl-2-L-amino-6-oxoheptanedioate
+eco:b0166,Succinyl-CoA
+eco:b0166,"2,3,4,5-Tetrahydrodipicolinate"
+eco:b2499,Phosphate
+eco:b2499,5-amino-1-(5-phospho-D-ribosyl)imidazole
+eco:b2499,2-(Formamido)-N1-(5-phospho-D-ribosyl)acetamidine
+eco:b2499,ADP
+eco:b2499,Phosphate
+eco:b2499,ATP
+eco:b2499,purM
+eco:b2499,ADP
+eco:b2499,2-(Formamido)-N1-(5-phospho-D-ribosyl)acetamidine
+eco:b2499,5-amino-1-(5-phospho-D-ribosyl)imidazole
+eco:b2499,ATP
+eco:b1622,Ammonium
+eco:b3008,Ammonium
+eco:b1622,L-Homocysteine
+eco:b3008,L-Homocysteine
+eco:b1622,Pyruvate
+eco:b3008,Pyruvate
+eco:b1622,malY
+eco:b3008,malY
+eco:b1622,L-Cystathionine
+eco:b3008,L-Cystathionine
+eco:b1622,Ammonium
+eco:b3008,Ammonium
+eco:b1622,metC
+eco:b3008,metC
+eco:b1622,Pyruvate
+eco:b3008,Pyruvate
+eco:b1622,L-Cystathionine
+eco:b3008,L-Cystathionine
+eco:b1622,L-Homocysteine
+eco:b3008,L-Homocysteine
+eco:b2019,Diphosphate
+eco:b2019,5-Phospho-alpha-D-ribose 1-diphosphate
+eco:b2019,1-(5-Phosphoribosyl)-ATP
+eco:b2019,hisG
+eco:b2019,ATP
+eco:b2019,5-Phospho-alpha-D-ribose 1-diphosphate
+eco:b2019,1-(5-Phosphoribosyl)-ATP
+eco:b2019,Diphosphate
+eco:b2019,ATP
+eco:b0475,Protoheme
+eco:b0475,Fe2+
+eco:b0475,Protoporphyrin
+eco:b0475,Protoporphyrin
+eco:b0475,hemH
+eco:b0475,Protoheme
+eco:b0475,Fe2+
+eco:b4384,Adenosine
+eco:b4384,alpha-D-Ribose 1-phosphate
+eco:b4384,Phosphate
+eco:b4384,deoD
+eco:b4384,Adenine
+eco:b4384,alpha-D-Ribose 1-phosphate
+eco:b4384,Phosphate
+eco:b4384,Adenosine
+eco:b4384,Adenine
+eco:b2022,D-erythro-1-(Imidazol-4-yl)glycerol 3-phosphate
+eco:b2022,3-(Imidazol-4-yl)-2-oxopropyl phosphate
+eco:b2022,D-erythro-1-(Imidazol-4-yl)glycerol 3-phosphate
+eco:b2022,hisB
+eco:b2022,3-(Imidazol-4-yl)-2-oxopropyl phosphate
+eco:b2914,alpha-D-Ribose 5-phosphate
+eco:b4090,alpha-D-Ribose 5-phosphate
+eco:b2914,rpiB
+eco:b4090,rpiB
+eco:b2914,rpiA
+eco:b4090,rpiA
+eco:b2914,D-Ribulose 5-phosphate
+eco:b4090,D-Ribulose 5-phosphate
+eco:b2914,D-Ribulose 5-phosphate
+eco:b4090,D-Ribulose 5-phosphate
+eco:b2914,alpha-D-Ribose 5-phosphate
+eco:b4090,alpha-D-Ribose 5-phosphate
+eco:b0074,Coenzyme A
+eco:b0074,3-Methyl-2-oxobutanoate
+eco:b0074,3-Carboxy-3-hydroxy-4-methylpentanoate
+eco:b0074,Acetyl-CoA
+eco:b0074,Coenzyme A
+eco:b0074,3-Carboxy-3-hydroxy-4-methylpentanoate
+eco:b0074,leuA
+eco:b0074,3-Methyl-2-oxobutanoate
+eco:b0074,Acetyl-CoA
+eco:b3846,trans-Hex-2-enoyl-CoA
+eco:b2341,trans-Hex-2-enoyl-CoA
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,(S)-3-Hydroxyhexanoyl-CoA
+eco:b2341,(S)-3-Hydroxyhexanoyl-CoA
+eco:b3846,(S)-3-Hydroxyhexanoyl-CoA
+eco:b2341,(S)-3-Hydroxyhexanoyl-CoA
+eco:b3846,trans-Hex-2-enoyl-CoA
+eco:b2341,trans-Hex-2-enoyl-CoA
+eco:b2290,L-Alanine
+eco:b2379,L-Alanine
+eco:b2290,L-Glutamate
+eco:b2379,L-Glutamate
+eco:b2290,2-Oxoglutarate
+eco:b2379,2-Oxoglutarate
+eco:b2290,Pyruvate
+eco:b2379,Pyruvate
+eco:b2290,yfdZ
+eco:b2379,yfdZ
+eco:b2290,L-Alanine
+eco:b2379,L-Alanine
+eco:b2290,yfbQ
+eco:b2379,yfbQ
+eco:b2290,Pyruvate
+eco:b2379,Pyruvate
+eco:b2290,2-Oxoglutarate
+eco:b2379,2-Oxoglutarate
+eco:b2290,L-Glutamate
+eco:b2379,L-Glutamate
+eco:b2585,L-Serine
+eco:b2585,"phosphatidylserine (dihexadec-9-enoyl, n-C16:1)"
+eco:b2585,CMP
+eco:b2585,pssA
+eco:b2585,"phosphatidylserine (dihexadec-9-enoyl, n-C16:1)"
+eco:b2585,"CDP-1,2-dihexadec-9-enoylglycerol"
+eco:b2585,L-Serine
+eco:b2585,CMP
+eco:b2585,"CDP-1,2-dihexadec-9-enoylglycerol"
+eco:b1093,Nicotinamide adenine dinucleotide phosphate
+eco:b1093,3-Oxo-pimeloyl-[acyl-carrier protein] methyl ester
+eco:b1093,3-Hydroxypimeloyl-[acyl-carrier protein] methyl ester
+eco:b1093,Nicotinamide adenine dinucleotide phosphate
+eco:b1093,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1093,fabG
+eco:b1093,3-Oxo-pimeloyl-[acyl-carrier protein] methyl ester
+eco:b1093,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1093,3-Hydroxypimeloyl-[acyl-carrier protein] methyl ester
+eco:b0241,Fe3+
+eco:b0929,Fe3+
+eco:b1377,Fe3+
+eco:b2215,Fe3+
+eco:b0241,Fe3+
+eco:b0929,Fe3+
+eco:b1377,Fe3+
+eco:b2215,Fe3+
+eco:b0241,Fe3+
+eco:b0929,Fe3+
+eco:b1377,Fe3+
+eco:b2215,Fe3+
+eco:b0241,Fe3+
+eco:b0929,Fe3+
+eco:b1377,Fe3+
+eco:b2215,Fe3+
+eco:b0474,UDP
+eco:b2518,UDP
+eco:b0474,UTP
+eco:b2518,UTP
+eco:b0474,ADP
+eco:b2518,ADP
+eco:b0474,adk
+eco:b2518,adk
+eco:b0474,ndk
+eco:b2518,ndk
+eco:b0474,ATP
+eco:b2518,ATP
+eco:b0474,ADP
+eco:b2518,ADP
+eco:b0474,UTP
+eco:b2518,UTP
+eco:b0474,UDP
+eco:b2518,UDP
+eco:b0474,ATP
+eco:b2518,ATP
+eco:b2507,L-Glutamate
+eco:b2507,Diphosphate
+eco:b2507,GMP
+eco:b2507,Xanthosine 5'-phosphate
+eco:b2507,L-Glutamine
+eco:b2507,AMP
+eco:b2507,guaA
+eco:b2507,ATP
+eco:b2507,L-Glutamate
+eco:b2507,Diphosphate
+eco:b2507,GMP
+eco:b2507,Xanthosine 5'-phosphate
+eco:b2507,L-Glutamine
+eco:b2507,AMP
+eco:b2507,ATP
+eco:b0118,cis-Aconitate
+eco:b1276,cis-Aconitate
+eco:b0118,Citrate
+eco:b1276,Citrate
+eco:b0118,acnA
+eco:b1276,acnA
+eco:b0118,acnB
+eco:b1276,acnB
+eco:b0118,cis-Aconitate
+eco:b1276,cis-Aconitate
+eco:b0118,Citrate
+eco:b1276,Citrate
+eco:b0099,Diphosphate
+eco:b1865,Diphosphate
+eco:b0099,Dihydroneopterin monophosphate
+eco:b1865,Dihydroneopterin monophosphate
+eco:b0099,nudB
+eco:b1865,nudB
+eco:b0099,"2-Amino-4-hydroxy-6-(erythro-1,2,3-trihydroxypropyl)dihydropteridine triphosphate"
+eco:b1865,"2-Amino-4-hydroxy-6-(erythro-1,2,3-trihydroxypropyl)dihydropteridine triphosphate"
+eco:b0099,Dihydroneopterin monophosphate
+eco:b1865,Dihydroneopterin monophosphate
+eco:b0099,mutT
+eco:b1865,mutT
+eco:b0099,Diphosphate
+eco:b1865,Diphosphate
+eco:b0099,"2-Amino-4-hydroxy-6-(erythro-1,2,3-trihydroxypropyl)dihydropteridine triphosphate"
+eco:b1865,"2-Amino-4-hydroxy-6-(erythro-1,2,3-trihydroxypropyl)dihydropteridine triphosphate"
+eco:b0523,purE
+eco:b0523,5-amino-1-(5-phospho-D-ribosyl)imidazole-4-carboxylate
+eco:b0523,5-phosphoribosyl-5-carboxyaminoimidazole
+eco:b0523,5-phosphoribosyl-5-carboxyaminoimidazole
+eco:b0523,5-amino-1-(5-phospho-D-ribosyl)imidazole-4-carboxylate
+eco:b0776,CO2
+eco:b0776,8-Amino-7-oxononanoate
+eco:b0776,acyl carrier protein
+eco:b0776,bioF
+eco:b0776,Pimeloyl-[acyl-carrier protein]
+eco:b0776,L-Alanine
+eco:b0776,acyl carrier protein
+eco:b0776,8-Amino-7-oxononanoate
+eco:b0776,CO2
+eco:b0776,L-Alanine
+eco:b0776,Pimeloyl-[acyl-carrier protein]
+eco:b0910,UDP
+eco:b0171,UDP
+eco:b0910,UMP
+eco:b0171,UMP
+eco:b0910,ATP
+eco:b0171,ATP
+eco:b0910,ADP
+eco:b0171,ADP
+eco:b0910,cmk
+eco:b0171,cmk
+eco:b0910,pyrH
+eco:b0171,pyrH
+eco:b0910,UMP
+eco:b0171,UMP
+eco:b0910,UDP
+eco:b0171,UDP
+eco:b0910,ADP
+eco:b0171,ADP
+eco:b0910,ATP
+eco:b0171,ATP
+eco:b1131,5-Amino-1-(5-Phospho-D-ribosyl)imidazole-4-carboxamide
+eco:b1131,(S)-2-[5-Amino-1-(5-phospho-D-ribosyl)imidazole-4-carboxamido]succinate
+eco:b1131,Fumarate
+eco:b1131,Fumarate
+eco:b1131,purB
+eco:b1131,5-Amino-1-(5-Phospho-D-ribosyl)imidazole-4-carboxamide
+eco:b1131,(S)-2-[5-Amino-1-(5-phospho-D-ribosyl)imidazole-4-carboxamido]succinate
+eco:b0241,Fe2+
+eco:b0929,Fe2+
+eco:b1377,Fe2+
+eco:b2215,Fe2+
+eco:b0241,Fe2+
+eco:b0929,Fe2+
+eco:b1377,Fe2+
+eco:b2215,Fe2+
+eco:b0241,Fe2+
+eco:b0929,Fe2+
+eco:b1377,Fe2+
+eco:b2215,Fe2+
+eco:b0241,Fe2+
+eco:b0929,Fe2+
+eco:b1377,Fe2+
+eco:b2215,Fe2+
+eco:b3991,L-Methionine
+eco:b3991,dehydroglycine
+eco:b3991,Nicotinamide adenine dinucleotide phosphate
+eco:b3991,p-Cresol
+eco:b3991,5'-Deoxyadenosine
+eco:b3991,S-Adenosyl-L-methionine
+eco:b3991,L-Tyrosine
+eco:b3991,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3991,Nicotinamide adenine dinucleotide phosphate
+eco:b3991,L-Methionine
+eco:b3991,thiG
+eco:b3991,5'-Deoxyadenosine
+eco:b3991,dehydroglycine
+eco:b3991,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3991,p-Cresol
+eco:b3991,L-Tyrosine
+eco:b3991,S-Adenosyl-L-methionine
+eco:b0071,3-Carboxy-3-hydroxy-4-methylpentanoate
+eco:b0072,3-Carboxy-3-hydroxy-4-methylpentanoate
+eco:b0071,2-Isopropylmaleate
+eco:b0072,2-Isopropylmaleate
+eco:b0071,leuC
+eco:b0072,leuC
+eco:b0071,2-Isopropylmaleate
+eco:b0072,2-Isopropylmaleate
+eco:b0071,leuD
+eco:b0072,leuD
+eco:b0071,3-Carboxy-3-hydroxy-4-methylpentanoate
+eco:b0072,3-Carboxy-3-hydroxy-4-methylpentanoate
+eco:b3870,Phosphate
+eco:b1297,Phosphate
+eco:b3870,Ammonium
+eco:b1297,Ammonium
+eco:b3870,L-Glutamine
+eco:b1297,L-Glutamine
+eco:b3870,ADP
+eco:b1297,ADP
+eco:b3870,ATP
+eco:b1297,ATP
+eco:b3870,puuA
+eco:b1297,puuA
+eco:b3870,L-Glutamate
+eco:b1297,L-Glutamate
+eco:b3870,Phosphate
+eco:b1297,Phosphate
+eco:b3870,glnA
+eco:b1297,glnA
+eco:b3870,Ammonium
+eco:b1297,Ammonium
+eco:b3870,L-Glutamine
+eco:b1297,L-Glutamine
+eco:b3870,ADP
+eco:b1297,ADP
+eco:b3870,ATP
+eco:b1297,ATP
+eco:b3870,L-Glutamate
+eco:b1297,L-Glutamate
+eco:b0781,cyclic pyranopterin monophosphate
+eco:b0783,cyclic pyranopterin monophosphate
+eco:b0781,GTP
+eco:b0783,GTP
+eco:b0781,Diphosphate
+eco:b0783,Diphosphate
+eco:b0781,moaA
+eco:b0783,moaA
+eco:b0781,moaC
+eco:b0783,moaC
+eco:b0781,GTP
+eco:b0783,GTP
+eco:b0781,Diphosphate
+eco:b0783,Diphosphate
+eco:b0781,cyclic pyranopterin monophosphate
+eco:b0783,cyclic pyranopterin monophosphate
+eco:b0915,Lipid A Disaccharide
+eco:b0915,"2,3,2'3'-Tetrakis(beta-hydroxymyristoyl)-D-glucosaminyl-1,6-beta-D-glucosamine 1,4'-bisphosphate"
+eco:b0915,ADP
+eco:b0915,lpxK
+eco:b0915,"2,3,2'3'-Tetrakis(beta-hydroxymyristoyl)-D-glucosaminyl-1,6-beta-D-glucosamine 1,4'-bisphosphate"
+eco:b0915,ATP
+eco:b0915,Lipid A Disaccharide
+eco:b0915,ADP
+eco:b0915,ATP
+eco:b3846,(S)-3-Hydroxyhexadecanoyl-CoA
+eco:b2341,(S)-3-Hydroxyhexadecanoyl-CoA
+eco:b3846,trans-Hexadec-2-enoyl-CoA
+eco:b2341,trans-Hexadec-2-enoyl-CoA
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,trans-Hexadec-2-enoyl-CoA
+eco:b2341,trans-Hexadec-2-enoyl-CoA
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,(S)-3-Hydroxyhexadecanoyl-CoA
+eco:b2341,(S)-3-Hydroxyhexadecanoyl-CoA
+eco:b0180,Enoylpimeloyl-[acyl-carrier protein] methyl ester
+eco:b0180,Enoylpimeloyl-[acyl-carrier protein] methyl ester
+eco:b0180,3-Hydroxypimeloyl-[acyl-carrier protein] methyl ester
+eco:b0180,fabZ
+eco:b0180,3-Hydroxypimeloyl-[acyl-carrier protein] methyl ester
+eco:b0452,Hexadecenoate (n-C16:1)
+eco:b0452,Hexadecenoyl-CoA (n-C16:1CoA)
+eco:b0452,tesB
+eco:b0452,Coenzyme A
+eco:b0452,Coenzyme A
+eco:b0452,Hexadecenoate (n-C16:1)
+eco:b0452,Hexadecenoyl-CoA (n-C16:1CoA)
+eco:b3850,Protoporphyrin
+eco:b3850,O2
+eco:b3850,hemG
+eco:b3850,Protoporphyrinogen IX
+eco:b3850,Protoporphyrinogen IX
+eco:b3850,Protoporphyrin
+eco:b3850,O2
+eco:b0684,dUTP
+eco:b3924,dUTP
+eco:b4238,dUTP
+eco:b4237,dUTP
+eco:b2895,dUTP
+eco:b0684,UTP
+eco:b3924,UTP
+eco:b4238,UTP
+eco:b4237,UTP
+eco:b2895,UTP
+eco:b0684,flavodoxin semi oxidized
+eco:b3924,flavodoxin semi oxidized
+eco:b4238,flavodoxin semi oxidized
+eco:b4237,flavodoxin semi oxidized
+eco:b2895,flavodoxin semi oxidized
+eco:b0684,fldB
+eco:b3924,fldB
+eco:b4238,fldB
+eco:b4237,fldB
+eco:b2895,fldB
+eco:b0684,Flavodoxin reduced
+eco:b3924,Flavodoxin reduced
+eco:b4238,Flavodoxin reduced
+eco:b4237,Flavodoxin reduced
+eco:b2895,Flavodoxin reduced
+eco:b0684,fpr
+eco:b3924,fpr
+eco:b4238,fpr
+eco:b4237,fpr
+eco:b2895,fpr
+eco:b0684,fldA
+eco:b3924,fldA
+eco:b4238,fldA
+eco:b4237,fldA
+eco:b2895,fldA
+eco:b0684,nrdG
+eco:b3924,nrdG
+eco:b4238,nrdG
+eco:b4237,nrdG
+eco:b2895,nrdG
+eco:b0684,flavodoxin semi oxidized
+eco:b3924,flavodoxin semi oxidized
+eco:b4238,flavodoxin semi oxidized
+eco:b4237,flavodoxin semi oxidized
+eco:b2895,flavodoxin semi oxidized
+eco:b0684,dUTP
+eco:b3924,dUTP
+eco:b4238,dUTP
+eco:b4237,dUTP
+eco:b2895,dUTP
+eco:b0684,nrdD
+eco:b3924,nrdD
+eco:b4238,nrdD
+eco:b4237,nrdD
+eco:b2895,nrdD
+eco:b0684,Flavodoxin reduced
+eco:b3924,Flavodoxin reduced
+eco:b4238,Flavodoxin reduced
+eco:b4237,Flavodoxin reduced
+eco:b2895,Flavodoxin reduced
+eco:b0684,UTP
+eco:b3924,UTP
+eco:b4238,UTP
+eco:b4237,UTP
+eco:b2895,UTP
+eco:b3433,Phosphate
+eco:b3433,Nicotinamide adenine dinucleotide phosphate
+eco:b3433,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3433,L-Aspartate 4-semialdehyde
+eco:b3433,Phosphate
+eco:b3433,4-Phospho-L-aspartate
+eco:b3433,asd
+eco:b3433,L-Aspartate 4-semialdehyde
+eco:b3433,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3433,Nicotinamide adenine dinucleotide phosphate
+eco:b3433,4-Phospho-L-aspartate
+eco:b2023,D-erythro-1-(Imidazol-4-yl)glycerol 3-phosphate
+eco:b2025,D-erythro-1-(Imidazol-4-yl)glycerol 3-phosphate
+eco:b2023,5-Amino-1-(5-Phospho-D-ribosyl)imidazole-4-carboxamide
+eco:b2025,5-Amino-1-(5-Phospho-D-ribosyl)imidazole-4-carboxamide
+eco:b2023,L-Glutamate
+eco:b2025,L-Glutamate
+eco:b2023,L-Glutamine
+eco:b2025,L-Glutamine
+eco:b2023,5-[(5-phospho-1-deoxyribulos-1-ylamino)methylideneamino]-1-(5-phosphoribosyl)imidazole-4-carboxamide
+eco:b2025,5-[(5-phospho-1-deoxyribulos-1-ylamino)methylideneamino]-1-(5-phosphoribosyl)imidazole-4-carboxamide
+eco:b2023,L-Glutamate
+eco:b2025,L-Glutamate
+eco:b2023,hisH
+eco:b2025,hisH
+eco:b2023,hisF
+eco:b2025,hisF
+eco:b2023,5-Amino-1-(5-Phospho-D-ribosyl)imidazole-4-carboxamide
+eco:b2025,5-Amino-1-(5-Phospho-D-ribosyl)imidazole-4-carboxamide
+eco:b2023,5-[(5-phospho-1-deoxyribulos-1-ylamino)methylideneamino]-1-(5-phosphoribosyl)imidazole-4-carboxamide
+eco:b2025,5-[(5-phospho-1-deoxyribulos-1-ylamino)methylideneamino]-1-(5-phosphoribosyl)imidazole-4-carboxamide
+eco:b2023,D-erythro-1-(Imidazol-4-yl)glycerol 3-phosphate
+eco:b2025,D-erythro-1-(Imidazol-4-yl)glycerol 3-phosphate
+eco:b2023,L-Glutamine
+eco:b2025,L-Glutamine
+eco:b3774,Nicotinamide adenine dinucleotide phosphate
+eco:b3774,"(R)-2,3-Dihydroxy-3-methylpentanoate"
+eco:b3774,(S)-2-Aceto-2-hydroxybutanoate
+eco:b3774,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3774,"(R)-2,3-Dihydroxy-3-methylpentanoate"
+eco:b3774,ilvC
+eco:b3774,Nicotinamide adenine dinucleotide phosphate
+eco:b3774,(S)-2-Aceto-2-hydroxybutanoate
+eco:b3774,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b2585,"phosphatidylserine (dihexadecanoyl, n-C16:0)"
+eco:b2585,CMP
+eco:b2585,"CDP-1,2-dihexadecanoylglycerol"
+eco:b2585,L-Serine
+eco:b2585,CMP
+eco:b2585,pssA
+eco:b2585,"phosphatidylserine (dihexadecanoyl, n-C16:0)"
+eco:b2585,"CDP-1,2-dihexadecanoylglycerol"
+eco:b2585,L-Serine
+eco:b0767,"6-phospho-D-glucono-1,5-lactone"
+eco:b0767,6-Phospho-D-gluconate
+eco:b0767,6-Phospho-D-gluconate
+eco:b0767,"6-phospho-D-glucono-1,5-lactone"
+eco:b0767,pgl
+eco:b0507,CO2
+eco:b0507,Glyoxylate
+eco:b0507,2-Hydroxy-3-oxopropanoate
+eco:b0507,2-Hydroxy-3-oxopropanoate
+eco:b0507,gcl
+eco:b0507,CO2
+eco:b0507,Glyoxylate
+eco:b2530,MoaD Protein with thiocarboxylate
+eco:b0784,MoaD Protein with thiocarboxylate
+eco:b2530,Nicotinamide adenine dinucleotide
+eco:b0784,Nicotinamide adenine dinucleotide
+eco:b2530,Nicotinamide adenine dinucleotide - reduced
+eco:b0784,Nicotinamide adenine dinucleotide - reduced
+eco:b2530,IscS sulfur acceptor protein
+eco:b0784,IscS sulfur acceptor protein
+eco:b2530,AMP
+eco:b0784,AMP
+eco:b2530,IscS with bound sulfur
+eco:b0784,IscS with bound sulfur
+eco:b2530,iscS
+eco:b0784,iscS
+eco:b2530,MoaD Protein with bound AMP
+eco:b0784,MoaD Protein with bound AMP
+eco:b2530,Nicotinamide adenine dinucleotide
+eco:b0784,Nicotinamide adenine dinucleotide
+eco:b2530,moaD
+eco:b0784,moaD
+eco:b2530,AMP
+eco:b0784,AMP
+eco:b2530,MoaD Protein with thiocarboxylate
+eco:b0784,MoaD Protein with thiocarboxylate
+eco:b2530,IscS sulfur acceptor protein
+eco:b0784,IscS sulfur acceptor protein
+eco:b2530,MoaD Protein with bound AMP
+eco:b0784,MoaD Protein with bound AMP
+eco:b2530,IscS with bound sulfur
+eco:b0784,IscS with bound sulfur
+eco:b2530,Nicotinamide adenine dinucleotide - reduced
+eco:b0784,Nicotinamide adenine dinucleotide - reduced
+eco:b0474,GTP
+eco:b2518,GTP
+eco:b0474,GDP
+eco:b2518,GDP
+eco:b0474,ADP
+eco:b2518,ADP
+eco:b0474,ndk
+eco:b2518,ndk
+eco:b0474,ATP
+eco:b2518,ATP
+eco:b0474,adk
+eco:b2518,adk
+eco:b0474,ADP
+eco:b2518,ADP
+eco:b0474,GDP
+eco:b2518,GDP
+eco:b0474,GTP
+eco:b2518,GTP
+eco:b0474,ATP
+eco:b2518,ATP
+eco:b3058,Glycolaldehyde
+eco:b3058,Dihydroneopterin
+eco:b3058,folB
+eco:b3058,6-hydroxymethyl dihydropterin
+eco:b3058,6-hydroxymethyl dihydropterin
+eco:b3058,Glycolaldehyde
+eco:b3058,Dihydroneopterin
+eco:b1748,2-Oxoglutarate
+eco:b3359,2-Oxoglutarate
+eco:b1748,L-Glutamate
+eco:b3359,L-Glutamate
+eco:b1748,N2-Acetyl-L-ornithine
+eco:b3359,N2-Acetyl-L-ornithine
+eco:b1748,astC
+eco:b3359,astC
+eco:b1748,N-Acetyl-L-glutamate 5-semialdehyde
+eco:b3359,N-Acetyl-L-glutamate 5-semialdehyde
+eco:b1748,argD
+eco:b3359,argD
+eco:b1748,N2-Acetyl-L-ornithine
+eco:b3359,N2-Acetyl-L-ornithine
+eco:b1748,L-Glutamate
+eco:b3359,L-Glutamate
+eco:b1748,2-Oxoglutarate
+eco:b3359,2-Oxoglutarate
+eco:b1748,N-Acetyl-L-glutamate 5-semialdehyde
+eco:b3359,N-Acetyl-L-glutamate 5-semialdehyde
+eco:b0474,AMP
+eco:b0474,ADP
+eco:b0474,ATP
+eco:b0474,ADP
+eco:b0474,ATP
+eco:b0474,adk
+eco:b0474,AMP
+eco:b0524,UMP
+eco:b0524,"UDP-2,3-bis(3-hydroxytetradecanoyl)glucosamine"
+eco:b0524,lpxH
+eco:b0524,"2,3-Bis(3-hydroxytetradecanoyl)-beta-D-glucosaminyl 1-phosphate"
+eco:b0524,"2,3-Bis(3-hydroxytetradecanoyl)-beta-D-glucosaminyl 1-phosphate"
+eco:b0524,UMP
+eco:b0524,"UDP-2,3-bis(3-hydroxytetradecanoyl)glucosamine"
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,trans-Dodec-2-enoyl-CoA
+eco:b2341,trans-Dodec-2-enoyl-CoA
+eco:b3846,(S)-3-Hydroxydodecanoyl-CoA
+eco:b2341,(S)-3-Hydroxydodecanoyl-CoA
+eco:b3846,trans-Dodec-2-enoyl-CoA
+eco:b2341,trans-Dodec-2-enoyl-CoA
+eco:b3846,(S)-3-Hydroxydodecanoyl-CoA
+eco:b2341,(S)-3-Hydroxydodecanoyl-CoA
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b1817,Pyruvate
+eco:b1818,Pyruvate
+eco:b1819,Pyruvate
+eco:b2415,Pyruvate
+eco:b2416,Pyruvate
+eco:b1817,D-Fructose
+eco:b1818,D-Fructose
+eco:b1819,D-Fructose
+eco:b2415,D-Fructose
+eco:b2416,D-Fructose
+eco:b1817,Phosphoenolpyruvate
+eco:b1818,Phosphoenolpyruvate
+eco:b1819,Phosphoenolpyruvate
+eco:b2415,Phosphoenolpyruvate
+eco:b2416,Phosphoenolpyruvate
+eco:b1817,D-Fructose 6-phosphate
+eco:b1818,D-Fructose 6-phosphate
+eco:b1819,D-Fructose 6-phosphate
+eco:b2415,D-Fructose 6-phosphate
+eco:b2416,D-Fructose 6-phosphate
+eco:b1817,D-Fructose 6-phosphate
+eco:b1818,D-Fructose 6-phosphate
+eco:b1819,D-Fructose 6-phosphate
+eco:b2415,D-Fructose 6-phosphate
+eco:b2416,D-Fructose 6-phosphate
+eco:b1817,Pyruvate
+eco:b1818,Pyruvate
+eco:b1819,Pyruvate
+eco:b2415,Pyruvate
+eco:b2416,Pyruvate
+eco:b1817,D-Fructose
+eco:b1818,D-Fructose
+eco:b1819,D-Fructose
+eco:b2415,D-Fructose
+eco:b2416,D-Fructose
+eco:b1817,Phosphoenolpyruvate
+eco:b1818,Phosphoenolpyruvate
+eco:b1819,Phosphoenolpyruvate
+eco:b2415,Phosphoenolpyruvate
+eco:b2416,Phosphoenolpyruvate
+eco:b0452,Hexadecanoate (n-C16:0)
+eco:b0452,tesB
+eco:b0452,Coenzyme A
+eco:b0452,Palmitoyl-CoA (n-C16:0CoA)
+eco:b0452,Coenzyme A
+eco:b0452,Palmitoyl-CoA (n-C16:0CoA)
+eco:b0452,Hexadecanoate (n-C16:0)
+eco:b3708,L-Tryptophan
+eco:b3708,Indole
+eco:b3708,Pyruvate
+eco:b3708,Ammonium
+eco:b3708,L-Tryptophan
+eco:b3708,Pyruvate
+eco:b3708,tnaA
+eco:b3708,Indole
+eco:b3708,Ammonium
+eco:b0425,(R)-Pantoate
+eco:b3774,(R)-Pantoate
+eco:b0425,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3774,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0425,2-Dehydropantoate
+eco:b3774,2-Dehydropantoate
+eco:b0425,Nicotinamide adenine dinucleotide phosphate
+eco:b3774,Nicotinamide adenine dinucleotide phosphate
+eco:b0425,panE
+eco:b3774,panE
+eco:b0425,ilvC
+eco:b3774,ilvC
+eco:b0425,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3774,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0425,(R)-Pantoate
+eco:b3774,(R)-Pantoate
+eco:b0425,Nicotinamide adenine dinucleotide phosphate
+eco:b3774,Nicotinamide adenine dinucleotide phosphate
+eco:b0425,2-Dehydropantoate
+eco:b3774,2-Dehydropantoate
+eco:b0522,Phosphate
+eco:b0522,5-phosphoribosyl-5-carboxyaminoimidazole
+eco:b0522,Bicarbonate
+eco:b0522,ADP
+eco:b0522,5-amino-1-(5-phospho-D-ribosyl)imidazole
+eco:b0522,ATP
+eco:b0522,ADP
+eco:b0522,purK
+eco:b0522,Phosphate
+eco:b0522,Bicarbonate
+eco:b0522,ATP
+eco:b0522,5-phosphoribosyl-5-carboxyaminoimidazole
+eco:b0522,5-amino-1-(5-phospho-D-ribosyl)imidazole
+eco:b1851,2-Dehydro-3-deoxy-D-gluconate 6-phosphate
+eco:b1851,2-Dehydro-3-deoxy-D-gluconate 6-phosphate
+eco:b1851,6-Phospho-D-gluconate
+eco:b1851,edd
+eco:b1851,6-Phospho-D-gluconate
+eco:b0509,Nicotinamide adenine dinucleotide
+eco:b3125,Nicotinamide adenine dinucleotide
+eco:b0509,(R)-Glycerate
+eco:b3125,(R)-Glycerate
+eco:b0509,2-Hydroxy-3-oxopropanoate
+eco:b3125,2-Hydroxy-3-oxopropanoate
+eco:b0509,Nicotinamide adenine dinucleotide - reduced
+eco:b3125,Nicotinamide adenine dinucleotide - reduced
+eco:b0509,Nicotinamide adenine dinucleotide
+eco:b3125,Nicotinamide adenine dinucleotide
+eco:b0509,glxR
+eco:b3125,glxR
+eco:b0509,garR
+eco:b3125,garR
+eco:b0509,Nicotinamide adenine dinucleotide - reduced
+eco:b3125,Nicotinamide adenine dinucleotide - reduced
+eco:b0509,2-Hydroxy-3-oxopropanoate
+eco:b3125,2-Hydroxy-3-oxopropanoate
+eco:b0509,(R)-Glycerate
+eco:b3125,(R)-Glycerate
+eco:b1091,3-Oxo-glutaryl-[acyl-carrier protein] methyl ester
+eco:b1091,Coenzyme A
+eco:b1091,malonyl-CoA methyl ester
+eco:b1091,CO2
+eco:b1091,3-Oxo-glutaryl-[acyl-carrier protein] methyl ester
+eco:b1091,Malonyl-[acyl-carrier protein]
+eco:b1091,fabH
+eco:b1091,CO2
+eco:b1091,malonyl-CoA methyl ester
+eco:b1091,Coenzyme A
+eco:b1091,Malonyl-[acyl-carrier protein]
+eco:b3805,Ammonium
+eco:b3805,Porphobilinogen
+eco:b3805,Hydroxymethylbilane
+eco:b3805,Hydroxymethylbilane
+eco:b3805,hemC
+eco:b3805,Ammonium
+eco:b3805,Porphobilinogen
+eco:b2600,CO2
+eco:b2600,Nicotinamide adenine dinucleotide - reduced
+eco:b2600,Prephenate
+eco:b2600,Nicotinamide adenine dinucleotide
+eco:b2600,3-(4-Hydroxyphenyl)pyruvate
+eco:b2600,Nicotinamide adenine dinucleotide - reduced
+eco:b2600,tyrA
+eco:b2600,Prephenate
+eco:b2600,CO2
+eco:b2600,3-(4-Hydroxyphenyl)pyruvate
+eco:b2600,Nicotinamide adenine dinucleotide
+eco:b4160,CO2
+eco:b4160,"phosphatidylserine (dihexadec-9-enoyl, n-C16:1)"
+eco:b4160,"phosphatidylethanolamine (dihexadec-9enoyl, n-C16:1)"
+eco:b4160,"phosphatidylethanolamine (dihexadec-9enoyl, n-C16:1)"
+eco:b4160,psd
+eco:b4160,CO2
+eco:b4160,"phosphatidylserine (dihexadec-9-enoyl, n-C16:1)"
+eco:b2312,5-Phospho-beta-D-ribosylamine
+eco:b2312,L-Glutamate
+eco:b2312,Diphosphate
+eco:b2312,purF
+eco:b2312,5-Phospho-alpha-D-ribose 1-diphosphate
+eco:b2312,L-Glutamine
+eco:b2312,Diphosphate
+eco:b2312,L-Glutamate
+eco:b2312,5-Phospho-beta-D-ribosylamine
+eco:b2312,L-Glutamine
+eco:b2312,5-Phospho-alpha-D-ribose 1-diphosphate
+eco:b0928,L-Aspartate
+eco:b0928,Oxaloacetate
+eco:b0928,L-Glutamate
+eco:b0928,2-Oxoglutarate
+eco:b0928,L-Aspartate
+eco:b0928,aspC
+eco:b0928,L-Glutamate
+eco:b0928,2-Oxoglutarate
+eco:b0928,Oxaloacetate
+eco:b0684,dGTP
+eco:b3924,dGTP
+eco:b4238,dGTP
+eco:b4237,dGTP
+eco:b2895,dGTP
+eco:b0684,GTP
+eco:b3924,GTP
+eco:b4238,GTP
+eco:b4237,GTP
+eco:b2895,GTP
+eco:b0684,flavodoxin semi oxidized
+eco:b3924,flavodoxin semi oxidized
+eco:b4238,flavodoxin semi oxidized
+eco:b4237,flavodoxin semi oxidized
+eco:b2895,flavodoxin semi oxidized
+eco:b0684,fldB
+eco:b3924,fldB
+eco:b4238,fldB
+eco:b4237,fldB
+eco:b2895,fldB
+eco:b0684,Flavodoxin reduced
+eco:b3924,Flavodoxin reduced
+eco:b4238,Flavodoxin reduced
+eco:b4237,Flavodoxin reduced
+eco:b2895,Flavodoxin reduced
+eco:b0684,fpr
+eco:b3924,fpr
+eco:b4238,fpr
+eco:b4237,fpr
+eco:b2895,fpr
+eco:b0684,fldA
+eco:b3924,fldA
+eco:b4238,fldA
+eco:b4237,fldA
+eco:b2895,fldA
+eco:b0684,nrdG
+eco:b3924,nrdG
+eco:b4238,nrdG
+eco:b4237,nrdG
+eco:b2895,nrdG
+eco:b0684,flavodoxin semi oxidized
+eco:b3924,flavodoxin semi oxidized
+eco:b4238,flavodoxin semi oxidized
+eco:b4237,flavodoxin semi oxidized
+eco:b2895,flavodoxin semi oxidized
+eco:b0684,dGTP
+eco:b3924,dGTP
+eco:b4238,dGTP
+eco:b4237,dGTP
+eco:b2895,dGTP
+eco:b0684,nrdD
+eco:b3924,nrdD
+eco:b4238,nrdD
+eco:b4237,nrdD
+eco:b2895,nrdD
+eco:b0684,Flavodoxin reduced
+eco:b3924,Flavodoxin reduced
+eco:b4238,Flavodoxin reduced
+eco:b4237,Flavodoxin reduced
+eco:b2895,Flavodoxin reduced
+eco:b0684,GTP
+eco:b3924,GTP
+eco:b4238,GTP
+eco:b4237,GTP
+eco:b2895,GTP
+eco:b3774,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3774,Nicotinamide adenine dinucleotide phosphate
+eco:b3774,"(R)-2,3-Dihydroxy-3-methylbutanoate"
+eco:b3774,ilvC
+eco:b3774,Nicotinamide adenine dinucleotide phosphate
+eco:b3774,(S)-2-Acetolactate
+eco:b3774,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3774,"(R)-2,3-Dihydroxy-3-methylbutanoate"
+eco:b3774,(S)-2-Acetolactate
+eco:b3957,Ornithine
+eco:b3957,N2-Acetyl-L-ornithine
+eco:b3957,Acetate
+eco:b3957,Acetate
+eco:b3957,argE
+eco:b3957,Ornithine
+eco:b3957,N2-Acetyl-L-ornithine
+eco:b2780,Phosphate
+eco:b2780,CTP
+eco:b2780,L-Glutamate
+eco:b2780,L-Glutamine
+eco:b2780,ADP
+eco:b2780,UTP
+eco:b2780,pyrG
+eco:b2780,Phosphate
+eco:b2780,ATP
+eco:b2780,CTP
+eco:b2780,L-Glutamate
+eco:b2780,L-Glutamine
+eco:b2780,ADP
+eco:b2780,UTP
+eco:b2780,ATP
+eco:b3846,trans-Dec-2-enoyl-CoA
+eco:b2341,trans-Dec-2-enoyl-CoA
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,(S)-3-Hydroxydecanoyl-CoA
+eco:b2341,(S)-3-Hydroxydecanoyl-CoA
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,(S)-3-Hydroxydecanoyl-CoA
+eco:b2341,(S)-3-Hydroxydecanoyl-CoA
+eco:b3846,trans-Dec-2-enoyl-CoA
+eco:b2341,trans-Dec-2-enoyl-CoA
+eco:b2979,Menaquinol 8
+eco:b4467,Menaquinol 8
+eco:b4468,Menaquinol 8
+eco:b2979,Glycolate
+eco:b4467,Glycolate
+eco:b4468,Glycolate
+eco:b2979,Glyoxylate
+eco:b4467,Glyoxylate
+eco:b4468,Glyoxylate
+eco:b2979,Menaquinone 8
+eco:b4467,Menaquinone 8
+eco:b4468,Menaquinone 8
+eco:b2979,glcD
+eco:b4467,glcD
+eco:b4468,glcD
+eco:b2979,glcF
+eco:b4467,glcF
+eco:b4468,glcF
+eco:b2979,glcE
+eco:b4467,glcE
+eco:b4468,glcE
+eco:b2979,Glyoxylate
+eco:b4467,Glyoxylate
+eco:b4468,Glyoxylate
+eco:b2979,Menaquinol 8
+eco:b4467,Menaquinol 8
+eco:b4468,Menaquinol 8
+eco:b2979,Menaquinone 8
+eco:b4467,Menaquinone 8
+eco:b4468,Menaquinone 8
+eco:b2979,Glycolate
+eco:b4467,Glycolate
+eco:b4468,Glycolate
+eco:b0529,"5,10-Methenyltetrahydrofolate"
+eco:b0529,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0529,"5,10-Methylenetetrahydrofolate"
+eco:b0529,folD
+eco:b0529,Nicotinamide adenine dinucleotide phosphate
+eco:b0529,"5,10-Methenyltetrahydrofolate"
+eco:b0529,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0529,Nicotinamide adenine dinucleotide phosphate
+eco:b0529,"5,10-Methylenetetrahydrofolate"
+eco:b0474,dTTP
+eco:b2518,dTTP
+eco:b0474,dTDP
+eco:b2518,dTDP
+eco:b0474,ATP
+eco:b2518,ATP
+eco:b0474,ADP
+eco:b2518,ADP
+eco:b0474,ndk
+eco:b2518,ndk
+eco:b0474,adk
+eco:b2518,adk
+eco:b0474,dTDP
+eco:b2518,dTDP
+eco:b0474,dTTP
+eco:b2518,dTTP
+eco:b0474,ADP
+eco:b2518,ADP
+eco:b0474,ATP
+eco:b2518,ATP
+Sink needed to allow S-Adenosyl-4-methylthio-2-oxobutanoate to leave system,S-Adenosyl-4-methylthio-2-oxobutanoate
+Sink needed to allow S-Adenosyl-4-methylthio-2-oxobutanoate to leave system,S-Adenosyl-4-methylthio-2-oxobutanoate
+Sink needed to allow S-Adenosyl-4-methylthio-2-oxobutanoate to leave system,S-Adenosyl-4-methylthio-2-oxobutanoate
+eco:b0774,"7,8-Diaminononanoate"
+eco:b0774,S-Adenosyl-L-methionine
+eco:b0774,8-Amino-7-oxononanoate
+eco:b0774,S-Adenosyl-4-methylthio-2-oxobutanoate
+eco:b0774,"7,8-Diaminononanoate"
+eco:b0774,bioA
+eco:b0774,8-Amino-7-oxononanoate
+eco:b0774,S-Adenosyl-4-methylthio-2-oxobutanoate
+eco:b0774,S-Adenosyl-L-methionine
+eco:b0452,Dodecanoate (n-C12:0)
+eco:b0452,Coenzyme A
+eco:b0452,tesB
+eco:b0452,Dodecanoyl-CoA (n-C12:0CoA)
+eco:b0452,Dodecanoyl-CoA (n-C12:0CoA)
+eco:b0452,Dodecanoate (n-C12:0)
+eco:b0452,Coenzyme A
+eco:b1260,Glyceraldehyde 3-phosphate
+eco:b1261,Glyceraldehyde 3-phosphate
+eco:b1260,Indole
+eco:b1261,Indole
+eco:b1260,trpA
+eco:b1261,trpA
+eco:b1260,C'-(3-Indolyl)-glycerol 3-phosphate
+eco:b1261,C'-(3-Indolyl)-glycerol 3-phosphate
+eco:b1260,trpB
+eco:b1261,trpB
+eco:b1260,Glyceraldehyde 3-phosphate
+eco:b1261,Glyceraldehyde 3-phosphate
+eco:b1260,C'-(3-Indolyl)-glycerol 3-phosphate
+eco:b1261,C'-(3-Indolyl)-glycerol 3-phosphate
+eco:b1260,Indole
+eco:b1261,Indole
+eco:b2026,1-(5-Phosphoribosyl)-AMP
+eco:b2026,1-(5-Phosphoribosyl)-ATP
+eco:b2026,Diphosphate
+eco:b2026,Diphosphate
+eco:b2026,hisI
+eco:b2026,1-(5-Phosphoribosyl)-AMP
+eco:b2026,1-(5-Phosphoribosyl)-ATP
+eco:b2417,Pyruvate
+eco:b1621,Pyruvate
+eco:b2415,Pyruvate
+eco:b2416,Pyruvate
+eco:b1101,Pyruvate
+eco:b1817,Pyruvate
+eco:b1818,Pyruvate
+eco:b1819,Pyruvate
+eco:b2417,D-Glucose
+eco:b1621,D-Glucose
+eco:b2415,D-Glucose
+eco:b2416,D-Glucose
+eco:b1101,D-Glucose
+eco:b1817,D-Glucose
+eco:b1818,D-Glucose
+eco:b1819,D-Glucose
+eco:b2417,D-Glucose 6-phosphate
+eco:b1621,D-Glucose 6-phosphate
+eco:b2415,D-Glucose 6-phosphate
+eco:b2416,D-Glucose 6-phosphate
+eco:b1101,D-Glucose 6-phosphate
+eco:b1817,D-Glucose 6-phosphate
+eco:b1818,D-Glucose 6-phosphate
+eco:b1819,D-Glucose 6-phosphate
+eco:b2417,D-Glucose 6-phosphate
+eco:b1621,D-Glucose 6-phosphate
+eco:b2415,D-Glucose 6-phosphate
+eco:b2416,D-Glucose 6-phosphate
+eco:b1101,D-Glucose 6-phosphate
+eco:b1817,D-Glucose 6-phosphate
+eco:b1818,D-Glucose 6-phosphate
+eco:b1819,D-Glucose 6-phosphate
+eco:b2417,Phosphoenolpyruvate
+eco:b1621,Phosphoenolpyruvate
+eco:b2415,Phosphoenolpyruvate
+eco:b2416,Phosphoenolpyruvate
+eco:b1101,Phosphoenolpyruvate
+eco:b1817,Phosphoenolpyruvate
+eco:b1818,Phosphoenolpyruvate
+eco:b1819,Phosphoenolpyruvate
+eco:b2417,Pyruvate
+eco:b1621,Pyruvate
+eco:b2415,Pyruvate
+eco:b2416,Pyruvate
+eco:b1101,Pyruvate
+eco:b1817,Pyruvate
+eco:b1818,Pyruvate
+eco:b1819,Pyruvate
+eco:b2417,Phosphoenolpyruvate
+eco:b1621,Phosphoenolpyruvate
+eco:b2415,Phosphoenolpyruvate
+eco:b2416,Phosphoenolpyruvate
+eco:b1101,Phosphoenolpyruvate
+eco:b1817,Phosphoenolpyruvate
+eco:b1818,Phosphoenolpyruvate
+eco:b1819,Phosphoenolpyruvate
+eco:b2417,D-Glucose
+eco:b1621,D-Glucose
+eco:b2415,D-Glucose
+eco:b2416,D-Glucose
+eco:b1101,D-Glucose
+eco:b1817,D-Glucose
+eco:b1818,D-Glucose
+eco:b1819,D-Glucose
+eco:b2315,"7,8-Dihydrofolate"
+eco:b2315,Phosphate
+eco:b2315,Dihydropteroate
+eco:b2315,ADP
+eco:b2315,L-Glutamate
+eco:b2315,folC
+eco:b2315,Phosphate
+eco:b2315,ATP
+eco:b2315,ADP
+eco:b2315,"7,8-Dihydrofolate"
+eco:b2315,ATP
+eco:b2315,L-Glutamate
+eco:b2315,Dihydropteroate
+eco:b1850,Pyruvate
+eco:b1850,2-Dehydro-3-deoxy-D-gluconate 6-phosphate
+eco:b1850,eda
+eco:b1850,Glyceraldehyde 3-phosphate
+eco:b1850,Glyceraldehyde 3-phosphate
+eco:b1850,Pyruvate
+eco:b1850,2-Dehydro-3-deoxy-D-gluconate 6-phosphate
+eco:b0086,Phosphate
+eco:b0086,"UDP-N-acetylmuramoyl-L-alanyl-D-glutamyl-meso-2,6-diaminopimeloyl-D-alanyl-D-alanine"
+eco:b0086,ATP
+eco:b0086,ADP
+eco:b0086,"UDP-N-acetylmuramoyl-L-alanyl-D-gamma-glutamyl-meso-2,6-diaminopimelate"
+eco:b0086,murF
+eco:b0086,"UDP-N-acetylmuramoyl-L-alanyl-D-glutamyl-meso-2,6-diaminopimeloyl-D-alanyl-D-alanine"
+eco:b0086,D-Alanyl-D-alanine
+eco:b0086,ADP
+eco:b0086,Phosphate
+eco:b0086,D-Alanyl-D-alanine
+eco:b0086,"UDP-N-acetylmuramoyl-L-alanyl-D-gamma-glutamyl-meso-2,6-diaminopimelate"
+eco:b0086,ATP
+eco:b4160,"phosphatidylserine (dihexadecanoyl, n-C16:0)"
+eco:b4160,"phosphatidylethanolamine (dihexadecanoyl, n-C16:0)"
+eco:b4160,CO2
+eco:b4160,"phosphatidylethanolamine (dihexadecanoyl, n-C16:0)"
+eco:b4160,CO2
+eco:b4160,psd
+eco:b4160,"phosphatidylserine (dihexadecanoyl, n-C16:0)"
+eco:b2763,Hydrogen sulfide
+eco:b2764,Hydrogen sulfide
+eco:b2763,Nicotinamide adenine dinucleotide phosphate
+eco:b2764,Nicotinamide adenine dinucleotide phosphate
+eco:b2763,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b2764,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b2763,cysJ
+eco:b2764,cysJ
+eco:b2763,Sulfite
+eco:b2764,Sulfite
+eco:b2763,Nicotinamide adenine dinucleotide phosphate
+eco:b2764,Nicotinamide adenine dinucleotide phosphate
+eco:b2763,cysI
+eco:b2764,cysI
+eco:b2763,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b2764,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b2763,Hydrogen sulfide
+eco:b2764,Hydrogen sulfide
+eco:b2763,Sulfite
+eco:b2764,Sulfite
+eco:b0142,AMP
+eco:b0142,6-hydroxymethyl dihydropterin
+eco:b0142,6-hydroxymethyl-dihydropterin pyrophosphate
+eco:b0142,ATP
+eco:b0142,AMP
+eco:b0142,6-hydroxymethyl-dihydropterin pyrophosphate
+eco:b0142,folK
+eco:b0142,6-hydroxymethyl dihydropterin
+eco:b0142,ATP
+eco:b2599,Phenylpyruvate
+eco:b2599,Prephenate
+eco:b2599,pheA
+eco:b2599,CO2
+eco:b2599,CO2
+eco:b2599,Phenylpyruvate
+eco:b2599,Prephenate
+Sink needed to allow p-Cresol to leave system,p-Cresol
+Sink needed to allow p-Cresol to leave system,p-Cresol
+Sink needed to allow p-Cresol to leave system,p-Cresol
+eco:b3846,(S)-3-Hydroxybutanoyl-CoA
+eco:b2341,(S)-3-Hydroxybutanoyl-CoA
+eco:b3846,Crotonoyl-CoA
+eco:b2341,Crotonoyl-CoA
+eco:b3846,Crotonoyl-CoA
+eco:b2341,Crotonoyl-CoA
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,(S)-3-Hydroxybutanoyl-CoA
+eco:b2341,(S)-3-Hydroxybutanoyl-CoA
+eco:b1093,Nicotinamide adenine dinucleotide phosphate
+eco:b1093,3-Oxo-glutaryl-[acyl-carrier protein] methyl ester
+eco:b1093,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1093,3-Hydroxyglutaryl-[acyl-carrier protein] methyl ester
+eco:b1093,Nicotinamide adenine dinucleotide phosphate
+eco:b1093,fabG
+eco:b1093,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1093,3-Hydroxyglutaryl-[acyl-carrier protein] methyl ester
+eco:b1093,3-Oxo-glutaryl-[acyl-carrier protein] methyl ester
+eco:b4040,Diphosphate
+eco:b4040,4-Hydroxybenzoate
+eco:b4040,3-Octaprenyl-4-hydroxybenzoate
+eco:b4040,all-trans-Octaprenyl diphosphate
+eco:b4040,Diphosphate
+eco:b4040,3-Octaprenyl-4-hydroxybenzoate
+eco:b4040,ubiA
+eco:b4040,4-Hydroxybenzoate
+eco:b4040,all-trans-Octaprenyl diphosphate
+eco:b3770,L-Isoleucine
+eco:b3770,2-Oxoglutarate
+eco:b3770,(S)-3-Methyl-2-oxopentanoate
+eco:b3770,L-Glutamate
+eco:b3770,2-Oxoglutarate
+eco:b3770,ilvE
+eco:b3770,L-Isoleucine
+eco:b3770,(S)-3-Methyl-2-oxopentanoate
+eco:b3770,L-Glutamate
+eco:b0243,L-Glutamate 5-semialdehyde
+eco:b0243,Phosphate
+eco:b0243,Nicotinamide adenine dinucleotide phosphate
+eco:b0243,L-Glutamate 5-phosphate
+eco:b0243,proA
+eco:b0243,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0243,Nicotinamide adenine dinucleotide phosphate
+eco:b0243,Phosphate
+eco:b0243,L-Glutamate 5-phosphate
+eco:b0243,L-Glutamate 5-semialdehyde
+eco:b0243,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0002,4-Phospho-L-aspartate
+eco:b3940,4-Phospho-L-aspartate
+eco:b4024,4-Phospho-L-aspartate
+eco:b0002,ADP
+eco:b3940,ADP
+eco:b4024,ADP
+eco:b0002,metL
+eco:b3940,metL
+eco:b4024,metL
+eco:b0002,ATP
+eco:b3940,ATP
+eco:b4024,ATP
+eco:b0002,L-Aspartate
+eco:b3940,L-Aspartate
+eco:b4024,L-Aspartate
+eco:b0002,lysC
+eco:b3940,lysC
+eco:b4024,lysC
+eco:b0002,ADP
+eco:b3940,ADP
+eco:b4024,ADP
+eco:b0002,thrA
+eco:b3940,thrA
+eco:b4024,thrA
+eco:b0002,ATP
+eco:b3940,ATP
+eco:b4024,ATP
+eco:b0002,4-Phospho-L-aspartate
+eco:b3940,4-Phospho-L-aspartate
+eco:b4024,4-Phospho-L-aspartate
+eco:b0002,L-Aspartate
+eco:b3940,L-Aspartate
+eco:b4024,L-Aspartate
+eco:b4019,"5,6,7,8-Tetrahydrofolate"
+eco:b3829,"5,6,7,8-Tetrahydrofolate"
+eco:b4019,L-Homocysteine
+eco:b3829,L-Homocysteine
+eco:b4019,L-Methionine
+eco:b3829,L-Methionine
+eco:b4019,metE
+eco:b3829,metE
+eco:b4019,5-Methyltetrahydrofolate
+eco:b3829,5-Methyltetrahydrofolate
+eco:b4019,metH
+eco:b3829,metH
+eco:b4019,L-Methionine
+eco:b3829,L-Methionine
+eco:b4019,L-Homocysteine
+eco:b3829,L-Homocysteine
+eco:b4019,"5,6,7,8-Tetrahydrofolate"
+eco:b3829,"5,6,7,8-Tetrahydrofolate"
+eco:b4019,5-Methyltetrahydrofolate
+eco:b3829,5-Methyltetrahydrofolate
+eco:b3919,Dihydroxyacetone phosphate
+eco:b3919,Dihydroxyacetone phosphate
+eco:b3919,Glyceraldehyde 3-phosphate
+eco:b3919,tpiA
+eco:b3919,Glyceraldehyde 3-phosphate
+Sink needed to allow 5'-deoxyribose to leave system,5'-deoxyribose
+Sink needed to allow 5'-deoxyribose to leave system,5'-deoxyribose
+Sink needed to allow 5'-deoxyribose to leave system,5'-deoxyribose
+eco:b3959,ADP
+eco:b3959,N-Acetyl-L-glutamate
+eco:b3959,N-Acetyl-L-glutamyl 5-phosphate
+eco:b3959,ATP
+eco:b3959,ADP
+eco:b3959,N-Acetyl-L-glutamyl 5-phosphate
+eco:b3959,argB
+eco:b3959,N-Acetyl-L-glutamate
+eco:b3959,ATP
+eco:b2436,Protoporphyrinogen IX
+eco:b2436,Coproporphyrinogen III
+eco:b2436,CO2
+eco:b2436,O2
+eco:b2436,Protoporphyrinogen IX
+eco:b2436,CO2
+eco:b2436,hemF
+eco:b2436,Coproporphyrinogen III
+eco:b2436,O2
+eco:b0684,dCTP
+eco:b3924,dCTP
+eco:b4238,dCTP
+eco:b4237,dCTP
+eco:b2895,dCTP
+eco:b0684,Flavodoxin reduced
+eco:b3924,Flavodoxin reduced
+eco:b4238,Flavodoxin reduced
+eco:b4237,Flavodoxin reduced
+eco:b2895,Flavodoxin reduced
+eco:b0684,flavodoxin semi oxidized
+eco:b3924,flavodoxin semi oxidized
+eco:b4238,flavodoxin semi oxidized
+eco:b4237,flavodoxin semi oxidized
+eco:b2895,flavodoxin semi oxidized
+eco:b0684,fldB
+eco:b3924,fldB
+eco:b4238,fldB
+eco:b4237,fldB
+eco:b2895,fldB
+eco:b0684,CTP
+eco:b3924,CTP
+eco:b4238,CTP
+eco:b4237,CTP
+eco:b2895,CTP
+eco:b0684,fpr
+eco:b3924,fpr
+eco:b4238,fpr
+eco:b4237,fpr
+eco:b2895,fpr
+eco:b0684,fldA
+eco:b3924,fldA
+eco:b4238,fldA
+eco:b4237,fldA
+eco:b2895,fldA
+eco:b0684,nrdG
+eco:b3924,nrdG
+eco:b4238,nrdG
+eco:b4237,nrdG
+eco:b2895,nrdG
+eco:b0684,flavodoxin semi oxidized
+eco:b3924,flavodoxin semi oxidized
+eco:b4238,flavodoxin semi oxidized
+eco:b4237,flavodoxin semi oxidized
+eco:b2895,flavodoxin semi oxidized
+eco:b0684,dCTP
+eco:b3924,dCTP
+eco:b4238,dCTP
+eco:b4237,dCTP
+eco:b2895,dCTP
+eco:b0684,nrdD
+eco:b3924,nrdD
+eco:b4238,nrdD
+eco:b4237,nrdD
+eco:b2895,nrdD
+eco:b0684,CTP
+eco:b3924,CTP
+eco:b4238,CTP
+eco:b4237,CTP
+eco:b2895,CTP
+eco:b0684,Flavodoxin reduced
+eco:b3924,Flavodoxin reduced
+eco:b4238,Flavodoxin reduced
+eco:b4237,Flavodoxin reduced
+eco:b2895,Flavodoxin reduced
+eco:b4036,D-Glucose
+eco:b4036,D-Glucose
+eco:b4036,D-Glucose
+eco:b4036,D-Glucose
+eco:b2026,1-(5-Phosphoribosyl)-5-[(5-phosphoribosylamino)methylideneamino]imidazole-4-carboxamide
+eco:b2026,hisI
+eco:b2026,1-(5-Phosphoribosyl)-AMP
+eco:b2026,1-(5-Phosphoribosyl)-5-[(5-phosphoribosylamino)methylideneamino]imidazole-4-carboxamide
+eco:b2026,1-(5-Phosphoribosyl)-AMP
+eco:b2979,Ubiquinol-8
+eco:b4467,Ubiquinol-8
+eco:b4468,Ubiquinol-8
+eco:b2979,Ubiquinone-8
+eco:b4467,Ubiquinone-8
+eco:b4468,Ubiquinone-8
+eco:b2979,Glyoxylate
+eco:b4467,Glyoxylate
+eco:b4468,Glyoxylate
+eco:b2979,glcD
+eco:b4467,glcD
+eco:b4468,glcD
+eco:b2979,Glycolate
+eco:b4467,Glycolate
+eco:b4468,Glycolate
+eco:b2979,glcE
+eco:b4467,glcE
+eco:b4468,glcE
+eco:b2979,Ubiquinol-8
+eco:b4467,Ubiquinol-8
+eco:b4468,Ubiquinol-8
+eco:b2979,Glyoxylate
+eco:b4467,Glyoxylate
+eco:b4468,Glyoxylate
+eco:b2979,glcF
+eco:b4467,glcF
+eco:b4468,glcF
+eco:b2979,Glycolate
+eco:b4467,Glycolate
+eco:b4468,Glycolate
+eco:b2979,Ubiquinone-8
+eco:b4467,Ubiquinone-8
+eco:b4468,Ubiquinone-8
+eco:b2518,CTP
+eco:b0474,CTP
+eco:b2518,ATP
+eco:b0474,ATP
+eco:b2518,ADP
+eco:b0474,ADP
+eco:b2518,CDP
+eco:b0474,CDP
+eco:b2518,ndk
+eco:b0474,ndk
+eco:b2518,CTP
+eco:b0474,CTP
+eco:b2518,adk
+eco:b0474,adk
+eco:b2518,CDP
+eco:b0474,CDP
+eco:b2518,ADP
+eco:b0474,ADP
+eco:b2518,ATP
+eco:b0474,ATP
+eco:b0474,ADP
+eco:b0474,AMP
+eco:b0474,adk
+eco:b0474,ATP
+eco:b0474,Adenosine
+eco:b0474,ADP
+eco:b0474,ATP
+eco:b0474,AMP
+eco:b0474,Adenosine
+eco:b3844,Flavin adenine dinucleotide reduced
+eco:b2763,Flavin adenine dinucleotide reduced
+eco:b2764,Flavin adenine dinucleotide reduced
+eco:b3844,Nicotinamide adenine dinucleotide
+eco:b2763,Nicotinamide adenine dinucleotide
+eco:b2764,Nicotinamide adenine dinucleotide
+eco:b3844,fre
+eco:b2763,fre
+eco:b2764,fre
+eco:b3844,Nicotinamide adenine dinucleotide - reduced
+eco:b2763,Nicotinamide adenine dinucleotide - reduced
+eco:b2764,Nicotinamide adenine dinucleotide - reduced
+eco:b3844,Flavin adenine dinucleotide oxidized
+eco:b2763,Flavin adenine dinucleotide oxidized
+eco:b2764,Flavin adenine dinucleotide oxidized
+eco:b3844,Flavin adenine dinucleotide reduced
+eco:b2763,Flavin adenine dinucleotide reduced
+eco:b2764,Flavin adenine dinucleotide reduced
+eco:b3844,Nicotinamide adenine dinucleotide - reduced
+eco:b2763,Nicotinamide adenine dinucleotide - reduced
+eco:b2764,Nicotinamide adenine dinucleotide - reduced
+eco:b3844,Nicotinamide adenine dinucleotide
+eco:b2763,Nicotinamide adenine dinucleotide
+eco:b2764,Nicotinamide adenine dinucleotide
+eco:b3844,Flavin adenine dinucleotide oxidized
+eco:b2763,Flavin adenine dinucleotide oxidized
+eco:b2764,Flavin adenine dinucleotide oxidized
+eco:b0369,Porphobilinogen
+eco:b0369,hemB
+eco:b0369,Porphobilinogen
+eco:b0369,5-Amino-4-oxopentanoate
+eco:b0369,5-Amino-4-oxopentanoate
+eco:b2747,Diphosphate
+eco:b2747,4-(cytidine 5'-diphospho)-2-C-methyl-D-erythritol
+eco:b2747,2-C-methyl-D-erythritol 4-phosphate
+eco:b2747,CTP
+eco:b2747,4-(cytidine 5'-diphospho)-2-C-methyl-D-erythritol
+eco:b2747,ispD
+eco:b2747,Diphosphate
+eco:b2747,2-C-methyl-D-erythritol 4-phosphate
+eco:b2747,CTP
+"Sink needed to allow (2R,4S)-2-methyl-2,3,3,4-tetrahydroxytetrahydrofuran to leave system","(2R,4S)-2-methyl-2,3,3,4-tetrahydroxytetrahydrofuran"
+"Sink needed to allow (2R,4S)-2-methyl-2,3,3,4-tetrahydroxytetrahydrofuran to leave system","(2R,4S)-2-methyl-2,3,3,4-tetrahydroxytetrahydrofuran"
+"Sink needed to allow (2R,4S)-2-methyl-2,3,3,4-tetrahydroxytetrahydrofuran to leave system","(2R,4S)-2-methyl-2,3,3,4-tetrahydroxytetrahydrofuran"
+eco:b1606,Nicotinamide adenine dinucleotide phosphate
+eco:b0048,Nicotinamide adenine dinucleotide phosphate
+eco:b1606,"5,6,7,8-Tetrahydrofolate"
+eco:b0048,"5,6,7,8-Tetrahydrofolate"
+eco:b1606,folA
+eco:b0048,folA
+eco:b1606,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0048,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1606,"7,8-Dihydrofolate"
+eco:b0048,"7,8-Dihydrofolate"
+eco:b1606,"5,6,7,8-Tetrahydrofolate"
+eco:b0048,"5,6,7,8-Tetrahydrofolate"
+eco:b1606,Nicotinamide adenine dinucleotide phosphate
+eco:b0048,Nicotinamide adenine dinucleotide phosphate
+eco:b1606,folM
+eco:b0048,folM
+eco:b1606,"7,8-Dihydrofolate"
+eco:b0048,"7,8-Dihydrofolate"
+eco:b1606,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0048,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0180,Enoylglutaryl-[acyl-carrier protein] methyl ester
+eco:b0180,3-Hydroxyglutaryl-[acyl-carrier protein] methyl ester
+eco:b0180,Enoylglutaryl-[acyl-carrier protein] methyl ester
+eco:b0180,fabZ
+eco:b0180,3-Hydroxyglutaryl-[acyl-carrier protein] methyl ester
+eco:b0414,5-Amino-6-(5'-phosphoribitylamino)uracil
+eco:b0414,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0414,Nicotinamide adenine dinucleotide phosphate
+eco:b0414,ribD
+eco:b0414,5-Amino-6-(5'-phosphoribosylamino)uracil
+eco:b0414,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0414,Nicotinamide adenine dinucleotide phosphate
+eco:b0414,5-Amino-6-(5'-phosphoribitylamino)uracil
+eco:b0414,5-Amino-6-(5'-phosphoribosylamino)uracil
+eco:b0154,5-Amino-4-oxopentanoate
+eco:b0154,L-Glutamate 1-semialdehyde
+eco:b0154,5-Amino-4-oxopentanoate
+eco:b0154,hemL
+eco:b0154,L-Glutamate 1-semialdehyde
+eco:b3198,Phosphate
+eco:b3198,3-Deoxy-D-manno-octulosonate 8-phosphate
+eco:b3198,kdsC
+eco:b3198,3-Deoxy-D-manno-2-octulosonate
+eco:b3198,3-Deoxy-D-manno-2-octulosonate
+eco:b3198,Phosphate
+eco:b3198,3-Deoxy-D-manno-octulosonate 8-phosphate
+eco:b4054,L-Phenylalanine
+eco:b0928,L-Phenylalanine
+eco:b3770,L-Phenylalanine
+eco:b4054,Phenylpyruvate
+eco:b0928,Phenylpyruvate
+eco:b3770,Phenylpyruvate
+eco:b4054,L-Glutamate
+eco:b0928,L-Glutamate
+eco:b3770,L-Glutamate
+eco:b4054,2-Oxoglutarate
+eco:b0928,2-Oxoglutarate
+eco:b3770,2-Oxoglutarate
+eco:b4054,tyrB
+eco:b0928,tyrB
+eco:b3770,tyrB
+eco:b4054,aspC
+eco:b0928,aspC
+eco:b3770,aspC
+eco:b4054,2-Oxoglutarate
+eco:b0928,2-Oxoglutarate
+eco:b3770,2-Oxoglutarate
+eco:b4054,ilvE
+eco:b0928,ilvE
+eco:b3770,ilvE
+eco:b4054,L-Phenylalanine
+eco:b0928,L-Phenylalanine
+eco:b3770,L-Phenylalanine
+eco:b4054,L-Glutamate
+eco:b0928,L-Glutamate
+eco:b3770,L-Glutamate
+eco:b4054,Phenylpyruvate
+eco:b0928,Phenylpyruvate
+eco:b3770,Phenylpyruvate
+eco:b4013,Coenzyme A
+eco:b4013,Succinyl-CoA
+eco:b4013,O-Succinyl-L-homoserine
+eco:b4013,metA
+eco:b4013,L-Homoserine
+eco:b4013,Succinyl-CoA
+eco:b4013,O-Succinyl-L-homoserine
+eco:b4013,Coenzyme A
+eco:b4013,L-Homoserine
+eco:b0085,ADP
+eco:b0085,"UDP-N-acetylmuramoyl-L-alanyl-D-gamma-glutamyl-meso-2,6-diaminopimelate"
+eco:b0085,Phosphate
+eco:b0085,ATP
+eco:b0085,"meso-2,6-Diaminoheptanedioate"
+eco:b0085,UDP-N-acetylmuramoyl-L-alanyl-D-glutamate
+eco:b0085,"UDP-N-acetylmuramoyl-L-alanyl-D-gamma-glutamyl-meso-2,6-diaminopimelate"
+eco:b0085,murE
+eco:b0085,UDP-N-acetylmuramoyl-L-alanyl-D-glutamate
+eco:b0085,Phosphate
+eco:b0085,ADP
+eco:b0085,"meso-2,6-Diaminoheptanedioate"
+eco:b0085,ATP
+eco:b0978,Ubiquinone-8
+eco:b0979,Ubiquinone-8
+eco:b0733,Ubiquinone-8
+eco:b0734,Ubiquinone-8
+eco:b0978,Ubiquinol-8
+eco:b0979,Ubiquinol-8
+eco:b0733,Ubiquinol-8
+eco:b0734,Ubiquinol-8
+eco:b0978,Ubiquinone-8
+eco:b0979,Ubiquinone-8
+eco:b0733,Ubiquinone-8
+eco:b0734,Ubiquinone-8
+eco:b0978,O2
+eco:b0979,O2
+eco:b0733,O2
+eco:b0734,O2
+eco:b0978,Ubiquinol-8
+eco:b0979,Ubiquinol-8
+eco:b0733,Ubiquinol-8
+eco:b0734,Ubiquinol-8
+eco:b0978,O2
+eco:b0979,O2
+eco:b0733,O2
+eco:b0734,O2
+eco:b3380,alpha-D-Ribose 5-phosphate
+eco:b4383,alpha-D-Ribose 5-phosphate
+eco:b3380,deoB
+eco:b4383,deoB
+eco:b3380,alpha-D-Ribose 1-phosphate
+eco:b4383,alpha-D-Ribose 1-phosphate
+eco:b3380,alpha-D-Ribose 1-phosphate
+eco:b4383,alpha-D-Ribose 1-phosphate
+eco:b3380,yhfW
+eco:b4383,yhfW
+eco:b3380,alpha-D-Ribose 5-phosphate
+eco:b4383,alpha-D-Ribose 5-phosphate
+eco:b0720,Citrate
+eco:b0720,Oxaloacetate
+eco:b0720,Coenzyme A
+eco:b0720,gltA
+eco:b0720,Acetyl-CoA
+eco:b0720,Oxaloacetate
+eco:b0720,Coenzyme A
+eco:b0720,Citrate
+eco:b0720,Acetyl-CoA
+eco:b4244,Phosphate
+eco:b4245,Phosphate
+eco:b4244,N-Carbamoyl-L-aspartate
+eco:b4245,N-Carbamoyl-L-aspartate
+eco:b4244,L-Aspartate
+eco:b4245,L-Aspartate
+eco:b4244,Carbamoyl phosphate
+eco:b4245,Carbamoyl phosphate
+eco:b4244,Phosphate
+eco:b4245,Phosphate
+eco:b4244,pyrI
+eco:b4245,pyrI
+eco:b4244,pyrB
+eco:b4245,pyrB
+eco:b4244,Carbamoyl phosphate
+eco:b4245,Carbamoyl phosphate
+eco:b4244,L-Aspartate
+eco:b4245,L-Aspartate
+eco:b4244,N-Carbamoyl-L-aspartate
+eco:b4245,N-Carbamoyl-L-aspartate
+eco:b1415,Glycolate
+eco:b1415,Nicotinamide adenine dinucleotide
+eco:b1415,Nicotinamide adenine dinucleotide - reduced
+eco:b1415,aldA
+eco:b1415,Glycolaldehyde
+eco:b1415,Nicotinamide adenine dinucleotide
+eco:b1415,Nicotinamide adenine dinucleotide - reduced
+eco:b1415,Glycolate
+eco:b1415,Glycolaldehyde
+eco:b2751,Diphosphate
+eco:b2752,Diphosphate
+eco:b2751,GDP
+eco:b2752,GDP
+eco:b2751,Phosphate
+eco:b2752,Phosphate
+eco:b2751,GTP
+eco:b2752,GTP
+eco:b2751,Adenosine 5'-phosphosulfate
+eco:b2752,Adenosine 5'-phosphosulfate
+eco:b2751,Sulfate
+eco:b2752,Sulfate
+eco:b2751,cysD
+eco:b2752,cysD
+eco:b2751,cysN
+eco:b2752,cysN
+eco:b2751,ATP
+eco:b2752,ATP
+eco:b2751,Phosphate
+eco:b2752,Phosphate
+eco:b2751,Diphosphate
+eco:b2752,Diphosphate
+eco:b2751,Sulfate
+eco:b2752,Sulfate
+eco:b2751,GDP
+eco:b2752,GDP
+eco:b2751,Adenosine 5'-phosphosulfate
+eco:b2752,Adenosine 5'-phosphosulfate
+eco:b2751,ATP
+eco:b2752,ATP
+eco:b2751,GTP
+eco:b2752,GTP
+eco:b2935,D-Xylulose 5-phosphate
+eco:b2465,D-Xylulose 5-phosphate
+eco:b2935,D-Fructose 6-phosphate
+eco:b2465,D-Fructose 6-phosphate
+eco:b2935,D-Erythrose 4-phosphate
+eco:b2465,D-Erythrose 4-phosphate
+eco:b2935,Glyceraldehyde 3-phosphate
+eco:b2465,Glyceraldehyde 3-phosphate
+eco:b2935,tktB
+eco:b2465,tktB
+eco:b2935,D-Xylulose 5-phosphate
+eco:b2465,D-Xylulose 5-phosphate
+eco:b2935,tktA
+eco:b2465,tktA
+eco:b2935,Glyceraldehyde 3-phosphate
+eco:b2465,Glyceraldehyde 3-phosphate
+eco:b2935,D-Erythrose 4-phosphate
+eco:b2465,D-Erythrose 4-phosphate
+eco:b2935,D-Fructose 6-phosphate
+eco:b2465,D-Fructose 6-phosphate
+eco:b1136,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1136,2-Oxoglutarate
+eco:b1136,CO2
+eco:b1136,icd
+eco:b1136,Nicotinamide adenine dinucleotide phosphate
+eco:b1136,Isocitrate
+eco:b1136,CO2
+eco:b1136,2-Oxoglutarate
+eco:b1136,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1136,Isocitrate
+eco:b1136,Nicotinamide adenine dinucleotide phosphate
+eco:b0684,dATP
+eco:b3924,dATP
+eco:b4238,dATP
+eco:b4237,dATP
+eco:b2895,dATP
+eco:b0684,Flavodoxin reduced
+eco:b3924,Flavodoxin reduced
+eco:b4238,Flavodoxin reduced
+eco:b4237,Flavodoxin reduced
+eco:b2895,Flavodoxin reduced
+eco:b0684,flavodoxin semi oxidized
+eco:b3924,flavodoxin semi oxidized
+eco:b4238,flavodoxin semi oxidized
+eco:b4237,flavodoxin semi oxidized
+eco:b2895,flavodoxin semi oxidized
+eco:b0684,fldB
+eco:b3924,fldB
+eco:b4238,fldB
+eco:b4237,fldB
+eco:b2895,fldB
+eco:b0684,ATP
+eco:b3924,ATP
+eco:b4238,ATP
+eco:b4237,ATP
+eco:b2895,ATP
+eco:b0684,fpr
+eco:b3924,fpr
+eco:b4238,fpr
+eco:b4237,fpr
+eco:b2895,fpr
+eco:b0684,fldA
+eco:b3924,fldA
+eco:b4238,fldA
+eco:b4237,fldA
+eco:b2895,fldA
+eco:b0684,nrdG
+eco:b3924,nrdG
+eco:b4238,nrdG
+eco:b4237,nrdG
+eco:b2895,nrdG
+eco:b0684,flavodoxin semi oxidized
+eco:b3924,flavodoxin semi oxidized
+eco:b4238,flavodoxin semi oxidized
+eco:b4237,flavodoxin semi oxidized
+eco:b2895,flavodoxin semi oxidized
+eco:b0684,dATP
+eco:b3924,dATP
+eco:b4238,dATP
+eco:b4237,dATP
+eco:b2895,dATP
+eco:b0684,nrdD
+eco:b3924,nrdD
+eco:b4238,nrdD
+eco:b4237,nrdD
+eco:b2895,nrdD
+eco:b0684,ATP
+eco:b3924,ATP
+eco:b4238,ATP
+eco:b4237,ATP
+eco:b2895,ATP
+eco:b0684,Flavodoxin reduced
+eco:b3924,Flavodoxin reduced
+eco:b4238,Flavodoxin reduced
+eco:b4237,Flavodoxin reduced
+eco:b2895,Flavodoxin reduced
+eco:b2942,Diphosphate
+eco:b2942,L-Methionine
+eco:b2942,Phosphate
+eco:b2942,S-Adenosyl-L-methionine
+eco:b2942,metK
+eco:b2942,Diphosphate
+eco:b2942,ATP
+eco:b2942,S-Adenosyl-L-methionine
+eco:b2942,Phosphate
+eco:b2942,L-Methionine
+eco:b2942,ATP
+eco:b3967,D-Glutamate
+eco:b3967,murI
+eco:b3967,D-Glutamate
+eco:b3967,L-Glutamate
+eco:b3967,L-Glutamate
+eco:b2746,"2-C-methyl-D-erythritol 2,4-cyclodiphosphate"
+eco:b2746,2-phospho-4-(cytidine 5'-diphospho)-2-C-methyl-D-erythritol
+eco:b2746,CMP
+eco:b2746,CMP
+eco:b2746,ispF
+eco:b2746,"2-C-methyl-D-erythritol 2,4-cyclodiphosphate"
+eco:b2746,2-phospho-4-(cytidine 5'-diphospho)-2-C-methyl-D-erythritol
+eco:b2478,Pyruvate
+eco:b2478,"2,3-Dihydrodipicolinate"
+eco:b2478,"2,3-Dihydrodipicolinate"
+eco:b2478,L-Aspartate 4-semialdehyde
+eco:b2478,dapA
+eco:b2478,L-Aspartate 4-semialdehyde
+eco:b2478,Pyruvate
+eco:b0221,Tetradecanoyl-CoA (n-C14:0CoA)
+eco:b0221,trans-Tetradec-2-enoyl-CoA
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,Tetradecanoyl-CoA (n-C14:0CoA)
+eco:b0221,fadE
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,trans-Tetradec-2-enoyl-CoA
+eco:b2927,Nicotinamide adenine dinucleotide - reduced
+eco:b1779,Nicotinamide adenine dinucleotide - reduced
+eco:b2927,Nicotinamide adenine dinucleotide
+eco:b1779,Nicotinamide adenine dinucleotide
+eco:b2927,D-Erythrose 4-phosphate
+eco:b1779,D-Erythrose 4-phosphate
+eco:b2927,4-Phospho-D-erythronate
+eco:b1779,4-Phospho-D-erythronate
+eco:b2927,epd
+eco:b1779,epd
+eco:b2927,gapA
+eco:b1779,gapA
+eco:b2927,Nicotinamide adenine dinucleotide
+eco:b1779,Nicotinamide adenine dinucleotide
+eco:b2927,Nicotinamide adenine dinucleotide - reduced
+eco:b1779,Nicotinamide adenine dinucleotide - reduced
+eco:b2927,4-Phospho-D-erythronate
+eco:b1779,4-Phospho-D-erythronate
+eco:b2927,D-Erythrose 4-phosphate
+eco:b1779,D-Erythrose 4-phosphate
+eco:b0109,Nicotinate D-ribonucleotide
+eco:b0109,Diphosphate
+eco:b0109,Quinolinate
+eco:b0109,5-Phospho-alpha-D-ribose 1-diphosphate
+eco:b0109,CO2
+eco:b0109,Diphosphate
+eco:b0109,nadC
+eco:b0109,Quinolinate
+eco:b0109,Nicotinate D-ribonucleotide
+eco:b0109,CO2
+eco:b0109,5-Phospho-alpha-D-ribose 1-diphosphate
+eco:b2501,Phosphate
+eco:b2501,Diphosphate
+eco:b2501,ADP
+eco:b2501,ATP
+eco:b2501,Phosphate
+eco:b2501,ppk
+eco:b2501,ADP
+eco:b2501,ATP
+eco:b2501,Diphosphate
+pyrimidine phosphatase,Phosphate
+pyrimidine phosphatase,5-Amino-6-(5'-phosphoribitylamino)uracil
+pyrimidine phosphatase,4-(1-D-Ribitylamino)-5-aminouracil
+pyrimidine phosphatase,5-Amino-6-(5'-phosphoribitylamino)uracil
+pyrimidine phosphatase,Phosphate
+pyrimidine phosphatase,4-(1-D-Ribitylamino)-5-aminouracil
+eco:b0185,Phosphate
+eco:b2316,Phosphate
+eco:b3255,Phosphate
+eco:b3256,Phosphate
+eco:b0185,ADP
+eco:b2316,ADP
+eco:b3255,ADP
+eco:b3256,ADP
+eco:b0185,Malonyl-CoA
+eco:b2316,Malonyl-CoA
+eco:b3255,Malonyl-CoA
+eco:b3256,Malonyl-CoA
+eco:b0185,Acetyl-CoA
+eco:b2316,Acetyl-CoA
+eco:b3255,Acetyl-CoA
+eco:b3256,Acetyl-CoA
+eco:b0185,Bicarbonate
+eco:b2316,Bicarbonate
+eco:b3255,Bicarbonate
+eco:b3256,Bicarbonate
+eco:b0185,ATP
+eco:b2316,ATP
+eco:b3255,ATP
+eco:b3256,ATP
+eco:b0185,accB
+eco:b2316,accB
+eco:b3255,accB
+eco:b3256,accB
+eco:b0185,accC
+eco:b2316,accC
+eco:b3255,accC
+eco:b3256,accC
+eco:b0185,accD
+eco:b2316,accD
+eco:b3255,accD
+eco:b3256,accD
+eco:b0185,Phosphate
+eco:b2316,Phosphate
+eco:b3255,Phosphate
+eco:b3256,Phosphate
+eco:b0185,accA
+eco:b2316,accA
+eco:b3255,accA
+eco:b3256,accA
+eco:b0185,Bicarbonate
+eco:b2316,Bicarbonate
+eco:b3255,Bicarbonate
+eco:b3256,Bicarbonate
+eco:b0185,Malonyl-CoA
+eco:b2316,Malonyl-CoA
+eco:b3255,Malonyl-CoA
+eco:b3256,Malonyl-CoA
+eco:b0185,ADP
+eco:b2316,ADP
+eco:b3255,ADP
+eco:b3256,ADP
+eco:b0185,Acetyl-CoA
+eco:b2316,Acetyl-CoA
+eco:b3255,Acetyl-CoA
+eco:b3256,Acetyl-CoA
+eco:b0185,ATP
+eco:b2316,ATP
+eco:b3255,ATP
+eco:b3256,ATP
+eco:b0134,"5,6,7,8-Tetrahydrofolate"
+eco:b0134,2-Dehydropantoate
+eco:b0134,3-Methyl-2-oxobutanoate
+eco:b0134,"5,10-Methylenetetrahydrofolate"
+eco:b0134,2-Dehydropantoate
+eco:b0134,panB
+eco:b0134,"5,6,7,8-Tetrahydrofolate"
+eco:b0134,3-Methyl-2-oxobutanoate
+eco:b0134,"5,10-Methylenetetrahydrofolate"
+eco:b0918,Diphosphate
+eco:b0918,CMP-3-deoxy-D-manno-octulosonate
+eco:b0918,CTP
+eco:b0918,3-Deoxy-D-manno-2-octulosonate
+eco:b0918,CMP-3-deoxy-D-manno-octulosonate
+eco:b0918,kdsB
+eco:b0918,Diphosphate
+eco:b0918,CTP
+eco:b0918,3-Deoxy-D-manno-2-octulosonate
+eco:b3941,Nicotinamide adenine dinucleotide
+eco:b3941,"5,10-Methylenetetrahydrofolate"
+eco:b3941,5-Methyltetrahydrofolate
+eco:b3941,Nicotinamide adenine dinucleotide - reduced
+eco:b3941,Nicotinamide adenine dinucleotide
+eco:b3941,5-Methyltetrahydrofolate
+eco:b3941,metF
+eco:b3941,"5,10-Methylenetetrahydrofolate"
+eco:b3941,Nicotinamide adenine dinucleotide - reduced
+eco:b3639,Pantetheine 4'-phosphate
+eco:b3639,coaBC
+eco:b3639,CO2
+eco:b3639,N-((R)-4-Phosphopantothenoyl)-L-cysteine
+eco:b3639,CO2
+eco:b3639,N-((R)-4-Phosphopantothenoyl)-L-cysteine
+eco:b3639,Pantetheine 4'-phosphate
+eco:b0978,Menaquinol 8
+eco:b0979,Menaquinol 8
+eco:b0978,Menaquinone 8
+eco:b0979,Menaquinone 8
+eco:b0978,O2
+eco:b0979,O2
+eco:b0978,O2
+eco:b0979,O2
+eco:b0978,Menaquinol 8
+eco:b0979,Menaquinol 8
+eco:b0978,Menaquinone 8
+eco:b0979,Menaquinone 8
+eco:b0003,O-Phospho-L-homoserine
+eco:b0003,ATP
+eco:b0003,ADP
+eco:b0003,L-Homoserine
+eco:b0003,O-Phospho-L-homoserine
+eco:b0003,ADP
+eco:b0003,thrB
+eco:b0003,ATP
+eco:b0003,L-Homoserine
+eco:b0131,CO2
+eco:b0131,beta-Alanine
+eco:b0131,panD
+eco:b0131,L-Aspartate
+eco:b0131,L-Aspartate
+eco:b0131,CO2
+eco:b0131,beta-Alanine
+eco:b2329,Phosphate
+eco:b2329,5-O-(1-Carboxyvinyl)-3-phosphoshikimate
+eco:b2329,aroC
+eco:b2329,chorismate
+eco:b2329,chorismate
+eco:b2329,Phosphate
+eco:b2329,5-O-(1-Carboxyvinyl)-3-phosphoshikimate
+eco:b0415,4-(1-D-Ribitylamino)-5-aminouracil
+eco:b1662,4-(1-D-Ribitylamino)-5-aminouracil
+eco:b0415,Riboflavin
+eco:b1662,Riboflavin
+eco:b0415,Riboflavin
+eco:b1662,Riboflavin
+eco:b0415,"6,7-Dimethyl-8-(1-D-ribityl)lumazine"
+eco:b1662,"6,7-Dimethyl-8-(1-D-ribityl)lumazine"
+eco:b0415,ribH
+eco:b1662,ribH
+eco:b0415,"6,7-Dimethyl-8-(1-D-ribityl)lumazine"
+eco:b1662,"6,7-Dimethyl-8-(1-D-ribityl)lumazine"
+eco:b0415,4-(1-D-Ribitylamino)-5-aminouracil
+eco:b1662,4-(1-D-Ribitylamino)-5-aminouracil
+eco:b0529,"5,10-Methenyltetrahydrofolate"
+eco:b0529,folD
+eco:b0529,10-Formyltetrahydrofolate
+eco:b0529,"5,10-Methenyltetrahydrofolate"
+eco:b0529,10-Formyltetrahydrofolate
+eco:b0133,Diphosphate
+eco:b0133,AMP
+eco:b0133,(R)-Pantoate
+eco:b0133,(R)-Pantothenate
+eco:b0133,beta-Alanine
+eco:b0133,ATP
+eco:b0133,(R)-Pantothenate
+eco:b0133,panC
+eco:b0133,Diphosphate
+eco:b0133,(R)-Pantoate
+eco:b0133,ATP
+eco:b0133,AMP
+eco:b0133,beta-Alanine
+eco:b2530,L-Alanine
+eco:b2530,IscS sulfur acceptor protein
+eco:b2530,IscS with bound sulfur
+eco:b2530,iscS
+eco:b2530,L-Cysteine
+eco:b2530,IscS sulfur acceptor protein
+eco:b2530,IscS with bound sulfur
+eco:b2530,L-Alanine
+eco:b2530,L-Cysteine
+eco:b2551,"5,10-Methylenetetrahydrofolate"
+eco:b2551,L-Serine
+eco:b2551,Glycine
+eco:b2551,"5,6,7,8-Tetrahydrofolate"
+eco:b2551,"5,10-Methylenetetrahydrofolate"
+eco:b2551,Glycine
+eco:b2551,glyA
+eco:b2551,L-Serine
+eco:b2551,"5,6,7,8-Tetrahydrofolate"
+eco:b3359,N-Succinyl-2-L-amino-6-oxoheptanedioate
+eco:b3359,"N-Succinyl-LL-2,6-diaminoheptanedioate"
+eco:b3359,2-Oxoglutarate
+eco:b3359,argD
+eco:b3359,"N-Succinyl-LL-2,6-diaminoheptanedioate"
+eco:b3359,L-Glutamate
+eco:b3359,N-Succinyl-2-L-amino-6-oxoheptanedioate
+eco:b3359,2-Oxoglutarate
+eco:b3359,L-Glutamate
+eco:b2935,D-Xylulose 5-phosphate
+eco:b2465,D-Xylulose 5-phosphate
+eco:b2935,alpha-D-Ribose 5-phosphate
+eco:b2465,alpha-D-Ribose 5-phosphate
+eco:b2935,Glyceraldehyde 3-phosphate
+eco:b2465,Glyceraldehyde 3-phosphate
+eco:b2935,Sedoheptulose 7-phosphate
+eco:b2465,Sedoheptulose 7-phosphate
+eco:b2935,D-Xylulose 5-phosphate
+eco:b2465,D-Xylulose 5-phosphate
+eco:b2935,tktA
+eco:b2465,tktA
+eco:b2935,tktB
+eco:b2465,tktB
+eco:b2935,Sedoheptulose 7-phosphate
+eco:b2465,Sedoheptulose 7-phosphate
+eco:b2935,Glyceraldehyde 3-phosphate
+eco:b2465,Glyceraldehyde 3-phosphate
+eco:b2935,alpha-D-Ribose 5-phosphate
+eco:b2465,alpha-D-Ribose 5-phosphate
+eco:b0088,UDP-N-acetylmuramoyl-L-alanyl-D-glutamate
+eco:b0088,ADP
+eco:b0088,UDP-N-acetylmuramoyl-L-alanine
+eco:b0088,Phosphate
+eco:b0088,ATP
+eco:b0088,D-Glutamate
+eco:b0088,Phosphate
+eco:b0088,murD
+eco:b0088,UDP-N-acetylmuramoyl-L-alanyl-D-glutamate
+eco:b0088,UDP-N-acetylmuramoyl-L-alanine
+eco:b0088,D-Glutamate
+eco:b0088,ADP
+eco:b0088,ATP
+eco:b3412,Methanol
+eco:b3412,Pimeloyl-[acyl-carrier protein]
+eco:b3412,bioH
+eco:b3412,Pimeloyl-[acyl-carrier protein]
+eco:b3412,Pimeloyl-[acyl-carrier protein] methyl ester
+eco:b3412,Pimeloyl-[acyl-carrier protein] methyl ester
+eco:b3412,Methanol
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,Octanoyl-CoA (n-C8:0CoA)
+eco:b0221,fadE
+eco:b0221,trans-Oct-2-enoyl-CoA
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,trans-Oct-2-enoyl-CoA
+eco:b0221,Octanoyl-CoA (n-C8:0CoA)
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b2215,Cu2+
+eco:b0241,Cu2+
+eco:b0929,Cu2+
+eco:b1377,Cu2+
+eco:b2215,Cu2+
+eco:b0241,Cu2+
+eco:b0929,Cu2+
+eco:b1377,Cu2+
+eco:b2215,Cu2+
+eco:b0241,Cu2+
+eco:b0929,Cu2+
+eco:b1377,Cu2+
+eco:b2215,Cu2+
+eco:b0241,Cu2+
+eco:b0929,Cu2+
+eco:b1377,Cu2+
+eco:b0031,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0031,"2,3,4,5-Tetrahydrodipicolinate"
+eco:b0031,Nicotinamide adenine dinucleotide phosphate
+eco:b0031,dapB
+eco:b0031,"2,3,4,5-Tetrahydrodipicolinate"
+eco:b0031,"2,3-Dihydrodipicolinate"
+eco:b0031,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0031,Nicotinamide adenine dinucleotide phosphate
+eco:b0031,"2,3-Dihydrodipicolinate"
+pyridoxine 5'-phosphate oxidase (anaerboic,Nicotinamide adenine dinucleotide - reduced
+pyridoxine 5'-phosphate oxidase (anaerboic,Pyridoxal 5'-phosphate
+pyridoxine 5'-phosphate oxidase (anaerboic,Pyridoxal 5'-phosphate
+pyridoxine 5'-phosphate oxidase (anaerboic,Pyridoxine 5'-phosphate
+pyridoxine 5'-phosphate oxidase (anaerboic,Nicotinamide adenine dinucleotide
+pyridoxine 5'-phosphate oxidase (anaerboic,Pyridoxine 5'-phosphate
+pyridoxine 5'-phosphate oxidase (anaerboic,Nicotinamide adenine dinucleotide
+pyridoxine 5'-phosphate oxidase (anaerboic,Nicotinamide adenine dinucleotide - reduced
+eco:b2320,2-Oxo-3-hydroxy-4-phosphobutanoate
+eco:b2320,4-Phospho-D-erythronate
+eco:b2320,Nicotinamide adenine dinucleotide - reduced
+eco:b2320,Nicotinamide adenine dinucleotide
+eco:b2320,2-Oxo-3-hydroxy-4-phosphobutanoate
+eco:b2320,Nicotinamide adenine dinucleotide - reduced
+eco:b2320,pdxB
+eco:b2320,4-Phospho-D-erythronate
+eco:b2320,Nicotinamide adenine dinucleotide
+eco:b0639,Diphosphate
+eco:b0639,ATP
+eco:b0639,Deamino-NAD+
+eco:b0639,Nicotinate D-ribonucleotide
+eco:b0639,Diphosphate
+eco:b0639,Deamino-NAD+
+eco:b0639,nadD
+eco:b0639,ATP
+eco:b0639,Nicotinate D-ribonucleotide
+eco:b3670,CO2
+eco:b3671,CO2
+eco:b0077,CO2
+eco:b0078,CO2
+eco:b3670,Pyruvate
+eco:b3671,Pyruvate
+eco:b0077,Pyruvate
+eco:b0078,Pyruvate
+eco:b3670,(S)-2-Aceto-2-hydroxybutanoate
+eco:b3671,(S)-2-Aceto-2-hydroxybutanoate
+eco:b0077,(S)-2-Aceto-2-hydroxybutanoate
+eco:b0078,(S)-2-Aceto-2-hydroxybutanoate
+eco:b3670,ilvH
+eco:b3671,ilvH
+eco:b0077,ilvH
+eco:b0078,ilvH
+eco:b3670,2-Oxobutanoate
+eco:b3671,2-Oxobutanoate
+eco:b0077,2-Oxobutanoate
+eco:b0078,2-Oxobutanoate
+eco:b3670,ilvN
+eco:b3671,ilvN
+eco:b0077,ilvN
+eco:b0078,ilvN
+eco:b3670,ilvB
+eco:b3671,ilvB
+eco:b0077,ilvB
+eco:b0078,ilvB
+eco:b3670,CO2
+eco:b3671,CO2
+eco:b0077,CO2
+eco:b0078,CO2
+eco:b3670,ilvI
+eco:b3671,ilvI
+eco:b0077,ilvI
+eco:b0078,ilvI
+eco:b3670,Pyruvate
+eco:b3671,Pyruvate
+eco:b0077,Pyruvate
+eco:b0078,Pyruvate
+eco:b3670,(S)-2-Aceto-2-hydroxybutanoate
+eco:b3671,(S)-2-Aceto-2-hydroxybutanoate
+eco:b0077,(S)-2-Aceto-2-hydroxybutanoate
+eco:b0078,(S)-2-Aceto-2-hydroxybutanoate
+eco:b3670,2-Oxobutanoate
+eco:b3671,2-Oxobutanoate
+eco:b0077,2-Oxobutanoate
+eco:b0078,2-Oxobutanoate
+eco:b0159,5'-deoxyribose
+eco:b0159,Adenine
+eco:b0159,Adenine
+eco:b0159,5'-Deoxyadenosine
+eco:b0159,mtnN
+eco:b0159,5'-Deoxyadenosine
+eco:b0159,5'-deoxyribose
+eco:b2342,Tetradecanoyl-CoA (n-C14:0CoA)
+eco:b3845,Tetradecanoyl-CoA (n-C14:0CoA)
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2342,3-Oxohexadecanoyl-CoA
+eco:b3845,3-Oxohexadecanoyl-CoA
+eco:b2342,fadI
+eco:b3845,fadI
+eco:b2342,fadA
+eco:b3845,fadA
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b2342,3-Oxohexadecanoyl-CoA
+eco:b3845,3-Oxohexadecanoyl-CoA
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2342,Tetradecanoyl-CoA (n-C14:0CoA)
+eco:b3845,Tetradecanoyl-CoA (n-C14:0CoA)
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b1761,Nicotinamide adenine dinucleotide phosphate
+eco:b1761,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1761,L-Glutamate
+eco:b1761,Ammonium
+eco:b1761,gdhA
+eco:b1761,Nicotinamide adenine dinucleotide phosphate
+eco:b1761,2-Oxoglutarate
+eco:b1761,Ammonium
+eco:b1761,L-Glutamate
+eco:b1761,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1761,2-Oxoglutarate
+eco:b0073,Nicotinamide adenine dinucleotide
+eco:b0073,Nicotinamide adenine dinucleotide - reduced
+eco:b0073,3-Carboxy-4-methyl-2-oxopentanoate
+eco:b0073,leuB
+eco:b0073,Nicotinamide adenine dinucleotide - reduced
+eco:b0073,3-Carboxy-2-hydroxy-4-methylpentanoate
+eco:b0073,Nicotinamide adenine dinucleotide
+eco:b0073,3-Carboxy-4-methyl-2-oxopentanoate
+eco:b0073,3-Carboxy-2-hydroxy-4-methylpentanoate
+eco:b3633,KDO-lipid IV(A)
+eco:b3633,KDO(2)-lipid IV(A)
+eco:b3633,CMP
+eco:b3633,waaA
+eco:b3633,KDO(2)-lipid IV(A)
+eco:b3633,CMP-3-deoxy-D-manno-octulosonate
+eco:b3633,KDO-lipid IV(A)
+eco:b3633,CMP
+eco:b3633,CMP-3-deoxy-D-manno-octulosonate
+eco:b4039,Pyruvate
+eco:b4039,ubiC
+eco:b4039,4-Hydroxybenzoate
+eco:b4039,chorismate
+eco:b4039,4-Hydroxybenzoate
+eco:b4039,chorismate
+eco:b4039,Pyruvate
+eco:b3940,L-Homoserine
+eco:b0002,L-Homoserine
+eco:b3940,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0002,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3940,Nicotinamide adenine dinucleotide phosphate
+eco:b0002,Nicotinamide adenine dinucleotide phosphate
+eco:b3940,metL
+eco:b0002,metL
+eco:b3940,L-Aspartate 4-semialdehyde
+eco:b0002,L-Aspartate 4-semialdehyde
+eco:b3940,L-Homoserine
+eco:b0002,L-Homoserine
+eco:b3940,thrA
+eco:b0002,thrA
+eco:b3940,Nicotinamide adenine dinucleotide phosphate
+eco:b0002,Nicotinamide adenine dinucleotide phosphate
+eco:b3940,L-Aspartate 4-semialdehyde
+eco:b0002,L-Aspartate 4-semialdehyde
+eco:b3940,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0002,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0241,Co2+
+eco:b0929,Co2+
+eco:b1377,Co2+
+eco:b2215,Co2+
+eco:b0241,Co2+
+eco:b0929,Co2+
+eco:b1377,Co2+
+eco:b2215,Co2+
+eco:b0241,Co2+
+eco:b0929,Co2+
+eco:b1377,Co2+
+eco:b2215,Co2+
+eco:b0241,Co2+
+eco:b0929,Co2+
+eco:b1377,Co2+
+eco:b2215,Co2+
+eco:b1094,Coenzyme A
+eco:b1092,Coenzyme A
+eco:b1094,Malonyl-CoA
+eco:b1092,Malonyl-CoA
+eco:b1094,Malonyl-[acyl-carrier protein]
+eco:b1092,Malonyl-[acyl-carrier protein]
+eco:b1094,fabD
+eco:b1092,fabD
+eco:b1094,acyl carrier protein
+eco:b1092,acyl carrier protein
+eco:b1094,Coenzyme A
+eco:b1092,Coenzyme A
+eco:b1094,acpP
+eco:b1092,acpP
+eco:b1094,Malonyl-[acyl-carrier protein]
+eco:b1092,Malonyl-[acyl-carrier protein]
+eco:b1094,acyl carrier protein
+eco:b1092,acyl carrier protein
+eco:b1094,Malonyl-CoA
+eco:b1092,Malonyl-CoA
+eco:b2528,IscU scaffold protein
+eco:b2529,IscU scaffold protein
+eco:b2528,IscU with bound [4Fe-4S] cluster
+eco:b2529,IscU with bound [4Fe-4S] cluster
+eco:b2528,nifU
+eco:b2529,nifU
+eco:b2528,[4Fe-4S] iron-sulfur cluster
+eco:b2529,[4Fe-4S] iron-sulfur cluster
+eco:b2528,IscU scaffold protein
+eco:b2529,IscU scaffold protein
+eco:b2528,iscA
+eco:b2529,iscA
+eco:b2528,[4Fe-4S] iron-sulfur cluster
+eco:b2529,[4Fe-4S] iron-sulfur cluster
+eco:b2528,IscU with bound [4Fe-4S] cluster
+eco:b2529,IscU with bound [4Fe-4S] cluster
+eco:b0415,"3,4-dihydroxy-2-butanone 4-phosphate"
+eco:b1662,"3,4-dihydroxy-2-butanone 4-phosphate"
+eco:b0415,Phosphate
+eco:b1662,Phosphate
+eco:b0415,"6,7-Dimethyl-8-(1-D-ribityl)lumazine"
+eco:b1662,"6,7-Dimethyl-8-(1-D-ribityl)lumazine"
+eco:b0415,ribE
+eco:b1662,ribE
+eco:b0415,Phosphate
+eco:b1662,Phosphate
+eco:b0415,4-(1-D-Ribitylamino)-5-aminouracil
+eco:b1662,4-(1-D-Ribitylamino)-5-aminouracil
+eco:b0415,"3,4-dihydroxy-2-butanone 4-phosphate"
+eco:b1662,"3,4-dihydroxy-2-butanone 4-phosphate"
+eco:b0415,"6,7-Dimethyl-8-(1-D-ribityl)lumazine"
+eco:b1662,"6,7-Dimethyl-8-(1-D-ribityl)lumazine"
+eco:b0415,4-(1-D-Ribitylamino)-5-aminouracil
+eco:b1662,4-(1-D-Ribitylamino)-5-aminouracil
+eco:b2472,Succinate
+eco:b2472,dapE
+eco:b2472,"LL-2,6-Diaminoheptanedioate"
+eco:b2472,"N-Succinyl-LL-2,6-diaminoheptanedioate"
+eco:b2472,"LL-2,6-Diaminoheptanedioate"
+eco:b2472,"N-Succinyl-LL-2,6-diaminoheptanedioate"
+eco:b2472,Succinate
+eco:b3974,ADP
+eco:b3974,(R)-Pantothenate
+eco:b3974,ATP
+eco:b3974,D-4'-Phosphopantothenate
+eco:b3974,ADP
+eco:b3974,coaA
+eco:b3974,ATP
+eco:b3974,D-4'-Phosphopantothenate
+eco:b3974,(R)-Pantothenate
+eco:b3639,CMP
+eco:b3639,N-((R)-4-Phosphopantothenoyl)-L-cysteine
+eco:b3639,Diphosphate
+eco:b3639,CTP
+eco:b3639,L-Cysteine
+eco:b3639,Diphosphate
+eco:b3639,D-4'-Phosphopantothenate
+eco:b3639,coaBC
+eco:b3639,N-((R)-4-Phosphopantothenoyl)-L-cysteine
+eco:b3639,L-Cysteine
+eco:b3639,CMP
+eco:b3639,D-4'-Phosphopantothenate
+eco:b3639,CTP
+eco:b3617,Acetyl-CoA
+eco:b3617,Coenzyme A
+eco:b3617,Glycine
+eco:b3617,kbl
+eco:b3617,L-2-Amino-3-oxobutanoate
+eco:b3617,Coenzyme A
+eco:b3617,Glycine
+eco:b3617,Acetyl-CoA
+eco:b3617,L-2-Amino-3-oxobutanoate
+Dihydroneopterin monophosphate dephosphorylase,Phosphate
+Dihydroneopterin monophosphate dephosphorylase,Dihydroneopterin
+Dihydroneopterin monophosphate dephosphorylase,Phosphate
+Dihydroneopterin monophosphate dephosphorylase,Dihydroneopterin monophosphate
+Dihydroneopterin monophosphate dephosphorylase,Dihydroneopterin
+Dihydroneopterin monophosphate dephosphorylase,Dihydroneopterin monophosphate
+eco:b3744,AMP
+eco:b3744,Diphosphate
+eco:b3744,L-Asparagine
+eco:b3744,ATP
+eco:b3744,L-Aspartate
+eco:b3744,Ammonium
+eco:b3744,Diphosphate
+eco:b3744,asnA
+eco:b3744,Ammonium
+eco:b3744,L-Asparagine
+eco:b3744,AMP
+eco:b3744,L-Aspartate
+eco:b3744,ATP
+eco:b2297,Acetyl-CoA
+eco:b2458,Acetyl-CoA
+eco:b2297,Coenzyme A
+eco:b2458,Coenzyme A
+eco:b2297,Phosphate
+eco:b2458,Phosphate
+eco:b2297,pta
+eco:b2458,pta
+eco:b2297,Acetyl phosphate
+eco:b2458,Acetyl phosphate
+eco:b2297,Acetyl-CoA
+eco:b2458,Acetyl-CoA
+eco:b2297,eutD
+eco:b2458,eutD
+eco:b2297,Phosphate
+eco:b2458,Phosphate
+eco:b2297,Acetyl phosphate
+eco:b2458,Acetyl phosphate
+eco:b2297,Coenzyme A
+eco:b2458,Coenzyme A
+eco:b2464,Glyceraldehyde 3-phosphate
+eco:b0008,Glyceraldehyde 3-phosphate
+eco:b2464,Sedoheptulose 7-phosphate
+eco:b0008,Sedoheptulose 7-phosphate
+eco:b2464,D-Erythrose 4-phosphate
+eco:b0008,D-Erythrose 4-phosphate
+eco:b2464,talB
+eco:b0008,talB
+eco:b2464,D-Fructose 6-phosphate
+eco:b0008,D-Fructose 6-phosphate
+eco:b2464,Sedoheptulose 7-phosphate
+eco:b0008,Sedoheptulose 7-phosphate
+eco:b2464,talA
+eco:b0008,talA
+eco:b2464,D-Erythrose 4-phosphate
+eco:b0008,D-Erythrose 4-phosphate
+eco:b2464,Glyceraldehyde 3-phosphate
+eco:b0008,Glyceraldehyde 3-phosphate
+eco:b2464,D-Fructose 6-phosphate
+eco:b0008,D-Fructose 6-phosphate
+eco:b0071,3-Carboxy-2-hydroxy-4-methylpentanoate
+eco:b0072,3-Carboxy-2-hydroxy-4-methylpentanoate
+eco:b0071,leuD
+eco:b0072,leuD
+eco:b0071,leuC
+eco:b0072,leuC
+eco:b0071,2-Isopropylmaleate
+eco:b0072,2-Isopropylmaleate
+eco:b0071,2-Isopropylmaleate
+eco:b0072,2-Isopropylmaleate
+eco:b0071,3-Carboxy-2-hydroxy-4-methylpentanoate
+eco:b0072,3-Carboxy-2-hydroxy-4-methylpentanoate
+eco:b0945,Ubiquinol-8
+eco:b0945,Orotate
+eco:b0945,(S)-Dihydroorotate
+eco:b0945,Ubiquinone-8
+eco:b0945,Orotate
+eco:b0945,pyrD
+eco:b0945,Ubiquinol-8
+eco:b0945,(S)-Dihydroorotate
+eco:b0945,Ubiquinone-8
+eco:b1096,4-Aminobenzoate
+eco:b1096,4-amino-4-deoxychorismate
+eco:b1096,Pyruvate
+eco:b1096,Pyruvate
+eco:b1096,pabC
+eco:b1096,4-Aminobenzoate
+eco:b1096,4-amino-4-deoxychorismate
+eco:b0221,Hexanoyl-CoA (n-C6:0CoA)
+eco:b0221,trans-Hex-2-enoyl-CoA
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,Hexanoyl-CoA (n-C6:0CoA)
+eco:b0221,fadE
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,trans-Hex-2-enoyl-CoA
+eco:b0241,CO2
+eco:b0929,CO2
+eco:b1377,CO2
+eco:b2215,CO2
+eco:b0241,CO2
+eco:b0929,CO2
+eco:b1377,CO2
+eco:b2215,CO2
+eco:b0241,CO2
+eco:b0929,CO2
+eco:b1377,CO2
+eco:b2215,CO2
+eco:b1288,Nicotinamide adenine dinucleotide phosphate
+eco:b1288,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1288,Pimeloyl-[acyl-carrier protein] methyl ester
+eco:b1288,fabI
+eco:b1288,Enoylpimeloyl-[acyl-carrier protein] methyl ester
+eco:b1288,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1288,Pimeloyl-[acyl-carrier protein] methyl ester
+eco:b1288,Nicotinamide adenine dinucleotide phosphate
+eco:b1288,Enoylpimeloyl-[acyl-carrier protein] methyl ester
+eco:b0029,Nicotinamide adenine dinucleotide
+eco:b0029,Isopentenyl diphosphate
+eco:b0029,1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate
+eco:b0029,Nicotinamide adenine dinucleotide - reduced
+eco:b0029,Isopentenyl diphosphate
+eco:b0029,ispH
+eco:b0029,Nicotinamide adenine dinucleotide
+eco:b0029,1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate
+eco:b0029,Nicotinamide adenine dinucleotide - reduced
+eco:b2599,Prephenate
+eco:b2600,Prephenate
+eco:b2599,pheA
+eco:b2600,pheA
+eco:b2599,chorismate
+eco:b2600,chorismate
+eco:b2599,tyrA
+eco:b2600,tyrA
+eco:b2599,chorismate
+eco:b2600,chorismate
+eco:b2599,Prephenate
+eco:b2600,Prephenate
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2342,Octanoyl-CoA (n-C8:0CoA)
+eco:b3845,Octanoyl-CoA (n-C8:0CoA)
+eco:b2342,3-Oxodecanoyl-CoA
+eco:b3845,3-Oxodecanoyl-CoA
+eco:b2342,fadA
+eco:b3845,fadA
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b2342,fadI
+eco:b3845,fadI
+eco:b2342,3-Oxodecanoyl-CoA
+eco:b3845,3-Oxodecanoyl-CoA
+eco:b2342,Octanoyl-CoA (n-C8:0CoA)
+eco:b3845,Octanoyl-CoA (n-C8:0CoA)
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b0242,L-Glutamate 5-phosphate
+eco:b0242,L-Glutamate
+eco:b0242,ADP
+eco:b0242,L-Glutamate 5-phosphate
+eco:b0242,ATP
+eco:b0242,proB
+eco:b0242,L-Glutamate
+eco:b0242,ATP
+eco:b0242,ADP
+eco:b0091,UDP-N-acetylmuramoyl-L-alanine
+eco:b0091,Phosphate
+eco:b0091,UDP-N-acetylmuramate
+eco:b0091,ADP
+eco:b0091,murC
+eco:b0091,ATP
+eco:b0091,L-Alanine
+eco:b0091,Phosphate
+eco:b0091,ADP
+eco:b0091,UDP-N-acetylmuramoyl-L-alanine
+eco:b0091,ATP
+eco:b0091,UDP-N-acetylmuramate
+eco:b0091,L-Alanine
+eco:b3633,KDO-lipid IV(A)
+eco:b3633,CMP
+eco:b3633,CMP-3-deoxy-D-manno-octulosonate
+eco:b3633,"2,3,2'3'-Tetrakis(beta-hydroxymyristoyl)-D-glucosaminyl-1,6-beta-D-glucosamine 1,4'-bisphosphate"
+eco:b3633,CMP
+eco:b3633,waaA
+eco:b3633,KDO-lipid IV(A)
+eco:b3633,CMP-3-deoxy-D-manno-octulosonate
+eco:b3633,"2,3,2'3'-Tetrakis(beta-hydroxymyristoyl)-D-glucosaminyl-1,6-beta-D-glucosamine 1,4'-bisphosphate"
+eco:b1740,Diphosphate
+eco:b1740,AMP
+eco:b1740,Nicotinamide adenine dinucleotide
+eco:b1740,ATP
+eco:b1740,Ammonium
+eco:b1740,Deamino-NAD+
+eco:b1740,Diphosphate
+eco:b1740,Nicotinamide adenine dinucleotide
+eco:b1740,nadE
+eco:b1740,Ammonium
+eco:b1740,AMP
+eco:b1740,Deamino-NAD+
+eco:b1740,ATP
+eco:b0241,Chloride
+eco:b0929,Chloride
+eco:b1377,Chloride
+eco:b2215,Chloride
+eco:b0241,Chloride
+eco:b0929,Chloride
+eco:b1377,Chloride
+eco:b2215,Chloride
+eco:b0241,Chloride
+eco:b0929,Chloride
+eco:b1377,Chloride
+eco:b2215,Chloride
+eco:b0241,Chloride
+eco:b0929,Chloride
+eco:b1377,Chloride
+eco:b2215,Chloride
+eco:b2021,3-(Imidazol-4-yl)-2-oxopropyl phosphate
+eco:b2021,L-Histidinol phosphate
+eco:b2021,2-Oxoglutarate
+eco:b2021,hisC
+eco:b2021,L-Histidinol phosphate
+eco:b2021,L-Glutamate
+eco:b2021,3-(Imidazol-4-yl)-2-oxopropyl phosphate
+eco:b2021,2-Oxoglutarate
+eco:b2021,L-Glutamate
+eco:b0025,FMN
+eco:b0025,ADP
+eco:b0025,ATP
+eco:b0025,Riboflavin
+eco:b0025,ADP
+eco:b0025,ribF
+eco:b0025,FMN
+eco:b0025,ATP
+eco:b0025,Riboflavin
+eco:b0777,Malonyl-CoA
+eco:b0777,malonyl-CoA methyl ester
+eco:b0777,S-Adenosyl-L-homocysteine
+eco:b0777,bioC
+eco:b0777,malonyl-CoA methyl ester
+eco:b0777,S-Adenosyl-L-methionine
+eco:b0777,Malonyl-CoA
+eco:b0777,S-Adenosyl-L-homocysteine
+eco:b0777,S-Adenosyl-L-methionine
+eco:b3634,Dephospho-CoA
+eco:b3634,Diphosphate
+eco:b3634,coaD
+eco:b3634,Pantetheine 4'-phosphate
+eco:b3634,ATP
+eco:b3634,Dephospho-CoA
+eco:b3634,Pantetheine 4'-phosphate
+eco:b3634,Diphosphate
+eco:b3634,ATP
+eco:b2103,2-Methyl-4-amino-5-hydroxymethylpyrimidine diphosphate
+eco:b2103,ATP
+eco:b2103,ADP
+eco:b2103,thiD
+eco:b2103,4-Amino-2-methyl-5-phosphomethylpyrimidine
+eco:b2103,ATP
+eco:b2103,ADP
+eco:b2103,2-Methyl-4-amino-5-hydroxymethylpyrimidine diphosphate
+eco:b2103,4-Amino-2-methyl-5-phosphomethylpyrimidine
+eco:b3809,"LL-2,6-Diaminoheptanedioate"
+eco:b3809,"meso-2,6-Diaminoheptanedioate"
+eco:b3809,"LL-2,6-Diaminoheptanedioate"
+eco:b3809,dapF
+eco:b3809,"meso-2,6-Diaminoheptanedioate"
+eco:b2529,IscU with bound [4Fe-4S] cluster
+eco:b2529,IscU with two bound [2Fe-2S] clusters
+eco:b2529,Flavin adenine dinucleotide oxidized
+eco:b2529,IscU with bound [4Fe-4S] cluster
+eco:b2529,Flavin adenine dinucleotide reduced
+eco:b2529,nifU
+eco:b2529,IscU with two bound [2Fe-2S] clusters
+eco:b2529,Flavin adenine dinucleotide reduced
+eco:b2529,Flavin adenine dinucleotide oxidized
+eco:b2827,"7,8-Dihydrofolate"
+eco:b2827,dTMP
+eco:b2827,thyA
+eco:b2827,"5,10-Methylenetetrahydrofolate"
+eco:b2827,dUMP
+eco:b2827,"7,8-Dihydrofolate"
+eco:b2827,"5,10-Methylenetetrahydrofolate"
+eco:b2827,dTMP
+eco:b2827,dUMP
+eco:b4025,D-Fructose 6-phosphate
+eco:b4025,D-Fructose 6-phosphate
+eco:b4025,D-Glucose 6-phosphate
+eco:b4025,pgi
+eco:b4025,D-Glucose 6-phosphate
+eco:b3608,Nicotinamide adenine dinucleotide phosphate
+eco:b3608,Dihydroxyacetone phosphate
+eco:b3608,Glycerol 3-phosphate
+eco:b3608,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3608,Nicotinamide adenine dinucleotide phosphate
+eco:b3608,Glycerol 3-phosphate
+eco:b3608,gpsA
+eco:b3608,Dihydroxyacetone phosphate
+eco:b3608,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3846,(S)-3-Hydroxybutanoyl-CoA
+eco:b2341,(S)-3-Hydroxybutanoyl-CoA
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,Acetoacetyl-CoA
+eco:b2341,Acetoacetyl-CoA
+eco:b3846,(S)-3-Hydroxybutanoyl-CoA
+eco:b2341,(S)-3-Hydroxybutanoyl-CoA
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,Acetoacetyl-CoA
+eco:b2341,Acetoacetyl-CoA
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b0907,L-Glutamate
+eco:b0907,O-Phospho-L-serine
+eco:b0907,2-Oxoglutarate
+eco:b0907,serC
+eco:b0907,O-Phospho-L-serine
+eco:b0907,3-Phosphohydroxypyruvate
+eco:b0907,L-Glutamate
+eco:b0907,2-Oxoglutarate
+eco:b0907,3-Phosphohydroxypyruvate
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,Palmitoyl-CoA (n-C16:0CoA)
+eco:b0221,fadE
+eco:b0221,trans-Hexadec-2-enoyl-CoA
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,trans-Hexadec-2-enoyl-CoA
+eco:b0221,Palmitoyl-CoA (n-C16:0CoA)
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b3360,L-Glutamate
+eco:b1812,L-Glutamate
+eco:b3360,L-Glutamine
+eco:b1812,L-Glutamine
+eco:b3360,4-amino-4-deoxychorismate
+eco:b1812,4-amino-4-deoxychorismate
+eco:b3360,pabA
+eco:b1812,pabA
+eco:b3360,chorismate
+eco:b1812,chorismate
+eco:b3360,pabB
+eco:b1812,pabB
+eco:b3360,4-amino-4-deoxychorismate
+eco:b1812,4-amino-4-deoxychorismate
+eco:b3360,L-Glutamine
+eco:b1812,L-Glutamine
+eco:b3360,L-Glutamate
+eco:b1812,L-Glutamate
+eco:b3360,chorismate
+eco:b1812,chorismate
+eco:b0728,Phosphate
+eco:b0729,Phosphate
+eco:b0728,ADP
+eco:b0729,ADP
+eco:b0728,Succinyl-CoA
+eco:b0729,Succinyl-CoA
+eco:b0728,Coenzyme A
+eco:b0729,Coenzyme A
+eco:b0728,Succinate
+eco:b0729,Succinate
+eco:b0728,sucC
+eco:b0729,sucC
+eco:b0728,ATP
+eco:b0729,ATP
+eco:b0728,sucD
+eco:b0729,sucD
+eco:b0728,Phosphate
+eco:b0729,Phosphate
+eco:b0728,ADP
+eco:b0729,ADP
+eco:b0728,Succinyl-CoA
+eco:b0729,Succinyl-CoA
+eco:b0728,Coenzyme A
+eco:b0729,Coenzyme A
+eco:b0728,Succinate
+eco:b0729,Succinate
+eco:b0728,ATP
+eco:b0729,ATP
+eco:b0241,Calcium
+eco:b0929,Calcium
+eco:b1377,Calcium
+eco:b2215,Calcium
+eco:b0241,Calcium
+eco:b0929,Calcium
+eco:b1377,Calcium
+eco:b2215,Calcium
+eco:b0241,Calcium
+eco:b0929,Calcium
+eco:b1377,Calcium
+eco:b2215,Calcium
+eco:b0241,Calcium
+eco:b0929,Calcium
+eco:b1377,Calcium
+eco:b2215,Calcium
+eco:b1288,Nicotinamide adenine dinucleotide phosphate
+eco:b1288,Enoylglutaryl-[acyl-carrier protein] methyl ester
+eco:b1288,Glutaryl-[acyl-carrier protein] methyl ester
+eco:b1288,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1288,Nicotinamide adenine dinucleotide phosphate
+eco:b1288,Glutaryl-[acyl-carrier protein] methyl ester
+eco:b1288,fabI
+eco:b1288,Enoylglutaryl-[acyl-carrier protein] methyl ester
+eco:b1288,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0029,Nicotinamide adenine dinucleotide - reduced
+eco:b0029,Nicotinamide adenine dinucleotide
+eco:b0029,Dimethylallyl diphosphate
+eco:b0029,ispH
+eco:b0029,Nicotinamide adenine dinucleotide
+eco:b0029,1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate
+eco:b0029,Nicotinamide adenine dinucleotide - reduced
+eco:b0029,Dimethylallyl diphosphate
+eco:b0029,1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate
+eco:b0175,"1,2-dihexadec-9-enoyl-sn-glycerol 3-phosphate"
+eco:b0175,Diphosphate
+eco:b0175,"CDP-1,2-dihexadec-9-enoylglycerol"
+eco:b0175,cdsA
+eco:b0175,Diphosphate
+eco:b0175,CTP
+eco:b0175,"1,2-dihexadec-9-enoyl-sn-glycerol 3-phosphate"
+eco:b0175,"CDP-1,2-dihexadec-9-enoylglycerol"
+eco:b0175,CTP
+eco:b3172,Diphosphate
+eco:b3172,AMP
+eco:b3172,L-Citrulline
+eco:b3172,N(omega)-(L-Arginino)succinate
+eco:b3172,L-Aspartate
+eco:b3172,ATP
+eco:b3172,N(omega)-(L-Arginino)succinate
+eco:b3172,argG
+eco:b3172,Diphosphate
+eco:b3172,L-Citrulline
+eco:b3172,ATP
+eco:b3172,AMP
+eco:b3172,L-Aspartate
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2342,Hexanoyl-CoA (n-C6:0CoA)
+eco:b3845,Hexanoyl-CoA (n-C6:0CoA)
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b2342,3-Oxooctanoyl-CoA
+eco:b3845,3-Oxooctanoyl-CoA
+eco:b2342,fadA
+eco:b3845,fadA
+eco:b2342,fadI
+eco:b3845,fadI
+eco:b2342,Hexanoyl-CoA (n-C6:0CoA)
+eco:b3845,Hexanoyl-CoA (n-C6:0CoA)
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2342,3-Oxooctanoyl-CoA
+eco:b3845,3-Oxooctanoyl-CoA
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b0090,UDP
+eco:b0090,"Undecaprenyl-diphospho-N-acetylmuramoyl-(N-acetylglucosamine)-L-ala-D-glu-meso-2,6-diaminopimeloyl-D-ala-D-ala"
+eco:b0090,UDP-N-acetyl-D-glucosamine
+eco:b0090,"Undecaprenyl-diphospho-N-acetylmuramoyl-L-alanyl-D-glutamyl-meso-2,6-diaminopimeloyl-D-alanyl-D-alanine"
+eco:b0090,"Undecaprenyl-diphospho-N-acetylmuramoyl-(N-acetylglucosamine)-L-ala-D-glu-meso-2,6-diaminopimeloyl-D-ala-D-ala"
+eco:b0090,murG
+eco:b0090,UDP
+eco:b0090,UDP-N-acetyl-D-glucosamine
+eco:b0090,"Undecaprenyl-diphospho-N-acetylmuramoyl-L-alanyl-D-glutamyl-meso-2,6-diaminopimeloyl-D-alanyl-D-alanine"
+2-Octaprenylphenol hydroxylase (anaerobic),Phosphate
+2-Octaprenylphenol hydroxylase (anaerobic),Nicotinamide adenine dinucleotide - reduced
+2-Octaprenylphenol hydroxylase (anaerobic),2-Octaprenyl-6-hydroxyphenol
+2-Octaprenylphenol hydroxylase (anaerobic),ADP
+2-Octaprenylphenol hydroxylase (anaerobic),2-Octaprenylphenol
+2-Octaprenylphenol hydroxylase (anaerobic),Nicotinamide adenine dinucleotide
+2-Octaprenylphenol hydroxylase (anaerobic),ATP
+2-Octaprenylphenol hydroxylase (anaerobic),Nicotinamide adenine dinucleotide - reduced
+2-Octaprenylphenol hydroxylase (anaerobic),ADP
+2-Octaprenylphenol hydroxylase (anaerobic),Phosphate
+2-Octaprenylphenol hydroxylase (anaerobic),Nicotinamide adenine dinucleotide
+2-Octaprenylphenol hydroxylase (anaerobic),2-Octaprenyl-6-hydroxyphenol
+2-Octaprenylphenol hydroxylase (anaerobic),ATP
+2-Octaprenylphenol hydroxylase (anaerobic),2-Octaprenylphenol
+eco:b2601,Phosphoenolpyruvate
+eco:b0754,Phosphoenolpyruvate
+eco:b1704,Phosphoenolpyruvate
+eco:b2601,Phosphate
+eco:b0754,Phosphate
+eco:b1704,Phosphate
+eco:b2601,2-Dehydro-3-deoxy-D-arabino-heptonate 7-phosphate
+eco:b0754,2-Dehydro-3-deoxy-D-arabino-heptonate 7-phosphate
+eco:b1704,2-Dehydro-3-deoxy-D-arabino-heptonate 7-phosphate
+eco:b2601,aroG
+eco:b0754,aroG
+eco:b1704,aroG
+eco:b2601,aroF
+eco:b0754,aroF
+eco:b1704,aroF
+eco:b2601,D-Erythrose 4-phosphate
+eco:b0754,D-Erythrose 4-phosphate
+eco:b1704,D-Erythrose 4-phosphate
+eco:b2601,Phosphate
+eco:b0754,Phosphate
+eco:b1704,Phosphate
+eco:b2601,aroH
+eco:b0754,aroH
+eco:b1704,aroH
+eco:b2601,D-Erythrose 4-phosphate
+eco:b0754,D-Erythrose 4-phosphate
+eco:b1704,D-Erythrose 4-phosphate
+eco:b2601,2-Dehydro-3-deoxy-D-arabino-heptonate 7-phosphate
+eco:b0754,2-Dehydro-3-deoxy-D-arabino-heptonate 7-phosphate
+eco:b1704,2-Dehydro-3-deoxy-D-arabino-heptonate 7-phosphate
+eco:b2601,Phosphoenolpyruvate
+eco:b0754,Phosphoenolpyruvate
+eco:b1704,Phosphoenolpyruvate
+eco:b2022,Phosphate
+eco:b2022,hisB
+eco:b2022,L-Histidinol
+eco:b2022,L-Histidinol phosphate
+eco:b2022,L-Histidinol
+eco:b2022,L-Histidinol phosphate
+eco:b2022,Phosphate
+eco:b2615,Nicotinamide adenine dinucleotide phosphate
+eco:b2615,Nicotinamide adenine dinucleotide
+eco:b2615,ADP
+eco:b2615,Nicotinamide adenine dinucleotide phosphate
+eco:b2615,ATP
+eco:b2615,ppnK
+eco:b2615,Nicotinamide adenine dinucleotide
+eco:b2615,ATP
+eco:b2615,ADP
+eco:b3612,D-Glycerate 2-phosphate
+eco:b4395,D-Glycerate 2-phosphate
+eco:b0755,D-Glycerate 2-phosphate
+eco:b3612,gpmA
+eco:b4395,gpmA
+eco:b0755,gpmA
+eco:b3612,3-Phospho-D-glycerate
+eco:b4395,3-Phospho-D-glycerate
+eco:b0755,3-Phospho-D-glycerate
+eco:b3612,D-Glycerate 2-phosphate
+eco:b4395,D-Glycerate 2-phosphate
+eco:b0755,D-Glycerate 2-phosphate
+eco:b3612,gpmB
+eco:b4395,gpmB
+eco:b0755,gpmB
+eco:b3612,gpmI
+eco:b4395,gpmI
+eco:b0755,gpmI
+eco:b3612,3-Phospho-D-glycerate
+eco:b4395,3-Phospho-D-glycerate
+eco:b0755,3-Phospho-D-glycerate
+eco:b2528,IscU scaffold protein
+eco:b2529,IscU scaffold protein
+eco:b2528,[2Fe-2S] iron-sulfur cluster
+eco:b2529,[2Fe-2S] iron-sulfur cluster
+eco:b2528,nifU
+eco:b2529,nifU
+eco:b2528,IscU with bound [2Fe-2S] cluster
+eco:b2529,IscU with bound [2Fe-2S] cluster
+eco:b2528,[2Fe-2S] iron-sulfur cluster
+eco:b2529,[2Fe-2S] iron-sulfur cluster
+eco:b2528,iscA
+eco:b2529,iscA
+eco:b2528,IscU scaffold protein
+eco:b2529,IscU scaffold protein
+eco:b2528,IscU with bound [2Fe-2S] cluster
+eco:b2529,IscU with bound [2Fe-2S] cluster
+eco:b1281,UMP
+eco:b1281,Orotidine 5'-phosphate
+eco:b1281,CO2
+eco:b1281,CO2
+eco:b1281,pyrF
+eco:b1281,UMP
+eco:b1281,Orotidine 5'-phosphate
+eco:b2838,CO2
+eco:b2838,L-Lysine
+eco:b2838,lysA
+eco:b2838,L-Lysine
+eco:b2838,"meso-2,6-Diaminoheptanedioate"
+eco:b2838,"meso-2,6-Diaminoheptanedioate"
+eco:b2838,CO2
+malate oxidase,O2
+malate oxidase,L-Malate
+malate oxidase,Hydrogen peroxide
+malate oxidase,Oxaloacetate
+malate oxidase,Oxaloacetate
+malate oxidase,O2
+malate oxidase,L-Malate
+malate oxidase,Hydrogen peroxide
+eco:b0004,L-Threonine
+eco:b0004,O-Phospho-L-homoserine
+eco:b0004,Phosphate
+eco:b0004,Phosphate
+eco:b0004,thrC
+eco:b0004,L-Threonine
+eco:b0004,O-Phospho-L-homoserine
+eco:b0750,Iminoaspartate
+eco:b0750,Quinolinate
+eco:b0750,Phosphate
+eco:b0750,nadA
+eco:b0750,Quinolinate
+eco:b0750,Dihydroxyacetone phosphate
+eco:b0750,Iminoaspartate
+eco:b0750,Phosphate
+eco:b0750,Dihydroxyacetone phosphate
+eco:b2779,D-Glycerate 2-phosphate
+eco:b2779,Phosphoenolpyruvate
+eco:b2779,Phosphoenolpyruvate
+eco:b2779,D-Glycerate 2-phosphate
+eco:b2779,eno
+eco:b1094,1-hexadec-9-enoyl-sn-glycerol 3-phosphate
+eco:b4041,1-hexadec-9-enoyl-sn-glycerol 3-phosphate
+eco:b1094,cis-hexadec-9-enoyl-[acyl-carrier protein] (n-C16:1)
+eco:b4041,cis-hexadec-9-enoyl-[acyl-carrier protein] (n-C16:1)
+eco:b1094,acyl carrier protein
+eco:b4041,acyl carrier protein
+eco:b1094,plsB
+eco:b4041,plsB
+eco:b1094,Glycerol 3-phosphate
+eco:b4041,Glycerol 3-phosphate
+eco:b1094,1-hexadec-9-enoyl-sn-glycerol 3-phosphate
+eco:b4041,1-hexadec-9-enoyl-sn-glycerol 3-phosphate
+eco:b1094,acpP
+eco:b4041,acpP
+eco:b1094,acyl carrier protein
+eco:b4041,acyl carrier protein
+eco:b1094,Glycerol 3-phosphate
+eco:b4041,Glycerol 3-phosphate
+eco:b1094,cis-hexadec-9-enoyl-[acyl-carrier protein] (n-C16:1)
+eco:b4041,cis-hexadec-9-enoyl-[acyl-carrier protein] (n-C16:1)
+eco:b1207,5-Phospho-alpha-D-ribose 1-diphosphate
+eco:b1207,AMP
+eco:b1207,ATP
+eco:b1207,alpha-D-Ribose 5-phosphate
+eco:b1207,AMP
+eco:b1207,prs
+eco:b1207,5-Phospho-alpha-D-ribose 1-diphosphate
+eco:b1207,ATP
+eco:b1207,alpha-D-Ribose 5-phosphate
+eco:b0241,Zinc
+eco:b0929,Zinc
+eco:b1377,Zinc
+eco:b2215,Zinc
+eco:b0241,Zinc
+eco:b0929,Zinc
+eco:b1377,Zinc
+eco:b2215,Zinc
+eco:b0241,Zinc
+eco:b0929,Zinc
+eco:b1377,Zinc
+eco:b2215,Zinc
+eco:b0241,Zinc
+eco:b0929,Zinc
+eco:b1377,Zinc
+eco:b2215,Zinc
+eco:b1852,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1852,D-Glucose 6-phosphate
+eco:b1852,"6-phospho-D-glucono-1,5-lactone"
+eco:b1852,Nicotinamide adenine dinucleotide phosphate
+eco:b1852,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1852,"6-phospho-D-glucono-1,5-lactone"
+eco:b1852,zwf
+eco:b1852,D-Glucose 6-phosphate
+eco:b1852,Nicotinamide adenine dinucleotide phosphate
+eco:b3368,Siroheme
+eco:b3368,cysG
+eco:b3368,sirohydrochlorin
+eco:b3368,Fe2+
+eco:b3368,sirohydrochlorin
+eco:b3368,Fe2+
+eco:b3368,Siroheme
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,(S)-3-Hydroxytetradecanoyl-CoA
+eco:b2341,(S)-3-Hydroxytetradecanoyl-CoA
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,3-Oxotetradecanoyl-CoA
+eco:b2341,3-Oxotetradecanoyl-CoA
+eco:b3846,(S)-3-Hydroxytetradecanoyl-CoA
+eco:b2341,(S)-3-Hydroxytetradecanoyl-CoA
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b3846,3-Oxotetradecanoyl-CoA
+eco:b2341,3-Oxotetradecanoyl-CoA
+eco:b3736,Phosphate
+eco:b3737,Phosphate
+eco:b3738,Phosphate
+eco:b3731,Phosphate
+eco:b3732,Phosphate
+eco:b3733,Phosphate
+eco:b3734,Phosphate
+eco:b3735,Phosphate
+eco:b3739,Phosphate
+eco:b3736,ADP
+eco:b3737,ADP
+eco:b3738,ADP
+eco:b3731,ADP
+eco:b3732,ADP
+eco:b3733,ADP
+eco:b3734,ADP
+eco:b3735,ADP
+eco:b3739,ADP
+eco:b3736,ATP
+eco:b3737,ATP
+eco:b3738,ATP
+eco:b3731,ATP
+eco:b3732,ATP
+eco:b3733,ATP
+eco:b3734,ATP
+eco:b3735,ATP
+eco:b3739,ATP
+eco:b3736,Phosphate
+eco:b3737,Phosphate
+eco:b3738,Phosphate
+eco:b3731,Phosphate
+eco:b3732,Phosphate
+eco:b3733,Phosphate
+eco:b3734,Phosphate
+eco:b3735,Phosphate
+eco:b3739,Phosphate
+eco:b3736,ATP
+eco:b3737,ATP
+eco:b3738,ATP
+eco:b3731,ATP
+eco:b3732,ATP
+eco:b3733,ATP
+eco:b3734,ATP
+eco:b3735,ATP
+eco:b3739,ATP
+eco:b3736,ADP
+eco:b3737,ADP
+eco:b3738,ADP
+eco:b3731,ADP
+eco:b3732,ADP
+eco:b3733,ADP
+eco:b3734,ADP
+eco:b3735,ADP
+eco:b3739,ADP
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b0221,trans-Dodec-2-enoyl-CoA
+eco:b0221,Dodecanoyl-CoA (n-C12:0CoA)
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,fadE
+eco:b0221,trans-Dodec-2-enoyl-CoA
+eco:b0221,Dodecanoyl-CoA (n-C12:0CoA)
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b3960,Fumarate
+eco:b3960,N(omega)-(L-Arginino)succinate
+eco:b3960,L-Arginine
+eco:b3960,L-Arginine
+eco:b3960,argH
+eco:b3960,Fumarate
+eco:b3960,N(omega)-(L-Arginino)succinate
+eco:b3018,"1,2-dihexadecanoyl-sn-glycerol 3-phosphate"
+eco:b3018,acyl carrier protein
+eco:b3018,1-hexadecanoyl-sn-glycerol 3-phosphate
+eco:b3018,Palmitoyl-ACP (n-C16:0ACP)
+eco:b3018,acyl carrier protein
+eco:b3018,plsC
+eco:b3018,"1,2-dihexadecanoyl-sn-glycerol 3-phosphate"
+eco:b3018,1-hexadecanoyl-sn-glycerol 3-phosphate
+eco:b3018,Palmitoyl-ACP (n-C16:0ACP)
+eco:b0175,Diphosphate
+eco:b0175,"CDP-1,2-dihexadecanoylglycerol"
+eco:b0175,CTP
+eco:b0175,"1,2-dihexadecanoyl-sn-glycerol 3-phosphate"
+eco:b0175,"CDP-1,2-dihexadecanoylglycerol"
+eco:b0175,cdsA
+eco:b0175,Diphosphate
+eco:b0175,CTP
+eco:b0175,"1,2-dihexadecanoyl-sn-glycerol 3-phosphate"
+eco:b3994,Nicotinamide adenine dinucleotide - reduced
+eco:b3994,Nicotinamide adenine dinucleotide
+eco:b3994,Formate
+eco:b3994,4-Amino-2-methyl-5-phosphomethylpyrimidine
+eco:b3994,thiC
+eco:b3994,Nicotinamide adenine dinucleotide - reduced
+eco:b3994,5-amino-1-(5-phospho-D-ribosyl)imidazole
+eco:b3994,4-Amino-2-methyl-5-phosphomethylpyrimidine
+eco:b3994,Formate
+eco:b3994,Nicotinamide adenine dinucleotide
+eco:b3994,5-amino-1-(5-phospho-D-ribosyl)imidazole
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b2342,3-Oxotetradecanoyl-CoA
+eco:b3845,3-Oxotetradecanoyl-CoA
+eco:b2342,Dodecanoyl-CoA (n-C12:0CoA)
+eco:b3845,Dodecanoyl-CoA (n-C12:0CoA)
+eco:b2342,fadA
+eco:b3845,fadA
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2342,fadI
+eco:b3845,fadI
+eco:b2342,Dodecanoyl-CoA (n-C12:0CoA)
+eco:b3845,Dodecanoyl-CoA (n-C12:0CoA)
+eco:b2342,3-Oxotetradecanoyl-CoA
+eco:b3845,3-Oxotetradecanoyl-CoA
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b3730,UTP
+eco:b3730,UDP-N-acetyl-D-glucosamine
+eco:b3730,Diphosphate
+eco:b3730,glmU
+eco:b3730,UDP-N-acetyl-D-glucosamine
+eco:b3730,N-Acetyl-D-glucosamine 1-phosphate
+eco:b3730,UTP
+eco:b3730,Diphosphate
+eco:b3730,N-Acetyl-D-glucosamine 1-phosphate
+eco:b1215,3-Deoxy-D-manno-octulosonate 8-phosphate
+eco:b1215,Phosphate
+eco:b1215,kdsA
+eco:b1215,Phosphoenolpyruvate
+eco:b1215,D-Arabinose 5-phosphate
+eco:b1215,3-Deoxy-D-manno-octulosonate 8-phosphate
+eco:b1215,Phosphoenolpyruvate
+eco:b1215,Phosphate
+eco:b1215,D-Arabinose 5-phosphate
+eco:b0414,5-Amino-6-(5'-phosphoribosylamino)uracil
+eco:b0414,Ammonium
+eco:b0414,Ammonium
+eco:b0414,"2,5-Diamino-6-(ribosylamino)-4-(3H)-pyrimidinone 5'-phosphate"
+eco:b0414,ribD
+eco:b0414,"2,5-Diamino-6-(ribosylamino)-4-(3H)-pyrimidinone 5'-phosphate"
+eco:b0414,5-Amino-6-(5'-phosphoribosylamino)uracil
+eco:b2020,L-Histidine
+eco:b2020,Nicotinamide adenine dinucleotide - reduced
+eco:b2020,L-Histidinol
+eco:b2020,hisD
+eco:b2020,Nicotinamide adenine dinucleotide
+eco:b2020,L-Histidine
+eco:b2020,Nicotinamide adenine dinucleotide - reduced
+eco:b2020,Nicotinamide adenine dinucleotide
+eco:b2020,L-Histidinol
+eco:b2818,N-Acetyl-L-glutamate
+eco:b2818,Coenzyme A
+eco:b2818,Acetyl-CoA
+eco:b2818,argA
+eco:b2818,L-Glutamate
+eco:b2818,N-Acetyl-L-glutamate
+eco:b2818,Coenzyme A
+eco:b2818,L-Glutamate
+eco:b2818,Acetyl-CoA
+eco:b0241,Sulfate
+eco:b0929,Sulfate
+eco:b1377,Sulfate
+eco:b2215,Sulfate
+eco:b0241,Sulfate
+eco:b0929,Sulfate
+eco:b1377,Sulfate
+eco:b2215,Sulfate
+eco:b0241,Sulfate
+eco:b0929,Sulfate
+eco:b1377,Sulfate
+eco:b2215,Sulfate
+eco:b0241,Sulfate
+eco:b0929,Sulfate
+eco:b1377,Sulfate
+eco:b2215,Sulfate
+eco:b0241,Ammonium
+eco:b0929,Ammonium
+eco:b1377,Ammonium
+eco:b2215,Ammonium
+eco:b0241,Ammonium
+eco:b0929,Ammonium
+eco:b1377,Ammonium
+eco:b2215,Ammonium
+eco:b0241,Ammonium
+eco:b0929,Ammonium
+eco:b1377,Ammonium
+eco:b2215,Ammonium
+eco:b0241,Ammonium
+eco:b0929,Ammonium
+eco:b1377,Ammonium
+eco:b2215,Ammonium
+eco:b2926,ATP
+eco:b2926,3-Phospho-D-glyceroyl phosphate
+eco:b2926,3-Phospho-D-glycerate
+eco:b2926,ADP
+eco:b2926,ATP
+eco:b2926,3-Phospho-D-glycerate
+eco:b2926,pgk
+eco:b2926,3-Phospho-D-glyceroyl phosphate
+eco:b2926,ADP
+eco:b2551,Glycine
+eco:b0870,Glycine
+eco:b2551,L-Threonine
+eco:b0870,L-Threonine
+eco:b2551,glyA
+eco:b0870,glyA
+eco:b2551,Acetaldehyde
+eco:b0870,Acetaldehyde
+eco:b2551,Glycine
+eco:b0870,Glycine
+eco:b2551,ltaE
+eco:b0870,ltaE
+eco:b2551,Acetaldehyde
+eco:b0870,Acetaldehyde
+eco:b2551,L-Threonine
+eco:b0870,L-Threonine
+eco:b3640,Diphosphate
+eco:b2251,Diphosphate
+eco:b3640,dUMP
+eco:b2251,dUMP
+eco:b3640,nudI
+eco:b2251,nudI
+eco:b3640,dUTP
+eco:b2251,dUTP
+eco:b3640,dUMP
+eco:b2251,dUMP
+eco:b3640,dut
+eco:b2251,dut
+eco:b3640,Diphosphate
+eco:b2251,Diphosphate
+eco:b3640,dUTP
+eco:b2251,dUTP
+eco:b3642,Diphosphate
+eco:b3642,Orotate
+eco:b3642,Orotidine 5'-phosphate
+eco:b3642,5-Phospho-alpha-D-ribose 1-diphosphate
+eco:b3642,Diphosphate
+eco:b3642,Orotidine 5'-phosphate
+eco:b3642,pyrE
+eco:b3642,Orotate
+eco:b3642,5-Phospho-alpha-D-ribose 1-diphosphate
+eco:b3236,Oxaloacetate
+eco:b3236,L-Malate
+eco:b3236,Nicotinamide adenine dinucleotide - reduced
+eco:b3236,Nicotinamide adenine dinucleotide
+eco:b3236,Oxaloacetate
+eco:b3236,Nicotinamide adenine dinucleotide - reduced
+eco:b3236,mdh
+eco:b3236,L-Malate
+eco:b3236,Nicotinamide adenine dinucleotide
+eco:b3197,D-Arabinose 5-phosphate
+eco:b2708,D-Arabinose 5-phosphate
+eco:b3197,gutQ
+eco:b2708,gutQ
+eco:b3197,D-Ribulose 5-phosphate
+eco:b2708,D-Ribulose 5-phosphate
+eco:b3197,D-Ribulose 5-phosphate
+eco:b2708,D-Ribulose 5-phosphate
+eco:b3197,kdsD
+eco:b2708,kdsD
+eco:b3197,D-Arabinose 5-phosphate
+eco:b2708,D-Arabinose 5-phosphate
+eco:b3730,N-Acetyl-D-glucosamine 1-phosphate
+eco:b3730,D-Glucosamine 1-phosphate
+eco:b3730,Coenzyme A
+eco:b3730,glmU
+eco:b3730,Acetyl-CoA
+eco:b3730,D-Glucosamine 1-phosphate
+eco:b3730,Coenzyme A
+eco:b3730,N-Acetyl-D-glucosamine 1-phosphate
+eco:b3730,Acetyl-CoA
+eco:b1094,Palmitoyl-ACP (n-C16:0ACP)
+eco:b4041,Palmitoyl-ACP (n-C16:0ACP)
+eco:b1094,acyl carrier protein
+eco:b4041,acyl carrier protein
+eco:b1094,1-hexadecanoyl-sn-glycerol 3-phosphate
+eco:b4041,1-hexadecanoyl-sn-glycerol 3-phosphate
+eco:b1094,plsB
+eco:b4041,plsB
+eco:b1094,acpP
+eco:b4041,acpP
+eco:b1094,Glycerol 3-phosphate
+eco:b4041,Glycerol 3-phosphate
+eco:b1094,1-hexadecanoyl-sn-glycerol 3-phosphate
+eco:b4041,1-hexadecanoyl-sn-glycerol 3-phosphate
+eco:b1094,acyl carrier protein
+eco:b4041,acyl carrier protein
+eco:b1094,Palmitoyl-ACP (n-C16:0ACP)
+eco:b4041,Palmitoyl-ACP (n-C16:0ACP)
+eco:b1094,Glycerol 3-phosphate
+eco:b4041,Glycerol 3-phosphate
+eco:b3368,Nicotinamide adenine dinucleotide - reduced
+eco:b3368,sirohydrochlorin
+eco:b3368,dihydrosirohydrochlorin
+eco:b3368,cysG
+eco:b3368,Nicotinamide adenine dinucleotide
+eco:b3368,Nicotinamide adenine dinucleotide - reduced
+eco:b3368,sirohydrochlorin
+eco:b3368,Nicotinamide adenine dinucleotide
+eco:b3368,dihydrosirohydrochlorin
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b3846,(S)-3-Hydroxyoctanoyl-CoA
+eco:b2341,(S)-3-Hydroxyoctanoyl-CoA
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,3-Oxooctanoyl-CoA
+eco:b2341,3-Oxooctanoyl-CoA
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,(S)-3-Hydroxyoctanoyl-CoA
+eco:b2341,(S)-3-Hydroxyoctanoyl-CoA
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,3-Oxooctanoyl-CoA
+eco:b2341,3-Oxooctanoyl-CoA
+eco:b0221,Decanoyl-CoA (n-C10:0CoA)
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,fadE
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b0221,trans-Dec-2-enoyl-CoA
+eco:b0221,Decanoyl-CoA (n-C10:0CoA)
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,trans-Dec-2-enoyl-CoA
+eco:b0241,potassium
+eco:b0929,potassium
+eco:b1377,potassium
+eco:b2215,potassium
+eco:b0241,potassium
+eco:b0929,potassium
+eco:b1377,potassium
+eco:b2215,potassium
+eco:b0241,potassium
+eco:b0929,potassium
+eco:b1377,potassium
+eco:b2215,potassium
+eco:b0241,potassium
+eco:b0929,potassium
+eco:b1377,potassium
+eco:b2215,potassium
+eco:b0684,CO2
+eco:b1378,CO2
+eco:b2895,CO2
+eco:b0684,Flavodoxin reduced
+eco:b1378,Flavodoxin reduced
+eco:b2895,Flavodoxin reduced
+eco:b0684,flavodoxin semi oxidized
+eco:b1378,flavodoxin semi oxidized
+eco:b2895,flavodoxin semi oxidized
+eco:b0684,Acetyl-CoA
+eco:b1378,Acetyl-CoA
+eco:b2895,Acetyl-CoA
+eco:b0684,Pyruvate
+eco:b1378,Pyruvate
+eco:b2895,Pyruvate
+eco:b0684,fldB
+eco:b1378,fldB
+eco:b2895,fldB
+eco:b0684,fldA
+eco:b1378,fldA
+eco:b2895,fldA
+eco:b0684,Coenzyme A
+eco:b1378,Coenzyme A
+eco:b2895,Coenzyme A
+eco:b0684,Flavodoxin reduced
+eco:b1378,Flavodoxin reduced
+eco:b2895,Flavodoxin reduced
+eco:b0684,ydbK
+eco:b1378,ydbK
+eco:b2895,ydbK
+eco:b0684,Pyruvate
+eco:b1378,Pyruvate
+eco:b2895,Pyruvate
+eco:b0684,CO2
+eco:b1378,CO2
+eco:b2895,CO2
+eco:b0684,Acetyl-CoA
+eco:b1378,Acetyl-CoA
+eco:b2895,Acetyl-CoA
+eco:b0684,Coenzyme A
+eco:b1378,Coenzyme A
+eco:b2895,Coenzyme A
+eco:b0684,flavodoxin semi oxidized
+eco:b1378,flavodoxin semi oxidized
+eco:b2895,flavodoxin semi oxidized
+eco:b3807,IscS sulfur acceptor protein
+eco:b2530,IscS sulfur acceptor protein
+eco:b2529,IscS sulfur acceptor protein
+eco:b3807,IscU with two bound [2Fe-2S] clusters
+eco:b2530,IscU with two bound [2Fe-2S] clusters
+eco:b2529,IscU with two bound [2Fe-2S] clusters
+eco:b3807,IscS with bound sulfur
+eco:b2530,IscS with bound sulfur
+eco:b2529,IscS with bound sulfur
+eco:b3807,Flavin adenine dinucleotide oxidized
+eco:b2530,Flavin adenine dinucleotide oxidized
+eco:b2529,Flavin adenine dinucleotide oxidized
+eco:b3807,IscU with bound [2Fe-2S] cluster
+eco:b2530,IscU with bound [2Fe-2S] cluster
+eco:b2529,IscU with bound [2Fe-2S] cluster
+eco:b3807,Flavin adenine dinucleotide reduced
+eco:b2530,Flavin adenine dinucleotide reduced
+eco:b2529,Flavin adenine dinucleotide reduced
+eco:b3807,iscS
+eco:b2530,iscS
+eco:b2529,iscS
+eco:b3807,Fe2+
+eco:b2530,Fe2+
+eco:b2529,Fe2+
+eco:b3807,nifU
+eco:b2530,nifU
+eco:b2529,nifU
+eco:b3807,cyaY
+eco:b2530,cyaY
+eco:b2529,cyaY
+eco:b3807,Flavin adenine dinucleotide oxidized
+eco:b2530,Flavin adenine dinucleotide oxidized
+eco:b2529,Flavin adenine dinucleotide oxidized
+eco:b3807,IscU with two bound [2Fe-2S] clusters
+eco:b2530,IscU with two bound [2Fe-2S] clusters
+eco:b2529,IscU with two bound [2Fe-2S] clusters
+eco:b3807,IscS sulfur acceptor protein
+eco:b2530,IscS sulfur acceptor protein
+eco:b2529,IscS sulfur acceptor protein
+eco:b3807,IscS with bound sulfur
+eco:b2530,IscS with bound sulfur
+eco:b2529,IscS with bound sulfur
+eco:b3807,Fe2+
+eco:b2530,Fe2+
+eco:b2529,Fe2+
+eco:b3807,IscU with bound [2Fe-2S] cluster
+eco:b2530,IscU with bound [2Fe-2S] cluster
+eco:b2529,IscU with bound [2Fe-2S] cluster
+eco:b3807,Flavin adenine dinucleotide reduced
+eco:b2530,Flavin adenine dinucleotide reduced
+eco:b2529,Flavin adenine dinucleotide reduced
+eco:b3018,cis-hexadec-9-enoyl-[acyl-carrier protein] (n-C16:1)
+eco:b3018,"1,2-dihexadec-9-enoyl-sn-glycerol 3-phosphate"
+eco:b3018,acyl carrier protein
+eco:b3018,plsC
+eco:b3018,"1,2-dihexadec-9-enoyl-sn-glycerol 3-phosphate"
+eco:b3018,1-hexadec-9-enoyl-sn-glycerol 3-phosphate
+eco:b3018,cis-hexadec-9-enoyl-[acyl-carrier protein] (n-C16:1)
+eco:b3018,acyl carrier protein
+eco:b3018,1-hexadec-9-enoyl-sn-glycerol 3-phosphate
+eco:b3389,Phosphate
+eco:b3389,2-Dehydro-3-deoxy-D-arabino-heptonate 7-phosphate
+eco:b3389,3-Dehydroquinate
+eco:b3389,3-Dehydroquinate
+eco:b3389,aroB
+eco:b3389,Phosphate
+eco:b3389,2-Dehydro-3-deoxy-D-arabino-heptonate 7-phosphate
+eco:b4005,Phosphate
+eco:b4005,ADP
+eco:b4005,5-Phospho-beta-D-ribosylamine
+eco:b4005,N1-(5-Phospho-D-ribosyl)glycinamide
+eco:b4005,ATP
+eco:b4005,Glycine
+eco:b4005,N1-(5-Phospho-D-ribosyl)glycinamide
+eco:b4005,purD
+eco:b4005,Phosphate
+eco:b4005,5-Phospho-beta-D-ribosylamine
+eco:b4005,Glycine
+eco:b4005,ADP
+eco:b4005,ATP
+eco:b3565,D-Glucose
+eco:b3565,xylA
+eco:b3565,D-Fructose
+eco:b3565,D-Glucose
+eco:b3565,D-Fructose
+eco:b1208,ADP
+eco:b1208,ATP
+eco:b1208,2-phospho-4-(cytidine 5'-diphospho)-2-C-methyl-D-erythritol
+eco:b1208,ADP
+eco:b1208,4-(cytidine 5'-diphospho)-2-C-methyl-D-erythritol
+eco:b1208,ispE
+eco:b1208,ATP
+eco:b1208,4-(cytidine 5'-diphospho)-2-C-methyl-D-erythritol
+eco:b1208,2-phospho-4-(cytidine 5'-diphospho)-2-C-methyl-D-erythritol
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2342,3-Oxododecanoyl-CoA
+eco:b3845,3-Oxododecanoyl-CoA
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b2342,Decanoyl-CoA (n-C10:0CoA)
+eco:b3845,Decanoyl-CoA (n-C10:0CoA)
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2342,fadI
+eco:b3845,fadI
+eco:b2342,fadA
+eco:b3845,fadA
+eco:b2342,Decanoyl-CoA (n-C10:0CoA)
+eco:b3845,Decanoyl-CoA (n-C10:0CoA)
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b2342,3-Oxododecanoyl-CoA
+eco:b3845,3-Oxododecanoyl-CoA
+eco:b1094,UDP-3-O-(3-hydroxytetradecanoyl)-N-acetylglucosamine
+eco:b0181,UDP-3-O-(3-hydroxytetradecanoyl)-N-acetylglucosamine
+eco:b1094,acyl carrier protein
+eco:b0181,acyl carrier protein
+eco:b1094,(R)-3-Hydroxytetradecanoyl-[acyl-carrier protein]
+eco:b0181,(R)-3-Hydroxytetradecanoyl-[acyl-carrier protein]
+eco:b1094,UDP-N-acetyl-D-glucosamine
+eco:b0181,UDP-N-acetyl-D-glucosamine
+eco:b1094,UDP-3-O-(3-hydroxytetradecanoyl)-N-acetylglucosamine
+eco:b0181,UDP-3-O-(3-hydroxytetradecanoyl)-N-acetylglucosamine
+eco:b1094,lpxA
+eco:b0181,lpxA
+eco:b1094,acpP
+eco:b0181,acpP
+eco:b1094,UDP-N-acetyl-D-glucosamine
+eco:b0181,UDP-N-acetyl-D-glucosamine
+eco:b1094,(R)-3-Hydroxytetradecanoyl-[acyl-carrier protein]
+eco:b0181,(R)-3-Hydroxytetradecanoyl-[acyl-carrier protein]
+eco:b1094,acyl carrier protein
+eco:b0181,acyl carrier protein
+eco:b0521,Carbamoyl phosphate
+eco:b0323,Carbamoyl phosphate
+eco:b2874,Carbamoyl phosphate
+eco:b0521,Ammonium
+eco:b0323,Ammonium
+eco:b2874,Ammonium
+eco:b0521,ADP
+eco:b0323,ADP
+eco:b2874,ADP
+eco:b0521,yahI
+eco:b0323,yahI
+eco:b2874,yahI
+eco:b0521,CO2
+eco:b0323,CO2
+eco:b2874,CO2
+eco:b0521,ATP
+eco:b0323,ATP
+eco:b2874,ATP
+eco:b0521,yqeA
+eco:b0323,yqeA
+eco:b2874,yqeA
+eco:b0521,Carbamoyl phosphate
+eco:b0323,Carbamoyl phosphate
+eco:b2874,Carbamoyl phosphate
+eco:b0521,arcC
+eco:b0323,arcC
+eco:b2874,arcC
+eco:b0521,Ammonium
+eco:b0323,Ammonium
+eco:b2874,Ammonium
+eco:b0521,ADP
+eco:b0323,ADP
+eco:b2874,ADP
+eco:b0521,CO2
+eco:b0323,CO2
+eco:b2874,CO2
+eco:b0521,ATP
+eco:b0323,ATP
+eco:b2874,ATP
+eco:b2388,D-Glucose 6-phosphate
+eco:b2388,D-Glucose
+eco:b2388,ADP
+eco:b2388,D-Glucose 6-phosphate
+eco:b2388,ATP
+eco:b2388,glk
+eco:b2388,D-Glucose
+eco:b2388,ATP
+eco:b2388,ADP
+eco:b2913,3-Phosphohydroxypyruvate
+eco:b2913,Nicotinamide adenine dinucleotide
+eco:b2913,Nicotinamide adenine dinucleotide - reduced
+eco:b2913,serA
+eco:b2913,3-Phospho-D-glycerate
+eco:b2913,Nicotinamide adenine dinucleotide
+eco:b2913,Nicotinamide adenine dinucleotide - reduced
+eco:b2913,3-Phosphohydroxypyruvate
+eco:b2913,3-Phospho-D-glycerate
+eco:b3958,Phosphate
+eco:b3958,N-Acetyl-L-glutamate 5-semialdehyde
+eco:b3958,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3958,Nicotinamide adenine dinucleotide phosphate
+eco:b3958,argC
+eco:b3958,N-Acetyl-L-glutamyl 5-phosphate
+eco:b3958,N-Acetyl-L-glutamate 5-semialdehyde
+eco:b3958,Phosphate
+eco:b3958,Nicotinamide adenine dinucleotide phosphate
+eco:b3958,N-Acetyl-L-glutamyl 5-phosphate
+eco:b3958,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b4254,L-Citrulline
+eco:b0273,L-Citrulline
+eco:b4254,Ornithine
+eco:b0273,Ornithine
+eco:b4254,Phosphate
+eco:b0273,Phosphate
+eco:b4254,argF
+eco:b0273,argF
+eco:b4254,Carbamoyl phosphate
+eco:b0273,Carbamoyl phosphate
+eco:b4254,L-Citrulline
+eco:b0273,L-Citrulline
+eco:b4254,argI
+eco:b0273,argI
+eco:b4254,Phosphate
+eco:b0273,Phosphate
+eco:b4254,Carbamoyl phosphate
+eco:b0273,Carbamoyl phosphate
+eco:b4254,Ornithine
+eco:b0273,Ornithine
+eco:b0241,Phosphate
+eco:b0929,Phosphate
+eco:b1377,Phosphate
+eco:b2215,Phosphate
+eco:b0241,Phosphate
+eco:b0929,Phosphate
+eco:b1377,Phosphate
+eco:b2215,Phosphate
+eco:b0241,Phosphate
+eco:b0929,Phosphate
+eco:b1377,Phosphate
+eco:b2215,Phosphate
+eco:b0241,Phosphate
+eco:b0929,Phosphate
+eco:b1377,Phosphate
+eco:b2215,Phosphate
+eco:b0182,Lipid A Disaccharide
+eco:b0182,"UDP-2,3-bis(3-hydroxytetradecanoyl)glucosamine"
+eco:b0182,UDP
+eco:b0182,lpxB
+eco:b0182,"2,3-Bis(3-hydroxytetradecanoyl)-beta-D-glucosaminyl 1-phosphate"
+eco:b0182,"UDP-2,3-bis(3-hydroxytetradecanoyl)glucosamine"
+eco:b0182,UDP
+eco:b0182,Lipid A Disaccharide
+eco:b0182,"2,3-Bis(3-hydroxytetradecanoyl)-beta-D-glucosaminyl 1-phosphate"
+eco:b1098,dTDP
+eco:b1098,ATP
+eco:b1098,ADP
+eco:b1098,dTMP
+eco:b1098,dTDP
+eco:b1098,ADP
+eco:b1098,tmk
+eco:b1098,ATP
+eco:b1098,dTMP
+eco:b3781,Reduced thioredoxin
+eco:b0888,Reduced thioredoxin
+eco:b2582,Reduced thioredoxin
+eco:b3781,Oxidized thioredoxin
+eco:b0888,Oxidized thioredoxin
+eco:b2582,Oxidized thioredoxin
+eco:b3781,Nicotinamide adenine dinucleotide phosphate
+eco:b0888,Nicotinamide adenine dinucleotide phosphate
+eco:b2582,Nicotinamide adenine dinucleotide phosphate
+eco:b3781,trxC
+eco:b0888,trxC
+eco:b2582,trxC
+eco:b3781,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0888,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b2582,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3781,trxB
+eco:b0888,trxB
+eco:b2582,trxB
+eco:b3781,Reduced thioredoxin
+eco:b0888,Reduced thioredoxin
+eco:b2582,Reduced thioredoxin
+eco:b3781,Nicotinamide adenine dinucleotide phosphate
+eco:b0888,Nicotinamide adenine dinucleotide phosphate
+eco:b2582,Nicotinamide adenine dinucleotide phosphate
+eco:b3781,trxA
+eco:b0888,trxA
+eco:b2582,trxA
+eco:b3781,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0888,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b2582,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3781,Oxidized thioredoxin
+eco:b0888,Oxidized thioredoxin
+eco:b2582,Oxidized thioredoxin
+eco:b0778,Phosphate
+eco:b0778,ADP
+eco:b0778,"7,8-Diaminononanoate"
+eco:b0778,Dethiobiotin
+eco:b0778,ATP
+eco:b0778,CO2
+eco:b0778,Dethiobiotin
+eco:b0778,bioD1
+eco:b0778,Phosphate
+eco:b0778,"7,8-Diaminononanoate"
+eco:b0778,CO2
+eco:b0778,ADP
+eco:b0778,ATP
+eco:b3390,Shikimate 5-phosphate
+eco:b0388,Shikimate 5-phosphate
+eco:b3390,Shikimate
+eco:b0388,Shikimate
+eco:b3390,ADP
+eco:b0388,ADP
+eco:b3390,aroK
+eco:b0388,aroK
+eco:b3390,ATP
+eco:b0388,ATP
+eco:b3390,aroL
+eco:b0388,aroL
+eco:b3390,ADP
+eco:b0388,ADP
+eco:b3390,Shikimate
+eco:b0388,Shikimate
+eco:b3390,Shikimate 5-phosphate
+eco:b0388,Shikimate 5-phosphate
+eco:b3390,ATP
+eco:b0388,ATP
+eco:b1693,3-Dehydroshikimate
+eco:b1693,aroD
+eco:b1693,3-Dehydroquinate
+eco:b1693,3-Dehydroshikimate
+eco:b1693,3-Dehydroquinate
+eco:s0001,"(2R,4S)-2-methyl-2,4-dihydroxydihydrofuran-3-one"
+eco:s0001,"4,5-dihydroxy-2,3-pentanedione"
+eco:s0001,"4,5-dihydroxy-2,3-pentanedione"
+eco:s0001,"(2R,4S)-2-methyl-2,4-dihydroxydihydrofuran-3-one"
+eco:b0421,Diphosphate
+eco:b0421,Geranyl diphosphate
+eco:b0421,Farnesyl diphosphate
+eco:b0421,Isopentenyl diphosphate
+eco:b0421,Diphosphate
+eco:b0421,Farnesyl diphosphate
+eco:b0421,ispA
+eco:b0421,Geranyl diphosphate
+eco:b0421,Isopentenyl diphosphate
+eco:b0514,ADP
+eco:b3124,ADP
+eco:b0514,(R)-Glycerate
+eco:b3124,(R)-Glycerate
+eco:b0514,D-Glycerate 2-phosphate
+eco:b3124,D-Glycerate 2-phosphate
+eco:b0514,ADP
+eco:b3124,ADP
+eco:b0514,ATP
+eco:b3124,ATP
+eco:b0514,garK
+eco:b3124,garK
+eco:b0514,(R)-Glycerate
+eco:b3124,(R)-Glycerate
+eco:b0514,ATP
+eco:b3124,ATP
+eco:b0514,D-Glycerate 2-phosphate
+eco:b3124,D-Glycerate 2-phosphate
+eco:b1263,L-Glutamate
+eco:b1264,L-Glutamate
+eco:b1263,Anthranilate
+eco:b1264,Anthranilate
+eco:b1263,Pyruvate
+eco:b1264,Pyruvate
+eco:b1263,chorismate
+eco:b1264,chorismate
+eco:b1263,L-Glutamine
+eco:b1264,L-Glutamine
+eco:b1263,Pyruvate
+eco:b1264,Pyruvate
+eco:b1263,trpD
+eco:b1264,trpD
+eco:b1263,trpE
+eco:b1264,trpE
+eco:b1263,Anthranilate
+eco:b1264,Anthranilate
+eco:b1263,L-Glutamine
+eco:b1264,L-Glutamine
+eco:b1263,L-Glutamate
+eco:b1264,L-Glutamate
+eco:b1263,chorismate
+eco:b1264,chorismate
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b3846,3-Oxohexanoyl-CoA
+eco:b2341,3-Oxohexanoyl-CoA
+eco:b3846,(S)-3-Hydroxyhexanoyl-CoA
+eco:b2341,(S)-3-Hydroxyhexanoyl-CoA
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,(S)-3-Hydroxyhexanoyl-CoA
+eco:b2341,(S)-3-Hydroxyhexanoyl-CoA
+eco:b3846,3-Oxohexanoyl-CoA
+eco:b2341,3-Oxohexanoyl-CoA
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b0221,Crotonoyl-CoA
+eco:b0221,Butanoyl-CoA
+eco:b0221,Flavin adenine dinucleotide oxidized
+eco:b0221,fadE
+eco:b0221,Crotonoyl-CoA
+eco:b0221,Butanoyl-CoA
+eco:b0221,Flavin adenine dinucleotide reduced
+eco:b0173,Nicotinamide adenine dinucleotide phosphate
+eco:b0173,2-C-methyl-D-erythritol 4-phosphate
+eco:b0173,1-deoxy-D-xylulose 5-phosphate
+eco:b0173,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0173,2-C-methyl-D-erythritol 4-phosphate
+eco:b0173,dxr
+eco:b0173,Nicotinamide adenine dinucleotide phosphate
+eco:b0173,1-deoxy-D-xylulose 5-phosphate
+eco:b0173,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0241,O2
+eco:b0929,O2
+eco:b1377,O2
+eco:b2215,O2
+eco:b0241,O2
+eco:b0929,O2
+eco:b1377,O2
+eco:b2215,O2
+eco:b0241,O2
+eco:b0929,O2
+eco:b1377,O2
+eco:b2215,O2
+eco:b0241,O2
+eco:b0929,O2
+eco:b1377,O2
+eco:b2215,O2
+eco:b3176,D-Glucosamine 1-phosphate
+eco:b3176,glmM
+eco:b3176,D-Glucosamine 6-phosphate
+eco:b3176,D-Glucosamine 1-phosphate
+eco:b3176,D-Glucosamine 6-phosphate
+eco:b3770,2-Oxoglutarate
+eco:b3770,L-Glutamate
+eco:b3770,L-Valine
+eco:b3770,ilvE
+eco:b3770,3-Methyl-2-oxobutanoate
+eco:b3770,L-Glutamate
+eco:b3770,L-Valine
+eco:b3770,2-Oxoglutarate
+eco:b3770,3-Methyl-2-oxobutanoate
+eco:b0902,Pyruvate
+eco:b0903,Pyruvate
+eco:b3114,Pyruvate
+eco:b3951,Pyruvate
+eco:b3952,Pyruvate
+eco:b2579,Pyruvate
+eco:b0902,Formate
+eco:b0903,Formate
+eco:b3114,Formate
+eco:b3951,Formate
+eco:b3952,Formate
+eco:b2579,Formate
+eco:b0902,Acetyl-CoA
+eco:b0903,Acetyl-CoA
+eco:b3114,Acetyl-CoA
+eco:b3951,Acetyl-CoA
+eco:b3952,Acetyl-CoA
+eco:b2579,Acetyl-CoA
+eco:b0902,grcA
+eco:b0903,grcA
+eco:b3114,grcA
+eco:b3951,grcA
+eco:b3952,grcA
+eco:b2579,grcA
+eco:b0902,pflB
+eco:b0903,pflB
+eco:b3114,pflB
+eco:b3951,pflB
+eco:b3952,pflB
+eco:b2579,pflB
+eco:b0902,Coenzyme A
+eco:b0903,Coenzyme A
+eco:b3114,Coenzyme A
+eco:b3951,Coenzyme A
+eco:b3952,Coenzyme A
+eco:b2579,Coenzyme A
+eco:b0902,pflC
+eco:b0903,pflC
+eco:b3114,pflC
+eco:b3951,pflC
+eco:b3952,pflC
+eco:b2579,pflC
+eco:b0902,pflA
+eco:b0903,pflA
+eco:b3114,pflA
+eco:b3951,pflA
+eco:b3952,pflA
+eco:b2579,pflA
+eco:b0902,Formate
+eco:b0903,Formate
+eco:b3114,Formate
+eco:b3951,Formate
+eco:b3952,Formate
+eco:b2579,Formate
+eco:b0902,pflD
+eco:b0903,pflD
+eco:b3114,pflD
+eco:b3951,pflD
+eco:b3952,pflD
+eco:b2579,pflD
+eco:b0902,tdcE
+eco:b0903,tdcE
+eco:b3114,tdcE
+eco:b3951,tdcE
+eco:b3952,tdcE
+eco:b2579,tdcE
+eco:b0902,Pyruvate
+eco:b0903,Pyruvate
+eco:b3114,Pyruvate
+eco:b3951,Pyruvate
+eco:b3952,Pyruvate
+eco:b2579,Pyruvate
+eco:b0902,Coenzyme A
+eco:b0903,Coenzyme A
+eco:b3114,Coenzyme A
+eco:b3951,Coenzyme A
+eco:b3952,Coenzyme A
+eco:b2579,Coenzyme A
+eco:b0902,Acetyl-CoA
+eco:b0903,Acetyl-CoA
+eco:b3114,Acetyl-CoA
+eco:b3951,Acetyl-CoA
+eco:b3952,Acetyl-CoA
+eco:b2579,Acetyl-CoA
+eco:b3189,Phosphate
+eco:b3189,UDP-N-acetyl-3-O-(1-carboxyvinyl)-D-glucosamine
+eco:b3189,Phosphoenolpyruvate
+eco:b3189,murA
+eco:b3189,UDP-N-acetyl-D-glucosamine
+eco:b3189,Phosphate
+eco:b3189,UDP-N-acetyl-3-O-(1-carboxyvinyl)-D-glucosamine
+eco:b3189,UDP-N-acetyl-D-glucosamine
+eco:b3189,Phosphoenolpyruvate
+eco:b2342,3-Oxohexanoyl-CoA
+eco:b3845,3-Oxohexanoyl-CoA
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b2342,fadI
+eco:b3845,fadI
+eco:b2342,Butanoyl-CoA
+eco:b3845,Butanoyl-CoA
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2342,fadA
+eco:b3845,fadA
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b2342,3-Oxohexanoyl-CoA
+eco:b3845,3-Oxohexanoyl-CoA
+eco:b2342,Butanoyl-CoA
+eco:b3845,Butanoyl-CoA
+eco:b3857,Diphosphate
+eco:b3856,Diphosphate
+eco:b3857,GTP
+eco:b3856,GTP
+eco:b3857,bis-molybdopterin mono-guanine dinucleotide
+eco:b3856,bis-molybdopterin mono-guanine dinucleotide
+eco:b3857,mobA
+eco:b3856,mobA
+eco:b3857,bis-molybdenum cofactor
+eco:b3856,bis-molybdenum cofactor
+eco:b3857,mobB
+eco:b3856,mobB
+eco:b3857,bis-molybdopterin mono-guanine dinucleotide
+eco:b3856,bis-molybdopterin mono-guanine dinucleotide
+eco:b3857,GTP
+eco:b3856,GTP
+eco:b3857,Diphosphate
+eco:b3856,Diphosphate
+eco:b3857,bis-molybdenum cofactor
+eco:b3856,bis-molybdenum cofactor
+eco:b0394,ADP
+eco:b0394,D-Fructose 6-phosphate
+eco:b0394,ATP
+eco:b0394,mak
+eco:b0394,D-Fructose
+eco:b0394,ADP
+eco:b0394,D-Fructose 6-phosphate
+eco:b0394,D-Fructose
+eco:b0394,ATP
+eco:b0084,D-Alanine
+eco:b0635,D-Alanine
+eco:b0149,D-Alanine
+eco:b3396,D-Alanine
+eco:b0084,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b0635,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b0149,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b3396,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b0084,"two disacharide linked murein units, pentapeptide crosslinked tetrapeptide (A2pm->D-ala) (middle of chain)"
+eco:b0635,"two disacharide linked murein units, pentapeptide crosslinked tetrapeptide (A2pm->D-ala) (middle of chain)"
+eco:b0149,"two disacharide linked murein units, pentapeptide crosslinked tetrapeptide (A2pm->D-ala) (middle of chain)"
+eco:b3396,"two disacharide linked murein units, pentapeptide crosslinked tetrapeptide (A2pm->D-ala) (middle of chain)"
+eco:b0084,mrdA
+eco:b0635,mrdA
+eco:b0149,mrdA
+eco:b3396,mrdA
+eco:b0084,mrcB
+eco:b0635,mrcB
+eco:b0149,mrcB
+eco:b3396,mrcB
+eco:b0084,"two disacharide linked murein units, pentapeptide crosslinked tetrapeptide (A2pm->D-ala) (middle of chain)"
+eco:b0635,"two disacharide linked murein units, pentapeptide crosslinked tetrapeptide (A2pm->D-ala) (middle of chain)"
+eco:b0149,"two disacharide linked murein units, pentapeptide crosslinked tetrapeptide (A2pm->D-ala) (middle of chain)"
+eco:b3396,"two disacharide linked murein units, pentapeptide crosslinked tetrapeptide (A2pm->D-ala) (middle of chain)"
+eco:b0084,mrcA
+eco:b0635,mrcA
+eco:b0149,mrcA
+eco:b3396,mrcA
+eco:b0084,ftsI
+eco:b0635,ftsI
+eco:b0149,ftsI
+eco:b3396,ftsI
+eco:b0084,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b0635,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b0149,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b3396,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b0084,D-Alanine
+eco:b0635,D-Alanine
+eco:b0149,D-Alanine
+eco:b3396,D-Alanine
+eco:b3843,2-Octaprenylphenol
+eco:b2311,2-Octaprenylphenol
+eco:b3843,3-Octaprenyl-4-hydroxybenzoate
+eco:b2311,3-Octaprenyl-4-hydroxybenzoate
+eco:b3843,CO2
+eco:b2311,CO2
+eco:b3843,ubiX
+eco:b2311,ubiX
+eco:b3843,ubiD
+eco:b2311,ubiD
+eco:b3843,3-Octaprenyl-4-hydroxybenzoate
+eco:b2311,3-Octaprenyl-4-hydroxybenzoate
+eco:b3843,CO2
+eco:b2311,CO2
+eco:b3843,2-Octaprenylphenol
+eco:b2311,2-Octaprenylphenol
+eco:b0421,Geranyl diphosphate
+eco:b0421,Isopentenyl diphosphate
+eco:b0421,Diphosphate
+eco:b0421,ispA
+eco:b0421,Dimethylallyl diphosphate
+eco:b0421,Isopentenyl diphosphate
+eco:b0421,Diphosphate
+eco:b0421,Geranyl diphosphate
+eco:b0421,Dimethylallyl diphosphate
+eco:b3807,IscS sulfur acceptor protein
+eco:b2530,IscS sulfur acceptor protein
+eco:b2529,IscS sulfur acceptor protein
+eco:b3807,IscU with bound [2Fe-2S] cluster
+eco:b2530,IscU with bound [2Fe-2S] cluster
+eco:b2529,IscU with bound [2Fe-2S] cluster
+eco:b3807,IscU scaffold protein
+eco:b2530,IscU scaffold protein
+eco:b2529,IscU scaffold protein
+eco:b3807,IscS with bound sulfur
+eco:b2530,IscS with bound sulfur
+eco:b2529,IscS with bound sulfur
+eco:b3807,Flavin adenine dinucleotide oxidized
+eco:b2530,Flavin adenine dinucleotide oxidized
+eco:b2529,Flavin adenine dinucleotide oxidized
+eco:b3807,Flavin adenine dinucleotide reduced
+eco:b2530,Flavin adenine dinucleotide reduced
+eco:b2529,Flavin adenine dinucleotide reduced
+eco:b3807,Fe2+
+eco:b2530,Fe2+
+eco:b2529,Fe2+
+eco:b3807,nifU
+eco:b2530,nifU
+eco:b2529,nifU
+eco:b3807,iscS
+eco:b2530,iscS
+eco:b2529,iscS
+eco:b3807,cyaY
+eco:b2530,cyaY
+eco:b2529,cyaY
+eco:b3807,IscS sulfur acceptor protein
+eco:b2530,IscS sulfur acceptor protein
+eco:b2529,IscS sulfur acceptor protein
+eco:b3807,Flavin adenine dinucleotide oxidized
+eco:b2530,Flavin adenine dinucleotide oxidized
+eco:b2529,Flavin adenine dinucleotide oxidized
+eco:b3807,IscU with bound [2Fe-2S] cluster
+eco:b2530,IscU with bound [2Fe-2S] cluster
+eco:b2529,IscU with bound [2Fe-2S] cluster
+eco:b3807,IscS with bound sulfur
+eco:b2530,IscS with bound sulfur
+eco:b2529,IscS with bound sulfur
+eco:b3807,IscU scaffold protein
+eco:b2530,IscU scaffold protein
+eco:b2529,IscU scaffold protein
+eco:b3807,Fe2+
+eco:b2530,Fe2+
+eco:b2529,Fe2+
+eco:b3807,Flavin adenine dinucleotide reduced
+eco:b2530,Flavin adenine dinucleotide reduced
+eco:b2529,Flavin adenine dinucleotide reduced
+eco:b3846,trans-Hexadec-2-enoyl-CoA
+eco:b3846,fadB
+eco:b3846,Hexadecenoyl-CoA (n-C16:1CoA)
+eco:b3846,trans-Hexadec-2-enoyl-CoA
+eco:b3846,Hexadecenoyl-CoA (n-C16:1CoA)
+eco:b3770,L-Leucine
+eco:b4054,L-Leucine
+eco:b3770,4-Methyl-2-oxopentanoate
+eco:b4054,4-Methyl-2-oxopentanoate
+eco:b3770,2-Oxoglutarate
+eco:b4054,2-Oxoglutarate
+eco:b3770,L-Glutamate
+eco:b4054,L-Glutamate
+eco:b3770,ilvE
+eco:b4054,ilvE
+eco:b3770,L-Leucine
+eco:b4054,L-Leucine
+eco:b3770,tyrB
+eco:b4054,tyrB
+eco:b3770,L-Glutamate
+eco:b4054,L-Glutamate
+eco:b3770,2-Oxoglutarate
+eco:b4054,2-Oxoglutarate
+eco:b3770,4-Methyl-2-oxopentanoate
+eco:b4054,4-Methyl-2-oxopentanoate
+eco:b0103,Coenzyme A
+eco:b0103,Dephospho-CoA
+eco:b0103,ATP
+eco:b0103,ADP
+eco:b0103,Coenzyme A
+eco:b0103,coaE
+eco:b0103,ATP
+eco:b0103,ADP
+eco:b0103,Dephospho-CoA
+eco:b2557,L-Glutamate
+eco:b2557,Phosphate
+eco:b2557,ADP
+eco:b2557,L-Glutamine
+eco:b2557,2-(Formamido)-N1-(5-phospho-D-ribosyl)acetamidine
+eco:b2557,ATP
+eco:b2557,N2-Formyl-N1-(5-phospho-D-ribosyl)glycinamide
+eco:b2557,L-Glutamate
+eco:b2557,purL
+eco:b2557,Phosphate
+eco:b2557,ADP
+eco:b2557,L-Glutamine
+eco:b2557,2-(Formamido)-N1-(5-phospho-D-ribosyl)acetamidine
+eco:b2557,ATP
+eco:b2557,N2-Formyl-N1-(5-phospho-D-ribosyl)glycinamide
+eco:b0241,nickel
+eco:b0929,nickel
+eco:b1377,nickel
+eco:b2215,nickel
+eco:b0241,nickel
+eco:b0929,nickel
+eco:b1377,nickel
+eco:b2215,nickel
+eco:b0241,nickel
+eco:b0929,nickel
+eco:b1377,nickel
+eco:b2215,nickel
+eco:b0241,nickel
+eco:b0929,nickel
+eco:b1377,nickel
+eco:b2215,nickel
+eco:b0908,5-O-(1-Carboxyvinyl)-3-phosphoshikimate
+eco:b0908,Phosphate
+eco:b0908,aroA
+eco:b0908,Shikimate 5-phosphate
+eco:b0908,Phosphoenolpyruvate
+eco:b0908,5-O-(1-Carboxyvinyl)-3-phosphoshikimate
+eco:b0908,Shikimate 5-phosphate
+eco:b0908,Phosphate
+eco:b0908,Phosphoenolpyruvate
+eco:b3804,Uroporphyrinogen III
+eco:b3804,hemD
+eco:b3804,Hydroxymethylbilane
+eco:b3804,Uroporphyrinogen III
+eco:b3804,Hydroxymethylbilane
+eco:b1692,Shikimate
+eco:b3281,Shikimate
+eco:b1692,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3281,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1692,3-Dehydroshikimate
+eco:b3281,3-Dehydroshikimate
+eco:b1692,Nicotinamide adenine dinucleotide phosphate
+eco:b3281,Nicotinamide adenine dinucleotide phosphate
+eco:b1692,aroE
+eco:b3281,aroE
+eco:b1692,ydiB
+eco:b3281,ydiB
+eco:b1692,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3281,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1692,Shikimate
+eco:b3281,Shikimate
+eco:b1692,Nicotinamide adenine dinucleotide phosphate
+eco:b3281,Nicotinamide adenine dinucleotide phosphate
+eco:b1692,3-Dehydroshikimate
+eco:b3281,3-Dehydroshikimate
+eco:b1263,N-(5-Phospho-D-ribosyl)anthranilate
+eco:b1263,5-Phospho-alpha-D-ribose 1-diphosphate
+eco:b1263,Anthranilate
+eco:b1263,Diphosphate
+eco:b1263,N-(5-Phospho-D-ribosyl)anthranilate
+eco:b1263,trpD
+eco:b1263,Anthranilate
+eco:b1263,Diphosphate
+eco:b1263,5-Phospho-alpha-D-ribose 1-diphosphate
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,3-Oxohexadecanoyl-CoA
+eco:b2341,3-Oxohexadecanoyl-CoA
+eco:b3846,(S)-3-Hydroxyhexadecanoyl-CoA
+eco:b2341,(S)-3-Hydroxyhexadecanoyl-CoA
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b3846,(S)-3-Hydroxyhexadecanoyl-CoA
+eco:b2341,(S)-3-Hydroxyhexadecanoyl-CoA
+eco:b3846,3-Oxohexadecanoyl-CoA
+eco:b2341,3-Oxohexadecanoyl-CoA
+eco:b1779,3-Phospho-D-glyceroyl phosphate
+eco:b1779,Nicotinamide adenine dinucleotide - reduced
+eco:b1779,Glyceraldehyde 3-phosphate
+eco:b1779,Phosphate
+eco:b1779,Nicotinamide adenine dinucleotide
+eco:b1779,Nicotinamide adenine dinucleotide - reduced
+eco:b1779,3-Phospho-D-glyceroyl phosphate
+eco:b1779,gapA
+eco:b1779,Nicotinamide adenine dinucleotide
+eco:b1779,Phosphate
+eco:b1779,Glyceraldehyde 3-phosphate
+eco:b0126,CO2
+eco:b0339,CO2
+eco:b0126,cynT
+eco:b0339,cynT
+eco:b0126,Bicarbonate
+eco:b0339,Bicarbonate
+eco:b0126,Bicarbonate
+eco:b0339,Bicarbonate
+eco:b0126,can
+eco:b0339,can
+eco:b0126,CO2
+eco:b0339,CO2
+eco:b0420,Pyruvate
+eco:b0420,1-deoxy-D-xylulose 5-phosphate
+eco:b0420,CO2
+eco:b0420,dxs
+eco:b0420,1-deoxy-D-xylulose 5-phosphate
+eco:b0420,Glyceraldehyde 3-phosphate
+eco:b0420,Pyruvate
+eco:b0420,CO2
+eco:b0420,Glyceraldehyde 3-phosphate
+eco:b2224,Acetoacetyl-CoA
+eco:b2342,Acetoacetyl-CoA
+eco:b3845,Acetoacetyl-CoA
+eco:b2224,Coenzyme A
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2224,fadI
+eco:b2342,fadI
+eco:b3845,fadI
+eco:b2224,fadA
+eco:b2342,fadA
+eco:b3845,fadA
+eco:b2224,Acetyl-CoA
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b2224,Coenzyme A
+eco:b2342,Coenzyme A
+eco:b3845,Coenzyme A
+eco:b2224,atoB
+eco:b2342,atoB
+eco:b3845,atoB
+eco:b2224,Acetoacetyl-CoA
+eco:b2342,Acetoacetyl-CoA
+eco:b3845,Acetoacetyl-CoA
+eco:b2224,Acetyl-CoA
+eco:b2342,Acetyl-CoA
+eco:b3845,Acetyl-CoA
+eco:b1849,Phosphate
+eco:b1849,ADP
+eco:b1849,N2-Formyl-N1-(5-phospho-D-ribosyl)glycinamide
+eco:b1849,ATP
+eco:b1849,N1-(5-Phospho-D-ribosyl)glycinamide
+eco:b1849,Formate
+eco:b1849,Phosphate
+eco:b1849,N2-Formyl-N1-(5-phospho-D-ribosyl)glycinamide
+eco:b1849,purT
+eco:b1849,N1-(5-Phospho-D-ribosyl)glycinamide
+eco:b1849,ADP
+eco:b1849,Formate
+eco:b1849,ATP
+eco:b3956,Phosphate
+eco:b3956,Phosphoenolpyruvate
+eco:b3956,Oxaloacetate
+eco:b3956,Phosphate
+eco:b3956,CO2
+eco:b3956,ppc
+eco:b3956,Phosphoenolpyruvate
+eco:b3956,CO2
+eco:b3956,Oxaloacetate
+eco:b3771,(S)-3-Methyl-2-oxopentanoate
+eco:b3771,ilvD
+eco:b3771,"(R)-2,3-Dihydroxy-3-methylpentanoate"
+eco:b3771,(S)-3-Methyl-2-oxopentanoate
+eco:b3771,"(R)-2,3-Dihydroxy-3-methylpentanoate"
+eco:b3972,UDP-N-acetylmuramate
+eco:b3972,UDP-N-acetyl-3-O-(1-carboxyvinyl)-D-glucosamine
+eco:b3972,Nicotinamide adenine dinucleotide phosphate
+eco:b3972,UDP-N-acetylmuramate
+eco:b3972,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3972,murB
+eco:b3972,UDP-N-acetyl-3-O-(1-carboxyvinyl)-D-glucosamine
+eco:b3972,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3972,Nicotinamide adenine dinucleotide phosphate
+eco:b2836,AMP
+eco:b1094,AMP
+eco:b2836,Diphosphate
+eco:b1094,Diphosphate
+eco:b2836,cis-hexadec-9-enoyl-[acyl-carrier protein] (n-C16:1)
+eco:b1094,cis-hexadec-9-enoyl-[acyl-carrier protein] (n-C16:1)
+eco:b2836,ATP
+eco:b1094,ATP
+eco:b2836,acyl carrier protein
+eco:b1094,acyl carrier protein
+eco:b2836,Hexadecenoate (n-C16:1)
+eco:b1094,Hexadecenoate (n-C16:1)
+eco:b2836,acpP
+eco:b1094,acpP
+eco:b2836,aas
+eco:b1094,aas
+eco:b2836,AMP
+eco:b1094,AMP
+eco:b2836,Diphosphate
+eco:b1094,Diphosphate
+eco:b2836,cis-hexadec-9-enoyl-[acyl-carrier protein] (n-C16:1)
+eco:b1094,cis-hexadec-9-enoyl-[acyl-carrier protein] (n-C16:1)
+eco:b2836,ATP
+eco:b1094,ATP
+eco:b2836,acyl carrier protein
+eco:b1094,acyl carrier protein
+eco:b2836,Hexadecenoate (n-C16:1)
+eco:b1094,Hexadecenoate (n-C16:1)
+eco:b3857,Diphosphate
+eco:b3856,Diphosphate
+eco:b3857,GTP
+eco:b3856,GTP
+eco:b3857,bis-molybdopterin mono-guanine dinucleotide
+eco:b3856,bis-molybdopterin mono-guanine dinucleotide
+eco:b3857,bis-molybdopterin guanine dinucleotide
+eco:b3856,bis-molybdopterin guanine dinucleotide
+eco:b3857,mobA
+eco:b3856,mobA
+eco:b3857,mobB
+eco:b3856,mobB
+eco:b3857,GTP
+eco:b3856,GTP
+eco:b3857,Diphosphate
+eco:b3856,Diphosphate
+eco:b3857,bis-molybdopterin guanine dinucleotide
+eco:b3856,bis-molybdopterin guanine dinucleotide
+eco:b3857,bis-molybdopterin mono-guanine dinucleotide
+eco:b3856,bis-molybdopterin mono-guanine dinucleotide
+eco:b3041,"3,4-dihydroxy-2-butanone 4-phosphate"
+eco:b3041,Formate
+eco:b3041,Formate
+eco:b3041,D-Ribulose 5-phosphate
+eco:b3041,ribB
+eco:b3041,D-Ribulose 5-phosphate
+eco:b3041,"3,4-dihydroxy-2-butanone 4-phosphate"
+eco:b1262,N-(5-Phospho-D-ribosyl)anthranilate
+eco:b1262,1-(2-Carboxyphenylamino)-1-deoxy-D-ribulose 5-phosphate
+eco:b1262,1-(2-Carboxyphenylamino)-1-deoxy-D-ribulose 5-phosphate
+eco:b1262,N-(5-Phospho-D-ribosyl)anthranilate
+eco:b1262,trpC
+eco:b3187,all-trans-Octaprenyl diphosphate
+eco:b3187,Diphosphate
+eco:b3187,ispB
+eco:b3187,Isopentenyl diphosphate
+eco:b3187,Farnesyl diphosphate
+eco:b3187,all-trans-Octaprenyl diphosphate
+eco:b3187,Isopentenyl diphosphate
+eco:b3187,Diphosphate
+eco:b3187,Farnesyl diphosphate
+eco:b0826,MoaD Protein with carboxylate
+eco:b0826,Diphosphate
+eco:b0826,MoaD Protein with bound AMP
+eco:b0826,moeB
+eco:b0826,Diphosphate
+eco:b0826,ATP
+eco:b0826,MoaD Protein with carboxylate
+eco:b0826,MoaD Protein with bound AMP
+eco:b0826,ATP
+eco:b0114,CO2
+eco:b0115,CO2
+eco:b0116,CO2
+eco:b0114,Acetyl-CoA
+eco:b0115,Acetyl-CoA
+eco:b0116,Acetyl-CoA
+eco:b0114,Nicotinamide adenine dinucleotide - reduced
+eco:b0115,Nicotinamide adenine dinucleotide - reduced
+eco:b0116,Nicotinamide adenine dinucleotide - reduced
+eco:b0114,Nicotinamide adenine dinucleotide
+eco:b0115,Nicotinamide adenine dinucleotide
+eco:b0116,Nicotinamide adenine dinucleotide
+eco:b0114,Pyruvate
+eco:b0115,Pyruvate
+eco:b0116,Pyruvate
+eco:b0114,aceE
+eco:b0115,aceE
+eco:b0116,aceE
+eco:b0114,Coenzyme A
+eco:b0115,Coenzyme A
+eco:b0116,Coenzyme A
+eco:b0114,lpdA
+eco:b0115,lpdA
+eco:b0116,lpdA
+eco:b0114,Nicotinamide adenine dinucleotide - reduced
+eco:b0115,Nicotinamide adenine dinucleotide - reduced
+eco:b0116,Nicotinamide adenine dinucleotide - reduced
+eco:b0114,CO2
+eco:b0115,CO2
+eco:b0116,CO2
+eco:b0114,aceF
+eco:b0115,aceF
+eco:b0116,aceF
+eco:b0114,Pyruvate
+eco:b0115,Pyruvate
+eco:b0116,Pyruvate
+eco:b0114,Acetyl-CoA
+eco:b0115,Acetyl-CoA
+eco:b0116,Acetyl-CoA
+eco:b0114,Nicotinamide adenine dinucleotide
+eco:b0115,Nicotinamide adenine dinucleotide
+eco:b0116,Nicotinamide adenine dinucleotide
+eco:b0114,Coenzyme A
+eco:b0115,Coenzyme A
+eco:b0116,Coenzyme A
+eco:b3616,Nicotinamide adenine dinucleotide - reduced
+eco:b3616,L-2-Amino-3-oxobutanoate
+eco:b3616,Nicotinamide adenine dinucleotide
+eco:b3616,L-Threonine
+eco:b3616,L-2-Amino-3-oxobutanoate
+eco:b3616,tdh
+eco:b3616,Nicotinamide adenine dinucleotide - reduced
+eco:b3616,Nicotinamide adenine dinucleotide
+eco:b3616,L-Threonine
+eco:b1190,D-Alanine
+eco:b4053,D-Alanine
+eco:b1190,L-Alanine
+eco:b4053,L-Alanine
+eco:b1190,dadX
+eco:b4053,dadX
+eco:b1190,alr
+eco:b4053,alr
+eco:b1190,D-Alanine
+eco:b4053,D-Alanine
+eco:b1190,L-Alanine
+eco:b4053,L-Alanine
+eco:b1602,Nicotinamide adenine dinucleotide
+eco:b1603,Nicotinamide adenine dinucleotide
+eco:b1602,Nicotinamide adenine dinucleotide phosphate
+eco:b1603,Nicotinamide adenine dinucleotide phosphate
+eco:b1602,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1603,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1602,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1603,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b1602,Nicotinamide adenine dinucleotide - reduced
+eco:b1603,Nicotinamide adenine dinucleotide - reduced
+eco:b1602,Nicotinamide adenine dinucleotide - reduced
+eco:b1603,Nicotinamide adenine dinucleotide - reduced
+eco:b1602,Nicotinamide adenine dinucleotide
+eco:b1603,Nicotinamide adenine dinucleotide
+eco:b1602,Nicotinamide adenine dinucleotide phosphate
+eco:b1603,Nicotinamide adenine dinucleotide phosphate
+eco:b2530,Nicotinamide adenine dinucleotide phosphate
+eco:b3992,Nicotinamide adenine dinucleotide phosphate
+eco:b3990,Nicotinamide adenine dinucleotide phosphate
+eco:b0423,Nicotinamide adenine dinucleotide phosphate
+eco:b4407,Nicotinamide adenine dinucleotide phosphate
+eco:b2530,Diphosphate
+eco:b3992,Diphosphate
+eco:b3990,Diphosphate
+eco:b0423,Diphosphate
+eco:b4407,Diphosphate
+eco:b2530,AMP
+eco:b3992,AMP
+eco:b3990,AMP
+eco:b0423,AMP
+eco:b4407,AMP
+eco:b2530,IscS sulfur acceptor protein
+eco:b3992,IscS sulfur acceptor protein
+eco:b3990,IscS sulfur acceptor protein
+eco:b0423,IscS sulfur acceptor protein
+eco:b4407,IscS sulfur acceptor protein
+eco:b2530,CO2
+eco:b3992,CO2
+eco:b3990,CO2
+eco:b0423,CO2
+eco:b4407,CO2
+eco:b2530,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3992,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3990,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0423,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b4407,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b2530,IscS with bound sulfur
+eco:b3992,IscS with bound sulfur
+eco:b3990,IscS with bound sulfur
+eco:b0423,IscS with bound sulfur
+eco:b4407,IscS with bound sulfur
+eco:b2530,4-Methyl-5-(2-phosphoethyl)-thiazole
+eco:b3992,4-Methyl-5-(2-phosphoethyl)-thiazole
+eco:b3990,4-Methyl-5-(2-phosphoethyl)-thiazole
+eco:b0423,4-Methyl-5-(2-phosphoethyl)-thiazole
+eco:b4407,4-Methyl-5-(2-phosphoethyl)-thiazole
+eco:b2530,dehydroglycine
+eco:b3992,dehydroglycine
+eco:b3990,dehydroglycine
+eco:b0423,dehydroglycine
+eco:b4407,dehydroglycine
+eco:b2530,1-deoxy-D-xylulose 5-phosphate
+eco:b3992,1-deoxy-D-xylulose 5-phosphate
+eco:b3990,1-deoxy-D-xylulose 5-phosphate
+eco:b0423,1-deoxy-D-xylulose 5-phosphate
+eco:b4407,1-deoxy-D-xylulose 5-phosphate
+eco:b2530,thiI
+eco:b3992,thiI
+eco:b3990,thiI
+eco:b0423,thiI
+eco:b4407,thiI
+eco:b2530,ATP
+eco:b3992,ATP
+eco:b3990,ATP
+eco:b0423,ATP
+eco:b4407,ATP
+eco:b2530,thiF
+eco:b3992,thiF
+eco:b3990,thiF
+eco:b0423,thiF
+eco:b4407,thiF
+eco:b2530,thiH
+eco:b3992,thiH
+eco:b3990,thiH
+eco:b0423,thiH
+eco:b4407,thiH
+eco:b2530,thiS
+eco:b3992,thiS
+eco:b3990,thiS
+eco:b0423,thiS
+eco:b4407,thiS
+eco:b2530,iscS
+eco:b3992,iscS
+eco:b3990,iscS
+eco:b0423,iscS
+eco:b4407,iscS
+eco:b2530,Nicotinamide adenine dinucleotide phosphate
+eco:b3992,Nicotinamide adenine dinucleotide phosphate
+eco:b3990,Nicotinamide adenine dinucleotide phosphate
+eco:b0423,Nicotinamide adenine dinucleotide phosphate
+eco:b4407,Nicotinamide adenine dinucleotide phosphate
+eco:b2530,Diphosphate
+eco:b3992,Diphosphate
+eco:b3990,Diphosphate
+eco:b0423,Diphosphate
+eco:b4407,Diphosphate
+eco:b2530,AMP
+eco:b3992,AMP
+eco:b3990,AMP
+eco:b0423,AMP
+eco:b4407,AMP
+eco:b2530,IscS sulfur acceptor protein
+eco:b3992,IscS sulfur acceptor protein
+eco:b3990,IscS sulfur acceptor protein
+eco:b0423,IscS sulfur acceptor protein
+eco:b4407,IscS sulfur acceptor protein
+eco:b2530,CO2
+eco:b3992,CO2
+eco:b3990,CO2
+eco:b0423,CO2
+eco:b4407,CO2
+eco:b2530,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3992,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b3990,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0423,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b4407,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b2530,IscS with bound sulfur
+eco:b3992,IscS with bound sulfur
+eco:b3990,IscS with bound sulfur
+eco:b0423,IscS with bound sulfur
+eco:b4407,IscS with bound sulfur
+eco:b2530,4-Methyl-5-(2-phosphoethyl)-thiazole
+eco:b3992,4-Methyl-5-(2-phosphoethyl)-thiazole
+eco:b3990,4-Methyl-5-(2-phosphoethyl)-thiazole
+eco:b0423,4-Methyl-5-(2-phosphoethyl)-thiazole
+eco:b4407,4-Methyl-5-(2-phosphoethyl)-thiazole
+eco:b2530,dehydroglycine
+eco:b3992,dehydroglycine
+eco:b3990,dehydroglycine
+eco:b0423,dehydroglycine
+eco:b4407,dehydroglycine
+eco:b2530,1-deoxy-D-xylulose 5-phosphate
+eco:b3992,1-deoxy-D-xylulose 5-phosphate
+eco:b3990,1-deoxy-D-xylulose 5-phosphate
+eco:b0423,1-deoxy-D-xylulose 5-phosphate
+eco:b4407,1-deoxy-D-xylulose 5-phosphate
+eco:b2530,ATP
+eco:b3992,ATP
+eco:b3990,ATP
+eco:b0423,ATP
+eco:b4407,ATP
+eco:b2024,5-[(5-phospho-1-deoxyribulos-1-ylamino)methylideneamino]-1-(5-phosphoribosyl)imidazole-4-carboxamide
+eco:b2024,hisA
+eco:b2024,1-(5-Phosphoribosyl)-5-[(5-phosphoribosylamino)methylideneamino]imidazole-4-carboxamide
+eco:b2024,1-(5-Phosphoribosyl)-5-[(5-phosphoribosylamino)methylideneamino]imidazole-4-carboxamide
+eco:b2024,5-[(5-phospho-1-deoxyribulos-1-ylamino)methylideneamino]-1-(5-phosphoribosyl)imidazole-4-carboxamide
+eco:b2530,IscU with bound [2Fe-2S] cluster
+eco:b2529,IscU with bound [2Fe-2S] cluster
+eco:b2530,IscU scaffold protein
+eco:b2529,IscU scaffold protein
+eco:b2530,IscS with bound sulfur
+eco:b2529,IscS with bound sulfur
+eco:b2530,IscS sulfur acceptor protein
+eco:b2529,IscS sulfur acceptor protein
+eco:b2530,nifU
+eco:b2529,nifU
+eco:b2530,[2Fe-1S] desulfurated iron-sulfur cluster
+eco:b2529,[2Fe-1S] desulfurated iron-sulfur cluster
+eco:b2530,IscS sulfur acceptor protein
+eco:b2529,IscS sulfur acceptor protein
+eco:b2530,iscS
+eco:b2529,iscS
+eco:b2530,IscU with bound [2Fe-2S] cluster
+eco:b2529,IscU with bound [2Fe-2S] cluster
+eco:b2530,IscS with bound sulfur
+eco:b2529,IscS with bound sulfur
+eco:b2530,[2Fe-1S] desulfurated iron-sulfur cluster
+eco:b2529,[2Fe-1S] desulfurated iron-sulfur cluster
+eco:b2530,IscU scaffold protein
+eco:b2529,IscU scaffold protein
+eco:b0381,D-Alanyl-D-alanine
+eco:b0092,D-Alanyl-D-alanine
+eco:b0381,ADP
+eco:b0092,ADP
+eco:b0381,Phosphate
+eco:b0092,Phosphate
+eco:b0381,D-Alanine
+eco:b0092,D-Alanine
+eco:b0381,ATP
+eco:b0092,ATP
+eco:b0381,Phosphate
+eco:b0092,Phosphate
+eco:b0381,ddlA
+eco:b0092,ddlA
+eco:b0381,ddlB
+eco:b0092,ddlB
+eco:b0381,ADP
+eco:b0092,ADP
+eco:b0381,ATP
+eco:b0092,ATP
+eco:b0381,D-Alanyl-D-alanine
+eco:b0092,D-Alanyl-D-alanine
+eco:b0381,D-Alanine
+eco:b0092,D-Alanine
+eco:b3803,dihydrosirohydrochlorin
+eco:b3368,dihydrosirohydrochlorin
+eco:b3803,Uroporphyrinogen III
+eco:b3368,Uroporphyrinogen III
+eco:b3803,S-Adenosyl-L-homocysteine
+eco:b3368,S-Adenosyl-L-homocysteine
+eco:b3803,hemX
+eco:b3368,hemX
+eco:b3803,S-Adenosyl-L-methionine
+eco:b3368,S-Adenosyl-L-methionine
+eco:b3803,cysG
+eco:b3368,cysG
+eco:b3803,S-Adenosyl-L-homocysteine
+eco:b3368,S-Adenosyl-L-homocysteine
+eco:b3803,Uroporphyrinogen III
+eco:b3368,Uroporphyrinogen III
+eco:b3803,dihydrosirohydrochlorin
+eco:b3368,dihydrosirohydrochlorin
+eco:b3803,S-Adenosyl-L-methionine
+eco:b3368,S-Adenosyl-L-methionine
+eco:b1612,Fumarate
+eco:b4122,Fumarate
+eco:b1611,Fumarate
+eco:b1612,fumA
+eco:b4122,fumA
+eco:b1611,fumA
+eco:b1612,L-Malate
+eco:b4122,L-Malate
+eco:b1611,L-Malate
+eco:b1612,fumB
+eco:b4122,fumB
+eco:b1611,fumB
+eco:b1612,fumC
+eco:b4122,fumC
+eco:b1611,fumC
+eco:b1612,L-Malate
+eco:b4122,L-Malate
+eco:b1611,L-Malate
+eco:b1612,Fumarate
+eco:b4122,Fumarate
+eco:b1611,Fumarate
+eco:b3607,Coenzyme A
+eco:b3607,Acetyl-CoA
+eco:b3607,O-Acetyl-L-serine
+eco:b3607,L-Serine
+eco:b3607,Coenzyme A
+eco:b3607,O-Acetyl-L-serine
+eco:b3607,cysE
+eco:b3607,Acetyl-CoA
+eco:b3607,L-Serine
+eco:b3771,"(R)-2,3-Dihydroxy-3-methylbutanoate"
+eco:b3771,ilvD
+eco:b3771,3-Methyl-2-oxobutanoate
+eco:b3771,"(R)-2,3-Dihydroxy-3-methylbutanoate"
+eco:b3771,3-Methyl-2-oxobutanoate
+eco:b3648,GDP
+eco:b3648,ADP
+eco:b3648,ATP
+eco:b3648,GMP
+eco:b3648,ADP
+eco:b3648,gmk
+eco:b3648,GDP
+eco:b3648,ATP
+eco:b3648,GMP
+eco:b3670,Pyruvate
+eco:b3671,Pyruvate
+eco:b0077,Pyruvate
+eco:b0078,Pyruvate
+eco:b3670,CO2
+eco:b3671,CO2
+eco:b0077,CO2
+eco:b0078,CO2
+eco:b3670,(S)-2-Acetolactate
+eco:b3671,(S)-2-Acetolactate
+eco:b0077,(S)-2-Acetolactate
+eco:b0078,(S)-2-Acetolactate
+eco:b3670,ilvH
+eco:b3671,ilvH
+eco:b0077,ilvH
+eco:b0078,ilvH
+eco:b3670,ilvI
+eco:b3671,ilvI
+eco:b0077,ilvI
+eco:b0078,ilvI
+eco:b3670,ilvN
+eco:b3671,ilvN
+eco:b0077,ilvN
+eco:b0078,ilvN
+eco:b3670,CO2
+eco:b3671,CO2
+eco:b0077,CO2
+eco:b0078,CO2
+eco:b3670,ilvB
+eco:b3671,ilvB
+eco:b0077,ilvB
+eco:b0078,ilvB
+eco:b3670,(S)-2-Acetolactate
+eco:b3671,(S)-2-Acetolactate
+eco:b0077,(S)-2-Acetolactate
+eco:b0078,(S)-2-Acetolactate
+eco:b3670,Pyruvate
+eco:b3671,Pyruvate
+eco:b0077,Pyruvate
+eco:b0078,Pyruvate
+eco:b2323,CO2
+eco:b1095,CO2
+eco:b2323,Malonyl-[acyl-carrier protein]
+eco:b1095,Malonyl-[acyl-carrier protein]
+eco:b2323,acyl carrier protein
+eco:b1095,acyl carrier protein
+eco:b2323,3-Oxotetradecanoyl-[acyl-carrier protein]
+eco:b1095,3-Oxotetradecanoyl-[acyl-carrier protein]
+eco:b2323,fabB
+eco:b1095,fabB
+eco:b2323,fabF
+eco:b1095,fabF
+eco:b2323,Dodecanoyl-ACP (n-C12:0ACP)
+eco:b1095,Dodecanoyl-ACP (n-C12:0ACP)
+eco:b2323,acyl carrier protein
+eco:b1095,acyl carrier protein
+eco:b2323,CO2
+eco:b1095,CO2
+eco:b2323,Dodecanoyl-ACP (n-C12:0ACP)
+eco:b1095,Dodecanoyl-ACP (n-C12:0ACP)
+eco:b2323,3-Oxotetradecanoyl-[acyl-carrier protein]
+eco:b1095,3-Oxotetradecanoyl-[acyl-carrier protein]
+eco:b2323,Malonyl-[acyl-carrier protein]
+eco:b1095,Malonyl-[acyl-carrier protein]
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,(S)-3-Hydroxydodecanoyl-CoA
+eco:b2341,(S)-3-Hydroxydodecanoyl-CoA
+eco:b3846,3-Oxododecanoyl-CoA
+eco:b2341,3-Oxododecanoyl-CoA
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b3846,Nicotinamide adenine dinucleotide
+eco:b2341,Nicotinamide adenine dinucleotide
+eco:b3846,fadJ
+eco:b2341,fadJ
+eco:b3846,fadB
+eco:b2341,fadB
+eco:b3846,Nicotinamide adenine dinucleotide - reduced
+eco:b2341,Nicotinamide adenine dinucleotide - reduced
+eco:b3846,3-Oxododecanoyl-CoA
+eco:b2341,3-Oxododecanoyl-CoA
+eco:b3846,(S)-3-Hydroxydodecanoyl-CoA
+eco:b2341,(S)-3-Hydroxydodecanoyl-CoA
+eco:b0096,UDP-3-O-(3-hydroxytetradecanoyl)-D-glucosamine
+eco:b0096,Acetate
+eco:b0096,lpxC
+eco:b0096,UDP-3-O-(3-hydroxytetradecanoyl)-N-acetylglucosamine
+eco:b0096,UDP-3-O-(3-hydroxytetradecanoyl)-N-acetylglucosamine
+eco:b0096,UDP-3-O-(3-hydroxytetradecanoyl)-D-glucosamine
+eco:b0096,Acetate
+eco:b4214,AMP
+eco:b4214,"Adenosine 3',5'-bisphosphate"
+eco:b4214,Phosphate
+eco:b4214,Phosphate
+eco:b4214,cysQ
+eco:b4214,AMP
+eco:b4214,"Adenosine 3',5'-bisphosphate"
+eco:b2400,L-Glutamyl-tRNA(Glu)
+eco:b2400,Diphosphate
+eco:b2400,L-Glutamate
+eco:b2400,AMP
+eco:b2400,tRNA (Glu)
+eco:b2400,gltX
+eco:b2400,Diphosphate
+eco:b2400,ATP
+eco:b2400,AMP
+eco:b2400,L-Glutamyl-tRNA(Glu)
+eco:b2400,ATP
+eco:b2400,tRNA (Glu)
+eco:b2400,L-Glutamate
+eco:b2762,Sulfite
+eco:b2582,Sulfite
+eco:b3781,Sulfite
+eco:b2762,Oxidized thioredoxin
+eco:b2582,Oxidized thioredoxin
+eco:b3781,Oxidized thioredoxin
+eco:b2762,3'-Phosphoadenylyl sulfate
+eco:b2582,3'-Phosphoadenylyl sulfate
+eco:b3781,3'-Phosphoadenylyl sulfate
+eco:b2762,"Adenosine 3',5'-bisphosphate"
+eco:b2582,"Adenosine 3',5'-bisphosphate"
+eco:b3781,"Adenosine 3',5'-bisphosphate"
+eco:b2762,Reduced thioredoxin
+eco:b2582,Reduced thioredoxin
+eco:b3781,Reduced thioredoxin
+eco:b2762,trxA
+eco:b2582,trxA
+eco:b3781,trxA
+eco:b2762,cysH
+eco:b2582,cysH
+eco:b3781,cysH
+eco:b2762,trxC
+eco:b2582,trxC
+eco:b3781,trxC
+eco:b2762,Sulfite
+eco:b2582,Sulfite
+eco:b3781,Sulfite
+eco:b2762,Oxidized thioredoxin
+eco:b2582,Oxidized thioredoxin
+eco:b3781,Oxidized thioredoxin
+eco:b2762,3'-Phosphoadenylyl sulfate
+eco:b2582,3'-Phosphoadenylyl sulfate
+eco:b3781,3'-Phosphoadenylyl sulfate
+eco:b2762,"Adenosine 3',5'-bisphosphate"
+eco:b2582,"Adenosine 3',5'-bisphosphate"
+eco:b3781,"Adenosine 3',5'-bisphosphate"
+eco:b2762,Reduced thioredoxin
+eco:b2582,Reduced thioredoxin
+eco:b3781,Reduced thioredoxin
+eco:b3396,Undecaprenyl diphosphate
+eco:b1069,Undecaprenyl diphosphate
+eco:b0149,Undecaprenyl diphosphate
+eco:b2519,Undecaprenyl diphosphate
+eco:b3396,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b1069,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b0149,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b2519,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b3396,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b1069,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b0149,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b2519,"two linked disacharide pentapeptide murein units (uncrosslinked, middle of chain)"
+eco:b3396,Undecaprenyl diphosphate
+eco:b1069,Undecaprenyl diphosphate
+eco:b0149,Undecaprenyl diphosphate
+eco:b2519,Undecaprenyl diphosphate
+eco:b3396,"Undecaprenyl-diphospho-N-acetylmuramoyl-(N-acetylglucosamine)-L-ala-D-glu-meso-2,6-diaminopimeloyl-D-ala-D-ala"
+eco:b1069,"Undecaprenyl-diphospho-N-acetylmuramoyl-(N-acetylglucosamine)-L-ala-D-glu-meso-2,6-diaminopimeloyl-D-ala-D-ala"
+eco:b0149,"Undecaprenyl-diphospho-N-acetylmuramoyl-(N-acetylglucosamine)-L-ala-D-glu-meso-2,6-diaminopimeloyl-D-ala-D-ala"
+eco:b2519,"Undecaprenyl-diphospho-N-acetylmuramoyl-(N-acetylglucosamine)-L-ala-D-glu-meso-2,6-diaminopimeloyl-D-ala-D-ala"
+eco:b3396,"Undecaprenyl-diphospho-N-acetylmuramoyl-(N-acetylglucosamine)-L-ala-D-glu-meso-2,6-diaminopimeloyl-D-ala-D-ala"
+eco:b1069,"Undecaprenyl-diphospho-N-acetylmuramoyl-(N-acetylglucosamine)-L-ala-D-glu-meso-2,6-diaminopimeloyl-D-ala-D-ala"
+eco:b0149,"Undecaprenyl-diphospho-N-acetylmuramoyl-(N-acetylglucosamine)-L-ala-D-glu-meso-2,6-diaminopimeloyl-D-ala-D-ala"
+eco:b2519,"Undecaprenyl-diphospho-N-acetylmuramoyl-(N-acetylglucosamine)-L-ala-D-glu-meso-2,6-diaminopimeloyl-D-ala-D-ala"
+eco:b3939,Succinate
+eco:b3939,O-Succinyl-L-homoserine
+eco:b3939,L-Cysteine
+eco:b3939,L-Cystathionine
+eco:b3939,Succinate
+eco:b3939,metB
+eco:b3939,L-Cysteine
+eco:b3939,L-Cystathionine
+eco:b3939,O-Succinyl-L-homoserine
+eco:b0827,Cu2+
+eco:b0827,bis-molybdenum cofactor
+eco:b0827,adenylated molybdopterin
+eco:b0827,AMP
+eco:b0827,Cu2+
+eco:b0827,molybdenum cofactor
+eco:b0827,moeA
+eco:b0827,AMP
+eco:b0827,adenylated molybdopterin
+eco:b0827,bis-molybdenum cofactor
+eco:b0827,molybdenum cofactor
+eco:b3117,2-Oxobutanoate
+eco:b3772,2-Oxobutanoate
+eco:b3117,L-Threonine
+eco:b3772,L-Threonine
+eco:b3117,Ammonium
+eco:b3772,Ammonium
+eco:b3117,ilvA
+eco:b3772,ilvA
+eco:b3117,tdcB
+eco:b3772,tdcB
+eco:b3117,L-Threonine
+eco:b3772,L-Threonine
+eco:b3117,Ammonium
+eco:b3772,Ammonium
+eco:b3117,2-Oxobutanoate
+eco:b3772,2-Oxobutanoate
+eco:b0386,L-Proline
+eco:b0386,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0386,Nicotinamide adenine dinucleotide phosphate
+eco:b0386,L-Proline
+eco:b0386,1-Pyrroline-5-carboxylate
+eco:b0386,proC
+eco:b0386,Nicotinamide adenine dinucleotide phosphate - reduced
+eco:b0386,1-Pyrroline-5-carboxylate
+eco:b0386,Nicotinamide adenine dinucleotide phosphate

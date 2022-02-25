@@ -4,25 +4,10 @@
 #' 
 #' 
 ## -----------------------------------------------------------------------------
-library('tidyverse')
-library("RColorBrewer")
-
-library('plotly')
-library("dendextend")
-library("ggrepel")
-library("hrbrthemes")
-library("ggforce")
-library("ComplexHeatmap")
-library("ggbiplot")
-library("factoextra")
-library("OUwie")
-library("ouch")
-library("geiger")
-library("ape")
-library("phangorn")
-library('phytools')
-library("treeio")
-library("ggtree")
+library(pacman)
+p_load(tidyverse,RColorBrewer,plotly,dendextend,ggrepel,hrbrthemes,
+       ggforce,ComplexHeatmap,ggbiplot,factoextra,OUwie,
+       ouch,geiger,ape,phangorn,phytools,treeio,ggtree)
 
 
 
@@ -81,9 +66,8 @@ row_right_ha = rowAnnotation(category=annot[,11],
                        rate=anno_points((as.numeric(annot[,15])),
                        col = list(category = c("Same" = "red", "Different" = "black"),
                                   process = c("Same" = "red", "Different" = "black"),
-                                  use = c("Same" = "red", "Different" = "black")))
-c("13","5","3","11","7","6",
-  "9","10","4","8","2","12","1")
+                                  use = c("Same" = "red", "Different" = "black"))))
+
 row_left_ha = rowAnnotation(cluster=anno_block(gpar(fill = 1:13),
                             labels=c("13","5","3","11","7","6",
                                      "9","10","4","8","2","12","1"),
@@ -150,6 +134,3 @@ phylomorphospace(tree_nw, pca$x[,1:2],
 #phylomorphospace3d(tree_nw,pca.x[,c(1,2,3)],method="static")
 fancyTree(tree_nw,X=pca.x[,c(1,2)],
           type="traitgram3d",method="static")
-
-
-

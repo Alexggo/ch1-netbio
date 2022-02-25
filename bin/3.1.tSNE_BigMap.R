@@ -9,13 +9,10 @@
 #' 
 #' 
 ## -------------------------------------------------------------------------
-library(bigMap)
-library(bigmemory)
-library(tidyverse)
-library(rlist)
+library(pacman)
+p_load(bigMap,bigmemory,tidyverse,rlist)
 
-
-file <- file.path("data/processed","Broc2018_maindataset.csv")
+file <- file.path("data/1.processed","Broc2018_maindataset.csv")
 print(Sys.time())
 #Remove DDI with at least one NA.
 dataset <- read_csv(file) %>%
