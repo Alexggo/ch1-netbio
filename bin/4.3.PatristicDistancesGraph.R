@@ -36,7 +36,7 @@ mat <- read.csv("data/1.processed/Broc2018_maindataset.csv") %>%
   filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau))
 
 clust <- read.csv("data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.csv")
-mat1 <- full_join(mat,clust,by="drugdrug")
+mat1 <- full_join(mat,clust,by="drug_pair")
 
 
 # Read phylogenetic tree

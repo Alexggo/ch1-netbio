@@ -1,16 +1,10 @@
-library(geomorph)
-library(tidyverse)
-library(broom)
-library(OUwie)
-library(phytools)
-library(ggx)
-library(ape)
-
+library(pacman)
+p_load(broom,tidyverse,OUwie,phytools,ape,ggx,geomorph)
 
 mat <- read.csv("data/1.processed/Broc2018_maindataset.csv")
 clust <- read.csv("data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.csv")
 
-mat1 <- full_join(mat,clust,by="drugdrug")
+mat1 <- full_join(mat,clust,by="drug_pair")
 mat2 <- mat1 %>% 
   filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau))
 
@@ -47,15 +41,17 @@ ggplot(RT_result, aes(x = clusters, y = sigma.rate)) + theme_bw() +
 
 RT_result <- RT_result %>% mutate(clusters=as.numeric(as.character(clusters)))
 x <- inner_join(mat2,RT_result,by="clusters") %>% 
-  rename(drug_pair=drug_pair.x) %>% select(-drug_pair.y)
+  rename(Drug1=Drug1.x) %>% 
+  rename(Drug2=Drug2.x) %>% 
+  select(-c(Drug1.y,Drug2.y))
 
 write.csv(x,"data/4.PhylogeneticComparativeMethods/dataset1_ratios.csv",row.names = FALSE)
 
 #RT_tSNE is not significant if cluster 13 is excluded.
-#dat <- mat2 %>% filter(clusters!=13) %>% 
-#  select(ebw,ecr,seo,stm,pae,pau) %>% t() 
-#tags <- mat2 %>% filter(clusters!=13) %>% 
-#  select(clusters) %>% pull()
-#RT_tSNE <- compare.multi.evol.rates(A=dat,gp=tags,phy=tree_nw,iter=999)
-#summary(RT_tSNE)
-#plot(RT_tSNE)
+dat <- mat2 %>% filter(clusters!=13) %>%
+ select(ebw,ecr,seo,stm,pae,pau) %>% t()
+tags <- mat2 %>% filter(clusters!=13) %>%
+ select(clusters) %>% pull()
+RT_tSNE <- compare.multi.evol.rates(A=dat,gp=tags,phy=tree_nw,iter=999)
+summary(RT_tSNE)
+plot(RT_tSNE)

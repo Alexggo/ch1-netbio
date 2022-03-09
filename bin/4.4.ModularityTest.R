@@ -1,7 +1,6 @@
-library(geomorph)
-library(tidyverse)
-library(broom)
-library(ape)
+library(pacman)
+p_load(geomorph,tidyverse,broom,ape)
+
 
 mat <- read.csv("data/1.processed/Broc2018_maindataset.csv") %>%
   filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau))
@@ -19,7 +18,7 @@ tree_nw <- drop.tip(tree_nw,not.species)
 # 13 Clusters
 clusters <- read.csv("data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.csv")
 
-mat1 <- full_join(mat,clusters,by="drugdrug")
+mat1 <- full_join(mat,clusters,by="drug_pair") 
 mat2 <- mat1[,12:17] %>% t()
 
 
@@ -28,7 +27,7 @@ mod1 <- phylo.modularity(mat2,partition.gp = mat1$clusters,phy=tree_nw,print.pro
 mod1
 # CR: 0.9231
 # P-value: 0.001
-# Effect Size: -26.3594
+# Effect Size: -26.2552
 # Based on 1000 random permutations
 # Confidence Intervals 0.8643 
 # Confidence Intervals 1.0121
@@ -37,7 +36,7 @@ mod1
 # 4 Clusters
 clusters <- read.csv("data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx825.csv")
 
-mat1 <- full_join(mat,clusters,by="drugdrug")
+mat1 <- full_join(mat,clusters,by="drug_pair")
 mat2 <- mat1[,12:17] %>% t()
 
 
@@ -47,7 +46,7 @@ mod2 <- phylo.modularity(mat2,partition.gp = mat1$clusters,phy=tree_nw,print.pro
 mod2
 # CR: 0.985
 # P-value: 0.001
-# Effect Size: -13.9241
+# Effect Size: -15.5078
 # Based on 1000 random permutations
 #Confidence Intervals 0.9544 
 #Confidence Intervals 1.0049

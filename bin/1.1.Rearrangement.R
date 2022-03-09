@@ -9,7 +9,7 @@ library(pacman)
 p_load(tidyverse,broom)
 
 x <- read_csv(file.path("data/1.processed","2018_Broc_ED09C.csv")) %>% 
-  separate(drug_pair,into=c("Drug1","Drug2")) 
+  separate(drug_pair,into=c("Drug1","Drug2"),sep="_") 
 for (i in 1:dim(x)[1]){
   a <- x[i,]$Drug1
   b <- x[i,]$Drug2
