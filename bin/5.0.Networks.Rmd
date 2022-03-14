@@ -15,10 +15,22 @@ p_load(igraph,tidyverse,BioNet,ape,geomorph,matrixStats,
 ```
 
 ```{r}
-filenames <- c(filename_ecolinet)
+filenames <- c("EcoCyc.goldstandardset.txt","EcoliNet.v1.txt",
+                       "GN.INT.EcoliNet.3568gene.23439link.txt","GO-BP.goldstandardset.txt",
+                       "CC.EcoliNet.v1.2296gene.50528link.txt","CX.INT.EcoliNet.v1.4039gene.67494link.txt",
+                       "DC.EcoliNet.2283gene.9643link.txt","EcoliNet.v1.benchmark.txt",
+                       "HT.INT.EcoliNet.3209gene.15543link.txt",
+                       "LC.INT.EcoliNet.764gene.1073link.txt",
+                       "PG.INT.EcoliNet.v1.1817gene.17504link.txt")
 
 # Ecocyc_goldstandard:1, Small-medium PPI:10
-filepath_ecolinet <- file.path("../data/5.Targets_NetworkDistance",filename_ecolinet)
+filepath_ecolinet <- file.path("../data/5.Targets_NetworkDistance",filenames)
+net <- c("Co-functional (EcoCyc)","EN: all networks",
+         "Similar genomic context","Co-functional (GO-BP)",
+         "Co-citation","Co-expression",
+         "Co-occurence of prot. domains","Co-functional (EcoCyc/GO-BP)",
+         "High-throughput PPI","Small/medium-scale PPI",
+         "Similar phylogenetic profiles")
 
 list_ecolinet <- list()
 for (i in 1:length(filepath_ecolinet)){
@@ -31,6 +43,8 @@ list_net <- list_ecolinet
 
 list_net <- list_net %>% 
   map(select,node1,node2) 
+
+names(list_net) <- net
 ```
 
 # FROM TABLE TO GRAPH
@@ -144,8 +158,6 @@ possible_targets <- nodes$KEGG_eco %>% unique()
 # 
 # library(KeyPathwayMineR)
 # igraph_to_sif(list_graphs[[1]], "../data/5.Targets_NetworkDistance/ecocycnet.sif")
-
-
 ```
 
 #PLOTTING
@@ -155,7 +167,7 @@ pdf(file = file.path("../networks","network_graphs.pdf"))
 for (i in 1:length(list_graphs)){
   g1 <- list_graphs[[i]]
   names <- V(g1) %>% names()
-  print(filenames[i])
+  print(net[i])
   value1 <- names %in% possible_targets %>% sum()
   value2 <- nodes$Drug[possible_targets%in%names] %>% unique() %>% length()
   V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
@@ -164,7 +176,7 @@ for (i in 1:length(list_graphs)){
   v.number <- V(g1) %>% length()
   mean.length <- average.path.length(g1)
   plot(g1,vertex.label="",vertex.size=2)
-  mytitle = paste(filenames[i])
+  mytitle = paste(net[i])
   mysubtitle1 = paste0("Average path length =",round(mean.length,4),". Number of vertexes =",v.number)
   mysubtitle2 = paste0("Number of targets =",value1,". Number of drugs =",value2)
   mtext(side=3, line=3, at=-0.07, adj=0, cex=1, mytitle)
@@ -179,7 +191,7 @@ pdf(file = file.path("../networks","network_graphs_notext.pdf"))
 for (i in 1:length(list_graphs)){
   g1 <- list_graphs[[i]]
   names <- V(g1) %>% names()
-  print(filenames[i])
+  print(net[i])
   value1 <- names %in% possible_targets %>% sum()
   value2 <- nodes$Drug[possible_targets%in%names] %>% unique() %>% length()
   V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
@@ -212,8 +224,12 @@ for (i in 1:length(shortest_paths)){
   # How many targets have drugs in Brochado?
   targets <- rownames(dist_mat)[rownames(dist_mat) %in% possible_targets]
   target_list[[i]] <- targets
-  drugs <- nodes %>% filter(KEGG_eco%in%targets) %>% select(Drug) %>% unique() %>% pull() %>% sort()
-  drug_list[[i]] <- drugs
+  drugs <- nodes %>% 
+    filter(KEGG_eco%in%targets) %>%
+    select(Drug) %>% 
+    unique() %>% 
+    pull() %>% 
+    sort()
   print(paste("Network:",filenames[[i]]))
   Tar <-   rownames(dist_mat) %in% possible_targets %>% sum() 
   print(paste("Number of targets:",Tar))
@@ -235,7 +251,7 @@ for (i in 1:length(shortest_paths)){
   distnew2 <- distnew2 %>%
     select(dim(distnew2)[2],1:(dim(distnew2)[2]-1))
   list_path[[i]] <- distnew2  %>% 
-    pivot_longer(names_to="KEGG2",values_to="path.length",2:(dim(distnew2)[2]))%>%
+    pivot_longer(names_to="KEGG2",values_to="path.length",2:(dim(distnew2)[2])) %>% 
     filter(!is.na(path.length))
 }
 
@@ -264,8 +280,7 @@ for (i in 1:length(list_graphs)){
           select(dim(connnew)[2],1:(dim(connnew)[2]-1))
         connnew2 <- connnew1  %>% 
           pivot_longer(names_to="KEGG2",values_to="K.edge",2:(dim(connnew)[2]))%>%
-          filter(!is.na(K.edge)) %>% 
-          filter(K.edge!=0) 
+          filter(!is.na(K.edge))
         list_Kedge[[i]] <- connnew2
       }
     }
@@ -285,9 +300,8 @@ dist_conn <- map2(list_path, list_Kedge, full_join, by = "KEGG1_KEGG2") %>%
       path.length=path.length) %>% 
   map(arrange,K.edge) %>% 
   map(distinct) %>% 
-  map(filter,KEGG1!=KEGG2) %>% 
-  map(mutate,K.edge=ifelse(!is.na(K.edge),K.edge,0))
- 
+  map(filter,KEGG1!=KEGG2)
+
 
 l_deg_df <- l_deg_list %>% map(as.data.frame)
 
@@ -300,6 +314,7 @@ for (i in 1:length(l_deg_df)){
 }
 
 tabnew2 <- map2(dist_conn, l_deg_df, left_join, by = "KEGG1") 
+names(tabnew2) <- net
 l_deg_df2 <- l_deg_df
 l_deg_df2 <- l_deg_df2 %>% map(rename,"KEGG2"=KEGG1,"Degree2"=Degree1)
 dist_conn_deg <- map2(tabnew2, l_deg_df2, left_join, by = "KEGG2") %>% 
@@ -390,10 +405,7 @@ df_adja <- df_adja %>%
 dist_conn_deg_adj <- map2(df_join2,df_adja,left_join,by="KEGG1_KEGG2") %>% 
   map(select,-c(KEGG1.y,KEGG2.y)) %>% 
   map(rename,KEGG1=KEGG1.x,KEGG2=KEGG2.x)
-
-for (i in 1:length(dist_conn_deg_adj)){
-  dist_conn_deg_adj[[i]]$network <- filenames[i]
-}
+names(dist_conn_deg_adj) <- net
 
 ```
 
@@ -402,14 +414,14 @@ for (i in 1:length(dist_conn_deg_adj)){
 
 ```{r}
 DDI_dist_conn_deg_adj <- dist_conn_deg_adj %>% 
-  map(group_by,drug_pair,Drug1,Drug2) %>% 
-  map(summarise,mean.path.length=round(mean(path.length,na.rm=TRUE)),
+  map(dplyr::ungroup) %>% 
+  map(dplyr::group_by,drug_pair,Drug1,Drug2) %>% 
+  map(dplyr::summarize,mean.path.length=round(mean(path.length,na.rm=TRUE)),
       mean.k.edge=round(mean(K.edge,na.rm=TRUE)),
       mean.min.degree=round(mean(min_deg,na.rm=TRUE)),
       mean.max.degree=round(mean(max_deg,na.rm=TRUE)),
       mean.mean.degree=round(mean(mean_deg,na.rm=TRUE)),
       max.adjacency=max(adjacency,na.rm = TRUE)) %>% 
-  map(distinct) %>% 
   map(arrange,drug_pair)
 
 # Add rates.
@@ -421,28 +433,15 @@ r <- rates %>%
   arrange(sigma.rate)
 clusters <- factor(r$clusters, levels = r$clusters[order(r$sigma.rate)])
 
-tot <- map(DDI_dist_conn_deg_adj,inner_join,rates,by="drug_pair") %>%
+df_DDI_tot <- map(DDI_dist_conn_deg_adj,inner_join,rates,by="drug_pair") %>%
   map(distinct)
+names(df_DDI_tot) <- net
 
-names(tot) <- filenames
-
-df_tot <- bind_rows(tot, .id = "network") %>% 
+df_DDI_tot <- bind_rows(df_DDI_tot, .id = "network") %>% 
   mutate(max.adjacency=as.factor(max.adjacency)) %>% 
   mutate(connection_groups=cut_interval(mean.k.edge, 6)) %>% 
   mutate(connection_groups=ifelse(is.na(connection_groups),0,connection_groups)) %>% 
-  mutate(connection_onoff=ifelse(mean.k.edge==0,"disconnected","connected"))  %>% 
-  mutate(network=ifelse(network=="EcoCyc.goldstandardset.txt","Co-functional (EcoCyc)",
-                        ifelse(network=="EcoliNet.v1.txt","EN: all networks",
-                               ifelse(network=="GN.INT.EcoliNet.3568gene.23439link.txt","Similar genomic context",
-                                      ifelse(network=="GO-BP.goldstandardset.txt","Co-functional (GO-BP)",
-                                             ifelse(network=="CC.EcoliNet.v1.2296gene.50528link.txt","Co-citation",
-                                                    ifelse(network=="CX.INT.EcoliNet.v1.4039gene.67494link.txt","Co-expression",
-                                                           ifelse(network=="DC.EcoliNet.2283gene.9643link.txt","Co-occurence of prot. domains",
-                                                                  ifelse(network=="EcoliNet.v1.benchmark.txt","Co-functional (EcoCyc/GO-BP)",
-                                                                         ifelse(network=="HT.INT.EcoliNet.3209gene.15543link.txt","High-throughput PPI",
-                                                                                ifelse(network=="LC.INT.EcoliNet.764gene.1073link.txt","Small/medium-scale PPI",
-                                                                                       ifelse(network=="PG.INT.EcoliNet.v1.1817gene.17504link.txt","Similar phylogenetic profiles",
-                                                                                              ifelse(network=="MODEL1108160000_edgelist.csv","Metabolic model: 1108160000","NA"))))))))))))) %>% 
+  mutate(connection_onoff=ifelse(mean.k.edge==0,"disconnected","connected")) %>% 
   mutate(int_sign_ebw = factor(int_sign_ebw,levels = c("Synergy","Additivity","Antagonism"))) %>% 
   mutate(drug_cat=ifelse(drug_category=="Same",1,0)) %>% 
   mutate(targ=ifelse(targeted_process=="Same",1,0)) %>% 
@@ -468,47 +467,68 @@ df_tot <- bind_rows(tot, .id = "network") %>%
   rowwise() %>% 
   mutate(sum_g=ebw_g+ecr_g+seo_g+stm_g+pae_g+pau_g) %>% 
   distinct()
-net <- df_tot$network %>% unique()
-
 
 
 ## SAVE
 for (i in 1:length(DDI_dist_conn_deg_adj)){
-  DDI_dist_conn_deg_adj[[i]]$network <- filenames[[i]]
-  dist_conn_deg_adj[[i]]$network <- filenames[[i]]
+  DDI_dist_conn_deg_adj[[i]]$network <- net[i]
+  dist_conn_deg_adj[[i]]$network <- net[i]
 }
 
-dist_conn_deg_adj %>% colnames()
-DDI_dist_conn_deg_adj %>% colnames()
-df_tot %>% colnames()
+df_target_tot <- map(dist_conn_deg_adj,inner_join,rates,by="drug_pair") %>%
+  map(distinct) %>% bind_rows(.id = "network") %>% 
+  mutate(adjacency=as.factor(adjacency)) %>% 
+  mutate(connection_groups=cut_interval(K.edge, 6)) %>% 
+  mutate(connection_groups=ifelse(is.na(connection_groups),0,connection_groups)) %>% 
+  mutate(connection_onoff=ifelse(K.edge==0,"disconnected","connected"))  %>% 
+  mutate(int_sign_ebw = factor(int_sign_ebw,levels = c("Synergy","Additivity","Antagonism"))) %>% 
+  mutate(drug_cat=ifelse(drug_category=="Same",1,0)) %>% 
+  mutate(targ=ifelse(targeted_process=="Same",1,0)) %>% 
+  mutate(us=ifelse(use=="Same",1,0)) %>% 
+  mutate(ebw_g=ifelse(int_sign_ebw=="Antagonism",+1,
+                      ifelse(int_sign_ebw=="Additivity",0,
+                             ifelse(int_sign_ebw=="Synergy",-1,NA)))) %>% 
+  mutate(ecr_g=ifelse(int_sign_ecr=="Antagonism",+1,
+                      ifelse(int_sign_ecr=="Additivity",0,
+                             ifelse(int_sign_ecr=="Synergy",-1,NA)))) %>% 
+  mutate(seo_g=ifelse(int_sign_seo=="Antagonism",+1,
+                      ifelse(int_sign_seo=="Additivity",0,
+                             ifelse(int_sign_seo=="Synergy",-1,NA)))) %>% 
+  mutate(stm_g=ifelse(int_sign_stm=="Antagonism",+1,
+                      ifelse(int_sign_stm=="Additivity",0,
+                             ifelse(int_sign_stm=="Synergy",-1,NA)))) %>% 
+  mutate(pae_g=ifelse(int_sign_pae=="Antagonism",+1,
+                      ifelse(int_sign_pae=="Additivity",0,
+                             ifelse(int_sign_pae=="Synergy",-1,NA)))) %>% 
+  mutate(pau_g=ifelse(int_sign_pau=="Antagonism",+1,
+                      ifelse(int_sign_pau=="Additivity",0,
+                             ifelse(int_sign_pau=="Synergy",-1,NA)))) %>% 
+  rowwise() %>% 
+  mutate(sum_g=ebw_g+ecr_g+seo_g+stm_g+pae_g+pau_g) %>% 
+  distinct() 
 
-dist_conn_deg_adj <- do.call("rbind", dist_conn_deg_adj)
-DDI_dist_conn_deg_adj <- do.call("rbind", DDI_dist_conn_deg_adj)
+df_target_tot %>% colnames()
+df_DDI_tot %>% colnames()
 
-
-
-
-write.csv(dist_conn_deg_adj,file.path("../data/5.Targets_NetworkDistance","dist_conn_deg_adj.csv"),row.names = F)
-write.csv(DDI_dist_conn_deg_adj,file.path("../data/5.Targets_NetworkDistance","DDI_dist_conn_deg_adj.csv"),row.names = F)
-write.csv(df_tot,file.path("../data/5.Targets_NetworkDistance","all_network_metrics.csv"),row.names = F)
+write.csv(df_DDI_tot,file.path("../data/5.Targets_NetworkDistance","df_DDI_tot_network_metrics.csv"),row.names = F)
+write.csv(df_target_tot,file.path("../data/5.Targets_NetworkDistance","df_target_tot_metrics.csv"),row.names = F)
 ```
 
 # VISUALIZATION/STATS
 
 ```{r}
 # List 1 contains the complete dataset for each network.
-# df_tot contains all networks combined.
-df_tot <- read_csv(file.path("../data/5.Targets_NetworkDistance","all_network_metrics.csv")) %>% 
+# df_DDI_tot contains all networks combined.
+df_DDI_tot <- read_csv(file.path("../data/5.Targets_NetworkDistance","df_DDI_tot_network_metrics.csv")) %>% 
   mutate(int_sign_ebw=factor(int_sign_ebw,levels=c("Synergy","Additivity","Antagonism")))
 
 # Minimum path ~ interaction type (ebw). 
 my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
-net <- df_tot$network %>% unique()
 list_path <- list()
 for (i in 1:length(filenames)){
   
   font_size <- 2
-  list_path[[i]] <- df_tot %>% filter(network==net[i]) %>% 
+  list_path[[i]] <- df_DDI_tot %>% filter(network==net[i]) %>% 
     ggplot(aes(x=int_sign_ebw,y=mean.path.length,fill=int_sign_ebw))+
     geom_violin()+
     geom_boxplot(width=0.01,fill="white")+
@@ -535,10 +555,10 @@ list_path[[10]]
 
 # Connectivity ~ interaction type (ebw).
 my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
-net <- df_tot$network %>% unique()
+net <- df_DDI_tot$network %>% unique()
 list_Kedge <- list()
 for (i in 1:length(filenames)){
-  list_Kedge[[i]] <- df_tot %>% filter(network==net[i]) %>% 
+  list_Kedge[[i]] <- df_DDI_tot %>% filter(network==net[i]) %>% 
     ggplot(aes(x=int_sign_ebw,y=mean.k.edge,fill=int_sign_ebw))+
     geom_violin()+
     geom_boxplot(width=0.01,fill="white")+
@@ -562,10 +582,10 @@ wrap_plots(list_Kedge[[8]],list_Kedge[[10]])
 
 # Node degree ~ interaction type (ebw). 
 my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
-net <- df_tot$network %>% unique()
+net <- df_DDI_tot$network %>% unique()
 list_deg <- list()
 for (i in 1:length(filenames)){
-  list_deg[[i]] <- df_tot %>% filter(network==net[i]) %>% 
+  list_deg[[i]] <- df_DDI_tot %>% filter(network==net[i]) %>% 
     ggplot(aes(x = int_sign_ebw, y = mean.mean.degree,
               fill = int_sign_ebw))+ 
     geom_violin()+
@@ -599,7 +619,7 @@ wrap_plots(list_path[[8]],list_path[[10]],
 listA <- list()
 list_conn <- list()
 for (i in 1:length(filenames)){
-d1 <- df_tot %>%
+d1 <- df_DDI_tot %>%
     filter(network==net[i]) %>% 
     select(drug_pair,connection_onoff,int_sign_ebw,sum_g)  %>% 
     mutate(connect_01=ifelse(connection_onoff=="disconnected",0,
@@ -627,13 +647,14 @@ wrap_plots(list_conn[[1]],list_conn[[10]])
 # Even split in additivities (metabolic) for syn/ant
 
 # Rate ~ Conn/Adj
-my_comparisons <- list(c("0","1"))
+my_comparisons <- list(c("FALSE","TRUE"))
 listCon <- list()
 listAdj <- list()
 for (i in 1:length(filenames)){
 # Rates ~ adjacent/non adjacent
-  listAdj[[i]] <- df_tot %>%
+  listAdj[[i]] <- df_DDI_tot %>%
   filter(network==net[i]) %>% 
+  mutate(max.adjacency=as.logical(max.adjacency)) %>% 
   ggplot(aes(y=sigma.rate,x=as.factor(max.adjacency),
              fill=as.factor(max.adjacency)))+
   geom_boxplot()+
@@ -644,11 +665,13 @@ for (i in 1:length(filenames)){
   theme(legend.position = "none")+
   ggtitle(net[i])+
   ylab("Sigma rate")+
-  xlab("Adjacency")
+  xlab("Adjacent")
 #Rate ~ connected/non connected
   
-  listCon[[i]] <- df_tot %>%
+  listCon[[i]] <- df_DDI_tot %>%
   filter(network==net[i]) %>% 
+  mutate(connection_onoff=ifelse(connection_onoff=="connected","1","0")) %>% 
+  mutate(connection_onoff=as.logical(as.numeric(connection_onoff))) %>% 
   ggplot(aes(y=sigma.rate,x=connection_onoff,
              fill=connection_onoff))+
   geom_boxplot()+
@@ -659,7 +682,7 @@ for (i in 1:length(filenames)){
   theme(legend.position = "none")+
   ggtitle(net[i])+
   ylab("Sigma rate")+
-  xlab("Connectedness")
+  xlab("Connected")
 }
 
 listCon %>% wrap_plots()
@@ -676,7 +699,7 @@ wrap_plots(listAdj[[1]],listAdj[[10]])
 # For each cluster, calculate:
 
 # number of unique DDIs per cluster
-df_tot  %>% 
+df_DDI_tot  %>% 
   select(network,sigma.rate,clusters,drug_pair,connection_onoff,int_sign_ebw,sum_g) %>% 
   distinct() %>% 
   group_by(sigma.rate,network) %>%
@@ -686,7 +709,7 @@ df_tot  %>%
   ylab("Number of DDIs")
 
 # average sum_g
-df_tot %>%
+df_DDI_tot %>%
   filter(network=="Small/medium-scale PPI") %>% 
   select(sigma.rate,clusters,drug_pair,connection_onoff,int_sign_ebw,sum_g,
          sum_g)  %>% 
@@ -704,6 +727,8 @@ sup_b <- listAdj[[10]]
 sup_c <- listCon[[1]]
 # SupFig5.PercentageConnected
 sup_d <- list_conn[[1]]
+sup_i <- list_conn[[10]]+
+  theme(legend.position = "none")
 
 
 
@@ -712,7 +737,7 @@ sup_d <- list_conn[[1]]
 # Evolutionary rates ~ int_type/distance/connectivity/node 
 
 # Rates ~ Interaction Type (ebw) (PPI). 5A
-a <- df_tot %>%
+a <- df_target_tot %>%
   filter(network==net[1]|network==net[10]) %>% 
   ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
                   group = "network", col="network")+
@@ -722,10 +747,17 @@ a <- df_tot %>%
   theme(legend.position = "none")
 #Red:metabolic,blue:PPI
 # Rates ~ path length. 5B
-b <- df_tot %>%
+b <- df_target_tot %>%
   filter(network==net[1]|network==net[10]) %>% 
-  ggline(x = "mean.path.length", y = "sigma.rate", add = c("mean_se"),
-                  group = "network", col="network",linetype = 9)+
+  mutate(path.length.corr=ifelse(path.length==0,"0",
+                                 ifelse(path.length==1,"1",
+                                        ifelse(path.length==2,"2",
+                                               ifelse(path.length==3,"3",
+                                                      ifelse(path.length==4,"4",
+                                                             ifelse(path.length==5,"5","6+"))))))) %>% 
+  mutate(path.length.corr=factor(path.length.corr,levels=c("0","1","2","3","4","5","6+"))) %>%
+  ggline(x = "path.length.corr", y = "sigma.rate", add = c("mean_se"),
+                  group = "network", col="network",linetype = 1)+
   xlab("Path length")+
   ylab("Sigma rate")+
   theme_minimal()+
@@ -734,12 +766,12 @@ b <- df_tot %>%
 
 
 # Rates ~ Distance (all networks).
-df_tot %>%  mutate(path.length.corr=ifelse(mean.path.length==0,"0",
-                                 ifelse(mean.path.length==1,"1",
-                                        ifelse(mean.path.length==2,"2",
-                                               ifelse(mean.path.length==3,"3",
-                                                      ifelse(mean.path.length==4,"4",
-                                                             ifelse(mean.path.length==5,"5","6+"))))))) %>% 
+df_target_tot %>%  mutate(path.length.corr=ifelse(path.length==0,"0",
+                                 ifelse(path.length==1,"1",
+                                        ifelse(path.length==2,"2",
+                                               ifelse(path.length==3,"3",
+                                                      ifelse(path.length==4,"4",
+                                                             ifelse(path.length==5,"5","6+"))))))) %>% 
   mutate(path.length.corr=factor(path.length.corr,levels=c("0","1","2","3","4","5","6+"))) %>% 
   ggline(x = "path.length.corr", y = "sigma.rate", add = "mean_se",
                   group = "network", palette = "jco")+
@@ -751,7 +783,7 @@ df_tot %>%  mutate(path.length.corr=ifelse(mean.path.length==0,"0",
   theme_minimal()
 
 # Rates ~ Interaction Type (ebw) (all networks).
-df_tot %>% ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
+df_DDI_tot %>% ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
        group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif", 
                      label.y = c(40, 40, 40))+
@@ -761,7 +793,7 @@ df_tot %>% ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
   theme_minimal()
 
 # Rates ~ Interaction Type (all strains) (all networks).
-df_tot %>% ggline(x = "sum_g", y = "sigma.rate", add = "mean_se",
+df_DDI_tot %>% ggline(x = "sum_g", y = "sigma.rate", add = "mean_se",
                   group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif", 
                      label.y = c(40, 40, 40))+
@@ -772,12 +804,12 @@ df_tot %>% ggline(x = "sum_g", y = "sigma.rate", add = "mean_se",
 
 # mean path ~ interaction (Syn,Ant,Add,Add-Ant,Ant-Syn,Add-Syn,Add-Ant-Syn)
 r <- c()
-for (i in 1:dim(df_tot)[1]){
-  x <- df_tot[i,27:32] %>% t() %>% as.vector()
+for (i in 1:dim(df_DDI_tot)[1]){
+  x <- df_DDI_tot[i,27:32] %>% t() %>% as.vector()
   x <- x %>% unique() %>% sort()
   r[i] <- paste0(x,collapse = "-")
 }
-df_tot$type <- r
+df_DDI_tot$type <- r
 
 r <- c()
 for (i in 1:dim(rates)[1]){
@@ -805,13 +837,54 @@ c <- rates %>%
   ylab("Sigma rate")+
   theme(legend.position = "none")
 
-wrap_plots(a,b,c,nrow=1)+ 
+
+antagonism_score <- -1
+synergy_score <- +1
+
+d <- rates %>% 
+  mutate(ebw_g=ifelse(int_sign_ebw=="Antagonism",antagonism_score,
+                      ifelse(int_sign_ebw=="Additivity",0,
+                             ifelse(int_sign_ebw=="Synergy",synergy_score,NA)))) %>% 
+  mutate(ecr_g=ifelse(int_sign_ecr=="Antagonism",antagonism_score,
+                      ifelse(int_sign_ecr=="Additivity",0,
+                             ifelse(int_sign_ecr=="Synergy",synergy_score,NA)))) %>% 
+  mutate(seo_g=ifelse(int_sign_seo=="Antagonism",antagonism_score,
+                      ifelse(int_sign_seo=="Additivity",0,
+                             ifelse(int_sign_seo=="Synergy",synergy_score,NA)))) %>% 
+  mutate(stm_g=ifelse(int_sign_stm=="Antagonism",antagonism_score,
+                      ifelse(int_sign_stm=="Additivity",0,
+                             ifelse(int_sign_stm=="Synergy",synergy_score,NA)))) %>% 
+  mutate(pae_g=ifelse(int_sign_pae=="Antagonism",antagonism_score,
+                      ifelse(int_sign_pae=="Additivity",0,
+                             ifelse(int_sign_pae=="Synergy",synergy_score,NA)))) %>% 
+  mutate(pau_g=ifelse(int_sign_pau=="Antagonism",antagonism_score,
+                      ifelse(int_sign_pau=="Additivity",0,
+                             ifelse(int_sign_pau=="Synergy",synergy_score,NA)))) %>% 
+  rowwise() %>% 
+  mutate(sum_g=ebw_g+ecr_g+seo_g+stm_g+pae_g+pau_g) %>% 
+  distinct()%>% 
+  group_by(sum_g) %>% 
+  summarise(Mean.rate=mean(sigma.rate),
+            sem.rate=std.error(sigma.rate)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x=sum_g,y=Mean.rate))+
+  geom_bar(position=position_dodge(), stat="identity",
+           fill='#6191F2',width=0.5)+
+  geom_errorbar(position=position_dodge(0.5),aes(ymin=Mean.rate-sem.rate, ymax=Mean.rate+sem.rate), width=.2)+
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 15, vjust = 1, hjust=1))+
+  xlab("Score (More antagonistic <==> More synergistic)")+
+  ylab("Sigma rate")+
+  theme(legend.position = "none")
+
+
+wrap_plots(a,b,c,d,nrow=2)+ 
   plot_annotation(tag_levels = 'A',tag_suffix = '.')&
    theme(plot.tag.position = c(0, 1),
         plot.tag = element_text(size = 15, hjust = 0, vjust = 0)) #Fig5
 
 # Mean.path. Sup_E
-sup_e <- df_tot %>%
+sup_e <- df_DDI_tot %>%
   filter(network==net[10]|network==net[1]) %>% 
   select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,mean.path.length)  %>% 
   distinct() %>% 
@@ -830,7 +903,7 @@ sup_e <- df_tot %>%
   theme(legend.position = "none")
 
 #Mean.K.edge
-sup_f <- df_tot %>%
+sup_f <- df_DDI_tot %>%
   filter(network==net[10]|network==net[1]) %>% 
   select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,mean.path.length,mean.k.edge)  %>% 
   distinct() %>% 
@@ -850,7 +923,7 @@ sup_f <- df_tot %>%
 
 
 # Mean Deg
-sup_g <- df_tot %>%
+sup_g <- df_DDI_tot %>%
   filter(network==net[10]|network==net[1]) %>% 
   select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,mean.path.length,
          mean.mean.degree)  %>% 
@@ -869,20 +942,20 @@ sup_g <- df_tot %>%
   ylab("Mean node degree")+
   theme(legend.position = "none")
 
-# 20 x 10. SupFig
-wrap_plots(sup_a,sup_b,sup_c,sup_e,sup_f,sup_g,sup_d,ncol=3)+ 
+# 20 x 20. SupFig
+wrap_plots(sup_a,sup_b,sup_c,sup_e,sup_f,sup_g,sup_d,sup_i,ncol=3)+ 
   plot_annotation(tag_levels = 'A',tag_suffix = '.')&
    theme(plot.tag.position = c(0, 1),
         plot.tag = element_text(size = 15, hjust = 0, vjust = 0)) 
 
-df_tot %>%
+df_DDI_tot %>%
   filter(network==net[10]|network==net[1]) %>% 
   select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,mean.path.length)  %>% 
   distinct() %>% 
   ggplot(aes(x=type,y=sigma.rate))+geom_boxplot()+
   geom_jitter(aes(col=clusters))+theme_minimal()
 
-df_tot %>%
+df_DDI_tot %>%
   filter(network==net[10]|network==net[1]) %>% 
   select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,mean.path.length)  %>% 
   distinct() %>% 
