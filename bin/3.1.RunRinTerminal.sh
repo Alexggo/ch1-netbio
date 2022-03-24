@@ -3,7 +3,7 @@
 #SBATCH --job-name=tSNE
 #SBATCH -o tSNE.sh.out
 #SBATCH --nodes=1
-#SBATCH -p extended-40core
+#SBATCH -p extended-24core
 #SBATCH --time=7-00:00:00
 
 # AUTHOR: ALEX GIL GOMEZ
@@ -24,5 +24,5 @@ pwd
 
 
 # VARIABLE. 
-Rscript code/4.2.tSNE_BigMap.R
-
+# Rscript bin/3.1.tSNE_BigMap.R
+# Rscript bin/5.1.Networks.R

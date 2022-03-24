@@ -1,21 +1,12 @@
----
-title: "5.1.Networks.Rmd"
-output: html_document
-date: '2022-03-24'
----
+#!/usr/bin/env Rscript
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-
-```{r load}
+## ----load---------------------------------------------------------------------
 library(pacman)
 p_load(igraph,tidyverse,BioNet,ape,geomorph,matrixStats,
        ComplexHeatmap,ggpubr,plotrix,tidymodels,patchwork,here)
-```
 
-```{r}
+
+## -----------------------------------------------------------------------------
 filenames <- c("EcoCyc.goldstandardset.txt","EcoliNet.v1.txt",
                        "GN.INT.EcoliNet.3568gene.23439link.txt","GO-BP.goldstandardset.txt",
                        "CC.EcoliNet.v1.2296gene.50528link.txt","CX.INT.EcoliNet.v1.4039gene.67494link.txt",
@@ -46,12 +37,9 @@ list_net <- list_net |>
   map(select,node1,node2) 
 
 names(list_net) <- net
-```
 
 
-# FROM TABLE TO GRAPH
-
-```{r}
+## -----------------------------------------------------------------------------
 list_graphs <- list_net |> 
   map(graph_from_data_frame,directed=FALSE,vertices=NULL)
 
@@ -160,10 +148,9 @@ possible_targets <- nodes$KEGG_eco |> unique()
 # 
 # library(KeyPathwayMineR)
 # igraph_to_sif(list_graphs[[1]], "../data/5.Targets_NetworkDistance/ecocycnet.sif")
-```
 
-#PLOTTING
-```{r}
+
+## -----------------------------------------------------------------------------
 pdf(file = file.path("../networks","network_graphs.pdf"))
 
 for (i in 1:length(list_graphs)){
@@ -204,12 +191,9 @@ for (i in 1:length(list_graphs)){
   plot(g1,vertex.label="",vertex.size=2)
 }
 dev.off()
-```
 
 
-### MEASURING NETWORKS.
-
-```{r}
+## -----------------------------------------------------------------------------
 # Calculate path.length, k-edge and node degree for these targets.
 mean_pathlength <- list_graphs |> 
   map_dbl(average.path.length)
@@ -414,12 +398,9 @@ dist_conn_deg_adj <- map2(df_join2,df_adja,left_join,by="KEGG1_KEGG2") |>
   map(rename,KEGG1=KEGG1.x,KEGG2=KEGG2.x)
 names(dist_conn_deg_adj) <- net
 
-```
 
-# A DDI can have several target_target combinations.
-# We take the average of all metrics per DDI.
 
-```{r}
+## -----------------------------------------------------------------------------
 DDI_dist_conn_deg_adj <- dist_conn_deg_adj |> 
   map(dplyr::ungroup) |> 
   map(dplyr::group_by,drug_pair,Drug1,Drug2) |> 
@@ -519,4 +500,4 @@ df_DDI_tot |> colnames()
 
 write.csv(df_DDI_tot,file.path("../data/5.Targets_NetworkDistance","df_DDI_tot_network_metrics.csv"),row.names = F)
 write.csv(df_target_tot,file.path("../data/5.Targets_NetworkDistance","df_target_tot_metrics.csv"),row.names = F)
-```
+
