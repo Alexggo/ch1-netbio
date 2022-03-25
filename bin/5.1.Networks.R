@@ -2,38 +2,41 @@
 
 ## ----load---------------------------------------------------------------------
 library(pacman)
-p_load(igraph,tidyverse,BioNet,ape,geomorph,matrixStats,
-       ComplexHeatmap,ggpubr,plotrix,tidymodels,patchwork,here)
+p_load(igraph,tidyverse,ape,geomorph,matrixStats,
+       ggpubr,plotrix,tidymodels,patchwork,here)
 
 
 ## -----------------------------------------------------------------------------
-filenames <- c("EcoCyc.goldstandardset.txt","EcoliNet.v1.txt",
-                       "GN.INT.EcoliNet.3568gene.23439link.txt","GO-BP.goldstandardset.txt",
-                       "CC.EcoliNet.v1.2296gene.50528link.txt","CX.INT.EcoliNet.v1.4039gene.67494link.txt",
-                       "DC.EcoliNet.2283gene.9643link.txt","EcoliNet.v1.benchmark.txt",
+filenames <- c("EcoCyc.goldstandardset.txt", "EcoliNet.v1.txt",
+                       "GN.INT.EcoliNet.3568gene.23439link.txt",
+                       "GO-BP.goldstandardset.txt",
+                       "CC.EcoliNet.v1.2296gene.50528link.txt",
+                       "CX.INT.EcoliNet.v1.4039gene.67494link.txt",
+                       "DC.EcoliNet.2283gene.9643link.txt",
+                       "EcoliNet.v1.benchmark.txt",
                        "HT.INT.EcoliNet.3209gene.15543link.txt",
                        "LC.INT.EcoliNet.764gene.1073link.txt",
                        "PG.INT.EcoliNet.v1.1817gene.17504link.txt")
 
 # Ecocyc_goldstandard:1, Small-medium PPI:10
-filepath_ecolinet <- file.path("../data/5.Targets_NetworkDistance",filenames)
-net <- c("Co-functional (EcoCyc)","EN: all networks",
-         "Similar genomic context","Co-functional (GO-BP)",
-         "Co-citation","Co-expression",
-         "Co-occurence of prot. domains","Co-functional (EcoCyc/GO-BP)",
-         "High-throughput PPI","Small/medium-scale PPI",
+filepath_ecolinet <- file.path("data/5.Targets_NetworkDistance", filenames)
+net <- c("Co-functional (EcoCyc)", "EN: all networks",
+         "Similar genomic context", "Co-functional (GO-BP)",
+         "Co-citation", "Co-expression",
+         "Co-occurence of prot. domains", "Co-functional (EcoCyc/GO-BP)",
+         "High-throughput PPI", "Small/medium-scale PPI",
          "Similar phylogenetic profiles")
 
 list_ecolinet <- list()
-for (i in 1:length(filepath_ecolinet)){
+for (i in seq_along(filepath_ecolinet)) {
   list_ecolinet[[i]] <- read_table(filepath_ecolinet[[i]])
-  list_ecolinet[[i]]$node1 <- paste0("eco:",list_ecolinet[[i]]$node1)
-  list_ecolinet[[i]]$node2 <- paste0("eco:",list_ecolinet[[i]]$node2)
+  list_ecolinet[[i]]$node1 <- paste0("eco:", list_ecolinet[[i]]$node1)
+  list_ecolinet[[i]]$node2 <- paste0("eco:", list_ecolinet[[i]]$node2)
 }
 
 list_net <- list_ecolinet
 
-list_net <- list_net |> 
+list_net <- list_net |>
   map(select,node1,node2) 
 
 names(list_net) <- net
@@ -41,7 +44,7 @@ names(list_net) <- net
 
 ## -----------------------------------------------------------------------------
 list_graphs <- list_net |> 
-  map(graph_from_data_frame,directed=FALSE,vertices=NULL)
+  map(graph_from_data_frame, directed=FALSE, vertices=NULL)
 
 l_deg_list <- list_graphs |> 
   map(igraph::degree) 
@@ -52,22 +55,22 @@ l_deg <- list_graphs |>
   as.data.frame() 
 
 l_deg <- tibble::rownames_to_column(l_deg, "Node")
-colnames(l_deg) <- c("Node",filenames)
+colnames(l_deg) <- c("Node", filenames)
 
 l_deg_long <- l_deg |> 
-  pivot_longer(names_to="Network",values_to="Degree",2:12) |> 
+  pivot_longer(names_to = "Network", values_to = "Degree", 2:12) |> 
   drop_na()
 
-before_trimming <- l_deg_long |> 
-  ggplot(aes(x=Degree,y=Network,fill=Network))+
-  geom_boxplot()+
-  theme_minimal()+
-  theme(legend.position = "none")+
+before_trimming <- l_deg_long |>
+  ggplot(aes(x=Degree,y=Network,fill=Network)) +
+  geom_boxplot() +
+  theme_minimal() +
+  theme(legend.position = "none") +
   scale_y_discrete(limits=rev)
 
 # Trim outliers
-# q_table <- l_deg_long |> 
-#   group_by(Network) |> 
+# q_table <- l_deg_long |>
+#   group_by(Network) |>
 #   summarise(P25=quantile(Degree, probs = 0.25),
 #             P50=quantile(Degree, probs = 0.50),
 #             P75=quantile(Degree, probs = 0.75),
@@ -81,9 +84,9 @@ before_trimming <- l_deg_long |>
 # 
 # a <- l_deg_list |> 
 #   map(as.data.frame) |> 
-#   map(rownames_to_column,"Node") |> 
-#   map(rename,"Degree"=`.x[[i]]`)
-# for (i in 1:length(filenames)){
+#   map(rownames_to_column, "Node") |> 
+#   map(rename, "Degree"=`.x[[i]]`)
+# for (i in seq_along(filenames)){
 #   a[[i]] <- a[[i]] |> filter(Degree<q_table$P975[i]) 
 # }
 # names(a) <- filenames
@@ -121,7 +124,7 @@ l_deg_list <- list_graphs |>
   map(igraph::degree) 
 
 # Which proteins are targeted by drugs?
-nodes <- read.csv("../data/5.Targets_NetworkDistance/DrugTargets3_ecoli.csv") |> 
+nodes <- read.csv("data/5.Targets_NetworkDistance/DrugTargets3_ecoli.csv") |> 
   select(Drug,KEGG_eco) |>
   distinct() |>
   arrange(Drug) |> 
@@ -147,11 +150,11 @@ possible_targets <- nodes$KEGG_eco |> unique()
 # Export network for cytoscape
 # 
 # library(KeyPathwayMineR)
-# igraph_to_sif(list_graphs[[1]], "../data/5.Targets_NetworkDistance/ecocycnet.sif")
+# igraph_to_sif(list_graphs[[1]], "data/5.Targets_NetworkDistance/ecocycnet.sif")
 
 
 ## -----------------------------------------------------------------------------
-pdf(file = file.path("../networks","network_graphs.pdf"))
+pdf(file = file.path("networks","network_graphs.pdf"))
 
 for (i in 1:length(list_graphs)){
   g1 <- list_graphs[[i]]
@@ -175,7 +178,7 @@ for (i in 1:length(list_graphs)){
 }
 dev.off()
 
-pdf(file = file.path("../networks","network_graphs_notext.pdf"))
+pdf(file = file.path("networks","network_graphs_notext.pdf"))
 
 for (i in 1:length(list_graphs)){
   g1 <- list_graphs[[i]]
@@ -413,7 +416,7 @@ DDI_dist_conn_deg_adj <- dist_conn_deg_adj |>
   map(arrange,drug_pair)
 
 # Add rates.
-rates <- read.csv(file.path("../data/4.PhylogeneticComparativeMethods/dataset1_ratios.csv")) 
+rates <- read.csv(file.path("data/4.PhylogeneticComparativeMethods/dataset1_ratios.csv")) 
 
 r <- rates |>
   select(clusters,sigma.rate) |>
@@ -492,12 +495,13 @@ df_target_tot <- map(dist_conn_deg_adj,inner_join,rates,by="drug_pair") |>
                       ifelse(int_sign_pau=="Additivity",0,
                              ifelse(int_sign_pau=="Synergy",-1,NA)))) |> 
   rowwise() |> 
-  mutate(sum_g=ebw_g+ecr_g+seo_g+stm_g+pae_g+pau_g) |> 
-  distinct() 
+  mutate(sum_g=ebw_g+ecr_g+seo_g+stm_g+pae_g+pau_g) |>
+  distinct()
 
 df_target_tot |> colnames()
 df_DDI_tot |> colnames()
 
-write.csv(df_DDI_tot,file.path("../data/5.Targets_NetworkDistance","df_DDI_tot_network_metrics.csv"),row.names = F)
-write.csv(df_target_tot,file.path("../data/5.Targets_NetworkDistance","df_target_tot_metrics.csv"),row.names = F)
-
+write.csv(df_DDI_tot,
+file.path("data/5.Targets_NetworkDistance", "df_DDI_tot_network_metrics.csv"), row.names = F)
+write.csv(df_target_tot,
+file.path("data/5.Targets_NetworkDistance", "df_target_tot_metrics.csv"), row.names = F)
