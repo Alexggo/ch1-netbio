@@ -3,7 +3,7 @@
 ##----load---------------------------------------------------------------------
 library(pacman)
 p_load(igraph, tidyverse, ape, matrixStats,
-ggpubr, plotrix, tidymodels, here)
+ggpubr, plotrix, tidymodels, here,future.apply)
 
 
 ##-----------------------------------------------------------------------------
@@ -27,7 +27,7 @@ net <- c("Co-functional(EcoCyc)", "EN:allnetworks",
 "High-throughput PPI", "Small/medium-scale PPI",
 "Similar phylogenetic profiles")
 
-list_net <- lapply(filepath_ecolinet,read_table) |> 
+list_net <- future_lapply(filepath_ecolinet,read_table) |> 
   map(mutate,node1=paste0("eco:", node1),
       node2=paste0("eco:", node2)) |>
   map(select, node1, node2)
@@ -105,20 +105,20 @@ dev.off()
 list_path_conn_deg <- list()
 for (i in seq_along(list_graphs)) {
 gr.vert <-   t(combn(names(V(list_graphs[[i]])),2))
-gr.vert <- gr.vert[1:200,]
-allcon <- apply(gr.vert,1,function(edges){
+gr.vert <- gr.vert[,]
+allcon <- future_apply(gr.vert,1,function(edges){
   edge_connectivity(list_graphs[[i]],
                     source = edges[1], target = edges[2])
 })
-allpath <- apply(gr.vert,1,function(edges){
+allpath <- future_apply(gr.vert,1,function(edges){
   shortest.paths(list_graphs[[i]],
   v = edges[1], to = edges[2])
 })
-deg1 <- apply(gr.vert,1,function(edges){
+deg1 <- future_apply(gr.vert,1,function(edges){
   igraph::degree(list_graphs[[i]],
                  v = edges[1])
 })
-deg2 <- apply(gr.vert,1,function(edges){
+deg2 <- future_apply(gr.vert,1,function(edges){
   igraph::degree(list_graphs[[i]],
                  v = edges[2])
 })
@@ -179,7 +179,7 @@ map(mutate, drug_pair = paste0(Drug1, "_", Drug2)) |>
 map(select, KEGG1_KEGG2,
 KEGG1, KEGG2, drug_pair,
 Drug1, Drug2, path.length,
-K.edge, Degree1, Degree2,
+K.edge, Degree1, Degree2,adjacency,
 mean_deg, min_deg, max_deg) |>
 map(distinct) |>
 map(filter, Drug1 != Drug2) |>
@@ -300,3 +300,4 @@ write.csv(df_DDI_tot,
 write.csv(df_target_tot,
   file.path("data/5.Targets_NetworkDistance",
   "df_target_tot_metrics.csv"), row.names = F)
+
