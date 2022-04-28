@@ -102,8 +102,9 @@ dev.off()
 
 ##-----------------------------------------------------------------------------
 #Calculate path.length, k-edge and node degree for these targets.
-list_path_conn_deg <- list()
-for (i in seq_along(list_graphs)) {
+list_path_conn_deg <- list().
+#Only networks 1 and 10
+for (i in c(1,10)) {
 gr.vert <-   t(combn(names(V(list_graphs[[i]])),2))
 gr.vert <- gr.vert[,]
 allcon <- future_apply(gr.vert,1,function(edges){
