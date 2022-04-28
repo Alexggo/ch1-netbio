@@ -102,7 +102,7 @@ dev.off()
 
 ##-----------------------------------------------------------------------------
 #Calculate path.length, k-edge and node degree for these targets.
-list_path_conn_deg <- list().
+list_path_conn_deg <- list()
 #Only networks 1 and 10
 for (i in c(1,10)) {
 gr.vert <-   t(combn(names(V(list_graphs[[i]])),2))
