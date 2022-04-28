@@ -104,7 +104,7 @@ dev.off()
 #Calculate path.length, k-edge and node degree for these targets.
 list_path_conn_deg <- list()
 #Only networks 1 and 10
-for (i in c(1,10)) {
+for (i in seq_along(list_graphs)) {
 gr.vert <-   t(combn(names(V(list_graphs[[i]])),2))
 gr.vert <- gr.vert[,]
 allcon <- future_apply(gr.vert,1,function(edges){
@@ -217,9 +217,9 @@ names(df_DDI_tot) <- net
 
 df_DDI_tot <- bind_rows(df_DDI_tot, .id = "network") |>
   mutate(max.adjacency = as.factor(max.adjacency)) |>
-  mutate(connection_groups = cut_interval(mean.k.edge, 6)) |>
-  mutate(connection_groups = ifelse(is.na(connection_groups),
-  0, connection_groups)) |>
+  #mutate(connection_groups = cut_interval(mean.k.edge, 6)) |>
+  #mutate(connection_groups = ifelse(is.na(connection_groups),
+  #0, connection_groups)) |>
   mutate(connection_onoff =
          ifelse(mean.k.edge == 0, "disconnected", "connected")) |>
   mutate(int_sign_ebw = factor(int_sign_ebw,
@@ -259,9 +259,9 @@ for (i in seq_along(DDI_dist_conn_deg_adj)) {
 df_target_tot <- map(dist_conn_deg_adj, inner_join, rates, by = "drug_pair") |>
   map(distinct) |>bind_rows(.id = "network") |>
   mutate(adjacency = as.factor(adjacency)) |>
-  mutate(connection_groups = cut_interval(K.edge, 6)) |>
-  mutate(connection_groups = ifelse(is.na(connection_groups),
-  0, connection_groups)) |>
+  #mutate(connection_groups = cut_interval(K.edge, 6)) |>
+  #mutate(connection_groups = ifelse(is.na(connection_groups),
+  #0, connection_groups)) |>
   mutate(connection_onoff = ifelse(K.edge == 0, "disconnected", "connected")) |>
   mutate(int_sign_ebw = factor(int_sign_ebw,
   levels = c("Synergy", "Additivity", "Antagonism"))) |>
