@@ -1,4 +1,5 @@
 #!/usr/bin/envRscript
+args = commandArgs(trailingOnly=TRUE)
 
 ##----load---------------------------------------------------------------------
 library(pacman)
@@ -7,16 +8,19 @@ ggpubr, plotrix, tidymodels, here,future.apply)
 
 
 ##-----------------------------------------------------------------------------
+network <- args[1] |> as.numeric()
+#network <- 1
+
 filenames <- c("EcoCyc.goldstandardset.txt", "EcoliNet.v1.txt",
-"GN.INT.EcoliNet.3568gene.23439link.txt",
-"GO-BP.goldstandardset.txt",
-"CC.EcoliNet.v1.2296gene.50528link.txt",
-"CX.INT.EcoliNet.v1.4039gene.67494link.txt",
-"DC.EcoliNet.2283gene.9643link.txt",
-"EcoliNet.v1.benchmark.txt",
-"HT.INT.EcoliNet.3209gene.15543link.txt",
-"LC.INT.EcoliNet.764gene.1073link.txt",
-"PG.INT.EcoliNet.v1.1817gene.17504link.txt")
+               "GN.INT.EcoliNet.3568gene.23439link.txt",
+               "GO-BP.goldstandardset.txt",
+               "CC.EcoliNet.v1.2296gene.50528link.txt",
+               "CX.INT.EcoliNet.v1.4039gene.67494link.txt",
+               "DC.EcoliNet.2283gene.9643link.txt",
+               "EcoliNet.v1.benchmark.txt",
+               "HT.INT.EcoliNet.3209gene.15543link.txt",
+               "LC.INT.EcoliNet.764gene.1073link.txt",
+               "PG.INT.EcoliNet.v1.1817gene.17504link.txt")
 
 #Ecocyc_goldstandard:1, Small-mediumPPI:10
 filepath_ecolinet <- file.path("data/5.Targets_NetworkDistance", filenames)
@@ -27,12 +31,16 @@ net <- c("Co-functional(EcoCyc)", "EN:allnetworks",
 "High-throughput PPI", "Small/medium-scale PPI",
 "Similar phylogenetic profiles")
 
+filenames <- filenames[[network]]
+filepath_ecolinet <- filepath_ecolinet[[network]]
+
+
 list_net <- future_lapply(filepath_ecolinet,read_table) |> 
   map(mutate,node1=paste0("eco:", node1),
       node2=paste0("eco:", node2)) |>
   map(select, node1, node2)
 
-names(list_net) <- net
+names(list_net) <- filenames
 
 
 ##-----------------------------------------------------------------------------
@@ -49,7 +57,7 @@ possible_targets <- nodes$KEGG_eco |>
   unique()
 
 ##-----------------------------------------------------------------------------
-pdf(file = file.path("networks", "network_graphs.pdf"))
+pdf(file = file.path("networks", paste0(filenames,"_graph.pdf")))
 
 for (i in seq_along(list_graphs)) {
 g1 <- list_graphs[[i]]
@@ -79,7 +87,7 @@ print(paste("Nodes", v.number, "Targets", value1, "Drugs", value2))
 }
 dev.off()
 
-pdf(file = file.path("networks", "network_graphs_notext.pdf"))
+pdf(file = file.path("networks", paste0(filenames,"_graph_notext.pdf")))
 
 for (i in seq_along(list_graphs)) {
 g1 <- list_graphs[[i]]
@@ -297,8 +305,8 @@ df_DDI_tot |>
 
 write.csv(df_DDI_tot,
   file.path("data/5.Targets_NetworkDistance",
-  "df_DDI_tot_network_metrics.csv"), row.names = F)
+            paste0(filenames,"_df_DDI_tot_network_metrics.csv")), row.names = F)
 write.csv(df_target_tot,
   file.path("data/5.Targets_NetworkDistance",
-  "df_target_tot_metrics.csv"), row.names = F)
+            paste0(filenames,"_df_target_tot_metrics.csv")), row.names = F)
 
