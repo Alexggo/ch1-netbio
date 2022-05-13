@@ -33,6 +33,8 @@ net <- c("Co-functional(EcoCyc)", "EN:allnetworks",
 
 filenames <- filenames[[network]]
 filepath_ecolinet <- filepath_ecolinet[[network]]
+print(paste("Filename:",filenames))
+print(paste("Filepath:",filepath_ecolinet))
 
 
 list_net <- future_lapply(filepath_ecolinet,read_table) |> 
