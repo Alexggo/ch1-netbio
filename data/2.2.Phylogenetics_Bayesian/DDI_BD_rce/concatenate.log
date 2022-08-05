@@ -1,0 +1,87 @@
+#
+#model:
+#
+#<?xml version="1.0" encoding="UTF-8" standalone="no"?><input id="posterior" spec="beast.core.util.CompoundDistribution">
+#    <distribution id="prior" spec="beast.core.util.CompoundDistribution">
+#        <distribution id="BirthDeath.t:concatenate" spec="beast.evolution.speciation.BirthDeathGernhard08Model">
+#            <parameter id="BDDeathRate.t:concatenate" lower="0.0" name="relativeDeathRate" spec="beast.core.parameter.RealParameter" upper="1.0">0.5</parameter>
+#            <parameter id="BDBirthRate.t:concatenate" lower="0.0" name="birthDiffRate" spec="beast.core.parameter.RealParameter" upper="10000.0">1.0</parameter>
+#            <tree id="Tree.t:concatenate" spec="beast.evolution.tree.Tree">
+#                <taxonset id="TaxonSet.concatenate" spec="beast.evolution.alignment.TaxonSet">
+#                </taxonset>
+#            </tree>
+#        </distribution>
+#        <prior id="BirthRatePrior.t:concatenate" name="distribution" x="@BDBirthRate.t:concatenate">
+#            <Uniform id="Uniform.3" name="distr" upper="1000.0"/>
+#        </prior>
+#        <prior id="DeathRatePrior.t:concatenate" name="distribution" x="@BDDeathRate.t:concatenate">
+#            <Uniform id="Uniform.4" name="distr"/>
+#        </prior>
+#        <prior id="UCMeanRatePrior.c:concatenate" name="distribution">
+#            <parameter id="ucedMean.c:concatenate" name="x" spec="beast.core.parameter.RealParameter">1.0</parameter>
+#            <Uniform id="Uniform.9" name="distr" upper="Infinity"/>
+#        </prior>
+#        <distribution id="All.prior" spec="beast.math.distributions.MRCAPrior" tree="@Tree.t:concatenate">
+#            <taxonset id="All" spec="beast.evolution.alignment.TaxonSet">
+#                <taxon id="bce" spec="beast.evolution.alignment.Taxon"/>
+#                <taxon id="cdf" spec="beast.evolution.alignment.Taxon"/>
+#                <taxon id="ebw" spec="beast.evolution.alignment.Taxon"/>
+#                <taxon id="ecr" spec="beast.evolution.alignment.Taxon"/>
+#                <taxon id="pae" spec="beast.evolution.alignment.Taxon"/>
+#                <taxon id="pau" spec="beast.evolution.alignment.Taxon"/>
+#                <taxon id="rrc" spec="beast.evolution.alignment.Taxon"/>
+#                <taxon id="sau" spec="beast.evolution.alignment.Taxon"/>
+#                <taxon id="seo" spec="beast.evolution.alignment.Taxon"/>
+#                <taxon id="stm" spec="beast.evolution.alignment.Taxon"/>
+#            </taxonset>
+#            <Uniform id="Uniform.5" lower="2801.0" name="distr" offset="3634.0" upper="Infinity"/>
+#        </distribution>
+#        <distribution id="ES.prior" spec="beast.math.distributions.MRCAPrior" tree="@Tree.t:concatenate">
+#            <taxonset id="ES" spec="beast.evolution.alignment.TaxonSet">
+#                <taxon idref="ebw"/>
+#                <taxon idref="ecr"/>
+#                <taxon idref="seo"/>
+#                <taxon idref="stm"/>
+#            </taxonset>
+#            <Uniform id="Uniform.6" lower="57.0" name="distr" offset="176.0" upper="Infinity"/>
+#        </distribution>
+#        <distribution id="Firmicute.prior" spec="beast.math.distributions.MRCAPrior" tree="@Tree.t:concatenate">
+#            <taxonset id="Firmicute" spec="beast.evolution.alignment.TaxonSet">
+#                <taxon idref="bce"/>
+#                <taxon idref="cdf"/>
+#                <taxon idref="sau"/>
+#            </taxonset>
+#            <Uniform id="Uniform.7" lower="2587.0" name="distr" offset="3352.0" upper="Infinity"/>
+#        </distribution>
+#        <distribution id="proteobacteria.prior" spec="beast.math.distributions.MRCAPrior" tree="@Tree.t:concatenate">
+#            <taxonset id="proteobacteria" spec="beast.evolution.alignment.TaxonSet">
+#                <taxon idref="ebw"/>
+#                <taxon idref="ecr"/>
+#                <taxon idref="rrc"/>
+#                <taxon idref="seo"/>
+#                <taxon idref="stm"/>
+#            </taxonset>
+#            <Uniform id="Uniform.8" lower="2801.0" name="distr" offset="3634.0" upper="Infinity"/>
+#        </distribution>
+#    </distribution>
+#    <distribution id="likelihood" spec="beast.core.util.CompoundDistribution" useThreads="true">
+#        <distribution data="@concatenate" id="treeLikelihood.concatenate" spec="beast.evolution.likelihood.ThreadedTreeLikelihood" tree="@Tree.t:concatenate">
+#            <siteModel id="SiteModel.s:concatenate" spec="beast.evolution.sitemodel.SiteModel">
+#                <parameter estimate="false" id="mutationRate.s:concatenate" name="mutationRate" spec="beast.core.parameter.RealParameter">1.0</parameter>
+#                <parameter estimate="false" id="gammaShape.s:concatenate" name="shape" spec="beast.core.parameter.RealParameter">1.0</parameter>
+#                <parameter estimate="false" id="proportionInvariant.s:concatenate" lower="0.0" name="proportionInvariant" spec="beast.core.parameter.RealParameter" upper="1.0">0.0</parameter>
+#                <substModel id="WAG.s:concatenate" spec="beast.evolution.substitutionmodel.WAG"/>
+#            </siteModel>
+#            <branchRateModel clock.rate="@ucedMean.c:concatenate" id="ExponentialRelaxedClock.c:concatenate" spec="beast.evolution.branchratemodel.UCRelaxedClockModel" tree="@Tree.t:concatenate">
+#                <Exponential id="Exponential.c:concatenate" name="distr">
+#                    <parameter id="UCExpLambda.c:concatenate" name="mean" spec="beast.core.parameter.RealParameter">1.0</parameter>
+#                </Exponential>
+#                <rateCategories dimension="18" id="expRateCategories.c:concatenate" spec="beast.core.parameter.IntegerParameter">1</rateCategories>
+#            </branchRateModel>
+#        </distribution>
+#    </distribution>
+#</input>
+#
+Sample	posterior	likelihood	prior	treeLikelihood.concatenate	TreeHeight	monophyletic(ES)	logP(mrca(ES))	mrca.age(ES)	monophyletic(Firmicute)	logP(mrca(Firmicute))	mrca.age(Firmicute)	monophyletic(proteobacteria)	logP(mrca(proteobacteria))	mrca.age(proteobacteria)	monophyletic(All)	logP(mrca(All))	mrca.age(All)	ucedMean	rateStat.mean	rateStat.variance	rateStat.coefficientOfVariation	BirthDeath	BDBirthRate	BDDeathRate
+0	-188787.0142386111	-157354.85990148148	-31432.15433712963	-157354.85990148148	6437.118504579754	1	0.0	233.1	1	0.0	5939.1	1	0.0	6435.1	0	0.0	6437.118504579754	1.0	0.7289262019669259	0.7491932973397858	0.7306072668593149	-31425.246581850646	1.0	0.5
+1000	-125678.77951253664	-122340.31028148404	-3338.469231052601	-122340.31028148404	6437.463861183431	0	0.0	550.8037711615078	0	0.0	6437.463861183431	0	0.0	6437.463861183431	0	0.0	6437.463861183431	0.8755851459170133	1.1794552873051878	0.879330890830399	1.1068742273171406	-3331.561475773619	0.24566819881872035	0.6801591495363654
