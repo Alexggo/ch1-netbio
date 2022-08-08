@@ -1,0 +1,71 @@
+/gpfs/projects/RestGroup/agilgomez/projects/ch3-netbio
+/var/spool/slurmd/job772081/slurm_script: line 28: Rscript: command not found
+
+── Column specification ────────────────────────────────────────────────────────
+cols(
+  node1 = col_character(),
+  node2 = col_character(),
+  score = col_double()
+)
+
+── Column specification ────────────────────────────────────────────────────────
+cols(
+  node1 = col_character(),
+  node2 = col_character()
+)
+
+── Column specification ────────────────────────────────────────────────────────
+cols(
+  node1 = col_character(),
+  node2 = col_character()
+)
+Warning message:
+4694 parsing failures.
+row col  expected    actual                                                        file
+  1  -- 2 columns 3 columns 'data/5.Targets_NetworkDistance/EcoCyc.goldstandardset.txt'
+  2  -- 2 columns 3 columns 'data/5.Targets_NetworkDistance/EcoCyc.goldstandardset.txt'
+  3  -- 2 columns 3 columns 'data/5.Targets_NetworkDistance/EcoCyc.goldstandardset.txt'
+  4  -- 2 columns 3 columns 'data/5.Targets_NetworkDistance/EcoCyc.goldstandardset.txt'
+  5  -- 2 columns 3 columns 'data/5.Targets_NetworkDistance/EcoCyc.goldstandardset.txt'
+... ... ......... ......... ...........................................................
+See problems(...) for more details.
+ 
+Warning message:
+10804 parsing failures.
+row col  expected    actual                                                       file
+  1  -- 2 columns 3 columns 'data/5.Targets_NetworkDistance/EcoliNet.v1.benchmark.txt'
+  2  -- 2 columns 3 columns 'data/5.Targets_NetworkDistance/EcoliNet.v1.benchmark.txt'
+  3  -- 2 columns 3 columns 'data/5.Targets_NetworkDistance/EcoliNet.v1.benchmark.txt'
+  4  -- 2 columns 3 columns 'data/5.Targets_NetworkDistance/EcoliNet.v1.benchmark.txt'
+  5  -- 2 columns 3 columns 'data/5.Targets_NetworkDistance/EcoliNet.v1.benchmark.txt'
+... ... ......... ......... ..........................................................
+See problems(...) for more details.
+ 
+[1] "Co-functional(EcoCyc)"
+[1] "Co-functional(EcoCyc)"
+[1] "Co-functional(EcoCyc)"
+[1] "Nodes 764 Targets 18 Drugs 31"
+null device 
+          1 
+[1] "Co-functional(EcoCyc)"
+[1] "Nodes 885 Targets 10 Drugs 16"
+null device 
+          1 
+[1] "Co-functional(EcoCyc)"
+null device 
+          1 
+null device 
+          1 
+[1] "Nodes 1835 Targets 20 Drugs 31"
+null device 
+          1 
+[1] "Co-functional(EcoCyc)"
+null device 
+          1 
+Error in names(df_DDI_tot) <- net : 
+  'names' attribute [11] must be the same length as the vector [1]
+Execution halted
+Error in names(df_DDI_tot) <- net : 
+  'names' attribute [11] must be the same length as the vector [1]
+Execution halted
+slurmstepd: error: *** JOB 772080 ON sn084 CANCELLED AT 2022-05-13T11:34:48 ***
