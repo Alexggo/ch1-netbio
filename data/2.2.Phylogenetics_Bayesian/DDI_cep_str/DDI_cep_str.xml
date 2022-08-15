@@ -38,7 +38,7 @@ name="alignment">
 <map name="OneOnX" >beast.math.distributions.OneOnX</map>
 
 
-<run id="mcmc" spec="MCMC" chainLength="10000000">
+<run id="mcmc" spec="MCMC" chainLength="100000000">
     <state id="state" spec="State" storeEvery="5000">
         <tree id="Tree.t:concatenate" spec="beast.evolution.tree.Tree" name="stateNode">
             <taxonset id="TaxonSet.concatenate" spec="TaxonSet">
@@ -66,7 +66,10 @@ name="alignment">
                 <Uniform id="Uniform.0" name="distr" upper="Infinity"/>
             </prior>
             <prior id="ePopSizePrior.t:concatenate" name="distribution" x="@ePopSize.t:concatenate">
-                <OneOnX id="OneOnX.1" name="distr"/>
+                <LogNormal id="LogNormalDistributionModel.4" name="distr">
+                    <parameter id="RealParameter.45" spec="parameter.RealParameter" estimate="false" name="M">1.0</parameter>
+                    <parameter id="RealParameter.46" spec="parameter.RealParameter" estimate="false" lower="0.0" name="S" upper="5.0">1.25</parameter>
+                </LogNormal>
             </prior>
             <prior id="GrowthRatePrior.t:concatenate" name="distribution" x="@growthRate.t:concatenate">
                 <LaplaceDistribution id="LaplaceDistribution.0" name="distr">
