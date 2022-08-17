@@ -8,3 +8,20 @@ rrc Rickettsia rickettsii Colombia
 cdf Clostridioides difficile 630
 bce Bacillus cereus ATCC 14579
 sau Staphylococcus aureus subsp. aureus N315 (MRSA/VSSA)
+aae D01_dating-A.aeolicus
+bsu D02_dating-B.subtilis
+cje D03_dating-C.jejuni
+cgl D04_dating-C.glutamicum
+dra D05_dating-D.radiodurans
+fnu D07_dating-F.nucleatum
+mka D08_dating-M.kandleri
+mac D09_dating-M.acetivorans
+mma D10_dating-M.mazei
+nme D11_dating-N.meningitidis
+pfu D12_dating-P.furiosus
+rpr D13_dating-R.prowazekii
+sso D15_dating-S.solfataricus
+syn D16_dating-Synechocystis_sp.
+tvo D17_dating-T.volcanium
+syc D18_dating-T.elongatus
+tma D19_dating-T.maritima
