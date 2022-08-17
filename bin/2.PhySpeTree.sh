@@ -1,11 +1,5 @@
 #!/bin/sh
 
-#SBATCH --job-name=PhySpeTree
-#SBATCH -o PhySpeTree.sh.out
-#SBATCH --nodes=1
-#SBATCH -p short-40core
-#SBATCH --time=04:00:00
-
 # AUTHOR: ALEX GIL GOMEZ
 # INPUTS: TXT FILE WITH KEGG SPECIES NAMES. For example, bac_species.txt or fun_species.txt
 # OUTPUT: SPECIES TREES
@@ -17,11 +11,11 @@
 
 
 #ENVIRONMENTS
-source activate myenv
+conda activate bioinformatics_py3
 
 # WORKING DIRECTORY
 
-cd ../data/2.Phylogenetics_PhySpeTree
+cd ../data/2.1.Phylogenetics_PhySpeTree
 
 # VARIABLE. Filename (input txt file with KEGG species names). For example bac_species.txt or fun_species.txt
 
