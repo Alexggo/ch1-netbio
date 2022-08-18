@@ -8,20 +8,20 @@ rrc Rickettsia rickettsii Colombia
 cdf Clostridioides difficile 630
 bce Bacillus cereus ATCC 14579
 sau Staphylococcus aureus subsp. aureus N315 (MRSA/VSSA)
-aae D01_dating-A.aeolicus
-bsu D02_dating-B.subtilis
-cje D03_dating-C.jejuni
-cgl D04_dating-C.glutamicum
-dra D05_dating-D.radiodurans
-fnu D07_dating-F.nucleatum
-mka D08_dating-M.kandleri
-mac D09_dating-M.acetivorans
-mma D10_dating-M.mazei
-nme D11_dating-N.meningitidis
-pfu D12_dating-P.furiosus
-rpr D13_dating-R.prowazekii
-sso D15_dating-S.solfataricus
-syn D16_dating-Synechocystis_sp.
-tvo D17_dating-T.volcanium
-syc D18_dating-T.elongatus
-tma D19_dating-T.maritima
+aae Aquifex aeolicus
+bsu Bacillus subtilis subsp. subtilis 168
+cje Campylobacter jejuni subsp. jejuni NCTC 11168 = ATCC 700819
+cgl Corynebacterium glutamicum ATCC 13032 (Kyowa Hakko)
+dra Deinococcus radiodurans
+fnu Fusobacterium nucleatum subsp. nucleatum ATCC 25586
+mka Methanopyrus kandleri
+mac Methanosarcina acetivorans
+mma Methanosarcina mazei Go1
+nme Neisseria meningitidis MC58 (serogroup B)
+pfu Pyrococcus furiosus DSM 3638
+rpr Rickettsia prowazekii Madrid E
+sso Saccharolobus solfataricus P2
+syn Synechocystis sp. PCC 6803
+tvo Thermoplasma volcanium
+tel Thermosynechococcus vestitus
+tma Thermotoga maritima MSB8

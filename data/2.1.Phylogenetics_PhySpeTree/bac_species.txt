@@ -21,7 +21,7 @@ nme
 pfu
 rpr
 sso
-syn
+tel
 tvo
 syc
 tma
