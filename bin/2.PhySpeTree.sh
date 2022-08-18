@@ -19,13 +19,13 @@ cd ../data/2.1.Phylogenetics_PhySpeTree
 
 # VARIABLE. Filename (input txt file with KEGG species names). For example bac_species.txt or fun_species.txt
 
-Filename=(bac_species.txt fun_species.txt)
+Filename=(bac_species.txt)
 
 for m in "${Filename[@]}"
 do
 echo "Analysis of $Filename"
-PhySpeTree autobuild -i $m -o $m.hcp --iqtree  --hcp 
+PhySpeTree autobuild -i $m -o $m.hcp --iqtree  --ehcp 
 
-PhySpeTree autobuild -i $m -o $m.srna --iqtree --srna 
+PhySpeTree autobuild -i $m -o $m.srna --iqtree --esrna 
 done
 echo "All done!"
