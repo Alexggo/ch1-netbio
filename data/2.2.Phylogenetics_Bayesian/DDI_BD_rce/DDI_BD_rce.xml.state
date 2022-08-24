@@ -1,0 +1,25 @@
+<itsabeastystatewerein version='2.0' sample='11304999'>
+<statenode id='Tree.t:concatenate'>((((0:1579.4560588086883,(3:1176.7155247577257,(17:88.4403180281735,18:88.4403180281735)38:1088.275206729552)47:402.74053405096265)39:1246.9249865193624,((((1:161.5434261298553,2:161.5434261298553)42:575.7882936310615,22:737.3317197609168)43:697.9941611526284,5:1435.3258809135452)45:1328.8943565547354,((4:363.41830505805933,6:363.41830505805933)41:2232.9539257537026,((((((7:3.574829847517636,8:3.574829847517636)32:73.87544357398279,(20:1.7960121443283092,21:1.7960121443283092)33:75.65426127717211)36:269.0897294734599,(14:10.350337695201217,15:10.350337695201217)37:336.1896651997591)35:279.677607528265,13:626.2176104232253)34:174.05552142352803,9:800.2731318467534)40:1238.957756497415,(23:1023.1828064255201,25:1023.1828064255201)49:1016.0480819186482)48:557.1413424675939)46:167.84800665651846)31:62.1608078597701)50:1195.5391588619113,26:4021.920204189962)30:883.0816754493285,(((10:579.2503203875538,(16:510.13791156701586,19:510.13791156701586)27:69.1124088205379)28:77.45574229585611,(11:348.9328796228583,12:348.9328796228583)44:307.77318306055156)29:2699.687022129721,24:3356.393084813131)51:1548.6087948261597)52:0.0</statenode>
+<statenode id='BDBirthRate.t:concatenate'>BDBirthRate.t:concatenate[1 1] (0.0,10000.0): 6.088883038049589E-4 </statenode>
+<statenode id='BDDeathRate.t:concatenate'>BDDeathRate.t:concatenate[1 1] (0.0,1.0): 0.30553564208404227 </statenode>
+<statenode id='ucedMean.c:concatenate'>ucedMean.c:concatenate[1 1] (-Infinity,Infinity): 3.1110944869234056E-4 </statenode>
+<statenode id='expRateCategories.c:concatenate'>expRateCategories.c:concatenate[52 1] (0,51): 29 44 43 38 49 34 51 22 15 42 47 16 15 36 3 15 45 43 34 50 14 0 29 20 21 21 13 49 47 5 44 50 13 24 51 29 47 42 38 9 4 3 18 27 51 7 32 24 17 33 9 16 </statenode>
+</itsabeastystatewerein>
+<!--
+{"operators":[
+{"id":"BirthDeathTreeScaler.t:concatenate","p":0.93276610194767,"accept":17925,"reject":284754,"acceptFC":17922,"rejectFC":283837,"rejectIv":265853,"rejectOp":0},
+{"id":"BirthDeathTreeRootScaler.t:concatenate","p":0.8822994608034065,"accept":20487,"reject":282747,"acceptFC":20479,"rejectFC":281819,"rejectIv":185898,"rejectOp":12310},
+{"id":"BirthDeathUniformOperator.t:concatenate","p":"NaN","accept":100435,"reject":2926497,"acceptFC":100013,"rejectFC":2917290,"rejectIv":446530,"rejectOp":0},
+{"id":"BirthDeathSubtreeSlide.t:concatenate","p":10.922854937210076,"accept":791592,"reject":722053,"acceptFC":789336,"rejectFC":719511,"rejectIv":85275,"rejectOp":67394},
+{"id":"BirthDeathNarrow.t:concatenate","p":"NaN","accept":845,"reject":1512557,"acceptFC":672,"rejectFC":1507780,"rejectIv":333375,"rejectOp":0},
+{"id":"BirthDeathWide.t:concatenate","p":"NaN","accept":16,"reject":302383,"acceptFC":8,"rejectFC":301398,"rejectIv":247503,"rejectOp":153930},
+{"id":"BirthDeathWilsonBalding.t:concatenate","p":"NaN","accept":10,"reject":302327,"acceptFC":7,"rejectFC":301359,"rejectIv":171148,"rejectOp":42516},
+{"id":"BirthRateScaler.t:concatenate","p":0.28148969726917217,"accept":71919,"reject":230651,"acceptFC":71169,"rejectFC":230422,"rejectIv":0,"rejectOp":0},
+{"id":"DeathRateScaler.t:concatenate","p":0.6977543690288325,"accept":194697,"reject":108190,"acceptFC":194592,"rejectFC":107331,"rejectIv":23270,"rejectOp":23270},
+{"id":"ucedMeanScaler.c:concatenate","p":0.896465535220601,"accept":5950,"reject":95398,"acceptFC":5926,"rejectFC":95084,"rejectIv":0,"rejectOp":0},
+{"id":"ExpCategoriesRandomWalk.c:concatenate","p":"NaN","accept":273807,"reject":736370,"acceptFC":273048,"rejectFC":733935,"rejectIv":367699,"rejectOp":367699},
+{"id":"ExpCategoriesSwapOperator.c:concatenate","p":"NaN","accept":36596,"reject":973177,"acceptFC":36210,"rejectFC":970431,"rejectIv":0,"rejectOp":0},
+{"id":"ExpCategoriesUniform.c:concatenate","p":"NaN","accept":85733,"reject":924985,"acceptFC":85353,"rejectFC":922337,"rejectIv":0,"rejectOp":0},
+{"id":"relaxedUpDownOperatorExp.c:concatenate","p":0.956148680579511,"accept":63878,"reject":239021,"acceptFC":63854,"rejectFC":237978,"rejectIv":238141,"rejectOp":0}
+]}
+-->
