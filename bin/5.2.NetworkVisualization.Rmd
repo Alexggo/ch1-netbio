@@ -19,21 +19,22 @@ p_load(igraph,tidyverse,BioNet,ape,geomorph,matrixStats,
 ```{r}
 # List 1 contains the complete dataset for each network.
 # df_DDI_tot contains all networks combined.
+#Execute after 5.1
+
 df_DDI_tot <- read_csv(file.path("../data/5.Targets_NetworkDistance","df_DDI_tot_network_metrics.csv")) |> 
   mutate(int_sign_ebw=factor(int_sign_ebw,levels=c("Synergy","Additivity","Antagonism")))
 
 # Minimum path ~ interaction type (ebw). 
 my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
+net <- df_DDI_tot$network |> unique()
 list_path <- list()
 for (i in 1:length(filenames)){
-  
-  font_size <- 2
   list_path[[i]] <- df_DDI_tot |> filter(network==net[i]) |> 
     ggplot(aes(x=int_sign_ebw,y=mean.path.length,fill=int_sign_ebw))+
     geom_violin()+
     geom_boxplot(width=0.01,fill="white")+
     stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    stat_compare_means(label.y = -3,size=font_size) +
+    stat_compare_means(label.y = 0.5) +
     stat_summary(fun=mean, geom="point", shape=20, size=4, color="red", fill="red")+
     theme_minimal()+
     scale_fill_brewer(palette="Set2")+
@@ -42,13 +43,13 @@ for (i in 1:length(filenames)){
     theme(legend.position = "none")+
     ggtitle(net[i])+
     ylim(c(0,7.5))
-  
-  list_path[[i]]$layers[[2]]$aes_params$textsize <- font_size
-  
 }
+
 list_path |> wrap_plots()
 
 list_path[[10]]
+wrap_plots(list_path[[8]],list_path[[10]])
+
 
 # Synergies are smaller than additive and antagonistic interactions in the PPI network.
 # No signif difference between add/ant in LC
@@ -188,8 +189,7 @@ for (i in 1:length(filenames)){
 listCon |> wrap_plots()
 listAdj |> wrap_plots()
 wrap_plots(listCon[[1]])
-#Connected proteins (EcoCyc, metabolic network) have a higher sigma rate 
-# than disconnected proteins.
+#Connected proteins (EcoCyc, metabolic network) have a higher sigma rate than disconnected proteins.
 wrap_plots(listAdj[[1]],listAdj[[10]])
 #Adjacent proteins have a higher sigma rate than non-adjacent.
 

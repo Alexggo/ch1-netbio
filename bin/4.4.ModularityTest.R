@@ -6,14 +6,21 @@ mat <- read.csv("data/1.processed/Broc2018_maindataset.csv") %>%
   filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau))
 
 # Read phylogenetic tree
-species <- c("ebw","ecr","stm","seo","pae","pau")
+species <- c("Escherichia_coli_K-12_ebw",
+             "Escherichia_coli_O8_IAI1_ecr",
+             "Salmonella_enterica_serovar_Typhimurium_LT2_stm",
+             "Salmonella_enterica_serovar_Typhimurium_14028S_seo",
+             "Pseudomonas_aeruginosa_PAO1_pae",
+             "Pseudomonas_aeruginosa_UCBPP-PA14_pau")
 
 treetype <- "bac_species.txt.hcp"
-treefile <- file.path('data/2.Phylogenetics_PhySpeTree',treetype,"iqtree.tree.treefile")
-tree_nw <- read.tree(treefile)
+treefile <- file.path('data/2.2.Phylogenetics_Bayesian/DDI_BD_str',"concatenate.trees.tre")
+tree_nw <- read.nexus(treefile)
 # Drop the species that are not needed.
 not.species <- tree_nw$tip.label[!(tree_nw$tip.label %in% species)]
 tree_nw <- drop.tip(tree_nw,not.species)
+
+tree_nw$tip.label <- c("ebw","ecr","pae","pau","seo","stm")
 
 # 13 Clusters
 clusters <- read.csv("data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.csv")
@@ -25,12 +32,12 @@ mat2 <- mat1[,12:17] %>% t()
 mod1 <- phylo.modularity(mat2,partition.gp = mat1$clusters,phy=tree_nw,print.progress=T,
                          CI = TRUE)
 mod1
-# CR: 0.9231
+# CR: 0.9095
 # P-value: 0.001
-# Effect Size: -26.2552
+# Effect Size: -27.2032
 # Based on 1000 random permutations
-# Confidence Intervals 0.8643 
-# Confidence Intervals 1.0121
+# Confidence Intervals 0.8613 
+# Confidence Intervals 1.0097
 
 
 # 4 Clusters
@@ -44,12 +51,12 @@ mod2 <- phylo.modularity(mat2,partition.gp = mat1$clusters,phy=tree_nw,print.pro
                          CI = TRUE)
 
 mod2
-# CR: 0.985
+# CR: 0.9808
 # P-value: 0.001
-# Effect Size: -15.5078
+# Effect Size: -15.1886
 # Based on 1000 random permutations
-#Confidence Intervals 0.9544 
-#Confidence Intervals 1.0049
+# Confidence Intervals 0.9543 
+# Confidence Intervals 1.0049
 
 
 # Adams,2017. The most negative effect size (ZCR) is identified, 

@@ -1,6 +1,3 @@
-#!/usr/bin/envRscript
-args = commandArgs(trailingOnly=TRUE)
-
 ##----load---------------------------------------------------------------------
 library(pacman)
 p_load(igraph, tidyverse, ape, matrixStats,
@@ -8,22 +5,21 @@ ggpubr, plotrix, tidymodels, here,future.apply)
 
 
 ##-----------------------------------------------------------------------------
-network <- args[1] |> as.numeric()
-#network <- 1
+# Metabolic=1, PPI=10
 
-filenames <- c("EcoCyc.goldstandardset.txt", "EcoliNet.v1.txt",
-               "GN.INT.EcoliNet.3568gene.23439link.txt",
-               "GO-BP.goldstandardset.txt",
-               "CC.EcoliNet.v1.2296gene.50528link.txt",
-               "CX.INT.EcoliNet.v1.4039gene.67494link.txt",
-               "DC.EcoliNet.2283gene.9643link.txt",
-               "EcoliNet.v1.benchmark.txt",
-               "HT.INT.EcoliNet.3209gene.15543link.txt",
-               "LC.INT.EcoliNet.764gene.1073link.txt",
-               "PG.INT.EcoliNet.v1.1817gene.17504link.txt")
+filenames <- c("EcoCyc.goldstandardset.csv", "EcoliNet.v1.csv",
+               "GN.INT.EcoliNet.3568gene.23439link.csv",
+               "GO-BP.goldstandardset.csv",
+               "CC.EcoliNet.v1.2296gene.50528link.csv",
+               "CX.INT.EcoliNet.v1.4039gene.67494link.csv",
+               "DC.EcoliNet.2283gene.9643link.csv",
+               "EcoliNet.v1.benchmark.csv",
+               "HT.INT.EcoliNet.3209gene.15543link.csv",
+               "LC.INT.EcoliNet.764gene.1073link.csv",
+               "PG.INT.EcoliNet.v1.1817gene.17504link.csv")
 
-#Ecocyc_goldstandard:1, Small-mediumPPI:10
-filepath_ecolinet <- file.path("data/5.Targets_NetworkDistance", filenames)
+#Ecocyc_goldstandard:1, Small-medium_PPI:10
+filepath_ecolinet <- file.path("data/5.Targets_NetworkDistance/EcoliNet_8_29_2022", filenames)
 net <- c("Co-functional(EcoCyc)", "EN:allnetworks",
 "Similar genomic context", "Co-functional (GO-BP)",
 "Co-citation", "Co-expression",
@@ -31,35 +27,33 @@ net <- c("Co-functional(EcoCyc)", "EN:allnetworks",
 "High-throughput PPI", "Small/medium-scale PPI",
 "Similar phylogenetic profiles")
 
-filenames <- filenames[[network]]
-filepath_ecolinet <- filepath_ecolinet[[network]]
 print(paste("Filename:",filenames))
 print(paste("Filepath:",filepath_ecolinet))
 
 
-list_net <- future_lapply(filepath_ecolinet,read_table) |> 
+list_net <- future_lapply(filepath_ecolinet,read_csv) |> 
   map(mutate,node1=paste0("eco:", node1),
       node2=paste0("eco:", node2)) |>
   map(select, node1, node2)
 
-names(list_net) <- filenames
+names(list_net) <- net
 
 
-##-----------------------------------------------------------------------------
+#Create igraphs from tables.
 list_graphs <- list_net |>
   map(graph_from_data_frame, directed = FALSE, vertices = NULL)
 
 #Which proteins are targeted by drugs?
-nodes <- read.csv("data/5.Targets_NetworkDistance/DrugTargets3_ecoli.csv") |>
+drug_mapping <- read.csv("data/5.Targets_NetworkDistance/DrugTargets3_ecoli.csv") |>
   select(Drug, KEGG_eco) |>
   distinct() |>
   arrange(Drug) |>
   filter(KEGG_eco != "")
-possible_targets <- nodes$KEGG_eco |>
+possible_targets <- drug_mapping$KEGG_eco |>
   unique()
 
 ##-----------------------------------------------------------------------------
-pdf(file = file.path("networks", paste0(filenames,"_graph.pdf")))
+pdf(file = file.path("networks", "network_graph.pdf"))
 
 for (i in seq_along(list_graphs)) {
 g1 <- list_graphs[[i]]
@@ -67,7 +61,7 @@ names <- V(g1) |>names()
 print(net[i])
 value1 <- names %in% possible_targets |>
   sum()
-value2 <- nodes$Drug[possible_targets %in% names] |>
+value2 <- drug_mapping$Drug[possible_targets %in% names] |>
   unique() |>
   length()
 V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
@@ -89,7 +83,7 @@ print(paste("Nodes", v.number, "Targets", value1, "Drugs", value2))
 }
 dev.off()
 
-pdf(file = file.path("networks", paste0(filenames,"_graph_notext.pdf")))
+pdf(file = file.path("networks", "network_graph_notext.pdf"))
 
 for (i in seq_along(list_graphs)) {
 g1 <- list_graphs[[i]]
@@ -97,7 +91,7 @@ names <- V(g1) |>names()
 print(net[i])
 value1 <- names %in% possible_targets |>
   sum()
-value2 <- nodes$Drug[possible_targets %in% names] |>
+value2 <- drug_mapping$Drug[possible_targets %in% names] |>
   unique() |>
   length()
 V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
@@ -111,39 +105,71 @@ dev.off()
 
 
 ##-----------------------------------------------------------------------------
-#Calculate path.length, k-edge and node degree for these targets.
+#Calculate path.length, k-edge and node degree for the possible targets.
+
 list_path_conn_deg <- list()
 
 for (i in seq_along(list_graphs)) {
-gr.vert <-   t(combn(names(V(list_graphs[[i]])),2))
+  #All nodes
+#gr.vert <-   t(combn(names(V(list_graphs[[i]])),2)) 
+  #Only target nodes
+gr.vert <- t(combn(possible_targets,2))
+gr.vert_same <- cbind(possible_targets,possible_targets)
+gr.vert <- rbind(gr.vert,gr.vert_same)
+
 gr.vert <- gr.vert[,]
-allcon <- future_apply(gr.vert,1,function(edges){
+network <- list_graphs[[i]]
+verti <- V(network) |> names()
+ID <- 1:length(verti)
+index <- cbind(verti,ID) |> as.data.frame() |> 
+  mutate(ID=as.numeric(ID))
+
+set <- gr.vert[,1]
+
+set <- set[set %in% index$verti] |> as.data.frame()
+colnames(set) <- "verti"
+
+tab <- left_join(set,index,by="verti") |> 
+  arrange(ID) |> distinct()
+comb <- t(combn(tab$ID,2))
+
+
+allcon <- future_apply(comb,1,function(edges){
   edge_connectivity(list_graphs[[i]],
                     source = edges[1], target = edges[2])
 })
-allpath <- future_apply(gr.vert,1,function(edges){
+allpath <- future_apply(comb,1,function(edges){
   shortest.paths(list_graphs[[i]],
   v = edges[1], to = edges[2])
 })
-deg1 <- future_apply(gr.vert,1,function(edges){
+deg1 <- future_apply(comb,1,function(edges){
   igraph::degree(list_graphs[[i]],
                  v = edges[1])
 })
-deg2 <- future_apply(gr.vert,1,function(edges){
+deg2 <- future_apply(comb,1,function(edges){
   igraph::degree(list_graphs[[i]],
                  v = edges[2])
 })
 
 
 
-gr.vert <- as.data.frame(gr.vert)
-names(gr.vert) <- c("KEGG1","KEGG2")
-gr.vert$path.length <- allpath
-gr.vert$K.edge <- allcon
-gr.vert$Degree1 <- deg1
-gr.vert$Degree2 <- deg2
+comb <- as.data.frame(comb)
+names(comb) <- c("N1","N2")
+comb$path.length <- allpath
+comb$K.edge <- allcon
+comb$Degree1 <- deg1
+comb$Degree2 <- deg2
 
-gr.vert <- gr.vert |> 
+index1 <- index
+colnames(index1) <- c("KEGG1","N1")
+index2 <- index
+colnames(index2) <- c("KEGG2","N2")
+
+a <- left_join(comb,index1,by="N1")
+b <- left_join(a,index2,by="N2")
+comb <- b
+
+comb <- comb |> 
   mutate(KEGG1_KEGG2 = paste0(KEGG1, "_", KEGG2)) |> 
   rowwise() |> 
   mutate(min_deg=min(Degree1,Degree2,na.rm=TRUE)) |> 
@@ -153,21 +179,21 @@ gr.vert <- gr.vert |>
   distinct() |> 
   mutate(adjacency=ifelse(path.length==1,1,0))
 
-list_path_conn_deg[[i]] <- gr.vert
+list_path_conn_deg[[i]] <- comb
 }
 
-nodes1 <- nodes |>
+drug_mapping1 <- drug_mapping |>
 rename(Drug1 = Drug,
 KEGG1 = KEGG_eco)
 
 df_join <- list_path_conn_deg |>
-map(left_join, nodes1, by = "KEGG1")
+map(left_join, drug_mapping1, by = "KEGG1")
 
-nodes2 <- nodes |>
+drug_mapping2 <- drug_mapping |>
 rename(Drug2 = Drug,
 KEGG2 = KEGG_eco)
 df_join1 <- df_join |>
-map(left_join, nodes2, by = "KEGG2") |>
+map(left_join, drug_mapping2, by = "KEGG2") |>
 map(mutate, KEGG1_KEGG2 = paste0(KEGG1, "_", KEGG2)) |>
 map(distinct)
 
@@ -199,6 +225,7 @@ map(drop_na)
 
 
 ##-----------------------------------------------------------------------------
+#Take means per DDI.
 DDI_dist_conn_deg_adj <- dist_conn_deg_adj |>
   map(dplyr::ungroup) |>
   map(dplyr::group_by, drug_pair, Drug1, Drug2) |>
@@ -257,7 +284,9 @@ df_DDI_tot <- bind_rows(df_DDI_tot, .id = "network") |>
   ifelse(int_sign_pau == "Synergy", -1, NA)))) |>
   rowwise() |>
   mutate(sum_g = ebw_g + ecr_g + seo_g + stm_g + pae_g + pau_g) |>
-  distinct()
+  distinct() |> 
+  rename(Drug1=Drug1.x,Drug2=Drug2.x) |> 
+  select(-c(Drug1.y,Drug2.y))
 
 
 ##SAVE
@@ -267,7 +296,11 @@ for (i in seq_along(DDI_dist_conn_deg_adj)) {
 }
 
 df_target_tot <- map(dist_conn_deg_adj, inner_join, rates, by = "drug_pair") |>
-  map(distinct) |>bind_rows(.id = "network") |>
+  map(distinct)
+names(df_target_tot) <- net
+
+
+df_target_tot <- bind_rows(df_target_tot, .id = "network") |>
   mutate(adjacency = as.factor(adjacency)) |>
   #mutate(connection_groups = cut_interval(K.edge, 6)) |>
   #mutate(connection_groups = ifelse(is.na(connection_groups),
@@ -298,7 +331,9 @@ df_target_tot <- map(dist_conn_deg_adj, inner_join, rates, by = "drug_pair") |>
   ifelse(int_sign_pau == "Synergy", -1, NA)))) |>
   rowwise() |>
   mutate(sum_g = ebw_g + ecr_g + seo_g + stm_g + pae_g + pau_g) |>
-  distinct()
+  distinct()|> 
+  rename(Drug1=Drug1.x,Drug2=Drug2.x) |> 
+  select(-c(Drug1.y,Drug2.y))
 
 df_target_tot |>
   colnames()
@@ -307,8 +342,8 @@ df_DDI_tot |>
 
 write.csv(df_DDI_tot,
   file.path("data/5.Targets_NetworkDistance",
-            paste0(filenames,"_df_DDI_tot_network_metrics.csv")), row.names = F)
+            "df_DDI_tot_network_metrics.csv"), row.names = F)
 write.csv(df_target_tot,
   file.path("data/5.Targets_NetworkDistance",
-            paste0(filenames,"_df_target_tot_metrics.csv")), row.names = F)
+            "df_target_tot_metrics.csv"), row.names = F)
 
