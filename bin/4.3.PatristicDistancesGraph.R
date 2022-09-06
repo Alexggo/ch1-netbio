@@ -10,7 +10,7 @@ args = commandArgs(trailingOnly=TRUE)
 library(pacman)
 p_load(plyr,tidyverse,broom,ape,phangorn,phytools,treeio,ggtree,plotly,
 dendextend,RColorBrewer,car,factoextra,OUwie,ouch,factoextra,geiger,ggrepel,
-hrbrthemes,ggforce,ComplexHeatmap,ggbiplot,patchwork)
+hrbrthemes,ggforce,ComplexHeatmap,ggbiplot,patchwork,performance)
 
 
 
@@ -103,13 +103,14 @@ df <- inner_join(PD_dist,Chem_Dist,by="ID")  %>%
 #Model statistics.
 lmod1 <- lm(Chemdist~PhyloDist,data=df)
 gla1 <- glance(lmod1)
-
+check_model(lmod1)
 
 lmod2 <- lm(Chemdist~log(PhyloDist),data=df)
 tid2 <- tidy(lmod2)
 aug2 <- augment(lmod2)
 gla2 <- glance(lmod2)
-
+performance::check_model(lmod2)
+check_outliers(lmod2)
 
 g1 <- ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   geom_point(aes(color=class))+
