@@ -3,8 +3,8 @@
 #SBATCH --job-name=RunR-ch3
 #SBATCH -o RunR.sh.out
 #SBATCH --nodes=1
-#SBATCH -p extended-28core
-#SBATCH --time=7-00:00:00
+#SBATCH -p long-40core
+#SBATCH --time=2-00:00:00
 
 # AUTHOR: ALEX GIL GOMEZ
 # INPUTS: Dataset DDI
@@ -24,5 +24,5 @@ pwd
 
 
 # VARIABLE. 
-# Rscript bin/3.1.tSNE_BigMap.R
-Rscript bin/5.1.Networks.R $net
+Rscript bin/B.SameRes_across_strains_DDIs/3.1.tSNE_BigMap.R
+#Rscript bin/5.1.Networks.R $net

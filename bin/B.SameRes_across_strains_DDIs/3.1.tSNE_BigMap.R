@@ -66,7 +66,7 @@ m.list1 <- lapply(seq_along(ptsne.ppx), function(p) {
   m.ppx
 })
 
-save(m.list1, file = 'results/SameRes_across_strains_DDIs/RObjects/mlist1.RData')
+save(m.list1, file = 'results/B.SameRes_across_strains_DDIs/RObjects/mlist1.RData')
 
 print(Sys.time())
 
