@@ -47,9 +47,9 @@ m <- bdm.init('DDI', data)
 
 # range of perplexities. 
 # Large range for exploratory analysis.
-ptsne.ppx <- c(seq(5,50,10),seq(50, 2120, by = 82))
+#ptsne.ppx <- c(seq(5,50,10),seq(50, 2120, by = 82))
 #Smaller range after plots are shown.
-#ptsne.ppx <- seq(700, 900, by = 25)
+ptsne.ppx <- ptsne.ppx <- seq(50, 600, by = 10)
 
 # Should be around 1/3 of ptsne.ppx
 pakde.ppx <- round(ptsne.ppx/3, 0)
@@ -66,7 +66,7 @@ m.list1 <- lapply(seq_along(ptsne.ppx), function(p) {
   m.ppx
 })
 
-save(m.list1, file = 'results/B.SameRes_across_strains_DDIs/RObjects/mlist1.RData')
+save(m.list1, file = 'results/B.SameRes_across_strains_DDIs/RObjects/mlist1_small.RData')
 
 print(Sys.time())
 

@@ -15,11 +15,11 @@ dataset <- read_csv(file) %>%
 
 
 # Explore a large range of perplexities.
-load('results/RObjects/mlist1_ppx0005_2120.RData')
+load('results/B.SameRes_across_strains_DDIs/RObjects/mlist1.RData')
 list1 <- m.list1
 ptsne.ppx <- c(seq(5,50,10),seq(50, 2120, by = 82))
 
-pdf()
+pdf("img/B.SameRes_across_strains_DDIs/tSNE.pdf")
 for (i in 1:length(list1)){
   bdm.cost(list1[[i]])
   title(main = paste("perplexity = ",as.character(ptsne.ppx[i])))
@@ -34,7 +34,7 @@ dev.off()
 #5   15   25   35   45   50  132  214  296  378  460  542  624  706  788  870  952 1034 1116
 # 1198 1280 1362 1444 1526 1608 1690 1772 1854 1936 2018 2100
 x <- 1:31
-index <- x[ptsne.ppx==706]
+index <- x[ptsne.ppx==132]
 # Find a value that makes the size function stable.
 bdm.cost(list1[[index]])
 bdm.ptsne.plot(list1[[index]], ptsne.cex = 2)
@@ -85,7 +85,7 @@ write.csv(Cluster_membership,"data/3.InteractionScores_tSNE/tSNE_Clustermembersh
 # Explore a smaller range of perplexities closer to optimal value
 load('results/RObjects/mlist2_ppx0700_0900.RData')
 list2 <- m.list1
-ptsne.ppx <- ptsne.ppx <- seq(700, 900, by = 25)
+ptsne.ppx <- ptsne.ppx <- seq(50, 600, by = 10)
 
 pdf()
 for (i in 1:length(list2)){
