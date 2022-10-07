@@ -35,7 +35,22 @@ hrbrthemes,ggforce,ComplexHeatmap,ggbiplot,patchwork,performance)
 mat <- read.csv("data/1.processed/Broc2018_maindataset.csv") %>%
   filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau))
 
-clust <- read.csv("data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.csv")
+# All R, and all S.
+same_res <- c("Imipenem","Aztreonam","Cephalexin","Teicoplanin",
+              "Bacitracin","Metronidazole","Clofazimine",
+              "Doxorubicin","Mitomycin C","Ciprofloxacin","Levofloxacin",
+              "Sulfamonomethoxine","Cerulenin","Nisin","Daptomycin",
+              "Nonactin","Paraquat","Linezolid","Tigecycline",
+              "Spiramycin","Erythromycin","Clarithromycin",
+              "Caffeine","Reserpine","Procaine","Theophylline",
+              "Verapamil","Meropenem","Triclosan",
+              "Gentamicin","Berberine","Metformin","Diclofenac")
+
+mat <- mat |> 
+  filter(Drug1 %in% same_res) |> 
+  filter(Drug2 %in% same_res)
+
+clust <- read.csv("data/B.SameRes_across_strains_DDIs/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx_small.csv")
 mat1 <- full_join(mat,clust,by="drug_pair")
 
 

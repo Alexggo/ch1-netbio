@@ -30,7 +30,7 @@ p_load(tidyverse,RColorBrewer,plotly,dendextend,ggrepel,hrbrthemes,
 ## -----------------------------------------------------------------------------
 
 # Read data matrix
-file <- file.path("data/4.PhylogeneticComparativeMethods/","dataset1_ratios.csv")
+file <- file.path("data/B.SameRes_across_strains_DDIs/4.PhylogeneticComparativeMethods/","dataset1_ratios.csv")
 
 #Remove DDI with at least one NA.
 dataset <- read_csv(file) %>%
@@ -96,7 +96,7 @@ Heatmap(mat_red,show_column_names = T,
 ## Plot PCA DDI~strain.
 ## -----------------------------------------------------------------------------
 dataset1 <- dataset %>% as.data.frame()
-res.pca <- dataset1[,10:15] 
+res.pca <- dataset1[,12:17] 
 colnames(res.pca) <- c("E. coli-EBW","E. coli-ECR",
                        "S. enterica-SEO","S. enterica-STM",
                        "P.aeruginosa-PAE","P.aeruginosa-PAU")
@@ -114,7 +114,7 @@ fviz_eig(pca)# Eigenvalues
 ## Plot PCA Strain~DDI
 ## -----------------------------------------------------------------------------
 dataset1 <- dataset %>% as.data.frame()
-res.pca <- dataset1[,10:15] %>% t()
+res.pca <- dataset1[,12:17] %>% t()
 rownames(res.pca) <- c("E. coli-EBW","E. coli-ECR",
                        "S. enterica-SEO","S. enterica-STM",
                        "P.aeruginosa-PAE","P.aeruginosa-PAU")
@@ -142,3 +142,7 @@ phylomorphospace(tree_nw, pca$x[,1:2],
 #phylomorphospace3d(tree_nw,pca.x[,c(1,2,3)],method="static")
 fancyTree(tree_nw,X=pca.x[,c(1,2)],
           type="traitgram3d",method="static")
+
+
+
+

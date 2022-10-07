@@ -32,16 +32,16 @@ print(paste("Filepath:",filepath_ecolinet))
 
 
 list_net <- future_lapply(filepath_ecolinet,read_csv) |> 
-  map(mutate,node1=paste0("eco:", node1),
-      node2=paste0("eco:", node2)) |>
-  map(select, node1, node2)
+  lapply(mutate,node1=paste0("eco:", node1)) |> 
+  lapply(mutate,node2=paste0("eco:", node2)) |>
+  lapply(select, node1, node2)
 
 names(list_net) <- net
 
 
 #Create igraphs from tables.
 list_graphs <- list_net |>
-  map(graph_from_data_frame, directed = FALSE, vertices = NULL)
+  lapply(graph_from_data_frame, directed = FALSE, vertices = NULL)
 
 #Which proteins are targeted by drugs?
 drug_mapping <- read.csv("data/5.Targets_NetworkDistance/DrugTargets3_ecoli.csv") |>
@@ -53,7 +53,7 @@ possible_targets <- drug_mapping$KEGG_eco |>
   unique()
 
 ##-----------------------------------------------------------------------------
-pdf(file = file.path("networks", "network_graph.pdf"))
+pdf(file = file.path("networks/B.SameRes_across_strains_DDIs/", "network_graph.pdf"))
 
 for (i in seq_along(list_graphs)) {
 g1 <- list_graphs[[i]]
@@ -83,7 +83,7 @@ print(paste("Nodes", v.number, "Targets", value1, "Drugs", value2))
 }
 dev.off()
 
-pdf(file = file.path("networks", "network_graph_notext.pdf"))
+pdf(file = file.path("networks/B.SameRes_across_strains_DDIs/", "network_graph_notext.pdf"))
 
 for (i in seq_along(list_graphs)) {
 g1 <- list_graphs[[i]]
@@ -240,7 +240,7 @@ DDI_dist_conn_deg_adj <- dist_conn_deg_adj |>
 
 #Add rates.
 rates <- read.csv(file.path(
-  "data/4.PhylogeneticComparativeMethods/dataset1_ratios.csv"))
+  "data/B.SameRes_across_strains_DDIs/4.PhylogeneticComparativeMethods/dataset1_ratios.csv"))
 
 r <- rates |>
   select(clusters, sigma.rate) |>
@@ -341,9 +341,9 @@ df_DDI_tot |>
   colnames()
 
 write.csv(df_DDI_tot,
-  file.path("data/5.Targets_NetworkDistance",
+  file.path("data/B.SameRes_across_strains_DDIs/5.Targets_NetworkDistance",
             "df_DDI_tot_network_metrics.csv"), row.names = F)
 write.csv(df_target_tot,
-  file.path("data/5.Targets_NetworkDistance",
+  file.path("data/B.SameRes_across_strains_DDIs/5.Targets_NetworkDistance",
             "df_target_tot_metrics.csv"), row.names = F)
 

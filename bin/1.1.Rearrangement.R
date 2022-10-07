@@ -93,5 +93,5 @@ e <- d %>% mutate(int_sign_ebw=ifelse(is.na(int_sign_ebw),"Additivity",int_sign_
   mutate(int_sign_pae=ifelse(is.na(int_sign_pae),"Additivity",int_sign_pae)) %>% 
   mutate(int_sign_pau=ifelse(is.na(int_sign_pau),"Additivity",int_sign_pau)) 
 
-write.csv(e,"data/1.processed/Broc2018_maindataset.csv",row.names = F)
-
+#write.csv(e,"data/1.processed/Broc2018_maindataset.csv",row.names = F)
+#With RS data added manually.

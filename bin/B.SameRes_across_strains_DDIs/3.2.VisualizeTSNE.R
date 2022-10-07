@@ -13,13 +13,28 @@ dataset <- read_csv(file) %>%
          targeted_process=as.factor(targeted_process),
          int_sign_ebw=as.factor(int_sign_ebw))
 
+# All R, and all S.
+same_res <- c("Imipenem","Aztreonam","Cephalexin","Teicoplanin",
+              "Bacitracin","Metronidazole","Clofazimine",
+              "Doxorubicin","Mitomycin C","Ciprofloxacin","Levofloxacin",
+              "Sulfamonomethoxine","Cerulenin","Nisin","Daptomycin",
+              "Nonactin","Paraquat","Linezolid","Tigecycline",
+              "Spiramycin","Erythromycin","Clarithromycin",
+              "Caffeine","Reserpine","Procaine","Theophylline",
+              "Verapamil","Meropenem","Triclosan",
+              "Gentamicin","Berberine","Metformin","Diclofenac")
 
-# Explore a large range of perplexities.
-load('results/B.SameRes_across_strains_DDIs/RObjects/mlist1.RData')
-list1 <- m.list1
+dataset <- dataset |> 
+  filter(Drug1 %in% same_res) |> 
+  filter(Drug2 %in% same_res)
+
+# Explore a range of perplexities.
+
+# Large range
+load('results/B.SameRes_across_strains_DDIs/RObjects/mlist1_large.RData')
 ptsne.ppx <- c(seq(5,50,10),seq(50, 2120, by = 82))
-
-pdf("img/B.SameRes_across_strains_DDIs/tSNE.pdf")
+list1 <- m.list1
+pdf("img/B.SameRes_across_strains_DDIs/tSNE_large.pdf")
 for (i in 1:length(list1)){
   bdm.cost(list1[[i]])
   title(main = paste("perplexity = ",as.character(ptsne.ppx[i])))
@@ -49,6 +64,9 @@ labels <- dataset %>%
 ID <- dataset %>% 
   select(drugdrug) %>% pull()
 
+labels |> length()
+ID |> length()
+bdm.labels(list1[[index]]) |> length()
 subset <- as.factor(labels) %>% unique()
 
 
@@ -68,7 +86,7 @@ classG<- as.numeric(labels)
 list1[[index]]$lbls <- classG
 
 
-pdf()
+pdf("img/B.SameRes_across_strains_DDIs/tSNE_large_space.pdf")
 for (i in 1:length(subset)){
   bdm.qMap(list1[[index]], 
            data = list1[[index]]$data[, 1:6], 
@@ -78,16 +96,16 @@ for (i in 1:length(subset)){
 dev.off()
 
 
-write.csv(Cluster_membership,"data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.csv",row.names = F)
+write.csv(Cluster_membership,"data/B.SameRes_across_strains_DDIs/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx_large.csv",row.names = F)
 
 
 
 # Explore a smaller range of perplexities closer to optimal value
-load('results/RObjects/mlist2_ppx0700_0900.RData')
+load('results/B.SameRes_across_strains_DDIs/RObjects/mlist1_small.RData')
 list2 <- m.list1
-ptsne.ppx <- ptsne.ppx <- seq(50, 600, by = 10)
+ptsne.ppx <- seq(50, 600, by = 10)
 
-pdf()
+pdf("img/B.SameRes_across_strains_DDIs/tSNE_small.pdf")
 for (i in 1:length(list2)){
   bdm.cost(list2[[i]])
   title(main = paste("perplexity = ",as.character(ptsne.ppx[i])))
@@ -99,21 +117,20 @@ for (i in 1:length(list2)){
 dev.off()
 
 
-# Perplexity ranges between 5 and 2100.
-#700 725 750 775 800 825 850 875 900
-x <- 1:9
-index <- x[ptsne.ppx==825]
+# Perplexity ranges.
+x <- 1:56
+index <- x[ptsne.ppx==90]
 # Find a value that makes the size function stable.
 bdm.cost(list2[[index]])
 bdm.ptsne.plot(list2[[index]], ptsne.cex = 2)
 bdm.wtt.plot(list2[[index]])
-# For ppx=825, cost function reaches stable solution.
+# For ppx=90, cost function reaches stable solution.
 
 
 
 ## Plot labels in the graph.
 labels <- dataset %>% 
-  select(categorycategory) %>% pull() # Select your clustering label processprocess, useuse, categorycategory.
+  select(drug_pair) %>% pull() # Select your clustering label processprocess, useuse, categorycategory.
 ID <- dataset %>% 
   select(drugdrug) %>% pull()
 
@@ -137,7 +154,7 @@ classG<- as.numeric(labels)
 list2[[index]]$lbls <- classG
 
 
-pdf()
+pdf("img/B.SameRes_across_strains_DDIs/tSNE_small_space.pdf")
 for (i in 1:length(subset)){
   bdm.qMap(list2[[index]], 
            data = list2[[index]]$data[, 1:6], 
@@ -146,5 +163,5 @@ for (i in 1:length(subset)){
 }
 dev.off()
 
-write.csv(Cluster_membership,"data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx825.csv",row.names = F)
+write.csv(Cluster_membership,"data/B.SameRes_across_strains_DDIs/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx_small.csv",row.names = F)
 

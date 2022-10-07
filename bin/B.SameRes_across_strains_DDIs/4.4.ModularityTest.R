@@ -22,8 +22,25 @@ tree_nw <- drop.tip(tree_nw,not.species)
 
 tree_nw$tip.label <- c("ebw","ecr","pae","pau","seo","stm")
 
-# 13 Clusters
-clusters <- read.csv("data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.csv")
+
+same_res <- c("Imipenem","Aztreonam","Cephalexin","Teicoplanin",
+              "Bacitracin","Metronidazole","Clofazimine",
+              "Doxorubicin","Mitomycin C","Ciprofloxacin","Levofloxacin",
+              "Sulfamonomethoxine","Cerulenin","Nisin","Daptomycin",
+              "Nonactin","Paraquat","Linezolid","Tigecycline",
+              "Spiramycin","Erythromycin","Clarithromycin",
+              "Caffeine","Reserpine","Procaine","Theophylline",
+              "Verapamil","Meropenem","Triclosan",
+              "Gentamicin","Berberine","Metformin","Diclofenac")
+
+mat <- mat |> 
+  filter(Drug1 %in% same_res) |> 
+  filter(Drug2 %in% same_res)
+
+
+
+# TSNE large range
+clusters <- read.csv("data/B.SameRes_across_strains_DDIs/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx_large.csv")
 
 mat1 <- full_join(mat,clusters,by="drug_pair") 
 mat2 <- mat1[,12:17] %>% t()
@@ -32,16 +49,16 @@ mat2 <- mat1[,12:17] %>% t()
 mod1 <- phylo.modularity(mat2,partition.gp = mat1$clusters,phy=tree_nw,print.progress=T,
                          CI = TRUE)
 mod1
-# CR: 0.9095
-# P-value: 0.001
-# Effect Size: -27.2032
+# CR: 1.0139
+# P-value: 0.045
+# Effect Size: -1.5779
 # Based on 1000 random permutations
-# Confidence Intervals 0.8613 
-# Confidence Intervals 1.0097
+# Confidence Intervals 0.9857 
+# Confidence Intervals 1.0296
 
 
-# 4 Clusters
-clusters <- read.csv("data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx825.csv")
+# TSNE small range
+clusters <- read.csv("data/B.SameRes_across_strains_DDIs/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx_small.csv")
 
 mat1 <- full_join(mat,clusters,by="drug_pair")
 mat2 <- mat1[,12:17] %>% t()
@@ -51,16 +68,17 @@ mod2 <- phylo.modularity(mat2,partition.gp = mat1$clusters,phy=tree_nw,print.pro
                          CI = TRUE)
 
 mod2
-# CR: 0.9808
+
+# CR: 0.9897
 # P-value: 0.001
-# Effect Size: -15.1886
+# Effect Size: -4.6892
 # Based on 1000 random permutations
-# Confidence Intervals 0.9543 
-# Confidence Intervals 1.0049
+# Confidence Intervals 0.9195 
+# Confidence Intervals 1.0452
 
 
 # Adams,2017. The most negative effect size (ZCR) is identified, 
 # this represented the hypothesis representing the strongest modular signal.
 
-#In this case model 1 is better.
+#In this case mod2 is better.
 
