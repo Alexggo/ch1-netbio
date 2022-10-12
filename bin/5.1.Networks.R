@@ -221,22 +221,8 @@ mean_deg, min_deg, max_deg) |>
 lapply(distinct) |>
 lapply(filter, Drug1 != Drug2) |>
 lapply(filter, Drug1 < Drug2) |> 
-lapply(drop_na)
-
-
-##-----------------------------------------------------------------------------
-#Take means per DDI.
-DDI_dist_conn_deg_adj <- dist_conn_deg_adj |>
-  lapply(dplyr::ungroup) |>
-  lapply(dplyr::group_by, drug_pair, Drug1, Drug2) |>
-  lapply(dplyr::summarize,
-    mean.path.length = round(mean(path.length, na.rm = TRUE)),
-    mean.k.edge = round(mean(K.edge, na.rm = TRUE)),
-    mean.min.degree = round(mean(min_deg, na.rm = TRUE)),
-    mean.max.degree = round(mean(max_deg, na.rm = TRUE)),
-    mean.mean.degree = round(mean(mean_deg, na.rm = TRUE)),
-    max.adjacency = max(adjacency, na.rm = TRUE)) |>
-  lapply(arrange, drug_pair)
+lapply(drop_na) |> 
+lapply(arrange,drug_pair)
 
 #Add rates and DDI info
 rates <- read.csv(file.path(
@@ -248,102 +234,78 @@ r <- rates |>
   arrange(sigma.rate)
 clusters <- factor(r$clusters, levels = r$clusters[order(r$sigma.rate)])
 
-df_DDI_tot <- lapply(DDI_dist_conn_deg_adj, inner_join, rates, by = "drug_pair") |>
+dist_conn_deg_adj <- lapply(dist_conn_deg_adj, inner_join, rates, by = "drug_pair") |>
   lapply(distinct)
-names(df_DDI_tot) <- net
+names(dist_conn_deg_adj) <- net
 
-df_DDI_tot <- bind_rows(df_DDI_tot, .id = "network") |>
-  mutate(max.adjacency = as.factor(max.adjacency)) |>
-  #mutate(connection_groups = cut_interval(mean.k.edge, 6)) |>
-  #mutate(connection_groups = ifelse(is.na(connection_groups),
-  #0, connection_groups)) |>
-  mutate(connection_onoff =
-         ifelse(mean.k.edge == 0, "disconnected", "connected")) |>
+
+df_target_tot  <- bind_rows(dist_conn_deg_adj, .id = "network") |>
   mutate(int_sign_ebw = factor(int_sign_ebw,
-  levels = c("Synergy", "Additivity", "Antagonism"))) |>
+                               levels = c("Synergy", "Additivity", "Antagonism"))) |>
   mutate(drug_cat = ifelse(drug_category == "Same", 1, 0)) |>
   mutate(targ = ifelse(targeted_process == "Same", 1, 0)) |>
   mutate(us = ifelse(use == "Same", 1, 0)) |>
   mutate(ebw_g = ifelse(int_sign_ebw == "Antagonism",  +1,
-  ifelse(int_sign_ebw == "Additivity", 0,
-  ifelse(int_sign_ebw == "Synergy", -1, NA)))) |>
+                        ifelse(int_sign_ebw == "Additivity", 0,
+                               ifelse(int_sign_ebw == "Synergy", -1, NA)))) |>
   mutate(ecr_g = ifelse(int_sign_ecr == "Antagonism",  +1,
-  ifelse(int_sign_ecr == "Additivity", 0,
-  ifelse(int_sign_ecr == "Synergy", -1, NA)))) |>
+                        ifelse(int_sign_ecr == "Additivity", 0,
+                               ifelse(int_sign_ecr == "Synergy", -1, NA)))) |>
   mutate(seo_g = ifelse(int_sign_seo == "Antagonism",  +1,
-  ifelse(int_sign_seo == "Additivity", 0,
-  ifelse(int_sign_seo == "Synergy", -1, NA)))) |>
+                        ifelse(int_sign_seo == "Additivity", 0,
+                               ifelse(int_sign_seo == "Synergy", -1, NA)))) |>
   mutate(stm_g = ifelse(int_sign_stm == "Antagonism",  +1,
-  ifelse(int_sign_stm == "Additivity", 0,
-  ifelse(int_sign_stm == "Synergy", -1, NA)))) |>
+                        ifelse(int_sign_stm == "Additivity", 0,
+                               ifelse(int_sign_stm == "Synergy", -1, NA)))) |>
   mutate(pae_g = ifelse(int_sign_pae == "Antagonism",  +1,
-  ifelse(int_sign_pae == "Additivity", 0,
-  ifelse(int_sign_pae == "Synergy", -1, NA)))) |>
+                        ifelse(int_sign_pae == "Additivity", 0,
+                               ifelse(int_sign_pae == "Synergy", -1, NA)))) |>
   mutate(pau_g = ifelse(int_sign_pau == "Antagonism",  +1,
-  ifelse(int_sign_pau == "Additivity", 0,
-  ifelse(int_sign_pau == "Synergy", -1, NA)))) |>
-  rowwise() |>
-  mutate(sum_g = ebw_g + ecr_g + seo_g + stm_g + pae_g + pau_g) |>
-  distinct() |> 
-  rename(Drug1=Drug1.x,Drug2=Drug2.x) |> 
-  select(-c(Drug1.y,Drug2.y))
-
-
-##SAVE
-for (i in seq_along(DDI_dist_conn_deg_adj)) {
-  DDI_dist_conn_deg_adj[[i]]$network <- net[i]
-  dist_conn_deg_adj[[i]]$network <- net[i]
-}
-
-df_target_tot <- lapply(dist_conn_deg_adj, inner_join, rates, by = "drug_pair") |>
-  lapply(distinct)
-names(df_target_tot) <- net
-
-
-df_target_tot <- bind_rows(df_target_tot, .id = "network") |>
-  mutate(adjacency = as.factor(adjacency)) |>
-  #mutate(connection_groups = cut_interval(K.edge, 6)) |>
-  #mutate(connection_groups = ifelse(is.na(connection_groups),
-  #0, connection_groups)) |>
-  mutate(connection_onoff = ifelse(K.edge == 0, "disconnected", "connected")) |>
-  mutate(int_sign_ebw = factor(int_sign_ebw,
-  levels = c("Synergy", "Additivity", "Antagonism"))) |>
-  mutate(drug_cat = ifelse(drug_category == "Same", 1, 0)) |>
-  mutate(targ = ifelse(targeted_process == "Same", 1, 0)) |>
-  mutate(us = ifelse(use == "Same", 1, 0)) |>
-  mutate(ebw_g = ifelse(int_sign_ebw == "Antagonism",  +1,
-  ifelse(int_sign_ebw == "Additivity", 0,
-  ifelse(int_sign_ebw == "Synergy", -1, NA)))) |>
-  mutate(ecr_g = ifelse(int_sign_ecr == "Antagonism",  +1,
-  ifelse(int_sign_ecr == "Additivity", 0,
-  ifelse(int_sign_ecr == "Synergy", -1, NA)))) |>
-  mutate(seo_g = ifelse(int_sign_seo == "Antagonism",  +1,
-  ifelse(int_sign_seo == "Additivity", 0,
-  ifelse(int_sign_seo == "Synergy", -1, NA)))) |>
-  mutate(stm_g = ifelse(int_sign_stm == "Antagonism",  +1,
-  ifelse(int_sign_stm == "Additivity", 0,
-  ifelse(int_sign_stm == "Synergy", -1, NA)))) |>
-  mutate(pae_g = ifelse(int_sign_pae == "Antagonism",  +1,
-  ifelse(int_sign_pae == "Additivity", 0,
-  ifelse(int_sign_pae == "Synergy", -1, NA)))) |>
-  mutate(pau_g = ifelse(int_sign_pau == "Antagonism",  +1,
-  ifelse(int_sign_pau == "Additivity", 0,
-  ifelse(int_sign_pau == "Synergy", -1, NA)))) |>
+                        ifelse(int_sign_pau == "Additivity", 0,
+                               ifelse(int_sign_pau == "Synergy", -1, NA)))) |>
   rowwise() |>
   mutate(sum_g = ebw_g + ecr_g + seo_g + stm_g + pae_g + pau_g) |>
   distinct()|> 
   rename(Drug1=Drug1.x,Drug2=Drug2.x) |> 
-  select(-c(Drug1.y,Drug2.y))
+  select(-c(Drug1.y,Drug2.y)) |> 
+  distinct()
 
-df_target_tot |>
-  colnames()
-df_DDI_tot |>
-  colnames()
-
-write.csv(df_DDI_tot,
-  file.path("data/5.Targets_NetworkDistance",
-            "df_DDI_tot_network_metrics.csv"), row.names = F)
-write.csv(df_target_tot,
+df_target_tot  |> 
+  arrange(K.edge) |> 
+  arrange(drug_pair) |> 
+  arrange(network) |> 
+write.csv(
   file.path("data/5.Targets_NetworkDistance",
             "df_target_tot_metrics.csv"), row.names = F)
+
+significant_figures <- 4
+
+final_DDI <- df_target_tot  |> 
+  group_by(network,drug_pair) |> 
+  summarise(mean.path.length = ifelse(mean(path.length,na.rm=TRUE)==Inf,Inf,round(mean(path.length,na.rm=TRUE),significant_figures)),
+            mean.k.edge = round(mean(K.edge, na.rm = TRUE),significant_figures),
+            mean.min.degree = round(mean(min_deg, na.rm = TRUE),significant_figures),
+            mean.max.degree = round(mean(max_deg, na.rm = TRUE),significant_figures),
+            mean.mean.degree = round(mean(mean_deg, na.rm = TRUE),significant_figures),
+            max.adjacency = max(adjacency, na.rm = TRUE))
+
+df1 <- df_target_tot |> select(drug_pair,Drug1,Drug2,code_3letter1,
+                               code_3letter2,drug_category1,drug_category2,
+                               targeted_cellular_process1,targeted_cellular_process2,
+                               use1,use2,24:35,39:90)
+
+df_DDI_tot  <- inner_join(final_DDI, df1, by = "drug_pair") |>
+    distinct() |>
+  mutate(max.adjacency = as.factor(max.adjacency)) |>
+  mutate(connection_onoff =
+           ifelse(mean.k.edge == 0, "disconnected", "connected")) 
+
+
+df_DDI_tot   |> 
+  arrange(mean.k.edge) |> 
+  arrange(drug_pair) |> 
+  arrange(network) |> 
+  write.csv(
+    file.path("data/5.Targets_NetworkDistance",
+              "df_DDI_tot_metrics.csv"), row.names = F)
 
