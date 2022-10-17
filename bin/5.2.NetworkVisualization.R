@@ -566,3 +566,17 @@ wrap_plots(sup_a,sup_b,sup_c,sup_d,sup_e,sup_f,sup_g,
   theme(plot.tag.position = c(0, 1),
         plot.tag = element_text(size = 15, hjust = 0, vjust = 0)) 
 
+df_DDI_tot |> 
+  filter(network==net[3]|network==net[11]) |> 
+  filter(Drug1 %in% c("A22","Novobiocin","Ciprofloxacin",
+                      "Meropenem","Sulfamonomethoxine","Trimethoprim")) |>
+  filter(Drug2 %in% c("A22","Novobiocin","Ciprofloxacin",
+                      "Meropenem","Sulfamonomethoxine","Trimethoprim")) |> 
+  select(network,drug_pair,clusters,sigma.rate,
+         mean.path.length,mean.k.edge,mean.mean.degree,
+         starts_with("int"),starts_with("SR")) |> 
+  filter(drug_pair %in% c("Sulfamonomethoxine_Trimethoprim",
+                          "A22_Novobiocin",
+                          "Ciprofloxacin_Meropenem")) |> 
+  arrange(drug_pair,network) |> 
+  write.csv("data/5.Targets_NetworkDistance/sup_table1.csv",row.names = FALSE)
