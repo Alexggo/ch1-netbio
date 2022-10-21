@@ -93,5 +93,97 @@ e <- d %>% mutate(int_sign_ebw=ifelse(is.na(int_sign_ebw),"Additivity",int_sign_
   mutate(int_sign_pae=ifelse(is.na(int_sign_pae),"Additivity",int_sign_pae)) %>% 
   mutate(int_sign_pau=ifelse(is.na(int_sign_pau),"Additivity",int_sign_pau)) 
 
-#write.csv(e,"data/1.processed/Broc2018_maindataset.csv",row.names = F)
-#With RS data added manually.
+# Add R/S info
+
+res <- read_csv("data/0.rawdata/Broch_2018_278_MOESM3_ESM.csv") |> 
+  select(1,6:23)
+
+cols <- c("Drug","HDC_ebw_D","HDC_ecr_D",
+          "HDC_stm_D","HDC_seo_D","HDC_pae_D","HDC_pau_D","LF_ebw_D",
+          "LF_ecr_D","LF_stm_D",                 
+          "LF_seo_D","LF_pae_D","LF_pau_D",                
+          "SR_ebw_D","SR_ecr_D","SR_stm_D",                 
+          "SR_seo_D","SR_pae_D","SR_pau_D")
+
+colnames(res) <- cols
+
+res1 <- res
+colnames(res1) <- paste0(cols,"1")
+
+res2 <- res
+colnames(res2) <- paste0(cols,"2")
+
+e1 <- left_join(e,res1,by="Drug1")
+e2 <- left_join(e1,res2,by="Drug2")
+
+e3 <- e2 |> 
+  mutate(SR_ebw=paste0(SR_ebw_D1,SR_ebw_D2),
+         SR_ecr=paste0(SR_ecr_D1,SR_ecr_D2),
+         SR_stm=paste0(SR_stm_D1,SR_stm_D2),
+         SR_seo=paste0(SR_seo_D1,SR_seo_D2),
+         SR_pae=paste0(SR_pae_D1,SR_pae_D2),
+         SR_pau=paste0(SR_pau_D1,SR_pau_D2)) |> 
+  mutate(SR_score_ebw=ifelse(SR_ebw=="RR",1,
+                             ifelse(SR_ebw=="SR"|SR_ebw=="RS",0,
+                                    ifelse(SR_ebw=="SS",-1,"NA"))))|> 
+  mutate(SR_score_ecr=ifelse(SR_ecr=="RR",1,
+                             ifelse(SR_ecr=="SR"|SR_ecr=="RS",0,
+                                    ifelse(SR_ecr=="SS",-1,"NA"))))|> 
+  mutate(SR_score_stm=ifelse(SR_stm=="RR",1,
+                             ifelse(SR_stm=="SR"|SR_stm=="RS",0,
+                                    ifelse(SR_stm=="SS",-1,"NA"))))|> 
+  mutate(SR_score_seo=ifelse(SR_seo=="RR",1,
+                             ifelse(SR_seo=="SR"|SR_seo=="RS",0,
+                                    ifelse(SR_seo=="SS",-1,"NA"))))|> 
+  mutate(SR_score_pae=ifelse(SR_pae=="RR",1,
+                             ifelse(SR_pae=="SR"|SR_pae=="RS",0,
+                                    ifelse(SR_pae=="SS",-1,"NA"))))|> 
+  mutate(SR_score_pau=ifelse(SR_pau=="RR",1,
+                             ifelse(SR_pau=="SR"|SR_pau=="RS",0,
+                                    ifelse(SR_pau=="SS",-1,"NA")))) |> 
+  mutate(SR_score_ebw=as.numeric(SR_score_ebw)) |> 
+  mutate(SR_score_ecr=as.numeric(SR_score_ecr)) |> 
+  mutate(SR_score_stm=as.numeric(SR_score_stm)) |> 
+  mutate(SR_score_seo=as.numeric(SR_score_seo)) |> 
+  mutate(SR_score_pae=as.numeric(SR_score_pae)) |> 
+  mutate(SR_score_pau=as.numeric(SR_score_pau)) |> 
+  rowwise() |> 
+  mutate(SR_score_total=SR_score_ebw+SR_score_ecr+SR_score_seo+SR_score_stm+
+                            SR_score_pae+SR_score_pau)|>
+  mutate(drug_cat = ifelse(drug_category == "Same", 1, 0)) |>
+  mutate(targ = ifelse(targeted_process == "Same", 1, 0)) |>
+  mutate(us = ifelse(use == "Same", 1, 0)) |>
+  mutate(ebw_g = ifelse(int_sign_ebw == "Antagonism",  +1,
+                        ifelse(int_sign_ebw == "Additivity", 0,
+                               ifelse(int_sign_ebw == "Synergy", -1, NA)))) |>
+  mutate(ecr_g = ifelse(int_sign_ecr == "Antagonism",  +1,
+                        ifelse(int_sign_ecr == "Additivity", 0,
+                               ifelse(int_sign_ecr == "Synergy", -1, NA)))) |>
+  mutate(seo_g = ifelse(int_sign_seo == "Antagonism",  +1,
+                        ifelse(int_sign_seo == "Additivity", 0,
+                               ifelse(int_sign_seo == "Synergy", -1, NA)))) |>
+  mutate(stm_g = ifelse(int_sign_stm == "Antagonism",  +1,
+                        ifelse(int_sign_stm == "Additivity", 0,
+                               ifelse(int_sign_stm == "Synergy", -1, NA)))) |>
+  mutate(pae_g = ifelse(int_sign_pae == "Antagonism",  +1,
+                        ifelse(int_sign_pae == "Additivity", 0,
+                               ifelse(int_sign_pae == "Synergy", -1, NA)))) |>
+  mutate(pau_g = ifelse(int_sign_pau == "Antagonism",  +1,
+                        ifelse(int_sign_pau == "Additivity", 0,
+                               ifelse(int_sign_pau == "Synergy", -1, NA)))) |>
+  rowwise() |>
+  mutate(sum_g = ebw_g + ecr_g + seo_g + stm_g + pae_g + pau_g) |> 
+  mutate(only_res=ifelse(SR_score_total==6,TRUE,FALSE)) |> 
+  mutate(only_sen=ifelse(SR_score_total==-6,TRUE,FALSE)) |> 
+  mutate(only_res_or_sen=ifelse(only_res==TRUE|only_sen==TRUE,TRUE,FALSE))
+
+e4 <- e3 |> select(drug_pair,Drug1,Drug2,drugdrug,
+                   code_3letter1,code_3letter2,
+                   drug_cat,drug_category1,drug_category2,categorycategory,
+                   targ,targeted_cellular_process1,targeted_cellular_process2,processprocess,
+                   us,use1,use2,useuse,
+                   12:23,83:89,
+                   43:48,61:79,
+                   31:60)
+
+write.csv(e4,"data/1.processed/Broc2018_maindataset.csv",row.names = F)

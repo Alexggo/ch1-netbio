@@ -580,3 +580,17 @@ df_DDI_tot |>
                           "Ciprofloxacin_Meropenem")) |> 
   arrange(drug_pair,network) |> 
   write.csv("data/5.Targets_NetworkDistance/sup_table1.csv",row.names = FALSE)
+
+
+
+#Rates ~ interaction type and resistance type.
+df_DDI_tot |> ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
+                     group = "network", palette = "jco")+
+  stat_compare_means(aes(group = network), label = "p.signif",
+                     label.y = c(40, 40, 40))+
+  facet_wrap(~network)+
+  xlab("Type of interaction")+
+  ylab("Sigma rate")+
+  theme_minimal()
+
+

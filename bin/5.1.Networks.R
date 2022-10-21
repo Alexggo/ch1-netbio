@@ -183,15 +183,15 @@ list_path_conn_deg[[i]] <- comb
 }
 
 drug_mapping1 <- drug_mapping |>
-rename(Drug1 = Drug,
-KEGG1 = KEGG_eco)
+  mutate(Drug1 = Drug,
+         KEGG1 = KEGG_eco) |> select(Drug1,KEGG1)
 
 df_join <- list_path_conn_deg |>
 lapply(left_join, drug_mapping1, by = "KEGG1")
 
 drug_mapping2 <- drug_mapping |>
-rename(Drug2 = Drug,
-KEGG2 = KEGG_eco)
+mutate(Drug2 = Drug,
+KEGG2 = KEGG_eco) |> select(Drug2,KEGG2)
 df_join1 <- df_join |>
 lapply(left_join, drug_mapping2, by = "KEGG2") |>
 lapply(mutate, KEGG1_KEGG2 = paste0(KEGG1, "_", KEGG2)) |>
@@ -229,9 +229,11 @@ rates <- read.csv(file.path(
   "data/4.PhylogeneticComparativeMethods/dataset1_ratios.csv"))
 
 r <- rates |>
-  select(clusters, sigma.rate) |>
-  distinct() |>
+  mutate(sigma.rate=round(sigma.rate,5)) |> 
+  select(clusters, sigma.rate) |> 
+  distinct() |> 
   arrange(sigma.rate)
+
 clusters <- factor(r$clusters, levels = r$clusters[order(r$sigma.rate)])
 
 dist_conn_deg_adj <- lapply(dist_conn_deg_adj, inner_join, rates, by = "drug_pair") |>
@@ -239,36 +241,9 @@ dist_conn_deg_adj <- lapply(dist_conn_deg_adj, inner_join, rates, by = "drug_pai
 names(dist_conn_deg_adj) <- net
 
 
-df_target_tot  <- bind_rows(dist_conn_deg_adj, .id = "network") |>
-  mutate(int_sign_ebw = factor(int_sign_ebw,
-                               levels = c("Synergy", "Additivity", "Antagonism"))) |>
-  mutate(drug_cat = ifelse(drug_category == "Same", 1, 0)) |>
-  mutate(targ = ifelse(targeted_process == "Same", 1, 0)) |>
-  mutate(us = ifelse(use == "Same", 1, 0)) |>
-  mutate(ebw_g = ifelse(int_sign_ebw == "Antagonism",  +1,
-                        ifelse(int_sign_ebw == "Additivity", 0,
-                               ifelse(int_sign_ebw == "Synergy", -1, NA)))) |>
-  mutate(ecr_g = ifelse(int_sign_ecr == "Antagonism",  +1,
-                        ifelse(int_sign_ecr == "Additivity", 0,
-                               ifelse(int_sign_ecr == "Synergy", -1, NA)))) |>
-  mutate(seo_g = ifelse(int_sign_seo == "Antagonism",  +1,
-                        ifelse(int_sign_seo == "Additivity", 0,
-                               ifelse(int_sign_seo == "Synergy", -1, NA)))) |>
-  mutate(stm_g = ifelse(int_sign_stm == "Antagonism",  +1,
-                        ifelse(int_sign_stm == "Additivity", 0,
-                               ifelse(int_sign_stm == "Synergy", -1, NA)))) |>
-  mutate(pae_g = ifelse(int_sign_pae == "Antagonism",  +1,
-                        ifelse(int_sign_pae == "Additivity", 0,
-                               ifelse(int_sign_pae == "Synergy", -1, NA)))) |>
-  mutate(pau_g = ifelse(int_sign_pau == "Antagonism",  +1,
-                        ifelse(int_sign_pau == "Additivity", 0,
-                               ifelse(int_sign_pau == "Synergy", -1, NA)))) |>
-  rowwise() |>
-  mutate(sum_g = ebw_g + ecr_g + seo_g + stm_g + pae_g + pau_g) |>
-  distinct()|> 
-  rename(Drug1=Drug1.x,Drug2=Drug2.x) |> 
-  select(-c(Drug1.y,Drug2.y)) |> 
-  distinct()
+df_target_tot  <- bind_rows(dist_conn_deg_adj, .id = "network") |> 
+  mutate(Drug1=Drug1.x,Drug2=Drug2.x) |> 
+  select(!c("Drug2.x","Drug1.x","Drug2.y","Drug1.y"))
 
 df_target_tot  |> 
   arrange(K.edge) |> 
@@ -280,7 +255,7 @@ write.csv(
 
 significant_figures <- 4
 
-final_DDI <- df_target_tot  |> 
+network_values <- df_target_tot  |> 
   group_by(network,drug_pair) |> 
   summarise(mean.path.length = ifelse(mean(path.length,na.rm=TRUE)==Inf,Inf,round(mean(path.length,na.rm=TRUE),significant_figures)),
             mean.k.edge = round(mean(K.edge, na.rm = TRUE),significant_figures),
@@ -289,16 +264,16 @@ final_DDI <- df_target_tot  |>
             mean.mean.degree = round(mean(mean_deg, na.rm = TRUE),significant_figures),
             max.adjacency = max(adjacency, na.rm = TRUE))
 
-df1 <- df_target_tot |> select(drug_pair,Drug1,Drug2,code_3letter1,
-                               code_3letter2,drug_category1,drug_category2,
-                               targeted_cellular_process1,targeted_cellular_process2,
-                               use1,use2,24:35,39:90)
 
-df_DDI_tot  <- inner_join(final_DDI, df1, by = "drug_pair") |>
+## Bind other values from DDI with network values.
+
+df_DDI_tot  <- inner_join(network_values, df_target_tot, by = "drug_pair") |>
     distinct() |>
   mutate(max.adjacency = as.factor(max.adjacency)) |>
   mutate(connection_onoff =
-           ifelse(mean.k.edge == 0, "disconnected", "connected")) 
+           ifelse(mean.k.edge == 0, "disconnected", "connected")) |> 
+  ungroup() |> 
+  distinct()
 
 
 df_DDI_tot   |> 

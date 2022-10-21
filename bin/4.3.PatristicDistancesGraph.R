@@ -70,7 +70,7 @@ PD_dist <- PatristicDistMatrix |> pivot_longer(names_to = "Sp2",
   select(-test)
 
 #Euclidean chemical distances.
-g <- mat1 %>% select(12:17) %>% t()
+g <- mat1 %>% select(19:24) %>% t()
 dend <- hclust(dist(g,method="euclidean"),method="average")  %>% 
   as.phylo()
 PatristicDistMatrix<-cophenetic(dend)
@@ -203,7 +203,7 @@ PD_dist <- PatristicDistMatrix |> pivot_longer(names_to = "Sp2",
   select(-test)
 
 #Euclidean chemical distances.
-g <- mat1 %>% select(12:17) %>% t()
+g <- mat1 %>% select(19:24) %>% t()
 dend <- hclust(dist(g,method="euclidean"),method="average")  %>% 
   as.phylo()
 PatristicDistMatrix<-cophenetic(dend)
