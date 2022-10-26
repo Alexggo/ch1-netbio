@@ -12,6 +12,10 @@
 library(pacman)
 p_load(bigMap,bigmemory,tidyverse,rlist)
 
+args = commandArgs(trailingOnly=TRUE)
+
+set.seed(1234)
+
 file <- file.path("data/1.processed","Broc2018_maindataset.csv")
 print(Sys.time())
 #Remove DDI with at least one NA.
@@ -30,7 +34,7 @@ m <- bdm.init('DDI', data)
 
 # range of perplexities. 
 # Large range for exploratory analysis.
-ptsne.ppx <- c(seq(5,50,10),seq(50, 2120, by = 25))
+ptsne.ppx <- seq(args[1], args[2], by = 10)
 #Smaller range after plots are shown.
 #ptsne.ppx <- seq(700, 900, by = 25)
 
@@ -42,14 +46,14 @@ pakde.ppx <- round(ptsne.ppx/3, 0)
 # Number of layers: the higher the most robust the result will be.
 
 m.list1 <- lapply(seq_along(ptsne.ppx), function(p) {
-  m.ppx <- bdm.ptsne(m, threads = 80, layers = 80, rounds = 9, whiten = 0, ppx = ptsne.ppx[p], info = 0)
+  m.ppx <- bdm.ptsne(m, threads = 40, layers = 80, rounds = 9, whiten = 0, ppx = ptsne.ppx[p], info = 0)
   m.ppx <- bdm.pakde(m.ppx, threads = 40, ppx = pakde.ppx[p])
   m.ppx <- bdm.wtt(m.ppx)
   #m.ppx <- bdm.qlty(m.ppx, inp.data = Dbm, threads = 4, layers = 4, rounds = 2, ret.qlty = T, qm = 'kn', verbose = F)
   m.ppx
 })
 
-save(m.list1, file = 'results/RObjects/big_tSNE.RData')
+save(m.list1, file = paste0('results/tSNE_',args[1],"_",args[2],'.RData'))
 
 print(Sys.time())
 
