@@ -56,4 +56,3 @@ m.list1 <- lapply(seq_along(ptsne.ppx), function(p) {
 save(m.list1, file = paste0('results/tSNE_',args[1],"_",args[2],'.RData'))
 
 print(Sys.time())
-

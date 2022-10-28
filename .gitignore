@@ -5,8 +5,6 @@
 results/Robjects
 paper/img
 .RDataTmp
-.RDataTmp
-.RDataTmp
-.RDataTmp
 results/B.SameRes_across_strains_DDIs/RObjects/mlist1.RData
 results/*.RData
+

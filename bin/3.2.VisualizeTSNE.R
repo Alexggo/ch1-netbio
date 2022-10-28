@@ -1,150 +1,90 @@
 library(pacman)
 p_load(bigMap,bigmemory,tidyverse,rlist)
 
+
 # Dataset
 file <- file.path("data/1.processed/Broc2018_maindataset.csv")
 dataset <- read_csv(file) %>%
-  filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau)) %>% 
-  mutate(useuse=as.factor(useuse),
-         categorycategory=as.factor(categorycategory),
-         processprocess=as.factor(processprocess),
-         drug_category=as.factor(drug_category),
-         use=as.factor(use),
-         targeted_process=as.factor(targeted_process),
-         int_sign_ebw=as.factor(int_sign_ebw))
+  filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau))
 
 
-# Explore a large range of perplexities.
-load('results/RObjects/mlist1_ppx0005_2120.RData')
+# Explore a list of perplexities
+
+files <- list.files(path = "results",pattern = "\\.RData$")
+files <- files[c(9,7,10,11,1:6)]
+files <- paste0("results/",files)
+
+# Load lists
+load(files[1])
 list1 <- m.list1
-ptsne.ppx <- c(seq(5,50,10),seq(50, 2120, by = 82))
-
-pdf()
-for (i in 1:length(list1)){
-  bdm.cost(list1[[i]])
-  title(main = paste("perplexity = ",as.character(ptsne.ppx[i])))
-  bdm.ptsne.plot(list1[[i]], ptsne.cex = 4)
-  title(main = paste("perplexity = ",as.character(ptsne.ppx[i])))  
-  bdm.wtt.plot(list1[[i]])
-  title(main = paste("perplexity = ",as.character(ptsne.ppx[i])))
-}
-dev.off()
-
-# Perplexity ranges between 5 and 2100.
-#5   15   25   35   45   50  132  214  296  378  460  542  624  706  788  870  952 1034 1116
-# 1198 1280 1362 1444 1526 1608 1690 1772 1854 1936 2018 2100
-x <- 1:31
-index <- x[ptsne.ppx==706]
-# Find a value that makes the size function stable.
-bdm.cost(list1[[index]])
-bdm.ptsne.plot(list1[[index]], ptsne.cex = 2)
-bdm.wtt.plot(list1[[index]])
-# With a ppx above 706 the embedding function appears to reach stability.
-# For ppx>=870, only 5 clusters are formed, but the variability between threads increases.
-
-
-## Plot labels in the graph.
-labels <- dataset %>% 
-  select(drug_pair) %>% pull() # Select your clustering label processprocess, useuse, categorycategory.
-ID <- dataset %>% 
-  select(drugdrug) %>% pull()
-
-subset <- as.factor(labels) %>% unique()
-
-
-
-### Looking at the cluster membership
-Cluster_membership <- data.frame(drugdrug=ID,
-                                 drug_pair=labels, 
-                                 clusters=bdm.labels(list1[[index]]))
-
-
-
-dat <- as.matrix(dataset[,12:17])
-bdm.qMap(list1[[index]], data = dat, qMap.cex = 1)
-
-# Add labels to plot
-classG<- as.numeric(labels)
-list1[[index]]$lbls <- classG
-
-
-pdf()
-for (i in 1:length(subset)){
-  bdm.qMap(list1[[index]], 
-           data = list1[[index]]$data[, 1:6], 
-           subset = which(list1[[index]]$lbls %in% i))
-  title(sub = levels(subset)[i])
-}
-dev.off()
-
-
-write.csv(Cluster_membership,"data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx706.csv",row.names = F)
-
-
-
-# Explore a smaller range of perplexities closer to optimal value
-load('results/RObjects/mlist2_ppx0700_0900.RData')
+load(files[2])
 list2 <- m.list1
-ptsne.ppx <- ptsne.ppx <- seq(700, 900, by = 25)
+load(files[3])
+list3 <- m.list1
+load(files[4])
+list4 <- m.list1
+load(files[5])
+list5 <- m.list1
+load(files[6])
+list6 <- m.list1
+load(files[7])
+list7 <- m.list1
+load(files[8])
+list8 <- m.list1
+load(files[9])
+list9 <- m.list1
+load(files[10])
+list10 <- m.list1
+
+big_list <- c(list1,list2,list3,list4,list5,
+              list6,list7,list8,list9,list10)
+ptsne.ppx <- seq(5,2505,10)
 
 pdf()
-for (i in 1:length(list2)){
-  bdm.cost(list2[[i]])
+for (i in 1:length(big_list)){
+  bdm.cost(big_list[[i]])
   title(main = paste("perplexity = ",as.character(ptsne.ppx[i])))
-  bdm.ptsne.plot(list2[[i]], ptsne.cex = 4)
+  bdm.ptsne.plot(big_list[[i]], ptsne.cex = 4)
   title(main = paste("perplexity = ",as.character(ptsne.ppx[i])))  
-  bdm.wtt.plot(list2[[i]])
+  bdm.wtt.plot(big_list[[i]])
   title(main = paste("perplexity = ",as.character(ptsne.ppx[i])))
 }
 dev.off()
 
-
-# Perplexity ranges between 5 and 2100.
-#700 725 750 775 800 825 850 875 900
-x <- 1:9
-index <- x[ptsne.ppx==825]
+x <- 1:251
+index <- x[ptsne.ppx==805]
 # Find a value that makes the size function stable.
-bdm.cost(list2[[index]])
-bdm.ptsne.plot(list2[[index]], ptsne.cex = 2)
-bdm.wtt.plot(list2[[index]])
-# For ppx=825, cost function reaches stable solution.
+bdm.cost(big_list[[index]])
+bdm.ptsne.plot(big_list[[index]], ptsne.cex = 2)
+bdm.wtt.plot(big_list[[index]])
+# The embedding function appears to reach stability the higher the ppx.
+# However, for higher ppx, fewer clusters are formed, but the variability between threads increases.
+# Cost and effect size curves look reasonable for ppx above 235. 2255 if the largest ppx with 2 clusters.
 
+
+# Get cluster labels
+list_clusters <- list()
+for (i in 1:length(big_list)){
+  list_clusters[[i]] <- bdm.labels(big_list[[i]])
+}
+
+x <- do.call(rbind, list_clusters)
+rownames(x) <- paste0("ppx_",ptsne.ppx)
+y <- t(x) |> as.data.frame()
+y$drugdrug <- dataset$drugdrug
+
+full_dataset <- left_join(dataset,y,by="drugdrug") |> 
+  filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau))
 
 
 ## Plot labels in the graph.
-labels <- dataset %>% 
-  select(categorycategory) %>% pull() # Select your clustering label processprocess, useuse, categorycategory.
-ID <- dataset %>% 
-  select(drugdrug) %>% pull()
-
-subset <- as.factor(labels) %>% unique()
+df <- dataset%>%mutate(across(where(is.character), as.factor)) |> 
+  mutate(across(where(is.factor), as.numeric))
 
 
 
 
-### Looking at the cluster membership
-Cluster_membership <- data.frame(drugdrug=ID,
-                                 drug_pair=labels, 
-                                 clusters=bdm.labels(list2[[index]]))
+category <- df |> select(1:86) |> as.matrix()
+bdm.qMap(big_list[[1]], data = category, qMap.cex = 1)
 
-
-
-dat <- as.matrix(dataset[,12:17])
-bdm.qMap(list2[[index]], data = dat, qMap.cex = 1)
-
-# Add labels to plot
-classG<- as.numeric(labels)
-list2[[index]]$lbls <- classG
-
-
-pdf()
-for (i in 1:length(subset)){
-  bdm.qMap(list2[[index]], 
-           data = list2[[index]]$data[, 1:6], 
-           subset = which(list2[[index]]$lbls %in% i))
-  title(sub = levels(subset)[i])
-}
-dev.off()
-
-write.csv(Cluster_membership,"data/3.InteractionScores_tSNE/tSNE_Clustermembership_ppx825.csv",row.names = F)
-
+write.csv(full_dataset,"data/3.InteractionScores_tSNE/all_ppx_large.csv",row.names = F)
