@@ -10,7 +10,11 @@
 #' 
 ## -------------------------------------------------------------------------
 library(pacman)
-p_load(geomorph,tidyverse,broom,OUwie,phytools,ape,ggx,geomorph)
+p_load(geomorph,tidyverse,broom,ape,ggx,geomorph,furrr,tictoc)
+
+availableCores()
+plan("multisession",workers=8)
+#plan("multicore",workers=8)
 
 
 full_dataset <- read_csv("data/3.InteractionScores_tSNE/all_ppx_large.csv")
@@ -36,20 +40,27 @@ tree_nw$tip.label <- c("ebw","ecr","pae","pau","seo","stm")
 
 mat <- full_dataset[,19:24]%>% as.matrix() |> t()
 
-
-#test ppx 205-2255
+# Between 175-1455. Indexes 18-146
 mod_test <- list()
-1:205
-for (i in 1:2){
-  labels <- full_dataset[,i+107] |> pull()
-  
-  mod_test[[i]] <- phylo.modularity(mat,partition.gp = labels,
-                                    phy=tree_nw,print.progress=T,
-                                    CI = TRUE)
+
+labels <- list()
+for (i in 1:23){
+  labels[[i]] <- full_dataset[,i+103] |> pull()
 }
 
+number_of_clusters <- labels |> map(unique) |> map_dbl(length)
 
+test_mod <- function(g){
+  mod <- phylo.modularity(mat,partition.gp = g,
+                   phy=tree_nw,print.progress=T,
+                   CI = TRUE)
+  
 
-mod_test |> save(file = 'results/modularity_test.RData')
+}
 
-load('results/modularity_test.RData')
+tic()
+mod_test <- labels |>
+  lapply(test_mod)
+toc()
+
+mod_test |> save(file = 'results/modularity_tests-175-1455.RData')

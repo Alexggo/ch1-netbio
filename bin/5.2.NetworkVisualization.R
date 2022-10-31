@@ -2,7 +2,9 @@ library(pacman)
 p_load(igraph,tidyverse,BioNet,ape,geomorph,matrixStats,
        ComplexHeatmap,ggpubr,plotrix,tidymodels,patchwork,here)
 library(EnvStats) # for adding sample size
-source("bin/5.1.Networks.R")
+
+#Run 5.1 first. Some variables are needed from 5.1
+#source("bin/5.1.Networks.R")
 
 # VISUALIZATION/STATS
 
@@ -12,12 +14,11 @@ source("bin/5.1.Networks.R")
 font_size=2
 
 df_DDI_tot <- read_csv(file.path("data/5.Targets_NetworkDistance","df_DDI_tot_metrics.csv")) |> 
-  mutate(int_sign_ebw=factor(int_sign_ebw,levels=c("Synergy","Additivity","Antagonism"))) |> 
-  arrange(network)
+  mutate(int_sign_ebw=factor(int_sign_ebw,levels=c("Synergy","Additivity","Antagonism"))) 
 
 # Minimum path ~ interaction type (ebw). 
 my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
-net <- df_DDI_tot$network |> unique()
+net <- df_DDI_tot$network |> unique() |> sort()
 
 plot_path_met <- df_DDI_tot |> filter(network==net[3]) |> # See also net[5]
   filter(mean.path.length!="Inf") |> 
@@ -61,7 +62,6 @@ wrap_plots(plot_path_met,plot_path_PPI)
 
 # Connectivity ~ interaction type (ebw).
 my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
-net <- df_DDI_tot$network |> unique()
 
 plot_Kedge_met <- df_DDI_tot |> filter(network==net[3]) |>
   filter(mean.path.length!="Inf") |> 
@@ -104,7 +104,6 @@ wrap_plots(plot_Kedge_met,plot_Kedge_PPI)
 
 # Node degree ~ interaction type (ebw). 
 my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
-net <- df_DDI_tot$network |> unique()
 
 plot_degree_met <- df_DDI_tot |> filter(network==net[3]) |> 
   ggplot(aes(x = int_sign_ebw, y = mean.mean.degree,
@@ -284,9 +283,12 @@ sup_h <- list_conn[[11]]+
 # Evolutionary rates ~ int_type/distance/connectivity/node 
 
 # Rates ~ Interaction Type (ebw) (PPI). 5C
+
+df_target_tot <- left_join(full_df,df_target_tot,by="drugdrug")
+
 c <- df_target_tot |>
   filter(network==net[3]|network==net[11]) |> 
-  ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
+  ggline(x = "int_sign_ebw.x", y = "sigma.rate.y", add = "mean_se",
          group = "network", col="network")+
   xlab("Type of interaction (ebw)")+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
@@ -305,7 +307,7 @@ d <- df_target_tot |>
                                                                            ifelse(path.length==5,"5",
                                                                                   ifelse(path.length>=6,">6","Error"))))))))) |> 
   mutate(path.length.corr=factor(path.length.corr,levels=c("0","1","2","3","4","5",">6","Not connected","Error"))) |>
-  ggline(x = "path.length.corr", y = "sigma.rate", add = c("mean_se"),
+  ggline(x = "path.length.corr", y = "sigma.rate.x", add = c("mean_se"),
          group = "network", col="network",linetype = 1)+
   xlab("Path length")+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
@@ -329,7 +331,7 @@ df_target_tot |>  mutate(path.length.corr=ifelse(path.length==0,"0",
                                                                       ifelse(path.length==4,"4",
                                                                              ifelse(path.length==5,"5","6+"))))))) |>
   mutate(path.length.corr=factor(path.length.corr,levels=c("0","1","2","3","4","5","6+"))) |>
-  ggline(x = "path.length.corr", y = "sigma.rate", add = "mean_se",
+  ggline(x = "path.length.corr", y = "sigma.rate.y", add = "mean_se",
          group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif",
                      label.y = c(40, 40, 40))+
@@ -339,7 +341,7 @@ df_target_tot |>  mutate(path.length.corr=ifelse(path.length==0,"0",
   theme_minimal()
 
 # Rates ~ Interaction Type (ebw) (all networks).
-df_DDI_tot |> ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
+df_target_tot |> ggline(x = "int_sign_ebw.x", y = "sigma.rate.y", add = "mean_se",
                      group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif",
                      label.y = c(40, 40, 40))+
@@ -349,7 +351,7 @@ df_DDI_tot |> ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
   theme_minimal()
 
 # Rates ~ Interaction Type (all strains) (all networks).
-df_DDI_tot |> ggline(x = "sum_g", y = "sigma.rate", add = "mean_se",
+df_target_tot |> ggline(x = "sum_g.y", y = "sigma.rate.y", add = "mean_se",
                      group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif",
                      label.y = c(40, 40, 40))+
@@ -361,15 +363,15 @@ df_DDI_tot |> ggline(x = "sum_g", y = "sigma.rate", add = "mean_se",
 # mean path ~ interaction (Syn,Ant,Add,Add-Ant,Ant-Syn,Add-Syn,Add-Ant-Syn)
 
 r <- c()
-for (i in 1:dim(rates)[1]){
-  x <- rates[i,16:21] |> t() |> as.vector()
+for (i in 1:dim(full_df)[1]){
+  x <- full_df[i,25:30] |> t() |> as.vector()
   x <- x |> unique() |> sort()
   r[i] <- paste0(x,collapse = "-")
 }
-rates$type <- r
+full_df$type <- r
 
 # Mean.rate. 5A
-a <- rates |>
+a <- full_df |>
   select(type,sigma.rate)  |> 
   group_by(type) |> 
   summarise(Mean.rate=mean(sigma.rate),
@@ -393,7 +395,7 @@ a <- rates |>
 antagonism_score <- -1
 synergy_score <- +1
 
-b <- rates |> 
+b <- full_df |> 
   mutate(ebw_g=ifelse(int_sign_ebw=="Antagonism",antagonism_score,
                       ifelse(int_sign_ebw=="Additivity",0,
                              ifelse(int_sign_ebw=="Synergy",synergy_score,NA)))) |> 
@@ -535,11 +537,6 @@ sup_j <- df_DDI_tot |>
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
   theme_minimal()+
   theme(legend.position = "none")
-
-df_DDI_tot |> 
-  filter(clusters=="13") |> 
-  filter(network==net[10]) |> 
-  View()
 
 # Make figures:
 # Fig 3

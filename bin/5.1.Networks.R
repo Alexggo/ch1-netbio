@@ -1,7 +1,6 @@
 ##----load---------------------------------------------------------------------
 library(pacman)
-p_load(igraph, tidyverse, ape, matrixStats,
-ggpubr, plotrix, tidymodels, here,future.apply)
+p_load(igraph, tidyverse, matrixStats,future.apply)
 
 
 ##-----------------------------------------------------------------------------
@@ -31,7 +30,7 @@ print(paste("Filename:",filenames))
 print(paste("Filepath:",filepath_ecolinet))
 
 
-list_net <- future_lapply(filepath_ecolinet,read_csv) |> 
+list_net <- lapply(filepath_ecolinet,read_csv) |> 
   lapply(mutate,node1=paste0("eco:", node1),
       node2=paste0("eco:", node2)) |>
   lapply(select, node1, node2)
@@ -225,10 +224,10 @@ lapply(drop_na) |>
 lapply(arrange,drug_pair)
 
 #Add rates and DDI info
-rates <- read.csv(file.path(
-  "data/4.PhylogeneticComparativeMethods/dataset1_ratios.csv"))
+full_df <- read.csv(file.path(
+  "data/4.PhylogeneticComparativeMethods/DDI_table_rates.csv"))
 
-r <- rates |>
+r <- full_df |>
   mutate(sigma.rate=round(sigma.rate,5)) |> 
   select(clusters, sigma.rate) |> 
   distinct() |> 
@@ -236,14 +235,22 @@ r <- rates |>
 
 clusters <- factor(r$clusters, levels = r$clusters[order(r$sigma.rate)])
 
-dist_conn_deg_adj <- lapply(dist_conn_deg_adj, inner_join, rates, by = "drug_pair") |>
+dist_conn_deg_adj <- lapply(dist_conn_deg_adj, inner_join, full_df, by = "drug_pair") |>
   lapply(distinct)
 names(dist_conn_deg_adj) <- net
-
 
 df_target_tot  <- bind_rows(dist_conn_deg_adj, .id = "network") |> 
   mutate(Drug1=Drug1.x,Drug2=Drug2.x) |> 
   select(!c("Drug2.x","Drug1.x","Drug2.y","Drug1.y"))
+
+r <- c()
+for (i in 1:dim(df_target_tot)[1]){
+  x <- df_target_tot[i,35:40] |> t() |> as.vector()
+  x <- x |> unique() |> sort()
+  r[i] <- paste0(x,collapse = "-")
+}
+df_target_tot$type <- r
+
 
 df_target_tot  |> 
   arrange(K.edge) |> 
@@ -251,7 +258,7 @@ df_target_tot  |>
   arrange(network) |> 
 write.csv(
   file.path("data/5.Targets_NetworkDistance",
-            "df_target_tot_metrics.csv"), row.names = F)
+            "df_target_metrics.csv"), row.names = F)
 
 significant_figures <- 4
 
@@ -262,12 +269,13 @@ network_values <- df_target_tot  |>
             mean.min.degree = round(mean(min_deg, na.rm = TRUE),significant_figures),
             mean.max.degree = round(mean(max_deg, na.rm = TRUE),significant_figures),
             mean.mean.degree = round(mean(mean_deg, na.rm = TRUE),significant_figures),
-            max.adjacency = max(adjacency, na.rm = TRUE))
+            max.adjacency = max(adjacency, na.rm = TRUE)) |> 
+  ungroup()
 
 
 ## Bind other values from DDI with network values.
 
-df_DDI_tot  <- inner_join(network_values, df_target_tot, by = "drug_pair") |>
+df_DDI_tot  <- inner_join(network_values, full_df, by = "drug_pair") |>
     distinct() |>
   mutate(max.adjacency = as.factor(max.adjacency)) |>
   mutate(connection_onoff =
@@ -275,12 +283,20 @@ df_DDI_tot  <- inner_join(network_values, df_target_tot, by = "drug_pair") |>
   ungroup() |> 
   distinct()
 
+r <- c()
+for (i in 1:dim(df_DDI_tot)[1]){
+  x <- df_DDI_tot[i,32:37] |> t() |> as.vector()
+  x <- x |> unique() |> sort()
+  r[i] <- paste0(x,collapse = "-")
+}
+df_DDI_tot$type <- r
+
+
 
 df_DDI_tot   |> 
   arrange(mean.k.edge) |> 
   arrange(drug_pair) |> 
-  arrange(network) |> 
   write.csv(
     file.path("data/5.Targets_NetworkDistance",
-              "df_DDI_tot_metrics.csv"), row.names = F)
+              "df_DDI_metrics.csv"), row.names = F)
 
