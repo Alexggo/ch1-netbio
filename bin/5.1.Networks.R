@@ -52,55 +52,55 @@ possible_targets <- drug_mapping$KEGG_eco |>
   unique()
 
 ##-----------------------------------------------------------------------------
-pdf(file = file.path("networks", "network_graph.pdf"))
-
-for (i in seq_along(list_graphs)) {
-g1 <- list_graphs[[i]]
-names <- V(g1) |>names()
-print(net[i])
-value1 <- names %in% possible_targets |>
-  sum()
-value2 <- drug_mapping$Drug[possible_targets %in% names] |>
-  unique() |>
-  length()
-V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
-V(g1)$size <- ifelse(V(g1) %in% possible_targets, 40, 5)
-V(g1)$label.cex <- 0.3
-v.number <- V(g1) |>
-  length()
-mean.length <- average.path.length(g1)
-plot(g1, vertex.label = "", vertex.size = 2)
-mytitle <- paste(net[i])
-mysubtitle1 <- paste0("Average path length = ",
-round(mean.length, 4), ".Number of vertexes = ", v.number)
-mysubtitle2 <- paste0("Number of targets = ",
-value1, ".Number of drugs = ", value2)
-mtext(side = 3, line = 3, at = -0.07, adj = 0, cex = 1, mytitle)
-mtext(side = 3, line = 2, at = -0.07, adj = 0, cex = 0.7, mysubtitle1)
-mtext(side = 3, line = 1, at = -0.07, adj = 0, cex = 0.7, mysubtitle2)
-print(paste("Nodes", v.number, "Targets", value1, "Drugs", value2))
-}
-dev.off()
-
-pdf(file = file.path("networks", "network_graph_notext.pdf"))
-
-for (i in seq_along(list_graphs)) {
-g1 <- list_graphs[[i]]
-names <- V(g1) |>names()
-print(net[i])
-value1 <- names %in% possible_targets |>
-  sum()
-value2 <- drug_mapping$Drug[possible_targets %in% names] |>
-  unique() |>
-  length()
-V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
-V(g1)$size <- ifelse(V(g1) %in% possible_targets, 40, 5)
-V(g1)$label.cex <- 0.3
-v.number <- V(g1) |>length()
-mean.length <- average.path.length(g1)
-plot(g1, vertex.label = "", vertex.size = 2)
-}
-dev.off()
+# pdf(file = file.path("networks", "network_graph.pdf"))
+# 
+# for (i in seq_along(list_graphs)) {
+# g1 <- list_graphs[[i]]
+# names <- V(g1) |>names()
+# print(net[i])
+# value1 <- names %in% possible_targets |>
+#   sum()
+# value2 <- drug_mapping$Drug[possible_targets %in% names] |>
+#   unique() |>
+#   length()
+# V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
+# V(g1)$size <- ifelse(V(g1) %in% possible_targets, 40, 5)
+# V(g1)$label.cex <- 0.3
+# v.number <- V(g1) |>
+#   length()
+# mean.length <- average.path.length(g1)
+# plot(g1, vertex.label = "", vertex.size = 2)
+# mytitle <- paste(net[i])
+# mysubtitle1 <- paste0("Average path length = ",
+# round(mean.length, 4), ".Number of vertexes = ", v.number)
+# mysubtitle2 <- paste0("Number of targets = ",
+# value1, ".Number of drugs = ", value2)
+# mtext(side = 3, line = 3, at = -0.07, adj = 0, cex = 1, mytitle)
+# mtext(side = 3, line = 2, at = -0.07, adj = 0, cex = 0.7, mysubtitle1)
+# mtext(side = 3, line = 1, at = -0.07, adj = 0, cex = 0.7, mysubtitle2)
+# print(paste("Nodes", v.number, "Targets", value1, "Drugs", value2))
+# }
+# dev.off()
+# 
+# pdf(file = file.path("networks", "network_graph_notext.pdf"))
+# 
+# for (i in seq_along(list_graphs)) {
+# g1 <- list_graphs[[i]]
+# names <- V(g1) |>names()
+# print(net[i])
+# value1 <- names %in% possible_targets |>
+#   sum()
+# value2 <- drug_mapping$Drug[possible_targets %in% names] |>
+#   unique() |>
+#   length()
+# V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
+# V(g1)$size <- ifelse(V(g1) %in% possible_targets, 40, 5)
+# V(g1)$label.cex <- 0.3
+# v.number <- V(g1) |>length()
+# mean.length <- average.path.length(g1)
+# plot(g1, vertex.label = "", vertex.size = 2)
+# }
+# dev.off()
 
 
 ##-----------------------------------------------------------------------------
@@ -282,16 +282,6 @@ df_DDI_tot  <- inner_join(network_values, full_df, by = "drug_pair") |>
            ifelse(mean.k.edge == 0, "disconnected", "connected")) |> 
   ungroup() |> 
   distinct()
-
-r <- c()
-for (i in 1:dim(df_DDI_tot)[1]){
-  x <- df_DDI_tot[i,32:37] |> t() |> as.vector()
-  x <- x |> unique() |> sort()
-  r[i] <- paste0(x,collapse = "-")
-}
-df_DDI_tot$type <- r
-
-
 
 df_DDI_tot   |> 
   arrange(mean.k.edge) |> 

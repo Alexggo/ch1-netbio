@@ -4,16 +4,15 @@ p_load(igraph,tidyverse,BioNet,ape,geomorph,matrixStats,
 library(EnvStats) # for adding sample size
 
 #Run 5.1 first. Some variables are needed from 5.1
-#source("bin/5.1.Networks.R")
+source("bin/5.1.Networks.R")
 
 # VISUALIZATION/STATS
 
 # List 1 contains the complete dataset for each network.
 # df_DDI_tot contains all networks combined.
-#Execute after 5.1
 font_size=2
 
-df_DDI_tot <- read_csv(file.path("data/5.Targets_NetworkDistance","df_DDI_tot_metrics.csv")) |> 
+df_DDI_tot <- read_csv(file.path("data/5.Targets_NetworkDistance","df_DDI_metrics.csv")) |> 
   mutate(int_sign_ebw=factor(int_sign_ebw,levels=c("Synergy","Additivity","Antagonism"))) 
 
 # Minimum path ~ interaction type (ebw). 
@@ -136,7 +135,7 @@ plot_degree_PPI <- df_DDI_tot |> filter(network==net[11]) |>
   theme(legend.position = "none")+
   ggtitle(net[11])+
   stat_n_text(y.pos = -0.5)+
-  ylim(-0.5,8)
+  ylim(-0.5,9)
 
 wrap_plots(plot_degree_met,plot_degree_PPI)
 # Significant differences in mean degree for co-functional (Eco-Cyc/GO-BP)
@@ -155,10 +154,11 @@ for (i in 1:length(filenames)){
     theme_minimal()+
     scale_fill_brewer("Target connection",palette="Set2")+
     xlab("Type of interaction (ebw)")+
-    ylab("Number of connections")+
+    ylab("Number of DDIs")+
     ggtitle(net[i])+
     theme(legend.position = "bottom")+
-    geom_text(aes(label = paste0("n=",count)), vjust = 0, hjust = 0)
+    geom_text(aes(label = paste0("n=",count)), vjust = 0, hjust = 0)+
+    ylim(0,170)
 }
 
 wrap_plots(list_conn[[3]],list_conn[[11]])
@@ -184,7 +184,7 @@ listAdj_met <- df_DDI_tot |>
   ggtitle(net[5])+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
   xlab("Adjacent")+
-  ylim(0,0.0080)+
+  ylim(0,0.0090)+
   stat_n_text(y.pos = 0)
 
 listAdj_PPI <- df_DDI_tot |>
@@ -201,7 +201,7 @@ listAdj_PPI <- df_DDI_tot |>
   ggtitle(net[11])+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
   xlab("Adjacent")+
-  ylim(0,0.0080)+
+  ylim(0,0.0090)+
   stat_n_text(y.pos = 0)
 
 
@@ -224,7 +224,7 @@ listCon_met <- df_DDI_tot |>
   ggtitle(net[5])+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
   xlab("Connected")+
-  ylim(0,+0.0080)+
+  ylim(0,+0.0090)+
   stat_n_text(y.pos = 0)
 
 listCon_PPI <- df_DDI_tot |>
@@ -315,14 +315,6 @@ d <- df_target_tot |>
   theme(legend.position = "bottom")
 
 
-r <- c()
-for (i in 1:dim(df_DDI_tot)[1]){
-  x <- df_DDI_tot[i,25:30] |> t() |> as.vector()
-  x <- x |> unique() |> sort()
-  r[i] <- paste0(x,collapse = "-")
-}
-df_DDI_tot$type <- r
-
 # Rates ~ Distance (all networks).
 df_target_tot |>  mutate(path.length.corr=ifelse(path.length==0,"0",
                                                  ifelse(path.length==1,"1",
@@ -361,14 +353,6 @@ df_target_tot |> ggline(x = "sum_g.y", y = "sigma.rate.y", add = "mean_se",
   theme_minimal()
 
 # mean path ~ interaction (Syn,Ant,Add,Add-Ant,Ant-Syn,Add-Syn,Add-Ant-Syn)
-
-r <- c()
-for (i in 1:dim(full_df)[1]){
-  x <- full_df[i,25:30] |> t() |> as.vector()
-  x <- x |> unique() |> sort()
-  r[i] <- paste0(x,collapse = "-")
-}
-full_df$type <- r
 
 # Mean.rate. 5A
 a <- full_df |>
@@ -477,7 +461,8 @@ sup_e <- df_DDI_tot |>
   xlab("Interaction type across all strains")+
   ylab("Mean K-edge connectivity of connected targets")+
   theme(legend.position = "bottom")+
-  geom_text(aes(label = count,vjust=-0.75,hjust=-0.5))
+  geom_text(aes(label = count,vjust=-0.75,hjust=-0.25))+
+  ylim(0,35)
 
 
 # Mean Deg
@@ -500,7 +485,8 @@ sup_f <- df_DDI_tot |>
   xlab("Interaction type across all strains")+
   ylab("Mean node degree")+
   theme(legend.position = "none")+
-  geom_text(aes(label = count,vjust=-0.75,hjust=-0.5))
+  geom_text(aes(label = count,vjust=-0.75,hjust=-0.25))+
+  ylim(0,45)
 
 
 sup_i <- df_DDI_tot |>
@@ -549,11 +535,11 @@ wrap_plots(plot_path_met,plot_path_PPI,
 
 
 
-# Fig 5
+# Fig 4
 wrap_plots(a,b,c,d,nrow=2)+ 
   plot_annotation(tag_levels = 'A',tag_suffix = '.')&
   theme(plot.tag.position = c(0, 1),
-        plot.tag = element_text(size = 15, hjust = 0, vjust = 0)) #Fig5
+        plot.tag = element_text(size = 15, hjust = 0, vjust = 0)) #Fig4
 
 
 # 20 x 20. SupFig

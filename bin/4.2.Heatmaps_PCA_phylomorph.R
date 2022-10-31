@@ -111,11 +111,11 @@ Heatmap(mat_red,
         column_split = annot[11,],
         show_heatmap_legend = F,
         top_annotation = HeatmapAnnotation(cluster = anno_block(gp = gpar(fill = 1:16),
-                                                            labels = c("14", "8", "16","10",
-                                                                       "13","5","3","7","4",
-                                                                       "1","15","12","9",
-                                                                       "6","2","11"), 
-                                                            labels_gp = gpar(col = "white", fontsize = 10))),
+                                                           labels = c("14", "8", "16","10",
+                                                                      "13","5","3","7","4",
+                                                                      "1","15","12","9",
+                                                                      "6","2","11"),
+                                                           labels_gp = gpar(col = "white", fontsize = 10))),
         bottom_annotation = h)
   
 

@@ -17,8 +17,6 @@ library(ggrepel)
 full_dataset <- read_csv("data/3.InteractionScores_tSNE/all_ppx_large.csv")
 load('results/modularity_tests-175-1455.RData') #129 ppx
 load(file = 'results/rate_tests-5_most_modular.RData')
-names(RT_list) <- paste0("ppx_",seq(175,485,10))
-
 
 
 ptsne.ppx <- seq(5,2505,10) #251 ppx
@@ -111,15 +109,16 @@ tree_nw$tip.label <- c("ebw","ecr","pae","pau","seo","stm")
 dat <- dataset %>%  
   select(ebw,ecr,seo,stm,pae,pau) %>% t() 
 
-RT_list <- list()
-for (i in 1:dim(filtered_df)[1]){
-  t_ppx <- filtered_df$ptsne[i]
-  t_ppx <- paste0("ppx_",t_ppx)
-  groups_t <- dataset |> select(starts_with(t_ppx)) |> pull()
-  RT_list[[i]] <- compare.multi.evol.rates(A=dat,gp=groups_t,phy=tree_nw,iter=999)
-}
-names(RT_list) <- paste0("ppx_",filtered_df$ptsne)
-RT_list |> save(file = 'results/rate_tests-5_most_modular.RData')
+# To run test, run the following:
+# RT_list <- list()
+# for (i in 1:dim(filtered_df)[1]){
+#   t_ppx <- filtered_df$ptsne[i]
+#   t_ppx <- paste0("ppx_",t_ppx)
+#   groups_t <- dataset |> select(starts_with(t_ppx)) |> pull()
+#   RT_list[[i]] <- compare.multi.evol.rates(A=dat,gp=groups_t,phy=tree_nw,iter=999)
+# }
+# names(RT_list) <- paste0("ppx_",filtered_df$ptsne)
+# RT_list |> save(file = 'results/rate_tests-5_most_modular.RData')
 
 sigma.d.ratio<- c()
 p.value_test<- c()
@@ -140,7 +139,7 @@ df_rate_test <- data.frame(ptsne=filtered_df$ptsne,
 
 summary_test <- inner_join(filtered_df,df_rate_test,by="ptsne")
 
-best <- RT_list[["ppx_245"]]
+best <- RT_list[["ppx_245"]] 
 summary(best)
 plot(best)
 
@@ -166,9 +165,18 @@ p1 <- ggplot(RT_result, aes(x = clusters, y = sigma.rate)) +
 
 RT_result <- RT_result %>% mutate(clusters=as.numeric(as.character(clusters)))
 
-full_dataset$clusters <- full_dataset$ppx_245
+full_dataset$clusters <- full_dataset$ppx_245 
 full_df <- left_join(full_dataset,RT_result,by="clusters")
 full_df <- full_df |> select(!starts_with("ppx"))
+
+
+r <- c()
+for (i in 1:dim(full_df)[1]){
+  x <- full_df[i,25:30] |> t() |> as.vector()
+  x <- x |> unique() |> sort()
+  r[i] <- paste0(x,collapse = "-")
+}
+full_df$type <- r
 
 full_df |> 
   write_csv("data/4.PhylogeneticComparativeMethods/DDI_table_rates.csv")
