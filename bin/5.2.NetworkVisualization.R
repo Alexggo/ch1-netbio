@@ -577,3 +577,8 @@ df_DDI_tot |> ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
   theme_minimal()
 
 
+df1 <- df_DDI_tot |> 
+  filter(network==net[3]|network==net[11]) |> 
+  filter(drug_pair %in% c("A22_Novobiocin","Ciprofloxacin_Meropenem",
+                          "Sulfamonomethoxine_Trimethoprim"))
+
