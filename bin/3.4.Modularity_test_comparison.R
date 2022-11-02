@@ -67,7 +67,8 @@ df |>
   ggplot(aes(x=ptsne,y=Z_effect))+
   geom_point()+
   theme_minimal()+
-  xlab("tsne perplexity")
+  xlab("tsne perplexity")+
+  geom_smooth(method="lm")
 
 df |> 
   filter(ptsne<=500) |> 
@@ -76,8 +77,14 @@ df |>
   geom_point()+
   geom_text_repel()+
   geom_hline(yintercept=-26.5)+
-  geom_vline(xintercept=0.92)
-  
+  geom_vline(xintercept=0.92)+
+  geom_smooth(method="lm")
+
+library(broom)
+test <- lm(Z_effect~ptsne,df)
+broom::augment(test) |> 
+  arrange(.resid)
+
 # Adams,2017. The 5 most negative effect size (ZCR) clustering solutions were identified, 
 # these represented the hypotheses with the strongest modular signals.
 
