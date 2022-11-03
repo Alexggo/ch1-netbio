@@ -1,6 +1,0 @@
----
-title: "README"
-author: "Alejandro Gil-Gomez"
-date: "4/24/2020"
-output: github_document
----

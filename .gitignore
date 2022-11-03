@@ -7,4 +7,5 @@ paper/img
 .RDataTmp
 results/B.SameRes_across_strains_DDIs/RObjects/mlist1.RData
 results/*.RData
-
+results/sen/*.RData
+results/set/*.RData
