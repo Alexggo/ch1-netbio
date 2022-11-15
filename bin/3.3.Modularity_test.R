@@ -17,7 +17,7 @@ plan("multisession",workers=8)
 #plan("multicore",workers=8)
 
 
-full_dataset <- read_csv("data/3.InteractionScores_tSNE/all_ppx_large.csv")
+full_dataset <- read_csv("data/3.InteractionScores_tSNE/all_ppx_large_set2.csv")
 
 ## Testing modularity of clustering solutions.
 
@@ -40,12 +40,14 @@ tree_nw$tip.label <- c("ebw","ecr","pae","pau","seo","stm")
 
 mat <- full_dataset[,19:24]%>% as.matrix() |> t()
 
-# Between 175-1455. Indexes 18-146
+# ALL_DDI. Good tsnes between 175-1455. Indexes 18-146
+# SET2. Good tsnes between 115-455. Indexes 12-46
+
 mod_test <- list()
 
 labels <- list()
-for (i in 1:23){
-  labels[[i]] <- full_dataset[,i+103] |> pull()
+for (i in 1:35){
+  labels[[i]] <- full_dataset[,i+97] |> pull()
 }
 
 number_of_clusters <- labels |> map(unique) |> map_dbl(length)
@@ -63,4 +65,4 @@ mod_test <- labels |>
   lapply(test_mod)
 toc()
 
-mod_test |> save(file = 'results/modularity_tests-175-1455.RData')
+mod_test |> save(file = 'results/set/modularity_tests-115-455_sen.RData')

@@ -34,7 +34,7 @@ hrbrthemes,ggforce,ComplexHeatmap,ggbiplot,patchwork,performance)
 
 
 
-full_df <- read.csv("data/4.PhylogeneticComparativeMethods/DDI_table_rates.csv")
+full_df <- read.csv("data/4.PhylogeneticComparativeMethods/DDI_table_rates_set.csv")
 
 
 # Read phylogenetic tree

@@ -225,7 +225,7 @@ lapply(arrange,drug_pair)
 
 #Add rates and DDI info
 full_df <- read.csv(file.path(
-  "data/4.PhylogeneticComparativeMethods/DDI_table_rates.csv"))
+  "data/4.PhylogeneticComparativeMethods/DDI_table_rates_set.csv"))
 
 r <- full_df |>
   mutate(sigma.rate=round(sigma.rate,5)) |> 
@@ -288,5 +288,5 @@ df_DDI_tot   |>
   arrange(drug_pair) |> 
   write.csv(
     file.path("data/5.Targets_NetworkDistance",
-              "df_DDI_metrics.csv"), row.names = F)
+              "df_DDI_metrics_set.csv"), row.names = F)
 

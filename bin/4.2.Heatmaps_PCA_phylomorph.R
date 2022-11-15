@@ -30,7 +30,7 @@ p_load(tidyverse,RColorBrewer,plotly,dendextend,ggrepel,hrbrthemes,
 ## -----------------------------------------------------------------------------
 
 # Read data matrix
-full_df <- file.path("data/4.PhylogeneticComparativeMethods/DDI_table_rates.csv")
+full_df <- file.path("data/4.PhylogeneticComparativeMethods/DDI_table_rates_set.csv")
 full_df <- read_csv(full_df)
 
 # Read phylogenetic tree
@@ -110,14 +110,20 @@ Heatmap(mat_red,
         col=rev(brewer.pal(10,'RdBu')),
         column_split = annot[11,],
         show_heatmap_legend = F,
-        top_annotation = HeatmapAnnotation(cluster = anno_block(gp = gpar(fill = 1:16),
-                                                           labels = c("14", "8", "16","10",
-                                                                      "13","5","3","7","4",
-                                                                      "1","15","12","9",
-                                                                      "6","2","11"),
+        top_annotation = HeatmapAnnotation(cluster = anno_block(gp = gpar(fill = 1:8),
+                                                           labels = c("1", "2", "3","4",
+                                                                      "5","6","7","8"),
                                                            labels_gp = gpar(col = "white", fontsize = 10))),
         bottom_annotation = h)
   
+
+
+# top_annotation = HeatmapAnnotation(cluster = anno_block(gp = gpar(fill = 1:16),
+#                                                         labels = c("14", "8", "16","10",
+#                                                                    "13","5","3","7","4",
+#                                                                    "1","15","12","9",
+#                                                                    "6","2","11"),
+#                                                         labels_gp = gpar(col = "white", fontsize = 10))),
 
 
 
