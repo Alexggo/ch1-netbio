@@ -1,3 +1,5 @@
+#!/usr/bin/Rscript
+
 ##----load---------------------------------------------------------------------
 library(pacman)
 p_load(igraph, tidyverse, matrixStats,future.apply)
@@ -5,6 +7,15 @@ p_load(igraph, tidyverse, matrixStats,future.apply)
 
 ##-----------------------------------------------------------------------------
 # Metabolic=1, PPI=10
+
+# Name of set
+set <- "all" # Or set
+set_name <- paste0("DDI_table_rates_",set,".csv")
+
+#Add rates and DDI info
+full_df <- read.csv(file.path("data/4.PhylogeneticComparativeMethods",
+                              set_name))
+
 
 filenames <- c("EcoCyc.goldstandardset.csv", "EcoliNet.v1.csv",
                "GN.INT.EcoliNet.3568gene.23439link.csv",
@@ -37,7 +48,6 @@ list_net <- lapply(filepath_ecolinet,read_csv) |>
 
 names(list_net) <- net
 
-
 #Create igraphs from tables.
 list_graphs <- list_net |>
   lapply(graph_from_data_frame, directed = FALSE, vertices = NULL)
@@ -50,6 +60,14 @@ drug_mapping <- read.csv("data/5.Targets_NetworkDistance/DrugTargets3_ecoli.csv"
   filter(KEGG_eco != "")
 possible_targets <- drug_mapping$KEGG_eco |>
   unique()
+#All nodes
+#gr.vert <-   t(combn(names(V(list_graphs[[i]])),2)) 
+#All combinations of possible target nodes
+gr.vert <- t(combn(possible_targets,2))
+gr.vert_same <- cbind(possible_targets,possible_targets)
+gr.vert <- rbind(gr.vert,gr.vert_same)
+gr.vert <- gr.vert[,]
+
 
 ##-----------------------------------------------------------------------------
 # pdf(file = file.path("networks", "network_graph.pdf"))
@@ -104,53 +122,61 @@ possible_targets <- drug_mapping$KEGG_eco |>
 
 
 ##-----------------------------------------------------------------------------
-#Calculate path.length, k-edge and node degree for the possible targets.
-
+# Calculate path.length, k-edge connectivity,
+# and node degree for the possible targets.
 list_path_conn_deg <- list()
-
 for (i in seq_along(list_graphs)) {
-  #All nodes
-#gr.vert <-   t(combn(names(V(list_graphs[[i]])),2)) 
-  #Only target nodes
-gr.vert <- t(combn(possible_targets,2))
-gr.vert_same <- cbind(possible_targets,possible_targets)
-gr.vert <- rbind(gr.vert,gr.vert_same)
-
-gr.vert <- gr.vert[,]
 network <- list_graphs[[i]]
-verti <- V(network) |> names()
-ID <- 1:length(verti)
-index <- cbind(verti,ID) |> as.data.frame() |> 
+nodes <- V(network) |> names()
+ID <- seq_along(nodes)
+index <- cbind(nodes,ID) |> as.data.frame() |> 
   mutate(ID=as.numeric(ID))
 
-set <- gr.vert[,1]
+possible_nodes <- gr.vert[,1]
 
-set <- set[set %in% index$verti] |> as.data.frame()
-colnames(set) <- "verti"
+nodes_in_net <- possible_nodes[possible_nodes %in% index$nodes] |> as.data.frame()
+colnames(nodes_in_net) <- "nodes"
 
-tab <- left_join(set,index,by="verti") |> 
+tab <- left_join(nodes_in_net,index,by="nodes") |> 
   arrange(ID) |> distinct()
 comb <- t(combn(tab$ID,2))
 
-
+# Calculate connectivity between node combinations
 allcon <- future_apply(comb,1,function(edges){
   edge_connectivity(list_graphs[[i]],
                     source = edges[1], target = edges[2])
 })
+
+# Calculate distance between node combinations
 allpath <- future_apply(comb,1,function(edges){
   shortest.paths(list_graphs[[i]],
   v = edges[1], to = edges[2])
 })
+
+# Calculate node degree number 1
 deg1 <- future_apply(comb,1,function(edges){
   igraph::degree(list_graphs[[i]],
                  v = edges[1])
 })
+
+# Calculate node degree number 1
 deg2 <- future_apply(comb,1,function(edges){
   igraph::degree(list_graphs[[i]],
                  v = edges[2])
 })
 
+# Calculate betweeness
+bet1 <-  future_apply(comb,1,function(edges){
+  igraph::betweenness(list_graphs[[i]],
+                               v = edges[1],directed=FALSE,cutoff = 15)
+ 
+})
 
+bet2 <-  future_apply(comb,1,function(edges){
+  igraph::betweenness(list_graphs[[i]],
+                               v = edges[2],directed=FALSE,cutoff = 15)
+  
+})
 
 comb <- as.data.frame(comb)
 names(comb) <- c("N1","N2")
@@ -158,6 +184,8 @@ comb$path.length <- allpath
 comb$K.edge <- allcon
 comb$Degree1 <- deg1
 comb$Degree2 <- deg2
+comb$bet1 <- bet1
+comb$bet2 <- bet2
 
 index1 <- index
 colnames(index1) <- c("KEGG1","N1")
@@ -174,6 +202,9 @@ comb <- comb |>
   mutate(min_deg=min(Degree1,Degree2,na.rm=TRUE)) |> 
   mutate(max_deg=max(Degree1,Degree2,na.rm=TRUE)) |> 
   mutate(mean_deg=(Degree1+Degree2)/2) |> 
+  mutate(min_bet=min(bet1,bet2,na.rm=TRUE)) |> 
+  mutate(max_bet=max(bet1,bet2,na.rm=TRUE)) |> 
+  mutate(mean_bet=(bet1+bet2)/2) |>  
   ungroup() |> 
   distinct() |> 
   mutate(adjacency=ifelse(path.length==1,1,0))
@@ -216,16 +247,14 @@ lapply(select, KEGG1_KEGG2,
 KEGG1, KEGG2, drug_pair,
 Drug1, Drug2, path.length,
 K.edge, Degree1, Degree2,adjacency,
-mean_deg, min_deg, max_deg) |>
+mean_deg, min_deg, max_deg,min_bet,max_bet,mean_bet) |>
 lapply(distinct) |>
 lapply(filter, Drug1 != Drug2) |>
 lapply(filter, Drug1 < Drug2) |> 
 lapply(drop_na) |> 
 lapply(arrange,drug_pair)
 
-#Add rates and DDI info
-full_df <- read.csv(file.path(
-  "data/4.PhylogeneticComparativeMethods/DDI_table_rates_set.csv"))
+
 
 r <- full_df |>
   mutate(sigma.rate=round(sigma.rate,5)) |> 
@@ -258,7 +287,7 @@ df_target_tot  |>
   arrange(network) |> 
 write.csv(
   file.path("data/5.Targets_NetworkDistance",
-            "df_target_metrics.csv"), row.names = F)
+            paste0("df_target_metrics",set,".csv")), row.names = F)
 
 significant_figures <- 4
 
@@ -269,7 +298,10 @@ network_values <- df_target_tot  |>
             mean.min.degree = round(mean(min_deg, na.rm = TRUE),significant_figures),
             mean.max.degree = round(mean(max_deg, na.rm = TRUE),significant_figures),
             mean.mean.degree = round(mean(mean_deg, na.rm = TRUE),significant_figures),
-            max.adjacency = max(adjacency, na.rm = TRUE)) |> 
+            max.adjacency = max(adjacency, na.rm = TRUE),
+            mean.min.bet = round(mean(min_bet, na.rm = TRUE),significant_figures),
+            mean.max.bet = round(mean(max_bet, na.rm = TRUE),significant_figures),
+            mean.mean.bet = round(mean(mean_bet, na.rm = TRUE),significant_figures)) |> 
   ungroup()
 
 
@@ -288,5 +320,5 @@ df_DDI_tot   |>
   arrange(drug_pair) |> 
   write.csv(
     file.path("data/5.Targets_NetworkDistance",
-              "df_DDI_metrics_set.csv"), row.names = F)
+              paste0("df_DDI_metrics",set,".csv")), row.names = F)
 

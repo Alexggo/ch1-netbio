@@ -12,7 +12,7 @@ source("bin/5.1.Networks.R")
 # df_DDI_tot contains all networks combined.
 font_size=2
 
-df_DDI_tot <- read_csv(file.path("data/5.Targets_NetworkDistance","df_DDI_metrics_set.csv")) |> 
+df_DDI_tot <- read_csv(file.path("data/B.SameRes_across_strains_DDIs/5.Targets_NetworkDistance","df_DDI_metrics.csv")) |> 
   mutate(int_sign_ebw=factor(int_sign_ebw,levels=c("Synergy","Additivity","Antagonism"))) 
 
 # Minimum path ~ interaction type (ebw). 

@@ -171,3 +171,4 @@ phylomorphospace(tree_nw, pca$x[,1:2],
 #phylomorphospace3d(tree_nw,pca.x[,c(1,2,3)],method="static")
 fancyTree(tree_nw,X=pca.x[,c(1,2)],
           type="traitgram3d",method="static")
+
