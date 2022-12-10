@@ -1,6 +1,15 @@
+# Filter 2 groups to identify differences that are structural vs network based
+# Set 1 SEN in all strains for both drugs (network differences). 
+# Set 2 SEN/RES. Sensitive for both drugs in at least one species (structure and networks).
+# Possible results
+# Option 1. signal is the same, sensititvity doesn’t make any difference
+# Option 2. Maybe effect is different.
+
+
 library(tidyverse)
 
-x <- read_csv("data/1.processed/Broc2018_maindataset.csv") |> 
+raw <- read_csv("data/1.processed/Broc2018_maindataset.csv")
+x <-  raw |> 
   select(1:3,19:62)
 
 y <- x |> 
@@ -100,3 +109,27 @@ x_sq$observed < x_sq$expected
 
 #syn and ant are overrepresented in sen and hyb targets.
 # add are overrepresented when both targets are resistant
+
+
+sub <- x |> select(1:3,23:34)
+# Set 1 SEN in all strains for both drugs (network differences). 
+only_sen <- sub |> filter(SR_ebw_D1=="S"&SR_ecr_D1=="S"&SR_seo_D1=="S"&SR_stm_D1=="S"&SR_pae_D1=="S"&SR_pau_D1=="S") |> 
+  filter(SR_ebw_D2=="S"&SR_ecr_D2=="S"&SR_seo_D2=="S"&SR_stm_D2=="S"&SR_pae_D2=="S"&SR_pau_D2=="S")
+# 65 DDIs
+
+# Set 2 SEN/RES. Sensitive for both drugs in at least one species (structure and networks).
+set2 <- sub |> filter((SR_ebw_D1=="S"&SR_ebw_D2=="S")|(SR_ecr_D1=="S"&SR_ecr_D2=="S")|
+                        (SR_seo_D1=="S"&SR_seo_D2=="S")|(SR_stm_D1=="S"&SR_stm_D2=="S")|
+                        (SR_pae_D1=="S"&SR_pae_D2=="S")|(SR_pau_D1=="S"&SR_pau_D2=="S"))
+
+set2.1 <- set2 |> filter(!drug_pair %in% only_sen$drug_pair)
+
+only_sen_DDI <- only_sen |> select(drug_pair) |> pull()
+
+set2.1_DDI <- set2.1 |> select(drug_pair) |> pull()
+
+raw |> filter(drug_pair %in% only_sen_DDI) |> 
+  write.csv("data/1.processed/Broc2018_sen_set.csv",row.names = FALSE)
+
+raw |> filter(drug_pair %in% set2.1_DDI) |> 
+  write.csv("data/1.processed/Broc2018_set2_set.csv",row.names = FALSE)

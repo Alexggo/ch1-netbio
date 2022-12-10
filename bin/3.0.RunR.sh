@@ -11,6 +11,7 @@
 
 ###MODULES
 module load R
+#conda activate r_env
 
 #ENVIRONMENTS
 
@@ -22,3 +23,4 @@ pwd
 
 
 Rscript bin/3.1.tSNE_BigMap.R $from $to
+#Rscript bin/3.3.Modularity_test.R

@@ -2,22 +2,22 @@ library(pacman)
 p_load(igraph,tidyverse,BioNet,ape,geomorph,matrixStats,
        ComplexHeatmap,ggpubr,plotrix,tidymodels,patchwork,here)
 library(EnvStats) # for adding sample size
+
+#Run 5.1 first. Some variables are needed from 5.1
 source("bin/5.1.Networks.R")
 
 # VISUALIZATION/STATS
 
 # List 1 contains the complete dataset for each network.
 # df_DDI_tot contains all networks combined.
-#Execute after 5.1
 font_size=2
 
-df_DDI_tot <- read_csv(file.path("data/5.Targets_NetworkDistance","df_DDI_tot_metrics.csv")) |> 
-  mutate(int_sign_ebw=factor(int_sign_ebw,levels=c("Synergy","Additivity","Antagonism"))) |> 
-  arrange(network)
+df_DDI_tot <- read_csv(file.path("data/B.SameRes_across_strains_DDIs/5.Targets_NetworkDistance","df_DDI_metrics.csv")) |> 
+  mutate(int_sign_ebw=factor(int_sign_ebw,levels=c("Synergy","Additivity","Antagonism"))) 
 
 # Minimum path ~ interaction type (ebw). 
 my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
-net <- df_DDI_tot$network |> unique()
+net <- df_DDI_tot$network |> unique() |> sort()
 
 plot_path_met <- df_DDI_tot |> filter(network==net[3]) |> # See also net[5]
   filter(mean.path.length!="Inf") |> 
@@ -61,7 +61,6 @@ wrap_plots(plot_path_met,plot_path_PPI)
 
 # Connectivity ~ interaction type (ebw).
 my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
-net <- df_DDI_tot$network |> unique()
 
 plot_Kedge_met <- df_DDI_tot |> filter(network==net[3]) |>
   filter(mean.path.length!="Inf") |> 
@@ -104,7 +103,6 @@ wrap_plots(plot_Kedge_met,plot_Kedge_PPI)
 
 # Node degree ~ interaction type (ebw). 
 my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism") )
-net <- df_DDI_tot$network |> unique()
 
 plot_degree_met <- df_DDI_tot |> filter(network==net[3]) |> 
   ggplot(aes(x = int_sign_ebw, y = mean.mean.degree,
@@ -137,7 +135,7 @@ plot_degree_PPI <- df_DDI_tot |> filter(network==net[11]) |>
   theme(legend.position = "none")+
   ggtitle(net[11])+
   stat_n_text(y.pos = -0.5)+
-  ylim(-0.5,8)
+  ylim(-0.5,9)
 
 wrap_plots(plot_degree_met,plot_degree_PPI)
 # Significant differences in mean degree for co-functional (Eco-Cyc/GO-BP)
@@ -156,10 +154,11 @@ for (i in 1:length(filenames)){
     theme_minimal()+
     scale_fill_brewer("Target connection",palette="Set2")+
     xlab("Type of interaction (ebw)")+
-    ylab("Number of connections")+
+    ylab("Number of DDIs")+
     ggtitle(net[i])+
     theme(legend.position = "bottom")+
-    geom_text(aes(label = paste0("n=",count)), vjust = 0, hjust = 0)
+    geom_text(aes(label = paste0("n=",count)), vjust = 0, hjust = 0)+
+    ylim(0,170)
 }
 
 wrap_plots(list_conn[[3]],list_conn[[11]])
@@ -185,7 +184,7 @@ listAdj_met <- df_DDI_tot |>
   ggtitle(net[5])+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
   xlab("Adjacent")+
-  ylim(0,0.0080)+
+  ylim(0,0.0090)+
   stat_n_text(y.pos = 0)
 
 listAdj_PPI <- df_DDI_tot |>
@@ -202,7 +201,7 @@ listAdj_PPI <- df_DDI_tot |>
   ggtitle(net[11])+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
   xlab("Adjacent")+
-  ylim(0,0.0080)+
+  ylim(0,0.0090)+
   stat_n_text(y.pos = 0)
 
 
@@ -225,7 +224,7 @@ listCon_met <- df_DDI_tot |>
   ggtitle(net[5])+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
   xlab("Connected")+
-  ylim(0,+0.0080)+
+  ylim(0,+0.0090)+
   stat_n_text(y.pos = 0)
 
 listCon_PPI <- df_DDI_tot |>
@@ -284,9 +283,12 @@ sup_h <- list_conn[[11]]+
 # Evolutionary rates ~ int_type/distance/connectivity/node 
 
 # Rates ~ Interaction Type (ebw) (PPI). 5C
+
+df_target_tot <- left_join(full_df,df_target_tot,by="drugdrug")
+
 c <- df_target_tot |>
   filter(network==net[3]|network==net[11]) |> 
-  ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
+  ggline(x = "int_sign_ebw.x", y = "sigma.rate.y", add = "mean_se",
          group = "network", col="network")+
   xlab("Type of interaction (ebw)")+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
@@ -305,21 +307,13 @@ d <- df_target_tot |>
                                                                            ifelse(path.length==5,"5",
                                                                                   ifelse(path.length>=6,">6","Error"))))))))) |> 
   mutate(path.length.corr=factor(path.length.corr,levels=c("0","1","2","3","4","5",">6","Not connected","Error"))) |>
-  ggline(x = "path.length.corr", y = "sigma.rate", add = c("mean_se"),
+  ggline(x = "path.length.corr", y = "sigma.rate.x", add = c("mean_se"),
          group = "network", col="network",linetype = 1)+
   xlab("Path length")+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
   theme_minimal()+
   theme(legend.position = "bottom")
 
-
-r <- c()
-for (i in 1:dim(df_DDI_tot)[1]){
-  x <- df_DDI_tot[i,25:30] |> t() |> as.vector()
-  x <- x |> unique() |> sort()
-  r[i] <- paste0(x,collapse = "-")
-}
-df_DDI_tot$type <- r
 
 # Rates ~ Distance (all networks).
 df_target_tot |>  mutate(path.length.corr=ifelse(path.length==0,"0",
@@ -329,7 +323,7 @@ df_target_tot |>  mutate(path.length.corr=ifelse(path.length==0,"0",
                                                                       ifelse(path.length==4,"4",
                                                                              ifelse(path.length==5,"5","6+"))))))) |>
   mutate(path.length.corr=factor(path.length.corr,levels=c("0","1","2","3","4","5","6+"))) |>
-  ggline(x = "path.length.corr", y = "sigma.rate", add = "mean_se",
+  ggline(x = "path.length.corr", y = "sigma.rate.y", add = "mean_se",
          group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif",
                      label.y = c(40, 40, 40))+
@@ -339,7 +333,7 @@ df_target_tot |>  mutate(path.length.corr=ifelse(path.length==0,"0",
   theme_minimal()
 
 # Rates ~ Interaction Type (ebw) (all networks).
-df_DDI_tot |> ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
+df_target_tot |> ggline(x = "int_sign_ebw.x", y = "sigma.rate.y", add = "mean_se",
                      group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif",
                      label.y = c(40, 40, 40))+
@@ -349,7 +343,7 @@ df_DDI_tot |> ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
   theme_minimal()
 
 # Rates ~ Interaction Type (all strains) (all networks).
-df_DDI_tot |> ggline(x = "sum_g", y = "sigma.rate", add = "mean_se",
+df_target_tot |> ggline(x = "sum_g.y", y = "sigma.rate.y", add = "mean_se",
                      group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif",
                      label.y = c(40, 40, 40))+
@@ -360,16 +354,8 @@ df_DDI_tot |> ggline(x = "sum_g", y = "sigma.rate", add = "mean_se",
 
 # mean path ~ interaction (Syn,Ant,Add,Add-Ant,Ant-Syn,Add-Syn,Add-Ant-Syn)
 
-r <- c()
-for (i in 1:dim(rates)[1]){
-  x <- rates[i,16:21] |> t() |> as.vector()
-  x <- x |> unique() |> sort()
-  r[i] <- paste0(x,collapse = "-")
-}
-rates$type <- r
-
 # Mean.rate. 5A
-a <- rates |>
+a <- full_df |>
   select(type,sigma.rate)  |> 
   group_by(type) |> 
   summarise(Mean.rate=mean(sigma.rate),
@@ -393,7 +379,7 @@ a <- rates |>
 antagonism_score <- -1
 synergy_score <- +1
 
-b <- rates |> 
+b <- full_df |> 
   mutate(ebw_g=ifelse(int_sign_ebw=="Antagonism",antagonism_score,
                       ifelse(int_sign_ebw=="Additivity",0,
                              ifelse(int_sign_ebw=="Synergy",synergy_score,NA)))) |> 
@@ -475,7 +461,8 @@ sup_e <- df_DDI_tot |>
   xlab("Interaction type across all strains")+
   ylab("Mean K-edge connectivity of connected targets")+
   theme(legend.position = "bottom")+
-  geom_text(aes(label = count,vjust=-0.75,hjust=-0.5))
+  geom_text(aes(label = count,vjust=-0.75,hjust=-0.25))+
+  ylim(0,35)
 
 
 # Mean Deg
@@ -498,7 +485,8 @@ sup_f <- df_DDI_tot |>
   xlab("Interaction type across all strains")+
   ylab("Mean node degree")+
   theme(legend.position = "none")+
-  geom_text(aes(label = count,vjust=-0.75,hjust=-0.5))
+  geom_text(aes(label = count,vjust=-0.75,hjust=-0.25))+
+  ylim(0,45)
 
 
 sup_i <- df_DDI_tot |>
@@ -536,11 +524,6 @@ sup_j <- df_DDI_tot |>
   theme_minimal()+
   theme(legend.position = "none")
 
-df_DDI_tot |> 
-  filter(clusters=="13") |> 
-  filter(network==net[10]) |> 
-  View()
-
 # Make figures:
 # Fig 3
 wrap_plots(plot_path_met,plot_path_PPI,
@@ -552,11 +535,11 @@ wrap_plots(plot_path_met,plot_path_PPI,
 
 
 
-# Fig 5
+# Fig 4
 wrap_plots(a,b,c,d,nrow=2)+ 
   plot_annotation(tag_levels = 'A',tag_suffix = '.')&
   theme(plot.tag.position = c(0, 1),
-        plot.tag = element_text(size = 15, hjust = 0, vjust = 0)) #Fig5
+        plot.tag = element_text(size = 15, hjust = 0, vjust = 0)) #Fig4
 
 
 # 20 x 20. SupFig
@@ -593,4 +576,9 @@ df_DDI_tot |> ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
   ylab("Sigma rate")+
   theme_minimal()
 
+
+df1 <- df_DDI_tot |> 
+  filter(network==net[3]|network==net[11]) |> 
+  filter(drug_pair %in% c("A22_Novobiocin","Ciprofloxacin_Meropenem",
+                          "Sulfamonomethoxine_Trimethoprim"))
 
