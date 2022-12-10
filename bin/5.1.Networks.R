@@ -125,6 +125,7 @@ gr.vert <- gr.vert[,]
 # Calculate path.length, k-edge connectivity,
 # and node degree for the possible targets.
 list_path_conn_deg <- list()
+evcent_list <- list()
 for (i in seq_along(list_graphs)) {
 network <- list_graphs[[i]]
 nodes <- V(network) |> names()
@@ -178,6 +179,9 @@ bet2 <-  future_apply(comb,1,function(edges){
   
 })
 
+# EV centrality
+# evcent_list[[i]] <- evcent(list_graphs[[i]])
+
 comb <- as.data.frame(comb)
 names(comb) <- c("N1","N2")
 comb$path.length <- allpath
@@ -186,6 +190,7 @@ comb$Degree1 <- deg1
 comb$Degree2 <- deg2
 comb$bet1 <- bet1
 comb$bet2 <- bet2
+
 
 index1 <- index
 colnames(index1) <- c("KEGG1","N1")
@@ -247,7 +252,7 @@ lapply(select, KEGG1_KEGG2,
 KEGG1, KEGG2, drug_pair,
 Drug1, Drug2, path.length,
 K.edge, Degree1, Degree2,adjacency,
-mean_deg, min_deg, max_deg,min_bet,max_bet,mean_bet) |>
+mean_deg, min_deg, max_deg,bet1,bet2,min_bet,max_bet,mean_bet) |>
 lapply(distinct) |>
 lapply(filter, Drug1 != Drug2) |>
 lapply(filter, Drug1 < Drug2) |> 
@@ -274,7 +279,7 @@ df_target_tot  <- bind_rows(dist_conn_deg_adj, .id = "network") |>
 
 r <- c()
 for (i in 1:dim(df_target_tot)[1]){
-  x <- df_target_tot[i,35:40] |> t() |> as.vector()
+  x <- df_target_tot[i,38:43] |> t() |> as.vector()
   x <- x |> unique() |> sort()
   r[i] <- paste0(x,collapse = "-")
 }
