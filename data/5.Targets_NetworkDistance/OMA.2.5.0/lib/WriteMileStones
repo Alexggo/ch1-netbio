@@ -1,0 +1,85 @@
+# ***** BEGIN LICENSE BLOCK *****
+# Version: MPL 2.0
+#
+# The contents of this file are subject to the Mozilla Public License Version
+# 2.0 (the "License"); you may not use this file except in compliance with
+# the License. You may obtain a copy of the License at
+# http://www.mozilla.org/MPL/2.0/
+#
+# Software distributed under the License is distributed on an "AS IS" basis,
+# WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+# for the specific language governing rights and limitations under the
+# License.
+#
+# The Original Code is OMA standalone.
+#
+# The Initial Developer of the Original Code is CBRG Research Group; 
+# ETH Zurich; Switzerland.
+# Portions created by the Initial Developer are Copyright (C) 2005-2013
+# the Initial Developer. All Rights Reserved.
+#
+# Contributor(s):
+#   Christophe Dessimoz <cdessimoz@inf.ethz.ch>
+#   Adrian Altenhoff <adrian.altenhoff@inf.ethz.ch>
+#   Stefan Zoller <stefan.zoller@inf.ethz.ch>
+#   Adrian Schneider <adrian.schneider@inf.ethz.ch>
+#   Alexander Roth <alexander.roth@inf.ethz.ch>
+#   Gaston Gonnet <gonnet@inf.ethz.ch>
+#
+# ***** END LICENSE BLOCK *****
+StoreOrthologMilestone := proc(fn_)
+    fn := If(fn_[-3..-1]='.gz', fn_[1..-4], fn_);
+    OpenWriting(fn):
+    for var in ['Ort', 'VPairs', 'StablePairs', 'ParalogPairs'] do
+        printf('%s := %A:\n', var, eval(symbol(var))):
+    od:
+    printf('_genomes_order := %A:\n', genomes):
+    printf('_hash_DBs := %A:\n', HashDBs()):
+    printf('_params := %A:\n', OrthologMilestoneParams()):
+    printf('# Milestone created on %s on %s\n', date(), hostname());
+    OpenWriting(previous);
+    if fn_<>fn then
+        CallSystem('gzip -f9 '.fn);
+    fi:
+end:
+
+HashDBs := proc()
+    hashes := [seq(sha2(DBs[i,string])[1..16], i=1..NG)];
+    return(hashes)
+end:
+
+OrthologMilestoneParams := proc()
+    return([MinScore, LengthTol, StablePairTol, VerifiedPairTol, MinSeqLen,
+            UseOnlyOneSplicingVariant]);
+end:
+
+
+LoadOrthologMilestone := proc(fn)
+    global Ort, VPairs, StablePairs, _genomes_order, _hash_DBs, _params, ParalogPairs;
+    _genomes_order := _hash_DBs := _params := 0;
+    cur_DB_hashes := HashDBs():
+    cur_params := OrthologMilestoneParams():
+    err := traperror(ReadProgram(fn)):
+    
+    if err=lasterror or (_genomes_order<>0 and _genomes_order<>genomes) or 
+        (_hash_DBs<>0 and _hash_DBs<>cur_DB_hashes) or
+        (_params<>0 and _params<>cur_params) then
+        warning(fn.' could not be used due to inconsistencies with current dataset.');
+        if _genomes_order<>0 and _genomes_order<>genomes then
+            warning(sprintf('genome order differ: %A <--> %A\n', 
+                genomes, _genomes_order));
+        elif _hash_DBs<>0 and _hash_DBs<>cur_DB_hashes then
+            for i to NG do if _hash_DBs[i]<>cur_DB_hashes[i] then
+                warning(sprintf('DB for "%s" differs', genomes[i]));
+            fi od:
+        elif _params<>0 and _params<>cur_params then
+            warning(sprintf('relevant parameters changed: %A <--> %A', cur_params, _params));
+        fi: 
+        warning('  Will redo now orthology inference');    
+
+        CallSystem('rm -rf '.fn);
+        return(false);
+    fi:
+    return(true);
+
+end:

@@ -1,0 +1,126 @@
+# ***** BEGIN LICENSE BLOCK *****
+# Version: MPL 2.0
+#
+# The contents of this file are subject to the Mozilla Public License Version
+# 2.0 (the "License"); you may not use this file except in compliance with
+# the License. You may obtain a copy of the License at
+# http://www.mozilla.org/MPL/2.0/
+#
+# Software distributed under the License is distributed on an "AS IS" basis,
+# WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+# for the specific language governing rights and limitations under the
+# License.
+#
+# The Original Code is OMA standalone.
+#
+# The Initial Developer of the Original Code is CBRG Research Group; 
+# ETH Zurich; Switzerland.
+# Portions created by the Initial Developer are Copyright (C) 2005-2013
+# the Initial Developer. All Rights Reserved.
+#
+# Contributor(s):
+#   Christophe Dessimoz <cdessimoz@inf.ethz.ch>
+#   Adrian Altenhoff <adrian.altenhoff@inf.ethz.ch>
+#   Stefan Zoller <stefan.zoller@inf.ethz.ch>
+#   Adrian Schneider <adrian.schneider@inf.ethz.ch>
+#   Alexander Roth <alexander.roth@inf.ethz.ch>
+#   Gaston Gonnet <gonnet@inf.ethz.ch>
+#
+# ***** END LICENSE BLOCK *****
+
+
+GOsuper := proc(term) return(remember(GOsuperclassR(term))) end:
+GOsub := proc(term) return(remember(GOsubclassR(term))) end:
+
+parseEntryAnnotations := proc (annotations:string, evCodes, refCodes)
+    # Parsing the annotation string. Parent annotations are NOT included.
+    
+    # e.g., evCodes := ['IEA', 'EXP', 'IDA', 'IPI', 'IMP', 'IGI', 'IEP']:
+    # e.g., refCodes := ['GO_REF:002', 'GO_REF:003', 'GO_REF:004', 'GO_REF:023']:
+    
+    if annotations = '' then
+        return ([]):
+    fi:
+    
+    filteredAnnotations := []:
+    
+    for a in annotations do
+    
+        a := SearchDelim (';', a): 
+        
+        for b in a do
+            b := SearchDelim('@', b):
+            oneGO := trim(b[1]):
+            evidence := op (eval (parse (b[2])));
+            
+            for c in SearchAllArray (evidence[1], evCodes) do
+                # If there is no hit, this loop is not executed. 
+                
+                if evidence[1] = 'IEA' then
+                    for oneR in evidence [2] do
+                        if length (SearchAllArray (oneR, refCodes)) > 0 then
+                            filteredAnnotations := append (filteredAnnotations, oneGO):
+                            break: # One Reference code is enough to support an annotation
+                        fi:
+                    od:
+                else
+                    filteredAnnotations := append (filteredAnnotations, oneGO):
+                fi:
+            od: 
+            
+        od:
+        
+    od:
+    
+    return (filteredAnnotations):
+    
+end:
+
+# When running to develop and test annotation pipeline, start by downloading the
+# all against all files from the OMA web browser.
+# This gives the full OMA version along with the files.
+
+# Next, run
+# ReadProgram('parameters.drw'):
+# Finally, copy the code in the OMA.drw file, up to the ESPRIT part.
+
+# What follows uses the above data to get the annotations via homology.
+
+FunctionViaHomology := proc()
+    # Which evidence and reference codes do we use to propagate annotations
+    # based on homology?
+    inclEvCodes := ['EXP', 'IDA', 'IPI', 'IMP', 'IGI', 'IEP']:
+    inclRefCodes := []: # If there is no IEA evidence code included, this does not make a difference
+    
+    # loop through all homologous Pair objects
+    for X to NG do 
+        # list storing the annotations from homologous pairs.
+        goFunctions := CreateArray(1..GS[genomes[X],TotEntries], []):
+    
+        for Y to NG do 
+            DB := DBs[Y];
+            for x1 to length(BestMatch[X,Y]) do
+                if length(BestMatch[X,Y,x1])=0 then next fi;
+                
+                for pair in decompress(BestMatch[X,Y,x1]) do
+                    yEntry := Entry(pair['Entry']);
+                    yBasedFunctions := SearchTag('GO', yEntry);
+                    
+                    inferredA := parseEntryAnnotations(yBasedFunctions, inclEvCodes, inclRefCodes):
+                    
+                    if length (inferredA) > 0 then
+                        goFunctions[x1] := append(goFunctions[x1], op(inferredA)); 
+                    fi:
+                od:
+            od:
+        od:
+    
+        # now all the possible functions through Homology have been collected. 
+        # we next remove the existing annotations from the infered ones and 
+        # only keep the most specific terms.
+        
+    
+        # and now dump the annotations to a file.
+    od:
+
+end:

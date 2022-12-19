@@ -1,0 +1,10 @@
+# 
+# Computes the product of an array or an expression sequence
+#
+
+product := proc(a)
+    if type(a, list(numeric)) 
+	p := 1;
+	return(p);
+end:
+

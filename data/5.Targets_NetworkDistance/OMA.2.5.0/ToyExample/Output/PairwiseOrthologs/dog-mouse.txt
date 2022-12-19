@@ -1,0 +1,6 @@
+# Format: Protein 1<tab>Protein 2<tab>Protein ID1<tab>ProteinID2<tab>Orthology type<tab>OMA group (if any)
+# Every pair is listed only once, and in no particular order.
+# The map between sequence number and ID are given
+# in the file "Map-SeqNum-ID.map
+8	20	ENSCAFG00000024597	ENSMUSP00000097490	1:1	13
+10	21	ENSCAFP00000000844	ENSMUSP00000024565	1:1	6

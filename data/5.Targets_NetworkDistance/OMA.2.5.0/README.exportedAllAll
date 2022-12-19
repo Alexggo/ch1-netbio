@@ -1,0 +1,6 @@
+Together with this OMA Standalone release you downloaded the following 2 
+genomes and their precomputed all-against-all alignments:
+  - ECOBW: Escherichia coli (strain K12 / MC4100 / BW2952) (DB release: 09-FEB-2010 (Rel. 117, Last updated, Version 8))
+  - SALT1: Salmonella typhimurium (strain 14028s / SGSC 2262) (DB release: 18-NOV-2009 (Rel. 102, Last updated, Version 1))
+The genome files are stored in fasta format in the folder '/DB'. 
+The Alignments are stored in '/Cache/AllAll'.

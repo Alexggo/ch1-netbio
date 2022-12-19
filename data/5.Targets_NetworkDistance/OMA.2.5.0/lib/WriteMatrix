@@ -1,0 +1,101 @@
+# ***** BEGIN LICENSE BLOCK *****
+# Version: MPL 2.0
+#
+# The contents of this file are subject to the Mozilla Public License Version
+# 2.0 (the "License"); you may not use this file except in compliance with
+# the License. You may obtain a copy of the License at
+# http://www.mozilla.org/MPL/2.0/
+#
+# Software distributed under the License is distributed on an "AS IS" basis,
+# WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+# for the specific language governing rights and limitations under the
+# License.
+#
+# The Original Code is OMA standalone.
+#
+# The Initial Developer of the Original Code is CBRG Research Group; 
+# ETH Zurich; Switzerland.
+# Portions created by the Initial Developer are Copyright (C) 2005-2013
+# the Initial Developer. All Rights Reserved.
+#
+# Contributor(s):
+#   Christophe Dessimoz <cdessimoz@inf.ethz.ch>
+#   Adrian Altenhoff <adrian.altenhoff@inf.ethz.ch>
+#   Stefan Zoller <stefan.zoller@inf.ethz.ch>
+#   Adrian Schneider <adrian.schneider@inf.ethz.ch>
+#   Alexander Roth <alexander.roth@inf.ethz.ch>
+#   Gaston Gonnet <gonnet@inf.ethz.ch>
+#
+# ***** END LICENSE BLOCK *****
+
+module external WriteMatrix, WriteGroups, WriteProfileFromOGs, WriteProfileFromHOGs;
+
+WriteMatrix := proc(Ort:matrix(numeric), fname:string)
+    # Store the groups of orthologs
+    OpenWriting(fname);
+    print('\# The groups of orthologs are given as matrix with group per row', 
+         '\# and one genome per tab-separated column. Numbers refer to',
+         '\# entry number as listed in the file "Map-SeqNum-id.map.',
+         '\# Alternatively, use the OrthologousGroup.txt representation.');
+    prints(ConcatStrings(genomes,'\t'));
+    for r to length(Ort) do
+        prints(ConcatStrings(zip(string(Ort[r])),'\t'));
+    od;
+    OpenWriting(previous);
+end:
+
+WriteGroups := proc(Ort, fname)
+    OpenWriting(fname);
+    print('\# The groups of orthologs are given as one per row, starting',
+          '\# with a group identifier, followed by all group members, all',
+          '\# separated by tabs. For a more compact representation, use the',
+          '\# OrthologousMatrix.txt representation.');
+    for r to length(Ort) do
+        printf('OMA%05d',r);
+        for l to NG do
+            if Ort[r,l] <> 0 then
+                printf('\t%s:%s',genomes[l],IDtable[l,Ort[r,l]]);
+            fi;
+        od;
+        printf('\n');
+    od;
+    OpenWriting(previous);
+end:
+
+WriteProfileFromHOGs := proc(HOGs, fname)
+    OpenWriting(fname);
+    print('\# The phyletic profiles are given as one HOG (at its root level)',
+          '\# per row, starting with a group identifier, followed by the number',
+          '\# of entries per species in the group as columns. The first row',
+          '\# contains the species for each column.');
+    printf('Group\t%s\n', ConcatStrings(genomes, '\t'));
+    Goff := CreateArray(1..NG+1):
+    for i to NG do Goff[i+1] := Goff[i] + GS[genomes[i],TotEntries] od:
+    for hognr to length(HOGs) do
+        hog := HOGs[hognr];
+        cnts := CreateArray(1..NG):
+        for eNr in indets(hog, posint) do
+            g := SearchOrderedArray(eNr-1, Goff);
+            cnts[g] := cnts[g] + 1;
+        od:
+        printf('HOG%05d\t%s\n', hognr, ConcatStrings(zip(string(cnts)),'\t'));
+    od:
+    OpenWriting(previous):
+end:
+
+WriteProfileFromOGs := proc(OGs, fname)
+    OpenWriting(fname);
+    print('\# The phyletic profiles are given as one OMA Group per row, starting',
+          '\# with a group identifier, followed by a presents/absents indicator',
+          '\# (i.e. 0 := absent, 1: present) per species in the group as columns.',
+          '\# The first row contains the species for each column.');
+    printf('Group\t%s\n', ConcatStrings(genomes, '\t'));
+    for grpnr to length(OGs) do
+        og := OGs[grpnr];
+        profile := [sprintf('OMA%05d', grpnr), seq(If(z>0,'1','0'), z=og)];
+        print(ConcatStrings(profile,'\t'));
+    od:
+    OpenWriting(previous):
+end:
+
+end: #module

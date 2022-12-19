@@ -1,0 +1,140 @@
+#
+#	Experimental code for a new distance computation for
+#	Align.
+#
+#	Gaston H Gonnet (July 30th, 2009)
+#
+
+Set(gc=5e7):
+SetRandSeed():
+wdir := '/home/darwin/v2/source/bio-recipes/Orthologues/':
+ReadProgram( wdir . 'lib/darwinit' );
+GS := GenomeSummaries:
+CreateDayMatrices():
+
+gen1 := CANAL;  db1 := ReadDb(GenomeFileName[gen1]);
+gen2 := LACBI;  db2 := ReadDb(GenomeFileName[gen2]);
+
+als := [
+  [200, 11, 2858.722511, 96, 380..1720, 1..1170, 17.05298318],
+  [200, 698, 4816.690281, 98, 61..1980, 95..2108, 10.44191375],
+  [5519, 1665, 5961.53736, 119, 8..3076, 30..3124, 9.46880374],
+  [4945, 3755, 649.4619107, 161, 660..1348, 786..1518, 81.28524975],
+  [297, 1971, 888.8085834, 179, 56..1402, 124..1393, 55.83299323],
+  [4020, 11501, 1149.715227, 183, 938..2361, 1104..2570, 51.5617434],
+  [2978, 4062, 658.2201301, 185, 246..1352, 11..1143, 72.5540107],
+  [4010, 14427, 497.163869, 187, 863..1811, 1181..2078, 88.85654664],
+NULL]:
+
+PamPoint := proc(
+	DayMrange:posint..posint,	# DayMatrix range where this aligment is valid
+	DayMatrix:DayMatrix,		# Dayhoff matrix used for alignment
+	Score:numeric,			# score of alignment at DayMatrix
+	Seq1:string,			# matched sequence 1
+	Seq2:string,			# matched sequence 2
+	AlSeq1:string,			# Aligned sequence 1
+	AlSeq2:string,			# Aligned sequence 2
+	MaxScore:numeric,		# Maximum score for this alignment
+	MaxDist:positive,		# Pam distance at maximum score
+	MaxVar:positive			# distance variance of this alignment
+)
+if nargs <> 10 then error('invalid number of arguments') fi;
+noeval(procname(args)) end:
+CompleteClass(PamPoint);
+
+
+z := als[1];
+DB := db1;  s1 := Sequence(Entry(z[1]));
+DB := db2;  s2 := Sequence(Entry(z[2]));
+al := Align(s1,s2,SearchDayMatrix(z[4],DMS));
+
+MakePamPoint := proc( s1:string, s2:string, ipam:posint )
+  dm := DMS[ipam];
+  dp := DynProgScore(s1,s2,dm);
+  dps := DynProgStrings( Alignment(s1[dp[2]],s2[dp[3]],dp[1],dm,0,0,{Local}) );
+  ep := EstimatePam(dps[2],dps[3],DMS);
+  PamPoint( ipam..ipam, dm, dp[1], s1[dp[2]], s2[dp[3]], dps[2],
+	dps[3], op(ep) );
+end:
+
+
+SearchIndMatrix := proc( pam, DMS )
+lo := 0;  hi := length(DMS)+1;
+while hi-lo > 1 do
+    j := round( (hi+lo)/2 );
+    if DMS[j,PamDistance] <= pam then lo := j else hi := j fi
+od;
+if lo=0 then 1
+elif lo = length(DMS) then lo
+elif |DMS[lo,PamDistance]-pam| < |DMS[hi,PamDistance]-pam| then lo else hi fi
+end:
+
+i35 := SearchIndMatrix(35,DMS);
+i300 := SearchIndMatrix(300,DMS);
+
+
+###############################################
+# Make a sequential pass refine the PamPoints #
+###############################################
+
+OnePass := proc( PamPoints:list(PamPoint) ) -> list(PamPoint);
+if PamPoints = [] then return( [ MakePamPoint(s1,s2,i35) ] ) fi;
+
+TopScore := max(seq(x[MaxScore],x=PamPoints));
+
+r := [];
+###############################
+# special processing of first #
+###############################
+pp1 := PamPoints[1];
+if pp1[DayMrange,1] > i35 or
+   pp1[MaxDist] < DMS[pp1[DayMrange,1],PamDistance] then
+    if pp1[DayMrange,1] > i35 then
+	 new := MakePamPoint(s1,s2,i35)
+    else j := SearchIndMatrix(pp1[MaxDist],DMS);
+	 j := 2*j - pp1[DayMrange,1];
+	 if j=pp1[DayMrange,1] then new := pp1
+	 else new := MakePamPoint(s1,s2,max(1,j)) fi
+    fi;
+    if new[MaxScore]=pp1[MaxScore] and new[MaxVar]=pp1[MaxVar] then
+	 pp1[DayMrange,1] := new[DayMrange,1]
+    else r := [new] fi
+fi;
+
+##################################
+# process all intermediate pairs #
+##################################
+for i to length(PamPoints)-1 do
+    pp1 := PamPoints[i];  pp2 := PamPoints[i+1];
+    assert( pp1[MaxScore] <> pp2[MaxScore] );
+    gap := pp2[DayMrange,1] - pp1[DayMrange,2];
+
+    if gap < 10 then # do nothing, gap is too small
+	 r := append(r,pp1);
+	 next
+
+    if gap > 100 then # too large, always divide
+    elif ... then
+    fi;
+    new := MakePamPoint(s1,s2, round( (pp2[DayMrange,1]+pp1[DayMrange,2])/2 ));
+    if pp1[MaxScore] = new[MaxScore] then
+	 pp1[DayMrange,2] := new[DayMrange,1];
+	 r := append(r,pp1);
+    elif pp2[MaxScore] = new[MaxScore] then
+	 pp2[DayMrange,1] := new[DayMrange,2];
+	 r := append(r,pp1);
+    else r := append(r,pp1,new) fi
+
+od;
+
+##################################
+# special processing of the last #
+##################################
+pp1 := PamPoints[-1];
+if .... then
+fi;
+
+r
+end:
+
+

@@ -206,7 +206,7 @@ adj <-  future_apply(comb,1,function(edges){
                  v1 = edges[1], v2 = edges[2])
 })
 
-# Calculate EV centrality
+# Calculate eigenvector centrality
 evcentr <- evcent(list_graphs[[i]])$vector
 
 net_results <- data.frame(N1=comb[,1],
@@ -226,7 +226,7 @@ colnames(index2) <- c("KEGG2","N2")
 a <- left_join(net_results,index1,by="N1")
 b <- left_join(a,index2,by="N2")
 
-# Add EVC
+# Add eigenvector centrality
 for (j in 1:dim(b)[1]){
   K1 <- b[j,10]
   b[j,12] <- evcentr[K1]

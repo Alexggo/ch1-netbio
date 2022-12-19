@@ -43,9 +43,9 @@ short_str <-   str_split(strains,"_") |> map_chr(`[`,3)
 
 y_axis <- c("Minimum path length between connected protein targets",
             "K edge connectivity between connected protein targets",
-            "Average node degree between protein targets",
-            "Average node betweeness centrality between protein targets",
-            "Average node eigenvector centrality between protein targets",
+            "Average node degree",
+            "Average node betweeness centrality",
+            "Average node eigenvector centrality",
             "Average sigma rate per DDI")
 y_var <- c("mean.path.length","mean.k.edge","mean.mean.degree",
            "mean.mean.bet","mean.mean.EVC","mean.sigma_all")
@@ -105,12 +105,10 @@ plot_net_int <- function(net_sel,var_sel,str_name){
 ```
 
 ```{r}
-# Results for ecr
+# Results each strain
 netint <- list()
 
-# Results per strain:
-
-# Results for ebw
+# Results per strain
 netint[[1]] <- wrap_plots(plot_net_int(1,1,1),plot_net_int(3,1,1),
            plot_net_int(1,2,1),plot_net_int(3,2,1),
            plot_net_int(1,3,1),plot_net_int(3,3,1),
@@ -163,6 +161,69 @@ netint[[6]] <- wrap_plots(plot_net_int(1,1,6),plot_net_int(3,1,6),
            plot_net_int(1,6,6),plot_net_int(3,6,6),
            nrow = 2, byrow = FALSE)
 ```
+
+```{r}
+# results per network parameter for all strains
+netint_net <- list()
+
+netint_net[[1]] <- wrap_plots(
+           plot_net_int(1,1,1),plot_net_int(3,1,1),
+           plot_net_int(1,1,2),plot_net_int(3,1,2),
+           plot_net_int(1,1,3),plot_net_int(3,1,3),
+           plot_net_int(1,1,4),plot_net_int(3,1,4),
+           plot_net_int(1,1,5),plot_net_int(3,1,5),
+           plot_net_int(1,1,6),plot_net_int(3,1,6),
+           nrow = 2, byrow = FALSE)
+
+netint_net[[2]] <- wrap_plots(
+           plot_net_int(1,2,1),plot_net_int(3,2,1),
+           plot_net_int(1,2,2),plot_net_int(3,2,2),
+           plot_net_int(1,2,3),plot_net_int(3,2,3),
+           plot_net_int(1,2,4),plot_net_int(3,2,4),
+           plot_net_int(1,2,5),plot_net_int(3,2,5),
+           plot_net_int(1,2,6),plot_net_int(3,2,6),
+           nrow = 2, byrow = FALSE)
+
+netint_net[[3]] <- wrap_plots(
+           plot_net_int(1,3,1),plot_net_int(3,3,1),
+           plot_net_int(1,3,2),plot_net_int(3,3,2),
+           plot_net_int(1,3,3),plot_net_int(3,3,3),
+           plot_net_int(1,3,4),plot_net_int(3,3,4),
+           plot_net_int(1,3,5),plot_net_int(3,3,5),
+           plot_net_int(1,3,6),plot_net_int(3,3,6),
+           nrow = 2, byrow = FALSE)
+
+netint_net[[4]] <- wrap_plots(
+           plot_net_int(1,4,1),plot_net_int(3,4,1),
+           plot_net_int(1,4,2),plot_net_int(3,4,2),
+           plot_net_int(1,4,3),plot_net_int(3,4,3),
+           plot_net_int(1,4,4),plot_net_int(3,4,4),
+           plot_net_int(1,4,5),plot_net_int(3,4,5),
+           plot_net_int(1,4,6),plot_net_int(3,4,6),
+           nrow = 2, byrow = FALSE)
+
+netint_net[[5]] <- wrap_plots(
+           plot_net_int(1,5,1),plot_net_int(3,5,1),
+           plot_net_int(1,5,2),plot_net_int(3,5,2),
+           plot_net_int(1,5,3),plot_net_int(3,5,3),
+           plot_net_int(1,5,4),plot_net_int(3,5,4),
+           plot_net_int(1,5,5),plot_net_int(3,5,5),
+           plot_net_int(1,5,6),plot_net_int(3,5,6),
+           nrow = 2, byrow = FALSE)
+
+netint_net[[6]] <- wrap_plots(
+           plot_net_int(1,6,1),plot_net_int(3,6,1),
+           plot_net_int(1,6,2),plot_net_int(3,6,2),
+           plot_net_int(1,6,3),plot_net_int(3,6,3),
+           plot_net_int(1,6,4),plot_net_int(3,6,4),
+           plot_net_int(1,6,5),plot_net_int(3,6,5),
+           plot_net_int(1,6,6),plot_net_int(3,6,6),
+           nrow = 2, byrow = FALSE)
+
+
+
+```
+
 
 # Interpretation of results.
 

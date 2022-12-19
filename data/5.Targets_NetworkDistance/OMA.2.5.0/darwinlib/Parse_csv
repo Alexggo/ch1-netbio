@@ -1,0 +1,110 @@
+################################################################################
+########   Function to parse an entire csv file in a standard way   ############
+################################################################################
+#
+#	Parse an entire file using a given separator (comma by default) and a
+#	given quoting character (double quotes by default).
+#
+#	Rules (from Wikipedia): RFC 4180 formalized CSV. It defines the MIME
+#	type "text/csv", and CSV files that follow its rules should be very
+#	widely portable. Among its requirements:
+
+#	MS-DOS-style lines that end with (CR/LF) characters (optional for the
+#	last line).
+
+#	An optional header record (there is no sure way to detect whether it is
+#	present, so care is required when importing).  Each record "should"
+#	contain the same number of comma-separated fields.
+
+#	Any field may be quoted (with double quotes).  Fields containing a
+#	line-break, double-quote, and/or commas should be quoted. (If they are
+#	not, the file will likely be impossible to process correctly).
+
+#	A (double) quote character in a field must be represented by two
+#	(double) quote characters.
+#
+#	state - 0 - beginning of a field
+#		1 - end of a field
+#		2 - inside a quoted field
+
+#	Gaston H. Gonnet
+#	(recoded due to loss of MacBookAir Fri Nov 25 17:12:25 UYT 2016)
+#
+################################################################################
+
+Parse_csv := proc( s:string, sep:string, quo:string )
+if nargs=1 then return(procname(s,',','"'))
+elif nargs=2 then return(procname(s,sep,'"'))
+elif nargs <> 3 then error('invalid number of arguments') fi;
+assert( length(sep) = 1 and length(quo) = 1 );
+assert( sep <> '\n' );
+
+if SearchString( '\r\n', s ) >= 0 then # handle MS-DOS end of lines
+    return( procname( ConcatStrings( SearchDelim( '\r\n', s ), '\n' ), sep, quo ))
+fi;
+
+f := r := [];  st := 0;
+ls := length(s);
+for i to ls do
+    if st = 0 then	# beginning of a field
+	 if s[i] = sep then
+	      r := append(r,'')
+	 elif s[i] = quo then
+	      kq := SearchString( quo, i+s );
+	      if kq = -1 then error('unterminated quoted field near pos', i ) fi;
+	      assert( s[i+kq+1] = quo );
+	      if i+kq+2 > ls or s[i+kq+2] <> quo then
+		   r := append( r, s[i+1..i+kq] );
+		   i := i+kq+1;
+		   st := If( i >= ls, 0, 1 );
+	      else qs := [ s[i+1..i+kq+1] ];
+		   st := 2;
+		   i := i+kq+2;
+	      fi;
+	 else kn := SearchString( '\n', i-1+s ) - 1;
+	      if kn = -2 then kn := 1e10 fi;
+	      ks := SearchString( sep, i+s );
+	      if ks = -1 then ks := 1e10 fi;
+	      if kn < ks then
+		   assert( s[i+kn+1] = '\n' );
+		   f := append( f, append( r, s[i..i+kn] ));
+		   r := [];
+		   i := i+kn+1;
+	      elif ks < kn then
+		   assert( s[i+ks+1] = sep );
+	      	   r := append( r, s[i..i+ks] );
+		   i := i+ks+1;
+	      elif kn = 1e10 then
+		   # end of line and end of file
+		   f := append( f, append( r, s[i..-1] ));
+		   r := [];
+		   break
+	      else error(niy421)
+	      fi
+	 fi
+    elif st = 1 then	# end of a field
+	 st := 0;
+	 if s[i] = sep then
+	 elif s[i] = '\n' then
+	      f := append(f,r);
+	      r := []
+	 else printf( 'text just before the problem: %A\n', s[ max(1,i-30)..i ] );
+	      printf( 'text just after the problem: %A\n', s[ i+1 .. min(ls,i+30) ] );
+	      error('field does not start correctly near pos',i) fi;
+    elif st = 2 then	# inside a quoted field
+	 kq := SearchString( quo, i+s );
+	 if kq = -1 then error('unterminated quoted field near pos', i ) fi;
+	 assert( s[i+kq+1] = quo );
+	 if i+kq+2 > ls or s[i+kq+2] <> quo then
+	      r := append( r, ConcatStrings( append( qs, s[i..i+kq]), '') );
+	      i := i+kq+1;
+	      st := If( i >= ls, 0, 1 );
+	 else qs := append( qs, s[i..i+kq+1]);
+	      i := i+kq+2
+	 fi
+    else error(snh867) fi;
+od;
+assert( st = 0 );
+if r <> [] then append(f,r) else f fi;
+end:
+
