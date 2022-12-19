@@ -19,7 +19,7 @@ set.seed(1234)
 file <- file.path("data/1.processed","Broc2018_set2_set.csv") #"Broc2018_maindataset.csv","Broc2018_sen_set.csv","Broc2018_set2_set.csv"
 print(Sys.time())
 #Remove DDI with at least one NA.
-dataset <- read_csv(file) %>%
+dataset <- read_csv2(file) %>%
   filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau))
 
 mat_red <- dataset %>% 
@@ -53,6 +53,6 @@ m.list1 <- lapply(seq_along(ptsne.ppx), function(p) {
   m.ppx
 })
 
-save(m.list1, file = paste0('results/set/tSNE_',args[1],"_",args[2],'.RData'))
+save(m.list1, file = paste0('results/set_inc/tSNE_',args[1],"_",args[2],'.RData'))
 
 print(Sys.time())
