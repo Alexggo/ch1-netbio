@@ -36,7 +36,7 @@ df_target_tot <- read_csv(file.path("data/5.Targets_NetworkDistance",
 
 ```{r}
 # Minimum path ~ interaction type (ebw). 
-my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism"),c("Synergy","All"),c("Additivity","All"),c("Antagonism","All"))
+my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism"))
 net <- df_DDI_tot$network |> unique() |> sort()
 strains <- c("int_sign_ebw","int_sign_ecr","int_sign_seo","int_sign_stm","int_sign_pae","int_sign_pau")
 short_str <-   str_split(strains,"_") |> map_chr(`[`,3)
@@ -68,16 +68,9 @@ plot_net_int <- function(net_sel,var_sel,str_name){
       bot1 <- min_k - len_k*0.1
       bot2 <- min_k - len_k*0.2
       
-    df1 <- df_DDI_tot |> filter(network==net[net_sel]) |> 
+    df <- df_DDI_tot |> filter(network==net[net_sel]) |> 
     filter(mean.path.length!="Inf") |>
       select(strains[str_name],y_var[var_sel],network)  
-    
-    df2 <- df1
-    colnames(df1)[1] <- "int_type"
-    colnames(df2)[1] <- "int_type"
-    df2$int_type <- "All"
-    df <- rbind(df1,df2)
-    colnames(df)[2] <- "variable_name"
     
     net_name <- df$network |> unique()
       

@@ -122,14 +122,13 @@ set2 <- sub |> filter((SR_ebw_D1=="S"&SR_ebw_D2=="S")|(SR_ecr_D1=="S"&SR_ecr_D2=
                         (SR_seo_D1=="S"&SR_seo_D2=="S")|(SR_stm_D1=="S"&SR_stm_D2=="S")|
                         (SR_pae_D1=="S"&SR_pae_D2=="S")|(SR_pau_D1=="S"&SR_pau_D2=="S"))
 
-set2.1 <- set2 |> filter(!drug_pair %in% only_sen$drug_pair)
 
 only_sen_DDI <- only_sen |> select(drug_pair) |> pull()
 
-set2.1_DDI <- set2.1 |> select(drug_pair) |> pull()
+set2 <- set2 |> select(drug_pair) |> pull()
 
 raw |> filter(drug_pair %in% only_sen_DDI) |> 
-  write.csv("data/1.processed/Broc2018_sen_set.csv",row.names = FALSE)
+  write_csv("data/1.processed/Broc2018_sen_set.csv")
 
-raw |> filter(drug_pair %in% set2.1_DDI) |> 
-  write.csv("data/1.processed/Broc2018_set2_set.csv",row.names = FALSE)
+raw |> filter(drug_pair %in% set2) |> 
+  write_csv2("data/1.processed/Broc2018_set2_set.csv")
