@@ -6,37 +6,37 @@ p_load(bigMap,bigmemory,tidyverse,rlist)
 #file <- file.path("data/1.processed/Broc2018_maindataset.csv")
 
 file <- file.path("data/1.processed/Broc2018_set2_set.csv")
-dataset <- read_csv(file) %>%
+dataset <- read_csv2(file) %>%
   filter(!is.na(ebw)&!is.na(ecr)&!is.na(seo)&!is.na(stm)&!is.na(pae)&!is.na(pau))
 
 # Merge tsne
-# load(file="results/set/tSNE_5_255.RData")
+# load(file="results/set_inc/tSNE_5_255.RData")
 # f1 <- m.list1
-# load(file="results/set/tSNE_265_505.RData")
+# load(file="results/set_inc/tSNE_265_505.RData")
 # f2 <- m.list1
-# load(file="results/set/tSNE_515_755.RData")
+# load(file="results/set_inc/tSNE_515_755.RData")
 # f3 <- m.list1
-# load(file="results/set/tSNE_765_1005.RData")
+# load(file="results/set_inc/tSNE_765_1005.RData")
 # f4 <- m.list1
-# load(file="results/set/tSNE_1015_1255.RData")
+# load(file="results/set_inc/tSNE_1015_1255.RData")
 # f5 <- m.list1
-# load(file="results/set/tSNE_1265_1505.RData")
+# load(file="results/set_inc/tSNE_1265_1505.RData")
 # f6 <- m.list1
-# load(file="results/set/tSNE_1515_1755.RData")
+# load(file="results/set_inc/tSNE_1515_1755.RData")
 # f7 <- m.list1
-# load(file="results/set/tSNE_1765_2005.RData")
+# load(file="results/set_inc/tSNE_1765_2005.RData")
 # f8 <- m.list1
-# load(file="results/set/tSNE_2015_2255.RData")
+# load(file="results/set_inc/tSNE_2015_2255.RData")
 # f9 <- m.list1
-# load(file="results/set/tSNE_2265_2505.RData")
+# load(file="results/set_inc/tSNE_2255_2505.RData")
 # f10 <- m.list1
 # big_list <- c(f1,f2,f3,f4,f5,f6,f7,f8,f9,f10)
-# save(big_list,file="results/set/all_tsne.RData")
+# save(big_list,file="results/set_inc/all_tsne.RData")
 
 
 # Explore a list of perplexities
 # Load lists
-load(file="results/set/all_tsne.RData")
+load(file="results/set_inc/all_tsne.RData")
 ptsne.ppx <- seq(5,2505,10)
 
 #Make figure
@@ -61,6 +61,7 @@ dev.off()
 
 # ALL DDI. Good tsnes between 205-1455. Indexes 21-146
 # SET2. Good tsnes between 115-455. Indexes 12-46
+# SET_INC. Good tsnes between 145-455. Index 15-46
 
 #395,195,245
 
@@ -104,6 +105,6 @@ df <- dataset%>%mutate(across(where(is.character), as.factor)) |>
 category <- df |> select(1:86) |> as.matrix()
 bdm.qMap(big_list[[1]], data = category, qMap.cex = 1)
 
-write.csv(full_dataset,"data/3.InteractionScores_tSNE/all_ppx_large_set2.csv",row.names = F)
+write.csv(full_dataset,"data/3.InteractionScores_tSNE/all_ppx_large_incset2.csv",row.names = F)
 
 #write.csv(full_dataset,"data/3.InteractionScores_tSNE/all_ppx_large.csv",row.names = F)

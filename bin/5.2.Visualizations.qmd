@@ -19,12 +19,12 @@ font_size=2
 
 df_DDI_tot <- read_csv2(file.path("data/5.Targets_NetworkDistance",
                                  "df_DDI_metrics.csv")) |> 
-  mutate(int_sign_ebw=factor(int_sign_ebw,levels=c("Synergy","Additivity","Antagonism"))) |> 
-  mutate(int_sign_ecr=factor(int_sign_ecr,levels=c("Synergy","Additivity","Antagonism"))) |> 
-  mutate(int_sign_stm=factor(int_sign_stm,levels=c("Synergy","Additivity","Antagonism"))) |> 
-  mutate(int_sign_seo=factor(int_sign_seo,levels=c("Synergy","Additivity","Antagonism"))) |> 
-  mutate(int_sign_pae=factor(int_sign_pae,levels=c("Synergy","Additivity","Antagonism"))) |> 
-  mutate(int_sign_pau=factor(int_sign_pau,levels=c("Synergy","Additivity","Antagonism"))) |> 
+  mutate(int_sign_ebw=factor(int_sign_ebw,levels=c("Synergy","Additivity","Antagonism","Sample_nodes"))) |> 
+  mutate(int_sign_ecr=factor(int_sign_ecr,levels=c("Synergy","Additivity","Antagonism","Sample_nodes"))) |> 
+  mutate(int_sign_stm=factor(int_sign_stm,levels=c("Synergy","Additivity","Antagonism","Sample_nodes"))) |> 
+  mutate(int_sign_seo=factor(int_sign_seo,levels=c("Synergy","Additivity","Antagonism","Sample_nodes"))) |> 
+  mutate(int_sign_pae=factor(int_sign_pae,levels=c("Synergy","Additivity","Antagonism","Sample_nodes"))) |> 
+  mutate(int_sign_pau=factor(int_sign_pau,levels=c("Synergy","Additivity","Antagonism","Sample_nodes"))) |> 
   mutate(connection_onoff=ifelse(mean.k.edge==0,"FALSE","TRUE")) |> 
   mutate(connection_onoff=factor(connection_onoff,levels = c("TRUE","FALSE")))
 
@@ -36,17 +36,17 @@ df_target_tot <- read_csv(file.path("data/5.Targets_NetworkDistance",
 
 ```{r}
 # Minimum path ~ interaction type (ebw). 
-my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism"))
+my_comparisons <- list( c("Synergy", "Additivity"), c("Additivity", "Antagonism"), c("Synergy", "Antagonism"),c("Synergy", "Sample_nodes"), c("Additivity", "Sample_nodes"), c("Antagonism", "Sample_nodes"))
 net <- df_DDI_tot$network |> unique() |> sort()
 strains <- c("int_sign_ebw","int_sign_ecr","int_sign_seo","int_sign_stm","int_sign_pae","int_sign_pau")
 short_str <-   str_split(strains,"_") |> map_chr(`[`,3)
 
 y_axis <- c("Minimum path length between connected protein targets",
             "K edge connectivity between connected protein targets",
-            "Average node degree between protein targets",
-            "Average node betweeness centrality between protein targets",
-            "Average node eigenvector centrality between protein targets",
-            "Average sigma rate per DDI")
+            "Average node degree",
+            "Average betweeness centrality",
+            "Average eigenvector centrality",
+            "Average sigma rate")
 y_var <- c("mean.path.length","mean.k.edge","mean.mean.degree",
            "mean.mean.bet","mean.mean.EVC","mean.sigma_all")
 
@@ -64,13 +64,15 @@ plot_net_int <- function(net_sel,var_sel,str_name){
         min()
       
       len_k <- max_k - min_k
-      top <- max_k +len_k*0.5
+      top <- max_k +len_k*0.7
       bot1 <- min_k - len_k*0.1
       bot2 <- min_k - len_k*0.2
       net_name <- net[net_sel]
+      
+      
     df1 <- df_DDI_tot |> filter(network==net[net_sel]) |> 
-    filter(mean.path.length!="Inf") |>
-      select(strains[str_name],y_var[var_sel],network)  
+      select(strains[str_name],y_var[var_sel],network)  |> 
+          filter(y_var[var_sel]!="Inf")
     
     colnames(df1) <- c("int_type","variable_name","network")
     
@@ -99,63 +101,25 @@ plot_net_int <- function(net_sel,var_sel,str_name){
 ```
 
 ```{r}
-# Results for ecr
-netint <- list()
-
 # Results per strain:
-
-# Results for ebw
-netint[[1]] <- wrap_plots(plot_net_int(1,1,1),plot_net_int(3,1,1),
-           plot_net_int(1,2,1),plot_net_int(3,2,1),
-           plot_net_int(1,3,1),plot_net_int(3,3,1),
-           plot_net_int(1,4,1),plot_net_int(3,4,1),
-           plot_net_int(1,5,1),plot_net_int(3,5,1),
-           plot_net_int(1,6,1),plot_net_int(3,6,1),
+str_fig <- 1
+fig1_str <- wrap_plots(plot_net_int(1,1,str_fig),plot_net_int(3,1,str_fig),
+           plot_net_int(1,2,str_fig),plot_net_int(3,2,str_fig),
+           plot_net_int(1,3,str_fig),plot_net_int(3,3,str_fig),
+           plot_net_int(1,4,str_fig),plot_net_int(3,4,str_fig),
+           plot_net_int(1,5,str_fig),plot_net_int(3,5,str_fig),
+           plot_net_int(1,6,str_fig),plot_net_int(3,6,str_fig),
            nrow = 2, byrow = FALSE)
 
-netint[[2]] <- wrap_plots(plot_net_int(1,1,2),plot_net_int(3,1,2),
-           plot_net_int(1,2,2),plot_net_int(3,2,2),
-           plot_net_int(1,3,2),plot_net_int(3,3,2),
-           plot_net_int(1,4,2),plot_net_int(3,4,2),
-           plot_net_int(1,5,2),plot_net_int(3,5,2),
-           plot_net_int(1,6,2),plot_net_int(3,6,2),
+var_fig <- 1
+fig1_var <- wrap_plots(plot_net_int(1,var_fig,1),plot_net_int(3,var_fig,1),
+           plot_net_int(1,var_fig,2),plot_net_int(3,var_fig,2),
+           plot_net_int(1,var_fig,3),plot_net_int(3,var_fig,3),
+           plot_net_int(1,var_fig,4),plot_net_int(3,var_fig,4),
+           plot_net_int(1,var_fig,5),plot_net_int(3,var_fig,5),
+           plot_net_int(1,var_fig,6),plot_net_int(3,var_fig,6),
            nrow = 2, byrow = FALSE)
 
-# Results for seo
-netint[[3]] <- wrap_plots(plot_net_int(1,1,3),plot_net_int(3,1,3),
-           plot_net_int(1,2,3),plot_net_int(3,2,3),
-           plot_net_int(1,3,3),plot_net_int(3,3,3),
-           plot_net_int(1,4,3),plot_net_int(3,4,3),
-           plot_net_int(1,5,3),plot_net_int(3,5,3),
-           plot_net_int(1,6,3),plot_net_int(3,6,3),
-           nrow = 2, byrow = FALSE)
-
-# Results for stm
-netint[[4]] <- wrap_plots(plot_net_int(1,1,4),plot_net_int(3,1,4),
-           plot_net_int(1,2,4),plot_net_int(3,2,4),
-           plot_net_int(1,3,4),plot_net_int(3,3,4),
-           plot_net_int(1,4,4),plot_net_int(3,4,4),
-           plot_net_int(1,5,4),plot_net_int(3,5,4),
-           plot_net_int(1,6,4),plot_net_int(3,6,4),
-           nrow = 2, byrow = FALSE)
-
-# Results for pae
-netint[[5]] <- wrap_plots(plot_net_int(1,1,5),plot_net_int(3,1,5),
-           plot_net_int(1,2,5),plot_net_int(3,2,5),
-           plot_net_int(1,3,5),plot_net_int(3,3,5),
-           plot_net_int(1,4,5),plot_net_int(3,4,5),
-           plot_net_int(1,5,5),plot_net_int(3,5,5),
-           plot_net_int(1,6,5),plot_net_int(3,6,5),
-           nrow = 2, byrow = FALSE)
-
-# Results for pau
-netint[[6]] <- wrap_plots(plot_net_int(1,1,6),plot_net_int(3,1,6),
-           plot_net_int(1,2,6),plot_net_int(3,2,6),
-           plot_net_int(1,3,6),plot_net_int(3,3,6),
-           plot_net_int(1,4,6),plot_net_int(3,4,6),
-           plot_net_int(1,5,6),plot_net_int(3,5,6),
-           plot_net_int(1,6,6),plot_net_int(3,6,6),
-           nrow = 2, byrow = FALSE)
 ```
 
 # Interpretation of results.

@@ -80,15 +80,17 @@ drug_mapping <- read.csv("data/5.Targets_NetworkDistance/DrugTargets3_ecoli.csv"
   distinct() |>
   arrange(Drug) |>
   filter(KEGG_eco != "")
-possible_targets <- drug_mapping$KEGG_eco |>
+all_targets <- drug_mapping$KEGG_eco |>
   unique() |> sort()
-#All nodes
-#gr.vert <-   t(combn(names(V(list_graphs[[i]])),2)) 
+all_targets |> length()
+# 27*26/2=351 possible combinations
+ 
 #All combinations of possible target nodes
-gr.vert <- t(combn(possible_targets,2))
-gr.vert_same <- cbind(possible_targets,possible_targets)
+gr.vert <- t(combn(all_targets,2))
+gr.vert_same <- cbind(all_targets,all_targets)
 gr.vert <- rbind(gr.vert,gr.vert_same)
 gr.vert <- gr.vert[,]
+#Expecting maximum of 351+27=378 combinations
 
 # plot networks
 # pdf(file = file.path("networks", "network_graph.pdf"))
@@ -144,24 +146,60 @@ gr.vert <- gr.vert[,]
 ##-----------------------------------------------------------------------------
 # Calculate path.length, k-edge connectivity,
 # and node degree for the possible targets.
+total_sample <- 4950
+S_value1 <- (1+sqrt(8*total_sample+1))/2
+S_value2 <- (1-sqrt(8*total_sample+1))/2
+S_value <- max(S_value1,S_value2)
+S_value <- round(S_value,0)
+print(S_value)
+
 list_path_conn_deg <- list()
 
 for (i in seq_along(list_graphs)) {
   network <- list_graphs[[i]]
   nodes <- V(network) |> names()
   ID <- seq_along(nodes)
-  index <- cbind(nodes,ID) |> as.data.frame() |> 
-    mutate(ID=as.numeric(ID))
+  # For targets
+  index_targets <- cbind(nodes,ID) |> 
+    as.data.frame() |> 
+    mutate(ID=as.numeric(ID)) |> 
+    mutate(target=ifelse(nodes%in%all_targets,TRUE,FALSE)) |> 
+    arrange(desc(target))
   
-  possible_nodes <- gr.vert[,1]
+  targets_in_net <- index_targets |> 
+    filter(target==TRUE) |> 
+    select(ID) |> 
+    unique() |> 
+    pull() |> 
+    sort()
+  L_targets <- length(targets_in_net)
   
-  # Review this part
-  nodes_in_net <- possible_nodes[possible_nodes %in% index$nodes] |> as.data.frame() 
-  colnames(nodes_in_net) <- "nodes"
+  comb_targets <- t(combn(targets_in_net,2))
+  comb_targets |> dim() #net1=45, net2=190,net3=153 target combinations
+
+  # For a small sample of non-targets
+  index_nottargets <- cbind(nodes,ID) |> 
+    as.data.frame() |> 
+    mutate(ID=as.numeric(ID)) |> 
+    mutate(not_target=ifelse(nodes%in%all_targets,FALSE,TRUE)) |> 
+    arrange(desc(not_target))
+  nottargets_in_net <- index_nottargets |> 
+    filter(not_target==TRUE) |> 
+    select(ID) |> 
+    unique() |> 
+    pull() |> 
+    sort() |> 
+    sample(size=S_value,replace = FALSE)
+  comb_nottargets <- t(combn(nottargets_in_net,2))
+  comb_nottargets |> dim() #net1=45, net2=190,net3=153 target combinations
   
-  tab <- left_join(nodes_in_net,index,by="nodes") |> 
-    arrange(ID) |> distinct()
-  comb <- t(combn(tab$ID,2))
+  comb_targets <- cbind(comb_targets,rep(1,L_targets*(L_targets-1)/2))
+  
+  
+  comb_nottargets <- cbind(comb_nottargets,rep(0,S_value*(S_value-1)/2))
+  comb <- rbind(comb_targets,comb_nottargets)
+  
+
   
   # Calculate distance between node combinations
   allpath <- future_apply(comb,1,function(edges){
@@ -211,6 +249,7 @@ for (i in seq_along(list_graphs)) {
   
   net_results <- data.frame(N1=comb[,1],
                             N2=comb[,2],
+                            is.target=comb[,3],
                             path.length=allpath,
                             adjacency=adj,
                             K.edge=kcon,
@@ -218,24 +257,24 @@ for (i in seq_along(list_graphs)) {
                             Degree2=deg2,
                             Between1=bet1,
                             Between2=bet2)
-  index1 <- index
-  colnames(index1) <- c("KEGG1","N1")
-  index2 <- index
-  colnames(index2) <- c("KEGG2","N2")
+  index_targets1 <- index_targets
+  colnames(index_targets1) <- c("KEGG1","N1","is.target.1")
+  index_targets2 <- index_targets
+  colnames(index_targets2) <- c("KEGG2","N2","is.target.2")
   
-  a <- left_join(net_results,index1,by="N1")
-  b <- left_join(a,index2,by="N2")
+  a <- left_join(net_results,index_targets1,by="N1")
+  b <- left_join(a,index_targets2,by="N2")
   
   # Add EVC
   for (j in 1:dim(b)[1]){
-    K1 <- b[j,10]
-    b[j,12] <- evcentr[K1]
+    K1 <- b[j,11]
+    b[j,15] <- evcentr[K1]
     
-    K2 <- b[j,10]
-    b[j,13] <- evcentr[K2]
+    K2 <- b[j,13]
+    b[j,16] <- evcentr[K2]
   }
-  colnames(b)[12] <- "EVC1"
-  colnames(b)[13] <- "EVC2"
+  colnames(b)[15] <- "EVC1"
+  colnames(b)[16] <- "EVC2"
   
   list_path_conn_deg[[i]] <- b |> 
     mutate(Between1=round(Between1,2),
@@ -276,7 +315,10 @@ df_join <- list_path_conn_deg |>
 
 df_join1 <- df_join |>
   lapply(left_join,drug_mapping2, by = "KEGG2") |>
-  lapply(distinct)
+  lapply(distinct) |> 
+  lapply(select,-c("is.target.1","is.target.2")) |> 
+  lapply(mutate,Drug1=ifelse(is.na(Drug1),"Sample_nodes",Drug1)) |> 
+  lapply(mutate,Drug2=ifelse(is.na(Drug2),"Sample_nodes",Drug2))
 
 df_join2 <- list()
 for (j in seq_along(df_join1)){
@@ -295,8 +337,8 @@ for (j in seq_along(df_join1)){
       A <- z$Drug2
       B <- z$Drug1
       
-      df_now[i,25] <- A
-      df_now[i,26] <- B
+      df_now[i,26] <- A
+      df_now[i,27] <- B
       
       A <- z$N2
       B <- z$N1
@@ -307,26 +349,26 @@ for (j in seq_along(df_join1)){
       A <- z$Degree2
       B <- z$Degree1
       
-      df_now[i,6] <- A
-      df_now[i,7] <- B
+      df_now[i,7] <- A
+      df_now[i,8] <- B
       
       A <- z$Between2
       B <- z$Between1
       
-      df_now[i,8] <- A
-      df_now[i,9] <- B
+      df_now[i,9] <- A
+      df_now[i,10] <- B
       
       A <- z$KEGG2
       B <- z$KEGG1
       
-      df_now[i,10] <- A
-      df_now[i,11] <- B
+      df_now[i,11] <- A
+      df_now[i,12] <- B
       
       A <- z$EVC2
       B <- z$EVC1
       
-      df_now[i,12] <- A
-      df_now[i,13] <- B
+      df_now[i,13] <- A
+      df_now[i,14] <- B
       
       print(paste("Row",i,"is rearranged"))
       
@@ -341,21 +383,26 @@ for (j in seq_along(df_join1)){
 df_join3 <- df_join2 |>
   lapply(mutate, DRUG_ID=paste0(Drug1,"-",Drug2)) |>
   lapply(distinct) |>
-  lapply(filter, Drug1 != Drug2) |>
-  lapply(filter, Drug1 < Drug2) |>
-  lapply(drop_na) |>
-  lapply(arrange,DRUG_ID)
+  lapply(arrange,DRUG_ID) |> 
+  lapply(filter,Drug1<Drug2|Drug1=="Sample_nodes")
 
-dist_conn_deg_adj <- lapply(df_join3, inner_join, full_df, by = "DRUG_ID") |>
-  lapply(distinct)
+dist_conn_deg_adj <- lapply(df_join3, left_join, full_df, by = "DRUG_ID") |>
+  lapply(distinct) |> 
+  lapply(mutate,DRUG_ID=ifelse(DRUG_ID=="Sample_nodes-Sample_nodes","Sample_nodes",DRUG_ID)) |> 
+  lapply(mutate,int_sign_ebw=ifelse(is.na(int_sign_ebw),"Sample_nodes",int_sign_ebw)) |> 
+  lapply(mutate,int_sign_ecr=ifelse(is.na(int_sign_ecr),"Sample_nodes",int_sign_ecr)) |>
+  lapply(mutate,int_sign_seo=ifelse(is.na(int_sign_seo),"Sample_nodes",int_sign_seo)) |>
+  lapply(mutate,int_sign_stm=ifelse(is.na(int_sign_stm),"Sample_nodes",int_sign_stm)) |>
+  lapply(mutate,int_sign_pae=ifelse(is.na(int_sign_pae),"Sample_nodes",int_sign_pae)) |>
+  lapply(mutate,int_sign_pau=ifelse(is.na(int_sign_pau),"Sample_nodes",int_sign_pau)) 
 names(dist_conn_deg_adj) <- net
 
 df_target_tot  <- bind_rows(dist_conn_deg_adj, .id = "network") |> 
   mutate(Drug1=Drug1.x,Drug2=Drug2.x) |> 
   select(!c("Drug2.x","Drug1.x","Drug2.y","Drug1.y")) |> 
-  select(network,KEGG_ID,KEGG1,KEGG2,N1,N2,
-         DRUG_ID,Drug1,Drug2,111:116,
-         4:10,13:24,29:110)
+  select(network,KEGG_ID,KEGG1,KEGG2,N1,N2,is.target,
+         DRUG_ID,Drug1,Drug2,112:117,
+         5:11,14:25,30:111)
 
 df_target_tot |> 
   arrange(K.edge) |> 
@@ -371,8 +418,8 @@ df_target_tot |>
 # Since the DDI rate data is calculated per drug combination, we can take the
 # average of network metrics for each unique drug pair.
 
-
-network_values <- df_target_tot  |> 
+network_values_targ <- df_target_tot  |> 
+  filter(DRUG_ID!="Sample_nodes") |> 
   group_by(network,DRUG_ID) |> 
   summarise(mean.path.length = ifelse(mean(path.length,na.rm=TRUE)==Inf,Inf,round(mean(path.length,na.rm=TRUE),significant_figures)),
             mean.k.edge = round(mean(K.edge, na.rm = TRUE),significant_figures),
@@ -391,20 +438,60 @@ network_values <- df_target_tot  |>
   ungroup() |> 
   distinct()
 
-
-## Bind other values from DDI with network values.
-
-df_DDI_tot  <- inner_join(network_values, full_df, by = "DRUG_ID") |>
+df_DDI_targ  <- right_join(full_df,network_values_targ, by = "DRUG_ID") |>
   distinct() |>
   mutate(max.adjacency = as.factor(max.adjacency)) |>
   mutate(connection_onoff =
            ifelse(mean.k.edge == 0, "disconnected", "connected")) |> 
   ungroup() |> 
-  distinct()
-
-df_DDI_tot   |> 
+  distinct() |> 
+  filter(!is.na(Drug1))|> 
   arrange(mean.k.edge) |> 
-  arrange(drug_pair) |> 
+  arrange(DRUG_ID) |> 
+  select(network,DRUG_ID,Drug1,Drug2,SET,
+         87:91,5:86,95:109)
+
+# df_nottarget_tot
+df_nottarget_tot <- df_target_tot |> 
+  filter(DRUG_ID=="Sample_nodes")|> 
+  mutate(DRUG_ID=KEGG_ID)
+
+network_values_nottarg <- df_nottarget_tot |> 
+  group_by(DRUG_ID) |> 
+  summarise(mean.path.length = ifelse(mean(path.length,na.rm=TRUE)==Inf,Inf,round(mean(path.length,na.rm=TRUE),significant_figures)),
+            mean.k.edge = round(mean(K.edge, na.rm = TRUE),significant_figures),
+            mean.min.degree = round(mean(min_deg, na.rm = TRUE),significant_figures),
+            mean.max.degree = round(mean(max_deg, na.rm = TRUE),significant_figures),
+            mean.mean.degree = round(mean(mean_deg, na.rm = TRUE),significant_figures),
+            max.adjacency = max(adjacency, na.rm = TRUE),
+            mean.min.bet = round(mean(min_bet, na.rm = TRUE),significant_figures),
+            mean.max.bet = round(mean(max_bet, na.rm = TRUE),significant_figures),
+            mean.mean.bet = round(mean(mean_bet, na.rm = TRUE),significant_figures),
+            mean.min.EVC = round(mean(min_EVC, na.rm = TRUE),significant_figures),
+            mean.max.EVC = round(mean(max_EVC, na.rm = TRUE),significant_figures),
+            mean.mean.EVC = round(mean(mean_EVC, na.rm = TRUE),significant_figures),
+            mean.sigma_all = round(mean(sigma.rate_all, na.rm = TRUE),significant_figures),
+            mean.sigma_set = round(mean(sigma.rate_set, na.rm = TRUE),significant_figures)) |> 
+  ungroup() |> 
+  distinct() 
+
+
+df_DDI_nottarg  <- right_join(df_nottarget_tot,network_values_nottarg, by = "DRUG_ID") |>
+  distinct() |>
+  mutate(max.adjacency = as.factor(max.adjacency)) |>
+  mutate(connection_onoff =
+           ifelse(mean.k.edge == 0, "disconnected", "connected")) |> 
+  ungroup() |> 
+  distinct() |> 
+  arrange(mean.k.edge) |> 
+  arrange(DRUG_ID) |> 
+  select(colnames(df_DDI_targ))
+
+#rbind df_DDI_targ and df_DDI_nottarg
+df_DDI_tot <- rbind(df_DDI_targ,df_DDI_nottarg)
+
+
+df_DDI_tot    |> 
   write_excel_csv2(
     file.path("data/5.Targets_NetworkDistance",
               paste0("df_DDI_metrics.csv")))
