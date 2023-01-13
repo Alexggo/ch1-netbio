@@ -16,7 +16,9 @@ args = commandArgs(trailingOnly=TRUE)
 
 set.seed(1234)
 
-file <- file.path("data/1.processed","Broc2018_set2_set.csv") #"Broc2018_maindataset.csv","Broc2018_sen_set.csv","Broc2018_set2_set.csv"
+set_name <- "onlysen" #onlysen, sen2in1
+
+file <- file.path("data/1.processed",paste0("Broc2018_",set_name,"_set.csv")) 
 print(Sys.time())
 #Remove DDI with at least one NA.
 dataset <- read_csv2(file) %>%
@@ -53,6 +55,6 @@ m.list1 <- lapply(seq_along(ptsne.ppx), function(p) {
   m.ppx
 })
 
-save(m.list1, file = paste0('results/set_inc/tSNE_',args[1],"_",args[2],'.RData'))
+save(m.list1, file = paste0('results/',set_name,'/tSNE_',args[1],"_",args[2],'.RData'))
 
 print(Sys.time())

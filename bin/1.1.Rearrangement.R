@@ -186,4 +186,4 @@ e4 <- e3 |> select(drug_pair,Drug1,Drug2,drugdrug,
                    43:48,61:79,
                    31:60)
 
-write.csv(e4,"data/1.processed/Broc2018_maindataset.csv",row.names = F)
+write_csv2(e4,"data/1.processed/Broc2018_allddi_set.csv")

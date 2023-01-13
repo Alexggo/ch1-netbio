@@ -1,25 +1,17 @@
 #!/usr/bin/env Rscript
+args = commandArgs(trailingOnly=TRUE)
+#Rscript --vanilla 3.3.Modularity_test.R allddi ppx_205 ppx_215
 
-#' ---
 #' title: "3.2.Modularity_test"
 #' author: "Alex Gil"
 #' date: "1/26/2021"
 #' output: html_document
-#' 
-#' 
-#' 
-## -------------------------------------------------------------------------
+
 library(pacman)
 p_load(geomorph,tidyverse,broom,ape,ggx,geomorph,furrr,tictoc)
 
-availableCores()
-plan("multisession",workers=8)
+availableCores()plan("multisession",workers=8)
 #plan("multicore",workers=8)
-
-
-full_dataset <- read_csv("data/3.InteractionScores_tSNE/all_ppx_large_set2.csv")
-
-## Testing modularity of clustering solutions.
 
 # Read phylogenetic tree
 species <- c("Escherichia_coli_K-12_ebw",
@@ -38,16 +30,32 @@ tree_nw <- drop.tip(tree_nw,not.species)
 
 tree_nw$tip.label <- c("ebw","ecr","pae","pau","seo","stm")
 
+
+# ALL DDI. Good tsnes between 205-1455.
+# SEN2IN1. Good tsnes between 115-455.
+# ONLYSEN. All tsnes are bad due to the small number of DDIs.
+
+
+#get_ppx("allddi","ppx_205","ppx_1455")
+#get_ppx("sen2in1","ppx_115","ppx_455")
+#get_ppx("allddi",start="ppx_205",end="ppx_215")
+
+get_ppx <- function(set_name=args[1],start=args[2],end=args[3]){
+  print(paste(start,'to',end))
+full_dataset <- read_csv(paste0("data/3.InteractionScores_tSNE/all_ppx_large_",
+  set_name,".csv"))
+
 mat <- full_dataset[,19:24]%>% as.matrix() |> t()
 
-# ALL_DDI. Good tsnes between 175-1455. Indexes 18-146
-# SET2. Good tsnes between 115-455. Indexes 12-46
-
+## Testing modularity of clustering solutions.
 mod_test <- list()
-
 labels <- list()
-for (i in 1:35){
-  labels[[i]] <- full_dataset[,i+97] |> pull()
+cols <- 1:dim(full_dataset)[2]
+sta_c <- cols[colnames(full_dataset)==start]
+end_c <- cols[colnames(full_dataset)==end]
+
+for (i in sta_c:end_c){
+  labels[[i-sta_c+1]] <- full_dataset[,i] |> pull()
 }
 
 number_of_clusters <- labels |> map(unique) |> map_dbl(length)
@@ -56,8 +64,6 @@ test_mod <- function(g){
   mod <- phylo.modularity(mat,partition.gp = g,
                    phy=tree_nw,print.progress=T,
                    CI = TRUE)
-  
-
 }
 
 tic()
@@ -65,4 +71,8 @@ mod_test <- labels |>
   lapply(test_mod)
 toc()
 
-mod_test |> save(file = 'results/set/modularity_tests-115-455_sen.RData')
+file_name <- paste0('results/',set_name,'/modularity_tests_',
+                    set_name,start,"-",end,'.RData')
+print(file_name)
+mod_test |> save(file = file_name)
+}

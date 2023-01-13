@@ -14,15 +14,17 @@ p_load(geomorph,tidyverse,broom,ape,ggx,geomorph,furrr,tictoc,patchwork)
 library(ggrepel)
 
 
-full_dataset <- read_csv("data/3.InteractionScores_tSNE/all_ppx_large_set2.csv")
-load('results/set/modularity_tests-115-455_sen.RData') #129 ppx
-load(file = 'results/set/rate_tests-5_most_modular.RData')
+full_dataset <- read_csv("data/3.InteractionScores_tSNE/all_ppx_large_set_inc.csv")
+load('results/set_inc/modularity_tests-145-455_sen.RData') #129 ppx
+#load(file = 'results/set_inc/rate_tests-5_most_modular.RData')
 
 
 ptsne.ppx <- seq(5,2505,10) #251 ppx. 
-#ALL DDI 175-1455
-# SET2 115-455
-ptsne.ppx_tested <- ptsne.ppx[ptsne.ppx>=115&ptsne.ppx<=455] #129
+# ALL DDI. Good tsnes between 205-1455.
+# SEN2IN1. Good tsnes between 115-455.
+# ONLYSEN. All tsnes are bad due to the small number of DDIs.
+
+ptsne.ppx_tested <- ptsne.ppx[ptsne.ppx>=145&ptsne.ppx<=455] #129
 names(mod_test) <- ptsne.ppx_tested
 
 
@@ -43,7 +45,7 @@ Z <- c()
 CR.mat <- list()
 
 
-for (i in 1:35){
+for (i in 1:length(mod_test)){
   CR[i] <- mod_test[[i]]$CR
   CInterval[[i]] <- mod_test[[i]]$CInterval
   P.value[i] <- mod_test[[i]]$P.value
@@ -196,4 +198,4 @@ for (i in 1:dim(full_df)[1]){
 full_df$type <- r
 
 full_df |> 
-  write_csv("data/4.PhylogeneticComparativeMethods/DDI_table_rates_set.csv")
+  write_csv("data/4.PhylogeneticComparativeMethods/DDI_table_rates_set_inc.csv")
