@@ -10,7 +10,8 @@ args = commandArgs(trailingOnly=TRUE)
 library(pacman)
 p_load(geomorph,tidyverse,broom,ape,ggx,geomorph,furrr,tictoc)
 
-availableCores()plan("multisession",workers=8)
+availableCores()
+plan("multisession",workers=8)
 #plan("multicore",workers=8)
 
 # Read phylogenetic tree
@@ -40,7 +41,7 @@ tree_nw$tip.label <- c("ebw","ecr","pae","pau","seo","stm")
 #get_ppx("sen2in1","ppx_115","ppx_455")
 #get_ppx("allddi",start="ppx_205",end="ppx_215")
 
-get_ppx <- function(set_name=args[1],start=args[2],end=args[3]){
+get_ppx <- function(set_name,start,end){
   print(paste(start,'to',end))
 full_dataset <- read_csv(paste0("data/3.InteractionScores_tSNE/all_ppx_large_",
   set_name,".csv"))
@@ -76,3 +77,6 @@ file_name <- paste0('results/',set_name,'/modularity_tests_',
 print(file_name)
 mod_test |> save(file = file_name)
 }
+
+get_ppx(args[1],args[2],args[3])
+
