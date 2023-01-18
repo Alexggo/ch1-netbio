@@ -10,25 +10,26 @@
 #' 
 ## -------------------------------------------------------------------------
 library(pacman)
-p_load(geomorph,tidyverse,broom,ape,ggx,geomorph,furrr,tictoc,patchwork)
-library(ggrepel)
+p_load(geomorph,tidyverse,broom,ape,ggx,geomorph,furrr,tictoc,patchwork,ggrepel)
 
+set_name <- "allddi"
+test <- "modularity_tests_allddippx_205-ppx_1455.RData"
+ptsne.ppx <- seq(205,1455,10) #251 ppx.
 
-full_dataset <- read_csv("data/3.InteractionScores_tSNE/all_ppx_large_set_inc.csv")
-load('results/set_inc/modularity_tests-145-455_sen.RData') #129 ppx
-#load(file = 'results/set_inc/rate_tests-5_most_modular.RData')
+# set_name <- "sen2in1"
+# test <- "modularity_tests_sen2in1ppx_115-ppx_455.RData"
+# ptsne.ppx <- seq(115,455,10) #135 ppx.
 
-
-ptsne.ppx <- seq(5,2505,10) #251 ppx. 
 # ALL DDI. Good tsnes between 205-1455.
 # SEN2IN1. Good tsnes between 115-455.
 # ONLYSEN. All tsnes are bad due to the small number of DDIs.
 
-ptsne.ppx_tested <- ptsne.ppx[ptsne.ppx>=145&ptsne.ppx<=455] #129
-names(mod_test) <- ptsne.ppx_tested
+full_dataset <- read_csv(paste0("results/",set_name,"/","all_ppx_large_",set_name,".csv"))
+load(paste0('results/',set_name,"/",test)) #129 ppx
+names(mod_test) <- ptsne.ppx
 
 
-labels_df <- full_dataset |> select(paste0("ppx_",ptsne.ppx_tested))
+labels_df <- full_dataset |> select(paste0("ppx_",ptsne.ppx))
 labels <- list()
 for (i in 1:dim(labels_df)[2]){
   labels[[i]] <- labels_df[,i] |> pull()
@@ -54,7 +55,7 @@ for (i in 1:length(mod_test)){
 }
 
 df <- data.frame(Z_effect=Z,
-                 ptsne=ptsne.ppx_tested,
+                 ptsne=ptsne.ppx,
                  p.value=P.value,
                  CR=CR,
                  cluster_n=number_of_clusters) 
@@ -66,15 +67,15 @@ df |>
   theme_minimal()+
   xlab("tsne perplexity")
 
-df |> 
+p1 <- df |> 
   filter(p.value<0.05) |> 
   ggplot(aes(x=ptsne,y=Z_effect))+
   geom_point()+
   theme_minimal()+
   xlab("tsne perplexity")+
-  geom_smooth(method="lm")
+  geom_smooth(method="lm",se = FALSE)
 
-df |> 
+p2 <- df |> 
   filter(ptsne<=500) |> 
   ggplot(aes(x=CR,y=Z_effect,label = ptsne))+
   theme_minimal()+
@@ -82,28 +83,19 @@ df |>
   geom_text_repel()+
   geom_hline(yintercept=-26.5)+
   geom_vline(xintercept=0.92)+
-  geom_smooth(method="lm")
-
-#SET. 135 ppx
+  geom_smooth(method="lm",se=FALSE)
 
 library(broom)
 test <- lm(Z_effect~ptsne,df)
 broom::augment(test) |> 
   arrange(.resid)
 
-# Adams,2017. The 5 most negative effect size (ZCR) clustering solutions were identified, 
+# Adams,2017. The 10 most negative effect size (ZCR) clustering solutions were identified, 
 # these represented the hypotheses with the strongest modular signals.
-
-# filtered_df <- df |> 
-#   filter(p.value<0.05) |> 
-#   filter(Z_effect<=-26.5) |> 
-#   filter(CR<0.925) |> 
-#   arrange(Z_effect)
-
 
 filtered_df <- df |> 
   filter(p.value<0.05) |> 
-  filter(Z_effect<=-9) |> 
+  slice_min(Z_effect,n=10)|> 
   arrange(Z_effect)
 
 dataset <- full_dataset |> 
@@ -137,7 +129,7 @@ for (i in 1:dim(filtered_df)[1]){
   RT_list[[i]] <- compare.multi.evol.rates(A=dat,gp=groups_t,phy=tree_nw,iter=999)
 }
 names(RT_list) <- paste0("ppx_",filtered_df$ptsne)
-RT_list |> save(file = 'results/set/rate_tests-2_most_modular.RData')
+RT_list |> save(file = paste0('results/',set_name,'/rate_tests_most_modular.RData'))
 
 sigma.d.ratio<- c()
 p.value_test<- c()
@@ -158,22 +150,23 @@ df_rate_test <- data.frame(ptsne=filtered_df$ptsne,
 
 summary_test <- inner_join(filtered_df,df_rate_test,by="ptsne")
 
-best <- RT_list[["ppx_135"]]  #ALL DDI 245. SET2 PPX 135
+best <- RT_list[["ppx_245"]]  #ALL DDI 245. SET2 PPX 135
 summary(best)
 plot(best)
 
 RT_result <- data.frame(clusters=as.integer(best$groups),
                         sigma.rate=best$sigma.d.gp)
 
-RT_result %>% ggplot(aes(x=as.factor(clusters),y=sigma.rate))+
+p3 <- RT_result %>% ggplot(aes(x=as.factor(clusters),y=sigma.rate))+
   geom_bar(stat="identity")+
   ggtitle("Evolutionary rates for each cluster")+
   xlab("Cluster")+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
   theme_minimal()
 
-RT_result$clusters <- factor(RT_result$clusters, levels = RT_result$clusters[order(RT_result$sigma.rate)])
-p1 <- ggplot(RT_result, aes(x = clusters, y = sigma.rate)) + 
+RT_result$clusters <- factor(RT_result$clusters, 
+                             levels = RT_result$clusters[order(RT_result$sigma.rate)])
+p4 <- ggplot(RT_result, aes(x = clusters, y = sigma.rate)) + 
   geom_bar(stat = "identity")+
   ggtitle("Evolutionary rates for each cluster")+
   xlab("Cluster")+
@@ -182,9 +175,10 @@ p1 <- ggplot(RT_result, aes(x = clusters, y = sigma.rate)) +
   
 
 
-RT_result <- RT_result %>% mutate(clusters=as.numeric(as.character(clusters)))
+RT_result <- RT_result |> 
+  mutate(clusters=as.numeric(as.character(clusters)))
 
-full_dataset$clusters <- full_dataset$ppx_135 
+full_dataset$clusters <- full_dataset$ppx_245 #245 or 135
 full_df <- left_join(full_dataset,RT_result,by="clusters")
 full_df <- full_df |> select(!starts_with("ppx"))
 
@@ -197,5 +191,15 @@ for (i in 1:dim(full_df)[1]){
 }
 full_df$type <- r
 
+
 full_df |> 
-  write_csv("data/4.PhylogeneticComparativeMethods/DDI_table_rates_set_inc.csv")
+  write_csv(paste0("results/",set_name,"/","DDI_table_rates_",set_name,".csv"))
+
+#Save plots
+pdf(paste0("results/",set_name,"/","modularity_plots_",set_name,".pdf"))
+p1
+p2
+p3
+p4
+plot(best)
+dev.off()

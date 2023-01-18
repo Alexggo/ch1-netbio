@@ -32,9 +32,8 @@ hrbrthemes,ggforce,ComplexHeatmap,ggbiplot,patchwork,performance)
 #' 
 ## -----------------------------------------------------------------------------
 
-
-
-full_df <- read.csv("data/4.PhylogeneticComparativeMethods/DDI_table_rates_set.csv")
+set_name <- "allddi" #allddi sen2in1
+full_df <- read.csv(paste0("results/",set_name,"/","DDI_table_rates_",set_name,".csv"))
 
 
 # Read phylogenetic tree
@@ -138,9 +137,10 @@ g2 <- ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   annotate("text", x=500, y=5.5, label= "Chemdist ~ log(PhyloDist)")+
   annotate("text", x=500, y=5.4, label= paste0("R squared:",round(gla2$r.squared,2),", p-value:",round(gla2$p.value,10)))
 
-
-g1+g2
-
+pdf(paste0("results/",set_name,"/","distance_",set_name,".pdf"))
+g1
+g2
+dev.off()
 
 ###############
 
@@ -263,6 +263,7 @@ g2 <- ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   annotate("text", x=500, y=5.5, label= "Chemdist ~ log(PhyloDist)")+
   annotate("text", x=500, y=5.4, label= paste0("R squared:",round(gla2$r.squared,2),", p-value:",round(gla2$p.value,10)))
 
-
-g1+g2
-
+pdf(paste0("results/","onlysen","/","distance_","onlysen",".pdf"))
+g1
+g2
+dev.off()

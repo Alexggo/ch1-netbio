@@ -1,0 +1,49 @@
+#
+#	AlignmentSummary: a class to store the amino acid
+#	(or DNA or codons or any other symbol) transitions
+#	collected from alignments at a given PAM distance.
+#
+#	This is part of the functionality to estimate
+#	ML scoring matrices according to xxxx
+#
+#			Gaston H. Gonnet (Nov 24, 2007)
+#
+
+AlignmentSummary := proc( PamDistance:positive,
+	Counts:matrix({0,posint}) )
+option polymorphic;
+if nargs <> 2 then error('invalid number of components') fi;
+noeval( procname(args))
+end:
+
+
+Alignment_AlignmentSummary := proc( al:Alignment )
+dps := DynProgStrings(al);
+t := al[DayMatrix,type];
+if t = 'Peptide' then n := 20
+elif t = 'Nucleotide' then n := 4
+else n := length(al[DayMatrix,Sim]) fi;
+f := al[DayMatrix,Mapping];
+counts := CreateArray(1..n,1..n);
+for i to length(dps[2]) do
+    i1 := f(dps[2,i]);
+    i2 := f(dps[3,i]);
+    if i1 > 0 and i1 <= n and i2 >0 and i2 <= n then
+        if i1 > i2 then t := i1;  i1 := i2;  i2 := t fi;
+	counts[i1,i2] := counts[i1,i2] + 1
+    fi;
+od;
+AlignmentSummary( al[PamDistance], counts );
+end:
+
+AlignmentSummary_plus := proc( a:AlignmentSummary, b:AlignmentSummary )
+if |a['PamDistance']-b['PamDistance']| > 1e-10*|a['PamDistance']+b['PamDistance']|
+    then error('cannot be added at different distances') fi;
+AlignmentSummary( a['PamDistance'], a['Counts']+b['Counts'] );
+end:
+
+
+CompleteClass( AlignmentSummary );
+
+
+

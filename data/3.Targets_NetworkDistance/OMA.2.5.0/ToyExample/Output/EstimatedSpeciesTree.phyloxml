@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phyloxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phyloxml.org" xsi:schemaLocation="http://www.phyloxml.org http://www.phyloxml.org/1.20/phyloxml.xsd">
+ <phylogeny rooted="true" rerootable="false" branch_length_unit="PAM">
+  <name>Species phylogeny estimated in OmaStandalone - release 2.5.0_rc3</name>
+  <date>2021-07-12T14:16:38</date>
+  <clade>
+   <clade branch_length="41.833333">
+    <name>dog</name>
+   </clade>
+   <clade branch_length="40.630449">
+    <clade branch_length="0.420666">
+     <clade branch_length="0.231104">
+      <name>mouse2</name>
+     </clade>
+     <clade branch_length="0.000000">
+      <name>mouse</name>
+     </clade>
+    </clade>
+    <clade branch_length="2.536218">
+     <name>human</name>
+    </clade>
+   </clade>
+  </clade>
+
+ </phylogeny>
+</phyloxml>

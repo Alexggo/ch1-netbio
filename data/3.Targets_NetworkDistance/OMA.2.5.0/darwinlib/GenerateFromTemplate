@@ -1,0 +1,109 @@
+#
+#  Generates a string from a given template by replacing 
+#  placeholders. 
+#
+#                            Christophe Dessimoz, orig. impl.
+#                            Adrian Altenhoff, Jan 16, 2009
+#
+
+#module external GenerateFromTemplate;
+
+readVarTag := proc(tag, t)
+    L := length(t):
+    tag_op := '<'.tag.' name="';
+    posStart := SearchString(tag_op,t);
+    if posStart = -1 then return(NULL) fi;
+    
+    curPos := posStart+length(tag_op)+1; 
+    nestingLev := 0: field := 'name'; fields := table():
+    spaceChar := {' ','\n','\t','>'};
+    do
+    	for i from curPos while i<L and 
+	     not (t[i]='"' and nestingLev=0 and member(t[i+1],spaceChar)) do 
+	    if t[i]='<' then nestingLev:=nestingLev+1;
+	    elif t[i]='>' then nestingLev:=nestingLev-1;
+	    fi:
+	od:
+	if i>L then error('Malformed darwin tag') fi:
+        fields[field] := curPos..i-1;
+	if t[i+1]='>' then posEnd := i+2; break; fi:
+#	elif t[i+1]<>' ' then error('unexpected character at pos '.i+1) fi:
+
+	for j from i+2 while t[j]<>'=' and t[j+1]<>'"' do od:
+	field := t[i+2..j-1]; curPos := j+2;
+    od:
+  
+    tagname := t[ fields['name'] ];
+    return([tagname, posStart, posEnd, fields]);
+end;
+
+
+GenerateFromTemplate := proc(file:string,t:table)
+global f; output, tmp;
+    if length(FileStat(file)) = 0 then error('Missing template file'); fi;
+    f := ReadRawFile(file);
+    # boolean expressions
+    output := '';
+    do
+    	tmp := readVarTag('DBOOL', f);
+	if tmp=NULL then output := output.f; break fi;
+	value := t[tmp[1]];
+	isAssigned := evalb(value<>unassigned and value<>false):
+	if isAssigned then 
+	    stmt := If(type(tmp[4,'true'],range), f[tmp[4,'true']],'');
+	else 
+	    stmt := If(type(tmp[4,'false'],range), f[tmp[4,'false']],'');
+	fi:
+	output := output . f[ 1..tmp[2] ] . stmt;
+	f := f[tmp[3]..-1];
+    od:	
+    # regular variables
+    f := output: output := '';
+    do
+        tmp := readVarTag('DVAR',f);
+        if tmp = NULL then output := output.f; break; fi;
+        value := t[tmp[1]]:
+        if value = 'unassigned' and not type(tmp[4,'default'],range) then  
+            error('Missing key '.tmp[1].' in input table'); 
+        elif value='unassigned' then 
+            value := f[ tmp[4,'default'] ];
+        fi;    
+        output := output . f[1..tmp[2]] . string(value);
+        f := f[tmp[3]..-1];
+    od;
+    # loops
+    f := output; output := '';
+    do
+        tmp := readVarTag('DLOOP',f);
+        if tmp = NULL then output := output.f; break; fi;
+        if not type(t[tmp[1]],array) then
+            error('the array for loop '.tmp[1].' is not defined');
+        fi;
+        endloop := '</DLOOP>';
+        p := SearchString(endloop,f);
+        if p = -1 then error('malformed DLOOP syntax'); fi;
+        tout := '';
+        for row in t[tmp[1]] do
+            out2 := '';
+            f2 := copy(f[tmp[3]..p]);
+            do
+                tmp2 := readVarTag('DLVAR',f2);
+                if tmp2 = NULL then out2 := out2.copy(f2); break; fi;
+                value := row[tmp2[1]]:
+                if value = 'unassigned' and not type(tmp2[4,'default'],range) then  
+                    error('Missing key '.tmp2[1].' in input table'); 
+                elif value='unassigned' then 
+                    value := f2[ tmp2[4,'default'] ];
+                fi;    
+                out2 := out2. copy(f2[1..tmp2[2]]) . string(value);
+                f2 := f2[tmp2[3]..-1];
+            od;
+            tout := tout . copy(out2);
+        od;
+        output := output . copy(f[1..tmp[2]]) . tout; 
+        f := f[p+1+length(endloop)..-1];
+    od;
+    return(output);
+end:
+
+#end: #module

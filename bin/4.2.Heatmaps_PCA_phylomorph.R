@@ -10,8 +10,6 @@ p_load(tidyverse,RColorBrewer,plotly,dendextend,ggrepel,hrbrthemes,
        ouch,geiger,ape,phangorn,phytools,treeio,ggtree)
 
 
-
-
 #' Input files, phylogenetic tree and matrix.
 #' 
 #'   -Choose the tree: args[1]
@@ -29,9 +27,8 @@ p_load(tidyverse,RColorBrewer,plotly,dendextend,ggrepel,hrbrthemes,
 #' 
 ## -----------------------------------------------------------------------------
 
-# Read data matrix
-full_df <- file.path("data/4.PhylogeneticComparativeMethods/DDI_table_rates_set.csv")
-full_df <- read_csv(full_df)
+set_name <- "allddi" #allddi sen2in1
+full_df <- read.csv(paste0("results/",set_name,"/","DDI_table_rates_",set_name,".csv"))
 
 # Read phylogenetic tree
 species <- c("Escherichia_coli_K-12_ebw",
@@ -115,7 +112,7 @@ Heatmap(mat_red,
                                                                       "5","6","7","8"),
                                                            labels_gp = gpar(col = "white", fontsize = 10))),
         bottom_annotation = h)
-  
+
 
 
 # top_annotation = HeatmapAnnotation(cluster = anno_block(gp = gpar(fill = 1:16),
@@ -137,12 +134,12 @@ colnames(res.pca) <- c("E. coli-EBW","E. coli-ECR",
 
 pca <- prcomp(res.pca, center = TRUE, scale = TRUE)
 
-fviz_pca_biplot(pca, label ="var",
+p1 <- fviz_pca_biplot(pca, label ="var",
                 repel = TRUE,
                 habillage=dataset1$clusters,
                 addEllipses=TRUE, ellipse.level=0.95) +
         theme_minimal() # Individuals color
-fviz_eig(pca)# Eigenvalues
+p2 <- fviz_eig(pca)# Eigenvalues
 
 
 ## Plot PCA Strain~DDI
@@ -161,7 +158,7 @@ pca.1.2=pca.x[,c(1,2)]
 
 
 #Phylomorphospace plots.
-phylomorphospace(tree_nw, pca$x[,1:2], 
+p3 <- phylomorphospace(tree_nw, pca$x[,1:2], 
                  label = "horizontal", node.size=c(.5,1),
                  xlim=c(-50,60),
                  xlab="PC1 (47.01%)",
@@ -169,6 +166,15 @@ phylomorphospace(tree_nw, pca$x[,1:2],
 
 
 #phylomorphospace3d(tree_nw,pca.x[,c(1,2,3)],method="static")
-fancyTree(tree_nw,X=pca.x[,c(1,2)],
+p4 <- fancyTree(tree_nw,X=pca.x[,c(1,2)],
           type="traitgram3d",method="static")
 
+
+
+pdf(paste0("results/",set_name,"/","pca_plots_",set_name,".pdf"))
+p1
+p2
+p3
+p4
+
+dev.off()

@@ -1,0 +1,111 @@
+################################################################################
+#
+#	LegendreCoefficients, compute the Legendre coefficients of a
+#	piecewise-linear function given by a set of points.  These are
+#	orthogonal polynomials in [-1,1] (the range is normalized).
+#
+#	The function y(x) is given by a set of pairs x[i], y[i].
+#	It is assumed that the period is x[0]..x[N]
+#
+#	The function returns the list of coefficients (length k+1)
+#
+#	See https://en.wikipedia.org/wiki/Legendre_polynomials
+#
+#	Gaston H. Gonnet (Thu Jul 19 11:12:05 CEST 2018, Vorhaldenstrasse)
+#
+################################################################################
+
+LegendreCoefficients := proc( y:list(numeric), x0:list(numeric), k:{0,posint} )
+
+if length( {op(y)} ) = 1 then # easy case and avoid roundoff results
+    return( [y[1],seq(0,k)] ) fi;
+
+x := x0;
+N := length(x);
+assert( N = length(y) and N > 0 and sort(x) = x and x[N] > x[1] );
+
+#
+#	maple code
+#
+#	f := ((x-x0)*(y1-y0)/(x1-x0) + y0);
+#	P0 := 1;  P1 := x;
+#	for n to 10 do P.(n+1) := expand( (2*n+1)*x*P.n - n*P.(n-1) ) / (n+1) od;
+#
+#	normal( int( f*P0, x=x0..x1) / (x1-x0) );
+#	normal( int( f*P1, x=x0..x1) / (x1-x0) );
+#	normal( int( f*P2, x=x0..x1) / (x1-x0) );
+#	normal( int( f*P3, x=x0..x1) / (x1-x0) );
+#	normal( int( f*P4, x=x0..x1) / (x1-x0) );
+#	normal( int( f*P5, x=x0..x1) / (x1-x0) );
+#	normal( int( f*P6, x=x0..x1) / (x1-x0) );
+#
+#	spat := y0 = y[i], y1 = y[i+1], x0 = x[i], x1 = x[i+1];
+#	lprint(subs(spat,collect(%,[y0,y1])*(x1-x0)));
+
+#	normalize x to be in -1 .. 1
+#
+f := 2/(x[N]-x[1]);
+x := [ seq( f*(w-x[1])-1, w=x )];
+a := [ sum( (y[i]+y[i-1]) * (x[i]-x[i-1]), i=2..N ) / 4, seq(0,k) ];
+
+for i to N-1 do
+    if k >= 1 then
+        a[2] := a[2] + ((2*x[i]+x[i+1])*y[i]+(x[i]+2*x[i+1])*y[i+1]) *
+	    (x[i+1]-x[i]) / 4 fi;
+    if k >= 2 then
+        a[3] := a[3] + ((3*x[i]^2+2*x[i+1]*x[i]-2+x[i+1]^2)*y[i]+(x[i]^2 +
+	    2*x[i+1]*x[i]-2+3*x[i+1]^2)*y[i+1])*(x[i+1]-x[i]) * 5/16 fi;
+    if k >= 3 then
+        a[4] := a[4] + ((4*x[i]^3+3*x[i+1]*x[i]^2-4*x[i]+2*x[i]*x[i+1]^2 -
+	    2*x[i+1]+x[i+1]^3)*y[i]+(x[i]^3+2*x[i+1]*x[i]^2-2*x[i] +
+	    3*x[i]*x[i+1]^2-4*x[i+1]+4*x[i+1]^3)*y[i+1])*(x[i+1]-x[i]) * 7/16 fi;
+    if k >= 4 then
+        a[5] := a[5] + ((35*x[i]^4+28*x[i+1]*x[i]^3-45*x[i]^2+21*x[i]^2*x[i+1]^2 -
+	    30*x[i+1]*x[i]+14*x[i]*x[i+1]^3+9-15*x[i+1]^2+7*x[i+1]^4)*y[i] +
+	    (7*x[i]^4+14*x[i+1]*x[i]^3-15*x[i]^2+21*x[i]^2*x[i+1]^2 -
+	    30*x[i+1]*x[i]+28*x[i]*x[i+1]^3+9-45*x[i+1]^2+35*x[i+1]^4)*
+	    y[i+1])*(x[i+1]-x[i]) * 3/32 fi;
+    if k >= 5 then
+        a[6] := a[6] + ((10*x[i]+18*x[i]^5-14*x[i]*x[i+1]^2+15*x[i+1]*x[i]^4+
+	    6*x[i]*x[i+1]^4-28*x[i]^3+5*x[i+1]+12*x[i]^3*x[i+1]^2-7*x[i+1]^3-
+	    21*x[i+1]*x[i]^2+3*x[i+1]^5+9*x[i]^2*x[i+1]^3)*y[i]+(3*x[i]^5-
+	    7*x[i]^3-21*x[i]*x[i+1]^2+6*x[i+1]*x[i]^4+15*x[i]*x[i+1]^4-
+	    14*x[i+1]*x[i]^2+10*x[i+1]+9*x[i]^3*x[i+1]^2-28*x[i+1]^3+5*x[i]+
+	    18*x[i+1]^5+12*x[i]^2*x[i+1]^3)*y[i+1])*(x[i+1]-x[i]) * 11/32 fi;
+    if k >= 6 then
+	a[7] := a[7] + ((-20+231*x[i]^6+33*x[i+1]^6+140*x[i+1]*x[i]+70*x[i+1]^2+
+	    210*x[i]^2-252*x[i]^2*x[i+1]^2-336*x[i+1]*x[i]^3-84*x[i+1]^4-
+	    420*x[i]^4+99*x[i]^2*x[i+1]^4+66*x[i]*x[i+1]^5+132*x[i]^3*x[i+1]^3+
+	    165*x[i]^4*x[i+1]^2+198*x[i+1]*x[i]^5-168*x[i]*x[i+1]^3)*y[i]+
+	    (-20+198*x[i]*x[i+1]^5+33*x[i]^6+231*x[i+1]^6+140*x[i+1]*x[i]+
+	    210*x[i+1]^2+70*x[i]^2-252*x[i]^2*x[i+1]^2-420*x[i+1]^4-336*x[i]*x[i+1]^3-
+	    84*x[i]^4+165*x[i]^2*x[i+1]^4+132*x[i]^3*x[i+1]^3+66*x[i+1]*x[i]^5+
+	    99*x[i]^4*x[i+1]^2-168*x[i+1]*x[i]^3)*y[i+1])*(x[i+1]-x[i]) * 13/256 fi;
+    # all the above verified with Maple
+    if k > 6 then error(niy1482) fi;
+od:
+eps := max(max(y),-min(y)) * 1e-12;
+for i to length(a) do if |a[i]| < eps then a[i] := 0 fi od;
+
+a
+end:
+
+
+#
+# compute a Legendre approximation based on the coefficients -1 <= x <= 1
+#
+LegendreApprox := proc( a:list(numeric), x:numeric )
+assert( x >= -1 and x <= 1 );
+if a=[] then 0
+elif length(a) = 1 then a[1]
+elif length(a) = 2 then a[1] + x*a[2]
+else r := a[1] + x*a[2];
+     p0 := 1;  p1 := x;
+     for n to length(a)-2 do
+	pn1 := ( (2*n+1)*x*p1 - n*p0 ) / (n+1);
+	r := r + pn1*a[n+2];
+	p0 := p1;  p1 := pn1;
+     od;
+     r
+fi
+end:

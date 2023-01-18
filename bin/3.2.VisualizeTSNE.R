@@ -124,7 +124,8 @@ get_ppx <- function(set_name){
   category <- df |> select(1:86) |> as.matrix()
   bdm.qMap(big_list[[1]], data = category, qMap.cex = 1)
 
+  
 write.csv(full_dataset,
-          paste0("data/3.InteractionScores_tSNE/all_ppx_large_",set_name,".csv"),
+          paste0("results/",set_name,"/","all_ppx_large_",set_name,".csv"),
           row.names = F)
 }

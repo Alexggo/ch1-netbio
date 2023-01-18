@@ -11,13 +11,11 @@ p_load(igraph, tidyverse, matrixStats,future.apply)
 
 significant_figures <- 3
 
-full_df_all <- read.csv(file.path("data/4.PhylogeneticComparativeMethods",
-                                  "DDI_table_rates_all.csv")) |> 
+full_df_all <- read.csv(paste0("results/","allddi","/","DDI_table_rates_","allddi",".csv")) |> 
   rename(clusters_all=clusters) |> 
   rename(sigma.rate_all=sigma.rate)
 
-full_df_set <- read.csv(file.path("data/4.PhylogeneticComparativeMethods",
-                                  "DDI_table_rates_set.csv"))|> 
+full_df_set <- read.csv(paste0("results/","sen2in1","/","DDI_table_rates_","sen2in1",".csv"))|> 
   rename(clusters_set=clusters) |> 
   rename(sigma.rate_set=sigma.rate) |>
   select(drug_pair,clusters_set,sigma.rate_set) 
@@ -52,7 +50,7 @@ filenames <- filenames[filenames %in%
 
 
 #Ecocyc_goldstandard:1, Small-medium_PPI:10
-filepath_ecolinet <- file.path("data/5.Targets_NetworkDistance/Net_8_29_2022", filenames)
+filepath_ecolinet <- file.path("data/3.Targets_NetworkDistance/Net_8_29_2022", filenames)
 net <- c("Co-functional(EcoCyc)", "EN:allnetworks",
          "Similar genomic context", "Co-functional (GO-BP)",
          "Co-citation", "Co-expression",
@@ -75,7 +73,7 @@ list_graphs <- list_net |>
   lapply(graph_from_data_frame, directed = FALSE, vertices = NULL)
 
 #Which proteins are targeted by drugs?
-drug_mapping <- read.csv("data/5.Targets_NetworkDistance/DrugTargets3_ecoli.csv") |>
+drug_mapping <- read.csv("data/3.Targets_NetworkDistance/DrugTargets3_ecoli.csv") |>
   select(Drug, KEGG_eco) |>
   distinct() |>
   arrange(Drug) |>
@@ -91,57 +89,6 @@ gr.vert_same <- cbind(all_targets,all_targets)
 gr.vert <- rbind(gr.vert,gr.vert_same)
 gr.vert <- gr.vert[,]
 #Expecting maximum of 351+27=378 combinations
-
-# plot networks
-# pdf(file = file.path("networks", "network_graph.pdf"))
-# 
-# for (i in seq_along(list_graphs)) {
-#   g1 <- list_graphs[[i]]
-#   names <- V(g1) |>names()
-#   print(net[i])
-#   value1 <- names %in% possible_targets |>
-#     sum()
-#   value2 <- drug_mapping$Drug[possible_targets %in% names] |>
-#     unique() |>
-#     length()
-#   V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
-#   V(g1)$size <- ifelse(V(g1) %in% possible_targets, 40, 5)
-#   V(g1)$label.cex <- 0.3
-#   v.number <- V(g1) |>
-#     length()
-#   mean.length <- average.path.length(g1)
-#   plot(g1, vertex.label = "", vertex.size = 2)
-#   mytitle <- paste(net[i])
-#   mysubtitle1 <- paste0("Average path length = ",
-#                         round(mean.length, 4), ".Number of vertexes = ", v.number)
-#   mysubtitle2 <- paste0("Number of targets = ",
-#                         value1, ".Number of drugs = ", value2)
-#   mtext(side = 3, line = 3, at = -0.07, adj = 0, cex = 1, mytitle)
-#   mtext(side = 3, line = 2, at = -0.07, adj = 0, cex = 0.7, mysubtitle1)
-#   mtext(side = 3, line = 1, at = -0.07, adj = 0, cex = 0.7, mysubtitle2)
-#   print(paste("Nodes", v.number, "Targets", value1, "Drugs", value2))
-# }
-# dev.off()
-# 
-# pdf(file = file.path("networks", "network_graph_notext.pdf"))
-# 
-# for (i in seq_along(list_graphs)) {
-#   g1 <- list_graphs[[i]]
-#   names <- V(g1) |>names()
-#   print(net[i])
-#   value1 <- names %in% possible_targets |>
-#     sum()
-#   value2 <- drug_mapping$Drug[possible_targets %in% names] |>
-#     unique() |>
-#     length()
-#   V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
-#   V(g1)$size <- ifelse(V(g1) %in% possible_targets, 40, 5)
-#   V(g1)$label.cex <- 0.3
-#   v.number <- V(g1) |>length()
-#   mean.length <- average.path.length(g1)
-#   plot(g1, vertex.label = "", vertex.size = 2)
-# }
-# dev.off()
 
 ##-----------------------------------------------------------------------------
 # Calculate path.length, k-edge connectivity,
@@ -408,9 +355,8 @@ df_target_tot |>
   arrange(K.edge) |> 
   arrange(DRUG_ID) |> 
   arrange(network) |>  
-  write_excel_csv2(
-    file.path("data/5.Targets_NetworkDistance",
-              paste0("df_target_metrics.csv")))
+  write_excel_csv(paste0("results/","df_target_metrics_",set_name,".csv"))
+
 
 # Calculate the average per drug pair.
 # One target pair can have more than one drug pair.
@@ -492,8 +438,57 @@ df_DDI_tot <- rbind(df_DDI_targ,df_DDI_nottarg)
 
 
 df_DDI_tot    |> 
-  write_excel_csv2(
-    file.path("data/5.Targets_NetworkDistance",
-              paste0("df_DDI_metrics.csv")))
+  write_excel_csv(paste0("results/","df_DDI_metrics_",set_name,".csv"))
 
+
+# plot networks
+pdf(paste0("results/","network_graph",".pdf"))
+
+for (i in seq_along(list_graphs)) {
+  g1 <- list_graphs[[i]]
+  names <- V(g1) |>names()
+  print(net[i])
+  value1 <- names %in% possible_targets |>
+    sum()
+  value2 <- drug_mapping$Drug[possible_targets %in% names] |>
+    unique() |>
+    length()
+  V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
+  V(g1)$size <- ifelse(V(g1) %in% possible_targets, 40, 5)
+  V(g1)$label.cex <- 0.3
+  v.number <- V(g1) |>
+    length()
+  mean.length <- average.path.length(g1)
+  plot(g1, vertex.label = "", vertex.size = 2)
+  mytitle <- paste(net[i])
+  mysubtitle1 <- paste0("Average path length = ",
+                        round(mean.length, 4), ".Number of vertexes = ", v.number)
+  mysubtitle2 <- paste0("Number of targets = ",
+                        value1, ".Number of drugs = ", value2)
+  mtext(side = 3, line = 3, at = -0.07, adj = 0, cex = 1, mytitle)
+  mtext(side = 3, line = 2, at = -0.07, adj = 0, cex = 0.7, mysubtitle1)
+  mtext(side = 3, line = 1, at = -0.07, adj = 0, cex = 0.7, mysubtitle2)
+  print(paste("Nodes", v.number, "Targets", value1, "Drugs", value2))
+}
+dev.off()
+
+pdf(paste0("results/","network_graph","_notext.pdf"))
+
+for (i in seq_along(list_graphs)) {
+  g1 <- list_graphs[[i]]
+  names <- V(g1) |>names()
+  print(net[i])
+  value1 <- names %in% possible_targets |>
+    sum()
+  value2 <- drug_mapping$Drug[possible_targets %in% names] |>
+    unique() |>
+    length()
+  V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
+  V(g1)$size <- ifelse(V(g1) %in% possible_targets, 40, 5)
+  V(g1)$label.cex <- 0.3
+  v.number <- V(g1) |>length()
+  mean.length <- average.path.length(g1)
+  plot(g1, vertex.label = "", vertex.size = 2)
+}
+dev.off()
 

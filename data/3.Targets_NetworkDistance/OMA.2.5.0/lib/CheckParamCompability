@@ -1,0 +1,169 @@
+# ***** BEGIN LICENSE BLOCK *****
+# Version: MPL 2.0
+#
+# The contents of this file are subject to the Mozilla Public License Version
+# 2.0 (the "License"); you may not use this file except in compliance with
+# the License. You may obtain a copy of the License at
+# http://www.mozilla.org/MPL/2.0/
+#
+# Software distributed under the License is distributed on an "AS IS" basis,
+# WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+# for the specific language governing rights and limitations under the
+# License.
+#
+# The Original Code is OMA standalone.
+#
+# The Initial Developer of the Original Code is CBRG Research Group;
+# ETH Zurich; Switzerland.
+# Portions created by the Initial Developer are Copyright (C) 2005-2013
+# the Initial Developer. All Rights Reserved.
+#
+# Contributor(s):
+#   Christophe Dessimoz <cdessimoz@inf.ethz.ch>
+#   Adrian Altenhoff <adrian.altenhoff@inf.ethz.ch>
+#   Stefan Zoller <stefan.zoller@inf.ethz.ch>
+#   Adrian Schneider <adrian.schneider@inf.ethz.ch>
+#   Alexander Roth <alexander.roth@inf.ethz.ch>
+#   Gaston Gonnet <gonnet@inf.ethz.ch>
+#
+# ***** END LICENSE BLOCK *****
+
+module external ValidateParameters;
+
+# checks for inconsistentency
+ValidateParameters := proc()
+    _check_species_tree_param();
+    _check_quasi_clique_cutoff();
+    _check_HOG_params();
+    _check_group_function_params();
+    _check_outgroups();
+end:
+
+_check_species_tree_param := proc()
+    if lowercase(SpeciesTree)='estimate' then return();
+    elif lowercase(SpeciesTree)='lineage' then
+        for g in genomes do if GS[g,Lineage]=['Unknown'] then
+            error('SpeciesTree cannot be "lineage" if lineage is not known for '.g);
+        fi od:
+    else
+        t := traperror(ParseNewickTree(SpeciesTree)):
+        if t=lasterror then
+            error('SpeciesTree is not a valid newick tree');
+        fi:
+        leaves := {seq(z['Label'], z=indets(t, Leaf))}:
+        gset := {op(genomes)}:
+        if leaves<>gset then
+           error(sprintf('SpeciesTree does not contain the same leaves as species:\n'.
+                         'Differences: %A <--> %A', minus(leaves, gset),
+                         minus(gset, leaves)));
+        fi:
+    fi:
+end:
+
+_check_quasi_clique_cutoff := proc()
+    if type(QuasiCliquesCutoff,numeric) and QuasiCliquesCutoff <= 0 then
+       error('QuasiCliquesCutoff must be a positive value');
+    fi:
+end:
+
+_check_HOG_params := proc() global DoHierarchicalGroups;
+    if type(DoHierarchicalGroups, boolean) then
+        if DoHierarchicalGroups then
+            warning('(DEPRECATION) DoHierarchicalGroups should now be set to either ''top-down'' or ''bottom-up''.');
+            DoHierarchicalGroups := 'bottom-up';
+        fi:
+    elif type(DoHierarchicalGroups, string) then
+        DoHierarchicalGroups := lowercase(DoHierarchicalGroups);
+        if DoHierarchicalGroups = 'false' then
+            warning('You should use "DoHierarchicalGroups := false;" (without quotes around false).');
+            DoHierarchicalGroups := false;
+        elif not member(DoHierarchicalGroups, {'top-down','bottom-up'}) then
+            error(sprintf('DoHierarchicalGroups should be ''top-down'' or ''bottom-up'', not ''%s''.', DoHierarchicalGroups)):
+        fi:
+    else
+        error('Invalid value for ''DoHierarchicalGroups'' parameter');
+    fi:
+    if DoHierarchicalGroups='bottom-up' then
+        # check that the necessary python packages are installed
+        msg := '':
+        warthog := traperror(FindWarthogs());
+        if warthog = lasterror then
+            msg := lasterror;
+        else
+            cmd := [warthog, '-h', '2>&1'];
+            res := TimedCallSystem(ConcatStrings(cmd, ' '));
+            if res[1] <> 0 then
+                msg := sprintf('Cannot load GETHOG bottom-up library properly:\n%s', res[2]);
+            fi:
+        fi:
+        if msg<>'' then
+            printf('\n\n%s\n', CreateString(80, '*'));
+            prints(msg);
+            error(SplitLines(msg)[1]);
+        fi:
+    fi:
+end:
+
+_check_group_function_params := proc()
+    global GroupFunctionCutoff, CladeDefinition;
+
+    if not assigned(GroupFunctionCutoff) then
+        # check that it is not under the old name
+        if type(GroupFunctionPredictionCutOff, numeric) then
+            warning('Parameter ''GroupFunctionPredictionCutOff'' has been renamed to ''GroupFunctionCutoff''. Please update parameter file accordingly');
+            error('invalid parameter name');
+        else
+            warning('Parameter ''GroupFunctionCutoff'' not defined. Using default value');
+            GroupFunctionCutoff := 0.5;
+        fi:
+    fi:
+
+    if assigned(CladeDefinition) then
+        if not member(CladeDefinition, {'none', 'false', false, 'default'}) then
+            if not type(CladeDefinition, string) or length(FileStat(CladeDefinition))=0 then
+                error('File specified in ''CladeDefinition'' does not exist');
+            fi;
+        fi:
+    elif assigned(CladeDefinitionFilename) then
+        warning('Parameter ''CladeDefinitionFilename'' has been renamed to ''CladeDefinition''. Please update parameter file accordingly');
+        error('invalid parameter name');
+    else
+        warning('Parameter ''CladeDefinition'' not defined. Using default value ''default''.');
+        CladeDefintion := 'default';
+    fi:
+end:
+
+
+_check_outgroups := proc()
+    global OutgroupSpecies;
+
+    # we don't care if species tree will not be estimated
+    if lowercase(SpeciesTree) <> 'estimate' then return() fi:
+
+    gset := {op(genomes)};
+    if OutgroupSpecies = 'none' then
+        if DoHierarchicalGroups <> false then
+            warning('Not specifying an outgroup species is strongly discouraged.' .
+                    'The HOG inference strongly depends on a correctly rooted '.
+                    'species tree. Please verify that the rooting of the estimated '.
+                    'species tree does makes sense.');
+        fi:
+    elif not type(OutgroupSpecies, {set, list}) then
+        error('invalid type of parameter ''OutgroupSpecies''. Should be a list of species names');
+    else
+        OutgroupSpecies := {op(OutgroupSpecies)};
+        if length(OutgroupSpecies) = 0 and not DoHierarchicalGroups = false then
+            error('You must specify a set of out-group species or explicitly deactivate it.');
+        fi:
+        wrong := minus(OutgroupSpecies, gset);
+        if length(wrong) > 0 then
+            error(sprintf('OutgroupSpecies contains species that are not in the '.
+                         'dataset:\n %A\n You need to fix this.', wrong));
+        fi:
+        if OutgroupSpecies = gset then
+            error('The out-group species set cannot contain all species of the dataset');
+        fi:
+    fi:
+end:
+
+end: # module

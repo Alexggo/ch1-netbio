@@ -1,0 +1,36 @@
+#
+#	Convert a Darwin object to XML
+#
+#	Gaston H. Gonnet Thu Apr 27 14:57:28 CEST 2017
+#
+XML := proc( a:anything )
+assert( nargs = 1 );
+
+if type(a,structure) then
+     sn := op(0,a);
+     dsn := disassemble(eval(sn));
+     if type(dsn,structure) and op(0,dsn) = procedure then
+	  fields := [ op(op(1,dsn)) ];
+	  assert( length(fields) >= length(a) );
+     else error(niy907) fi;
+     r := [ '<' . sn . '>' ];
+     for i to length(a) do
+	ai := op(i,a);
+	if length(ai) = 0 then next fi;
+	li := fields[i];
+	if type(li,colon(name,anything)) then li := op(1,li) fi;
+	r := append( r, '<' . li . '>' . procname(ai) . '</' . li . '>' )
+     od;
+     ConcatStrings( append( r, '</' . sn . '>' ), '' );
+elif type(a,numeric) then sprintf( '%.12g', a )
+elif type(a,string) then
+     for i to length(a) while
+	SearchString( a[i..i], 'abcdefghijklmnopqrstuvwxyz0123456789_' ) >= 0 do od;
+     if i <= length(a) then sprintf( '"%s"', a ) else a fi
+elif type(a,list) then
+     r := [];
+     for ai in a do r := append(r,procname(ai)) od;
+     '[' . ConcatStrings( r, ',' ) . ']'
+elif type(a,name=anything) then a[1] . '=' . procname(a[2])
+else error(a,niy072) fi;
+end:

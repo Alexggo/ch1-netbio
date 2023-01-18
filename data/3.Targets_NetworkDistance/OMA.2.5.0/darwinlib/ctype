@@ -1,0 +1,117 @@
+#
+#	C-type functions implemented in darwin
+#
+#	From the C man page:
+#	Warning: in darwin these are implemented for entire strings and are true when all
+#		the characters in the string are true.
+#
+# DESCRIPTION
+#       These functions check whether c, which must have the value of an unsigned char or EOF, falls into  a  certain
+#       character class according to the current locale.
+#
+#       isalnum()
+#              checks for an alphanumeric character; it is equivalent to (isalpha(c) || isdigit(c)).
+#
+#       isalpha()
+#              checks  for  an  alphabetic  character; in the standard "C" locale, it is equivalent to (isupper(c) ||
+#              islower(c)).  In some locales, there may be additional characters for which isalpha() is true--letters
+#              which are neither upper case nor lower case.
+#
+#       isascii()
+#              checks whether c is a 7-bit unsigned char value that fits into the ASCII character set.
+#
+#       isblank()
+#              checks for a blank character; that is, a space or a tab.
+#
+#       iscntrl()
+#              checks for a control character.
+#
+#       isdigit()
+#              checks for a digit (0 through 9).
+#
+#       isgraph()
+#              checks for any printable character except space.
+#
+#       islower()
+#              checks for a lower-case character.
+#
+#       isprint()
+#              checks for any printable character including space.
+#
+#       ispunct()
+#              checks for any printable character which is not a space or an alphanumeric character.
+#
+#       isspace()
+#              checks  for  white-space  characters.   In  the  "C"  and "POSIX" locales, these are: space, form-feed
+#              ('\f'), newline ('\n'), carriage return ('\r'), horizontal tab ('\t'), and vertical tab ('\v').
+#
+#       isupper()
+#              checks for an uppercase letter.
+#
+#       isxdigit()
+#              checks for a hexadecimal digits, that is, one of
+#              0 1 2 3 4 5 6 7 8 9 a b c d e f A B C D E F.
+#
+#	Gaston H. Gonnet (Oct 26th, 2013)
+#
+#	Data collected with this C program:
+# #include <ctype.h>
+# #include <stdio.h>
+# 
+# #define STR_VALUE(arg)      #arg
+# #define FUNCTION_NAME(name) STR_VALUE(name)
+# 
+# #define TEST_FUNC      isxdigit
+# #define TEST_FUNC_NAME FUNCTION_NAME(TEST_FUNC)
+# 
+# int main( int argc, char *argv ) {
+#    int c;
+#    printf( "%s_truth := [", TEST_FUNC_NAME );
+#    for( c=1; c<128; c++ ) printf( "%s,", TEST_FUNC(c) ? "true" : "false" );
+#    printf( "seq(false,128)]:\n" );
+# }
+#
+is_general := proc( s:string, class:list )
+for i to length(s) do
+    if class[AsciiToInt[s[i]]] = false then return(false) fi od;
+true
+end:
+
+isalnum_truth := [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,seq(false,128)]:
+isalnum := proc( s:string ) is_general(s,isalnum_truth) end:
+
+isalpha_truth := [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,seq(false,128)]:
+isalpha := proc( s:string ) is_general(s,isalpha_truth) end:
+
+isascii_truth := [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,seq(false,128)]:
+isascii := proc( s:string ) is_general(s,isascii_truth) end:
+
+isblank_truth := [false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,seq(false,128)]:
+isblank := proc( s:string ) is_general(s,isblank_truth) end:
+
+iscntrl_truth := [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,seq(false,128)]:
+iscntrl := proc( s:string ) is_general(s,iscntrl_truth) end:
+
+isdigit_truth := [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,seq(false,128)]:
+isdigit := proc( s:string ) is_general(s,isdigit_truth) end:
+
+isgraph_truth := [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,seq(false,128)]:
+isgraph := proc( s:string ) is_general(s,isgraph_truth) end:
+
+islower_truth := [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,seq(false,128)]:
+islower := proc( s:string ) is_general(s,islower_truth) end:
+
+isprint_truth := [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,seq(false,128)]:
+isprint := proc( s:string ) is_general(s,isprint_truth) end:
+
+ispunct_truth := [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,false,seq(false,128)]:
+ispunct := proc( s:string ) is_general(s,ispunct_truth) end:
+
+isspace_truth := [false,false,false,false,false,false,false,false,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,seq(false,128)]:
+isspace := proc( s:string ) is_general(s,isspace_truth) end:
+
+isupper_truth := [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,seq(false,128)]:
+isupper := proc( s:string ) is_general(s,isupper_truth) end:
+
+isxdigit_truth := [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,seq(false,128)]:
+isxdigit := proc( s:string ) is_general(s,isxdigit_truth) end:

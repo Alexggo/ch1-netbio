@@ -1,8 +1,0 @@
-#
-#  Identity	GhG (May 1998)
-
-Identity := proc( n:posint )
-r := CreateArray(1..n,1..n);
-for i to n do r[i,i] := 1 od;
-r
-end:

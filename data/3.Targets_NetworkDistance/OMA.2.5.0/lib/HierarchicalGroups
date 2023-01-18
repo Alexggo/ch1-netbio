@@ -1,0 +1,400 @@
+# ***** BEGIN LICENSE BLOCK *****
+# Version: MPL 2.0
+#
+# The contents of this file are subject to the Mozilla Public License Version
+# 2.0 (the "License"); you may not use this file except in compliance with
+# the License. You may obtain a copy of the License at
+# http://www.mozilla.org/MPL/2.0/
+#
+# Software distributed under the License is distributed on an "AS IS" basis,
+# WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+# for the specific language governing rights and limitations under the
+# License.
+#
+# The Original Code is OMA standalone.
+#
+# The Initial Developer of the Original Code is CBRG Research Group; 
+# ETH Zurich; Switzerland.
+# Portions created by the Initial Developer are Copyright (C) 2005-2013
+# the Initial Developer. All Rights Reserved.
+#
+# Contributor(s):
+#   Christophe Dessimoz <cdessimoz@inf.ethz.ch>
+#   Adrian Altenhoff <adrian.altenhoff@inf.ethz.ch>
+#   Stefan Zoller <stefan.zoller@inf.ethz.ch>
+#   Adrian Schneider <adrian.schneider@inf.ethz.ch>
+#   Alexander Roth <alexander.roth@inf.ethz.ch>
+#   Gaston Gonnet <gonnet@inf.ethz.ch>
+#
+# ***** END LICENSE BLOCK *****
+#  This set of function allow to compute Hierarchical orthologous groups
+#  based on the VerifiedPairs.
+#
+#  The procedure requires a genome summaries table (GS) with Lineage 
+#  information, the 'genomes'-array as well as the VPairs matrix.
+#
+#                     Adrian Altenhoff, Nov 2011
+
+module external HierarchicalGroups;
+local GenomeOffs;
+
+EdgeScore := proc(g1,n1,g2,n2)
+    m := decompress( BestMatch[g1,g2,n1]);
+    for i to length(m) while m[i,Entry]<>n2 do od:
+
+    if i>length(m) then return( 50 );
+    else return( m[i,Score100]/100 );
+    fi:
+end:
+
+    
+GetOrthologyGraphFromVPairs := proc(eNr:posint)
+    NG := length(VPairs):
+    assert( NG = length(GenomeOffs)-1 ):
+    assert( eNr <= GenomeOffs[-1] ): 
+    isDone := table(false):
+    todo := [eNr]; res := []; isDone[eNr] := true;
+    while length(todo)>0 do
+        cur := todo[1]; todo := todo[2..-1];
+        res := append(res, cur): 
+        assert( isDone[cur] );
+        g := SearchOrderedArray(cur-1, GenomeOffs):
+        nr := cur-GenomeOffs[g];
+        for g2 to NG do if g<>g2 then 
+            for nr2 in decompress(VPairs[g,g2,nr]) do
+                eNr2 := GenomeOffs[g2]+nr2;
+                if not isDone[eNr2] then 
+                    todo := append(todo, eNr2);
+                    isDone[eNr2] := true;
+                fi:
+            od 
+        fi od:
+    od:
+
+    nds := Nodes(op({op(res)})):
+    edg := []:
+    for v in nds do 
+        gV := SearchOrderedArray(v-1, GenomeOffs); nrV := v-GenomeOffs[gV];
+        for gW from gV+1 to NG do 
+            edg := append(edg, seq( Edge( EdgeScore(gV,nrV, gW, z), v, GenomeOffs[gW]+z), 
+                z=decompress(VPairs[gV,gW,nrV])));
+        od:
+    od:
+
+    edg := Edges( op({op(edg)}) ):
+    return( Graph(edg,nds) ):
+end:
+   
+
+AvgReachability := proc( G:Graph ; (steps=2):posint )
+   N := length(G['Nodes']): 
+   nrSamp := min(N, 200, max( 20, round(3*sqrt(N)) ) ):
+   reached := CreateArray(1..N):
+   adj := G['Adjacencies']:
+   for samp to nrSamp do 
+       v0 := If(nrSamp<N, Rand(1..N), samp):
+       vis := CreateString(N,'0'):
+       vis[v0] := '1'; todo := [v0]; hops := [0];
+       while length(todo) > 0 and hops[1]<steps do
+          u := todo[1]; todo := todo[2..-1]; 
+          uHop := hops[1]; hops := hops[2..-1];
+          for v in adj[u] do if vis[v]='0' then
+              todo := append(todo, v); hops := append(hops, uHop+1);
+              vis[v] := '1';
+          fi od:
+       od:
+       for i to N do if vis[i]='1' then reached[i] := reached[i]+1 fi od:
+   od:
+   return( sum(reached)/(N*nrSamp) );
+end:
+
+FindClusters := proc( G:Graph, th:TaxHierarchy, curLev:integer;
+    (avgReachCutoff=0.7):positive)
+    grs := [G]: clst := []; 
+    tStart := time(): 
+    timeLimit := If(MaxTimePerLevel<0, DBL_MAX, MaxTimePerLevel);
+    while length(grs)>0 do
+        if time()-tStart > timeLimit then break fi:
+
+        gr := grs[1]; grs := grs[2..-1];
+        cc := FindConnectedComponents(gr);
+        if length(cc)>1 then grs := append(grs, op(cc) );
+        else
+            avgReach := AvgReachability(gr);
+            if printlevel>1 then 
+                printf('Analyse Graph with %d/%d nodes/edges, %.3f reachable\n', 
+                length(gr[Nodes]), length(gr[Edges]), avgReach):
+            fi:
+            if avgReach<avgReachCutoff then
+                if length(gr[Edges])>0 then
+                    mc := MinimumCut(gr, 20):
+                    Nmc := length(mc):
+                    for i from 2 to Nmc do 
+                        g := gr minus Nodes( seq(If(j<>i,op(mc[j]),NULL),j=2..Nmc) );
+                        grs := append(grs, g);
+                    od:
+                else 
+                    clst := append(clst, seq(Graph(Edges(),Nodes(z)), z=[op(gr[Nodes])]) );
+                fi:
+            else clst := append(clst, gr); 
+            fi:
+        fi:
+    od:
+    if length(grs)>0 then
+        warning( sprintf('took too long (>%d sec) to find clusters for |G|=(%d,%d) on '.
+            '%s level. Going on on lower levels', timeLimit, length(G['Nodes']), 
+            length(G['Edges']), th['Levs',curLev]));
+
+        nextLev := NextDeeperTaxLevs( th, curLev );
+        for gr in grs do
+            if length(gr['Nodes'])>500 and AvgReachability(gr)<.5*avgReachCutoff then
+                subGraphs := SubTaxGraph(gr, [seq(th['Memb',z], z=nextLev)] );
+                for i to length(subGraphs) do if subGraphs[i]<>0 then
+                    clst := append(clst, op(procname(subGraphs[i], th, 
+                        nextLev[i], avgReachCutoff)));
+                fi od:
+            else
+                clst := append(clst, op(procname(gr, th, curLev, avgReachCutoff)) ):
+            fi:
+        od:
+    fi:
+    return( clst );
+end: 
+
+TaxHierarchy := proc(Levs,Up,Down,Memb) option noindex;
+    if nargs=4 then noeval(procname(args));
+    elif nargs=0 then procname( genomes, intersect() ):
+    elif nargs=1 and type(args[1], list(string)) then
+        procname( args[1], intersect() ):
+    elif nargs=2 and type(args[1], list(string)) and 
+         type(args[2], {set(string),intersect()}) then
+        # load all the lineages and store tree in datastructure
+        levs := []:
+        for g in args[1] do
+            levs := append(levs, op(GS[g,Lineage])):
+        od:
+        levs := [op(intersect( {op(levs),'LUCA'}, 
+            union( args[2], {seq(GS[g,SCINAME],g=args[1])} ) ))]:
+        NL := length(levs):
+
+        starts := [];
+        up := CreateArray(1..NL):
+        down := CreateArray(1..NL,{}):
+        Size := CreateArray(1..NL):
+        memb := CreateArray(1..NL,{}):
+        iLuca := SearchArray('LUCA', levs):
+        for g in args[1] do
+            gnr  := SearchArray(g, genomes):
+            iLow := SearchArray( GS[g,Lineage,-1], levs ):
+            starts := append(starts, iLow):
+            Size[iLow] := Size[iLow] + 1;
+            memb[iLow] := append(memb[iLow], gnr);
+            for i from length(GS[g,Lineage])-1 to 1 by -1 do
+                iCur := SearchArray( GS[g,Lineage,i], levs ):
+                if iCur<=0 then next fi:
+                Size[iCur] := Size[iCur] + 1;
+                memb[iCur] := append(memb[iCur], gnr):
+                up[iLow] := iCur;
+                down[iCur] := append(down[iCur], iLow);
+                iLow := iCur;
+            od:
+            if iLuca>0 then
+                up[iCur] := iLuca;
+                down[iLuca] := append(down[iLuca], iCur);
+                memb[iLuca] := append(memb[iLuca], gnr);
+            fi:
+        od:
+        # sometimes stains are anotated as being internal nodes
+        # in the taxonomy. this does not make sense. we have to 
+        # correct these situations by introducing some new leaf 
+        # levels. 
+        for gNr to length(starts) do if Size[starts[gNr]]>1 then
+            t := starts[gNr];
+            levs := append(levs, levs[t].' (disambiguate '.genomes[gNr].')');
+            NL := NL + 1;
+            starts[gNr] := NL;
+            down[t] := append(down[t], NL);
+            down := append(down,{}):
+            up := append(up, t);
+            Size := append(Size, 1):
+            memb := append(memb, {gNr}):
+        fi od:
+        if length(SearchAllArray(0,up))<>1 then
+            error('All levels need to have a common last ancestor');
+        fi:
+        procname(levs, up, down, memb);
+    elif nargs=1 and type(args[1], Tree) then
+        # local function to traverse tree and extract info. 
+        # memb, up, down need to be defined and will be modified.
+        trav:=proc(t:Tree, memb,down,up ; (idx=1):posint, h0:numeric)
+            if type(t,Leaf) then 
+                memb[idx] := {SearchArray( t['Label'], genomes)}:
+                return( {idx} );
+            else
+                lT := trav(t[Left], memb,down,up, idx, t['Height']);
+                rT := trav(t[Right],memb,down,up, lT[-1]+1,t['Height']);
+                if not assigned(h0) or |t['Height']-h0| > 1e-10 then
+                    i := rT[-1]+1;
+                    down[i] := union(lT,rT);
+                    memb[i] := union(seq(memb[z],z=down[i]));
+                    for z in down[i] do up[z] := i od:
+                    return({i});
+                else 
+                    return(union(lT,rT))
+                fi:
+            fi:
+        end:
+        # assert that species set and tree labels are congruent
+        leafSet := {seq(z['Label'], z=indets(args[1], Leaf))}:
+        genomeSet := {op(genomes)}:
+        if leafSet<>genomeSet then 
+            error(sprintf('Labels in species tree do not match with genome names: %a <--> %a',
+                minus(leafSet,genomeSet), minus(genomeSet,leafSet)));
+        fi:
+        Nnds := 2*length(genomes)-1;
+        memb := CreateArray(1..Nnds,{}):
+        up := CreateArray(1..Nnds):
+        down := CreateArray(1..Nnds,{}):
+        iLUCA := trav( args[1], memb, down, up )[1]:
+        # shorten vectors to required length
+        Nnds := iLUCA; 
+        memb := memb[1..Nnds]; up := up[1..Nnds]; down:=down[1..Nnds];
+
+        levs := CreateArray(1..Nnds):
+        levs[iLUCA] := 'LUCA';
+        for i to Nnds do if i<>iLUCA then 
+            levs[i] := ConcatStrings([seq(genomes[z],z=memb[i])],'/');
+        fi od:
+        procname(levs, up, down, memb);
+    else error('unimplemented TaxHierarchy constructor') fi:
+end:
+TaxHierarchy_type := noeval(structure(anything,TaxHierarchy)):
+CompleteClass(TaxHierarchy):
+
+GetTopLevelIdx := proc(th:TaxHierarchy)
+    return( SearchArray(0,th[Up]) ):
+end:
+
+GetTaxonomicRange := proc(th:TaxHierarchy, specs:set(posint))
+    if length(specs)=0 then error('empty species set passed'); 
+    elif length(specs)=1 then 
+        return( SearchArray(specs, th['Memb']) );
+    else
+        ndl := NextDeeperTaxLevs(th, GetTopLevelIdx(th), specs):
+        assert( th[Up,ndl[1]] = th[Up,ndl[2]]);
+        return( th[Up,ndl[1]] ):
+    fi:
+end:
+
+NextDeeperTaxLevs := proc(th:TaxHierarchy, curLev:{posint,string} ; 
+    invSpecs:set(posint)) 
+
+    curNr := If(type(curLev,posint), curLev, SearchArray(curLev, th['Levs']));
+    do 
+       while length(th['Down',curNr])=1 do
+          curNr := th['Down',curNr,1];
+       od:
+       
+       # curNr points now to the last level having no change in set of species 
+       nextLevNrs := th['Down',curNr]; lNL := length(nextLevNrs): 
+       if assigned(invSpecs) then
+           # check, whether all involved species belong to same subclade. if so, 
+           # go on, otherwise break
+           nextLevUsed := [seq( If(length(intersect(th[Memb,z],invSpecs))>0,1,0),
+                                z=nextLevNrs)];
+           if sum(nextLevUsed)=1 then 
+              curNr := nextLevNrs[ SearchArray(1,nextLevUsed) ];
+              next;
+           else 
+              nextLevNrs := [seq( If(nextLevUsed[i]=1,nextLevNrs[i],NULL), 
+                  i=1..lNL)];
+           fi:
+       fi:
+       return( nextLevNrs ):
+    od:
+end:
+
+
+SubTaxGraph := proc(G:Graph, nextLevs:list(set(posint)) )
+   lNL := length(nextLevs):
+   NodesOfSubG := CreateArray(1..lNL,[]):
+   nds := {op(G[Nodes])}:
+   for u in nds do 
+       g := SearchOrderedArray(u-1, GenomeOffs);
+       for i to lNL while not member(g,nextLevs[i]) do od:
+       if i>lNL then error(u.'('.genomes[g].') is not expected to appear') fi:
+       NodesOfSubG[i] := append(NodesOfSubG[i], u):
+   od:
+   return( [seq( If(length(NodesOfSubG[i])<=0, 0,
+            G minus Nodes( op( minus(nds, {op(NodesOfSubG[i])})))
+            ), i=1..lNL)] );
+end:
+
+HierarchyR := proc( G, th, levInd, alpha ; (lev=-1):integer )
+    N := length(G[Nodes]); M := length(G[Edges]):
+    if N=1 then return( G[Nodes,1] );
+    elif M=0 then return( ParalogousCluster(op(G[Nodes])) ):
+    fi:
+    # in case of early abort
+    if lev=0 then return( OrthologousCluster(op(G[Nodes])) ) fi:
+
+    orgNrs  := {seq( SearchOrderedArray(u-1, GenomeOffs), u=[op(G[Nodes])])}:
+    nextLev := NextDeeperTaxLevs( th, levInd, orgNrs );
+    labelLev := th['Levs', th['Up',nextLev[1]]];
+    
+    subGraphs := SubTaxGraph(G, [seq(th['Memb',z], z=nextLev)] );
+    h := [];
+    for i to length(subGraphs) do if subGraphs[i]<>0 then
+        subCluster := FindClusters( subGraphs[i], th, nextLev[i], alpha ):
+        if length(subCluster)>1 then
+           h := append(h, ParalogousCluster( 
+              seq(HierarchyR( z, th, nextLev[i], alpha, lev-1 ), z=subCluster)) );
+        else h := append(h, HierarchyR(subCluster[1], th, nextLev[i], alpha, lev-1) );
+        fi:
+    fi od:
+    if length(h)>1 then return( OrthologousCluster(labelLev, op(h)) ):
+    else return( op(h) ):
+    fi:
+end:
+
+HierarchicalGroups := proc( ;(alpha=.65):positive, 
+    (TaxLevels=NULL):{list(string),Tree} )
+    external GenomeOffs;
+
+    if alpha>1 then error('0 < alpha <= 1') fi:
+    NS := length(genomes);
+    GenomeOffs := CreateArray(1..NS+1):
+    for i to NS do
+        GenomeOffs[i+1] := GenomeOffs[i]+GS[genomes[i],'TotEntries'];
+    od:
+    NP := GenomeOffs[NS+1];
+    
+    th := TaxHierarchy( TaxLevels ):
+    topLevelNr := GetTopLevelIdx( th ):
+    
+    protSeen := CreateString(NP,'0'):
+    prot2Group := CreateArray(1..NP):
+    HOG := [];
+    cNr := cnt := 0; 
+    for p to NP do 
+        if protSeen[p]='1' then next fi:
+        
+        G := GetOrthologyGraphFromVPairs(p):
+        nNodes := length(G['Nodes']);
+        for u in G['Nodes'] do protSeen[u]:='1'; cnt := cnt+1; od:
+        topClusters := FindClusters( G, th, topLevelNr, alpha ):
+        for c in topClusters do
+            if length(c[Nodes])=1 then next fi: # singletons will be left out
+            cNr := cNr+1;
+            for u in c[Nodes] do prot2Group[u] := cNr od:
+            h := HierarchyR( c, th, topLevelNr, alpha ):
+            HOG := append(HOG, h):
+        od:
+        printf('CC of %d proteins done (%.2f%%)\n', nNodes, 100*cnt/NP);
+    od:
+    printf('Hierarchical Group computation finished. \n');
+    printf('  Found %d toplevel groups\n\n', cNr);
+    return( HOG ):
+end:
+
+end: #module

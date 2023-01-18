@@ -43,8 +43,7 @@ tree_nw$tip.label <- c("ebw","ecr","pae","pau","seo","stm")
 
 get_ppx <- function(set_name,start,end){
   print(paste(start,'to',end))
-full_dataset <- read_csv(paste0("data/3.InteractionScores_tSNE/all_ppx_large_",
-  set_name,".csv"))
+full_dataset <- read_csv(paste0("results/",set_name,"/","all_ppx_large_",set_name,".csv"))
 
 mat <- full_dataset[,19:24]%>% as.matrix() |> t()
 

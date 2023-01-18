@@ -1,0 +1,13 @@
+init := proc ()
+  global DM;
+  ReadDb ('~darwin/v2/source/test/enolase');
+  DM := CreateDayMatrix (NewLogPAM1, 250)
+end:
+job := proc ()
+  OpenWriting (tmpfile);
+  for i to entry - 1 do
+    lprint (LocalAlign (Match (Entry (i, entry)), DM), ':')
+  od;
+  OpenWriting (terminal);
+  ReadRawFile (tmpfile)
+end:

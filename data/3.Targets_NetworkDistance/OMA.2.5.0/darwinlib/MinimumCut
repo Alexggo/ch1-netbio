@@ -1,0 +1,114 @@
+#
+#	Karger's algorithm for minimum cut, GG's version.  (Many differences
+#	from Karger's algorithm)
+#
+#	Modified to accept weights.  If the weights of the Edges (1st component)
+#	are all 0, then it works as unweighted, else it computes the weighted
+#	minimum cut.  The weights cannot be negative.
+#
+#	Gaston H. Gonnet (Feb 21st, 2012)
+#
+
+MinimumCut2 := proc( g:Graph ) global MinimumCut_value;
+
+ns := sort([op(g[Nodes])]):
+n := length(ns);
+es := [ seq( [w[1],SearchOrderedArray(w[2],ns),SearchOrderedArray(w[3],ns)],
+	w=[op(g[Edges])] )]:
+if not type(es,list([nonnegative,posint,posint])) then
+    error(g,'edge weights are negative or non-numeric, or graph invalid') fi;
+
+MinimumCut_value := [DBL_MAX];
+mc := MinimumCut_R( es, length(es), [seq(i,i=1..n)], n, max( seq(w[1],w=es) ) );
+[ MinimumCut_value[1],
+  Nodes( seq( ns[i], i=MinimumCut_value[2] )),
+  Nodes( seq( ns[i], i=MinimumCut_value[3] )) ]
+end:
+
+
+# recursive call, es may be permuted for i <= ne0 and nn is destroyed
+MinimumCut_R := proc( es:list, ne0:posint, nn:list(posint), tn0:posint, maxwei )
+global MinimumCut_value;
+
+ne := ne0;  tn := tn0;  n := length(nn);
+
+if tn <= Small then
+    # solve directly
+    uniq := [ op({op(nn)}) ];
+    assert( length(uniq) = tn );
+    nu := CreateArray(1..n);
+    for i to n do nu[i] := SearchArray(nn[i], uniq) od;
+
+    # count edges/weights between remaining vertices
+    cnt := CreateArray(1..tn,1..tn);
+    if maxwei=0 then
+         for ie to ne do
+	     i1 := nu[es[ie,2]];
+	     i2 := nu[es[ie,3]];
+	     cnt[i1,i2] := cnt[i2,i1] := cnt[i1,i2]+1
+         od:
+    else for ie to ne do
+             i1 := nu[es[ie,2]];
+             i2 := nu[es[ie,3]];
+             cnt[i1,i2] := cnt[i2,i1] := cnt[i1,i2]+es[ie,1]
+         od:
+    fi;
+
+    # try all non-empty partitions
+    class := CreateArray(1..tn);
+    class[2] := 1;
+    mc := DBL_MAX;
+    do  mc := min( mc, sum( sum( If( class[i1] = class[i2], 0, cnt[i1,i2]),
+		i2=i1+1..tn), i1=1..tn ));
+	if mc < MinimumCut_value[1] then
+	    MinimumCut_value := [mc,
+	        [ seq( If( class[nu[i]]=0,i,NULL), i=1..n) ],
+	        [ seq( If( class[nu[i]]=1,i,NULL), i=1..n) ] ]
+	fi;
+	for i from 2 to tn while class[i] = 1 do class[i] := 0 od;
+	if i > tn then break fi;
+	class[i] := 1;
+    od:
+    return(mc)
+fi;
+
+# reduce number of nodes by randomly collapsing edges
+tn2 := min( tn-1, max( Small2, ceil(tn/Factor) ));
+while tn > tn2 do
+
+    ie := ceil( Rand()*ne );
+    e := es[ie];
+    if e[1] < Rand()*maxwei then next fi;
+
+    n1 := e[2];  while nn[n1] <> n1 do n1 := nn[n1] od;
+    n2 := e[3];  while nn[n2] <> n2 do n2 := nn[n2] od;
+    if n1 <> n2 then
+         # collapsing an edge, joining two nodes
+         nn[e[2]] := nn[e[3]] := nn[n1] := n2;
+         tn := tn-1;
+    else nn[e[2]] := n1;
+	 nn[e[3]] := n2;
+    fi;
+    t := es[ie];  es[ie] := es[ne];  es[ne] := t;
+    ne := ne-1;
+od;
+
+# update completely nn renumbering vector
+for i to n do n1 := i; while nn[n1] <> n1 do n1 := nn[n1] od;  nn[i] := n1 od;
+# remove all edges of collapsed nodes
+for ie while ie <= ne do
+    if nn[es[ie,2]] = nn[es[ie,3]] then
+	t := es[ie];  es[ie] := es[ne];  es[ne] := t;
+	ne := ne-1;
+	ie := ie-1
+    fi
+od;
+
+# recursive calls
+if tn > Small then
+     maxwei2 := max( seq( es[i,1], i=1..ne ));
+     min( MinimumCut_R( es, ne, copy(nn), tn, maxwei2 ),
+          MinimumCut_R( es, ne, nn, tn, maxwei2 ) )
+else MinimumCut_R( es, ne, nn, tn, maxwei ) fi
+end:
+
