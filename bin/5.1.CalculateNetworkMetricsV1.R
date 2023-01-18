@@ -93,7 +93,7 @@ gr.vert <- gr.vert[,]
 ##-----------------------------------------------------------------------------
 # Calculate path.length, k-edge connectivity,
 # and node degree for the possible targets.
-total_sample <- 4950
+total_sample <- 378
 S_value1 <- (1+sqrt(8*total_sample+1))/2
 S_value2 <- (1-sqrt(8*total_sample+1))/2
 S_value <- max(S_value1,S_value2)
@@ -355,7 +355,7 @@ df_target_tot |>
   arrange(K.edge) |> 
   arrange(DRUG_ID) |> 
   arrange(network) |>  
-  write_excel_csv(paste0("results/","df_target_metrics_",set_name,".csv"))
+  write_excel_csv2(paste0("results/","df_target_metrics",".csv"))
 
 
 # Calculate the average per drug pair.
@@ -438,7 +438,7 @@ df_DDI_tot <- rbind(df_DDI_targ,df_DDI_nottarg)
 
 
 df_DDI_tot    |> 
-  write_excel_csv(paste0("results/","df_DDI_metrics_",set_name,".csv"))
+  write_excel_csv2(paste0("results/","df_DDI_metrics",".csv"))
 
 
 # plot networks
@@ -448,13 +448,13 @@ for (i in seq_along(list_graphs)) {
   g1 <- list_graphs[[i]]
   names <- V(g1) |>names()
   print(net[i])
-  value1 <- names %in% possible_targets |>
+  value1 <- names %in% all_targets |>
     sum()
-  value2 <- drug_mapping$Drug[possible_targets %in% names] |>
+  value2 <- drug_mapping$Drug[all_targets %in% names] |>
     unique() |>
     length()
-  V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
-  V(g1)$size <- ifelse(V(g1) %in% possible_targets, 40, 5)
+  V(g1)$color <- ifelse(names %in% all_targets, "red", "lightblue")
+  V(g1)$size <- ifelse(V(g1) %in% all_targets, 40, 5)
   V(g1)$label.cex <- 0.3
   v.number <- V(g1) |>
     length()
@@ -478,13 +478,13 @@ for (i in seq_along(list_graphs)) {
   g1 <- list_graphs[[i]]
   names <- V(g1) |>names()
   print(net[i])
-  value1 <- names %in% possible_targets |>
+  value1 <- names %in% all_targets |>
     sum()
-  value2 <- drug_mapping$Drug[possible_targets %in% names] |>
+  value2 <- drug_mapping$Drug[all_targets %in% names] |>
     unique() |>
     length()
-  V(g1)$color <- ifelse(names %in% possible_targets, "red", "lightblue")
-  V(g1)$size <- ifelse(V(g1) %in% possible_targets, 40, 5)
+  V(g1)$color <- ifelse(names %in% all_targets, "red", "lightblue")
+  V(g1)$size <- ifelse(V(g1) %in% all_targets, 40, 5)
   V(g1)$label.cex <- 0.3
   v.number <- V(g1) |>length()
   mean.length <- average.path.length(g1)

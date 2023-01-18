@@ -7,18 +7,16 @@ editor: source
 ```{r}
 library(pacman)
 p_load(igraph,tidyverse,BioNet,ape,geomorph,matrixStats,
-       ComplexHeatmap,ggpubr,plotrix,tidymodels,patchwork,here)
-library(EnvStats) # for adding sample size
+       ComplexHeatmap,ggpubr,plotrix,tidymodels,patchwork,here,EnvStats)
 options(warn = -1)
-
+set_name <- "allddi"
 # VISUALIZATION/STATS
 
 # List 1 contains the complete dataset for each network.
 # df_DDI_tot contains all networks combined.
 font_size=2
 
-df_DDI_tot <- read_csv2(file.path("data/5.Targets_NetworkDistance",
-                                 "df_DDI_metrics.csv")) |> 
+df_DDI_tot <- read_csv(paste0("results/","df_DDI_metrics",".csv")) |> 
   mutate(int_sign_ebw=factor(int_sign_ebw,levels=c("Synergy","Additivity","Antagonism","Sample_nodes"))) |> 
   mutate(int_sign_ecr=factor(int_sign_ecr,levels=c("Synergy","Additivity","Antagonism","Sample_nodes"))) |> 
   mutate(int_sign_stm=factor(int_sign_stm,levels=c("Synergy","Additivity","Antagonism","Sample_nodes"))) |> 
@@ -28,8 +26,7 @@ df_DDI_tot <- read_csv2(file.path("data/5.Targets_NetworkDistance",
   mutate(connection_onoff=ifelse(mean.k.edge==0,"FALSE","TRUE")) |> 
   mutate(connection_onoff=factor(connection_onoff,levels = c("TRUE","FALSE")))
 
-df_target_tot <- read_csv(file.path("data/5.Targets_NetworkDistance",
-                                   "df_target_metrics.csv"))
+df_target_tot <- read_csv(paste0("results/","df_target_metrics",".csv"))
 ```
 
 # Figures Network metric \~ interaction score.
@@ -204,6 +201,7 @@ plot_net_num <- function(net_sel,var_sel,str_name){
     plot(pl1)
 }
 
+plot_net_num(1,1,1)
 ```
 
 ```{r}
@@ -217,7 +215,7 @@ conn_type <- function(net_sel,str_name){
   str_var <- strains[str_name]
   df2 <- df_DDI_tot |>
     filter(network==net[net_sel]) |> 
-    select(drug_pair,connection_onoff,str_var)
+    select(DRUG_ID,connection_onoff,str_var)
   
   colnames(df2)[3] <- "str_var"
   pl2 <- df2 |>  group_by(str_var,connection_onoff) |> 
@@ -259,20 +257,20 @@ rate_adjcon <- function(net_sel,var_sel){
   
   df3 <- df_DDI_tot |>
   filter(network==net[net_sel]) |> 
-  select(sigma.rate,max.adjacency,connection_onoff,network) |> 
+  select(sigma.rate_all,max.adjacency,connection_onoff,network) |> 
   mutate(max.adjacency=as.logical(max.adjacency)) |> 
   mutate(max.adjacency=as.character(as.logical(max.adjacency))) |> 
   mutate(connection_onoff=as.character(connection_onoff)) |> 
-  select(sigma.rate,var_1,network)
+  select(sigma.rate_all,var_1,network)
   
   colnames(df3)[2] <- "var_name"
   
   max_k <- df3  |> 
-        select(sigma.rate) |> 
+        select(sigma.rate_all) |> 
         max()
       
   min_k <- df3  |> 
-        select(sigma.rate) |> 
+        select(sigma.rate_all) |> 
         min()
       
       len_k <- max_k - min_k
@@ -281,7 +279,7 @@ rate_adjcon <- function(net_sel,var_sel){
       bot2 <- min_k - len_k*0.2
   
   pl3 <- df3 |> 
-    ggplot(aes(y=sigma.rate,x=var_name,
+    ggplot(aes(y=sigma.rate_all,x=var_name,
              fill=var_name))+
   geom_boxplot()+
   stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
@@ -326,23 +324,22 @@ sup_h <- conn_type(3,1)+
 ```{r}
 # Evolutionary rates ~ int_type/distance/connectivity/node 
 # Fixed below this
-df_target1 <- left_join(df_target_tot,df_DDI_tot,by="drugdrug") |> 
+df_target1 <- left_join(df_target_tot,df_DDI_tot,by="DRUG_ID") |> 
   mutate(network=network.x) |> 
   filter(network==net[1]|network==net[3])
 
-df <- read_csv(file.path("data/4.PhylogeneticComparativeMethods",
-                                 "DDI_table_rates_all.csv"))
+df <- read_csv(paste0("results/",set_name,"/","DDI_table_rates_",set_name,".csv"))
 
 
-df_comb <- left_join(df,df_target1,by="drugdrug")
+df_comb <- left_join(df,df_target1,by="DRUG_ID")
 # mean path ~ interaction (Syn,Ant,Add,Add-Ant,Ant-Syn,Add-Syn,Add-Ant-Syn)
 
 # Mean.rate. 5A
 a <- df_comb |>
-  select(type,sigma.rate)  |> 
+  select(type,sigma.rate_all)  |> 
   group_by(type) |> 
-  summarise(Mean.rate=mean(sigma.rate),
-            sem.rate=std.error(sigma.rate),
+  summarise(Mean.rate=mean(sigma.rate_all),
+            sem.rate=std.error(sigma.rate_all),
             count=n()) |> 
   ungroup() |> 
   ggplot(aes(x=type,y=Mean.rate))+
@@ -385,8 +382,8 @@ b <- df |>
   mutate(sum_g=ebw_g+ecr_g+seo_g+stm_g+pae_g+pau_g) |> 
   distinct()|> 
   group_by(sum_g) |> 
-  summarise(Mean.rate=mean(sigma.rate),
-            sem.rate=std.error(sigma.rate),
+  summarise(Mean.rate=mean(sigma.rate_all),
+            sem.rate=std.error(sigma.rate_all),
             count=n()) |> 
   ungroup() |> 
   ggplot(aes(x=sum_g,y=Mean.rate))+
@@ -402,7 +399,7 @@ b <- df |>
 
 # Rates ~ Interaction Type (ebw) (PPI). 5C
 c <- df_target1 |>
-  ggline(x = "int_sign_ebw.x", y = "sigma.rate.y", add = "mean_se",
+  ggline(x = "int_sign_ebw.x", y = "sigma.rate_all.y", add = "mean_se",
          group = "network", col="network")+
   xlab("Type of interaction (ebw)")+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
@@ -422,7 +419,7 @@ d <- df_target1 |>
                                                                            ifelse(path.length==5,"5",
                                                                                   ifelse(path.length>=6,">6","Error"))))))))) |> 
   mutate(path.length.corr=factor(path.length.corr,levels=c("0","1","2","3","4","5",">6","Not connected","Error"))) |>
-  ggline(x = "path.length.corr", y = "sigma.rate.x", add = c("mean_se"),
+  ggline(x = "path.length.corr", y = "sigma.rate_all.x", add = c("mean_se"),
          group = "network", col="network",linetype = 1)+
   xlab("Path length")+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
@@ -430,7 +427,7 @@ d <- df_target1 |>
   theme(legend.position = "bottom")
 
 # Rates ~ Interaction Type (all strains) (all networks).
-df_target1 |> ggline(x = "sum_g.y", y = "sigma.rate.y", add = "mean_se",
+df_target1 |> ggline(x = "sum_g.y", y = "sigma.rate_all.y", add = "mean_se",
                      group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif",
                      label.y = c(40, 40, 40))+
@@ -445,7 +442,7 @@ df_target1 |> ggline(x = "sum_g.y", y = "sigma.rate.y", add = "mean_se",
 sup_d <- df_DDI_tot |>
   filter(network==net[1]|network==net[3]) |> 
   filter(!is.infinite(mean.path.length)) |> 
-  select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,mean.path.length)  |> 
+  select(network,sigma.rate_all,clusters,DRUG_ID,connection_onoff,type,mean.path.length)  |> 
   distinct() |> 
   group_by(type,network) |> 
   summarise(Mean.path=mean(mean.path.length),
@@ -467,7 +464,7 @@ sup_d <- df_DDI_tot |>
 #Mean.K.edge
 sup_e <- df_DDI_tot |>
   filter(network==net[1]|network==net[3]) |> 
-  select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,mean.path.length,mean.k.edge)  |> 
+  select(network,sigma.rate_all,clusters,DRUG_ID,connection_onoff,type,mean.path.length,mean.k.edge)  |> 
   filter(!is.infinite(mean.path.length)) |> 
   distinct() |> 
   group_by(type,network) |> 
@@ -491,7 +488,7 @@ sup_e <- df_DDI_tot |>
 # Mean Deg
 sup_f <- df_DDI_tot |>
   filter(network==net[1]|network==net[3]) |> 
-  select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,mean.path.length,
+  select(network,sigma.rate_all,clusters,DRUG_ID,connection_onoff,type,mean.path.length,
          mean.mean.degree)  |> 
   distinct() |> 
   group_by(type,network) |> 
@@ -514,7 +511,7 @@ sup_f <- df_DDI_tot |>
 
 sup_i <- df_DDI_tot |>
   filter(network==net[1]|network==net[3]) |> 
-  select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,mean.path.length,
+  select(network,sigma.rate_all,clusters,DRUG_ID,connection_onoff,type,mean.path.length,
          mean.mean.degree,mean.k.edge) |> 
   distinct() |> 
   mutate(mean.k.group=ifelse(mean.k.edge<=5,"0-5",
@@ -522,7 +519,7 @@ sup_i <- df_DDI_tot |>
                                     ifelse(mean.k.edge<=20,"10-20",
                                            ifelse(mean.k.edge>=20,">20","error"))))) |> 
   mutate(mean.k.group=factor(mean.k.group,levels=c("0-5","5-10","10-20",">20","error"))) |>
-  ggline(x = "mean.k.group", y = "sigma.rate", add = "mean_se",
+  ggline(x = "mean.k.group", y = "sigma.rate_all", add = "mean_se",
          group = "network", col="network")+
   xlab("K edge connectivity bettwen target proteins")+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
@@ -532,7 +529,7 @@ sup_i <- df_DDI_tot |>
 
 sup_j <- df_DDI_tot |>
   filter(network==net[1]|network==net[3]) |> 
-  select(network,sigma.rate,clusters,drug_pair,connection_onoff,type,mean.path.length,
+  select(network,sigma.rate_all,clusters,DRUG_ID,connection_onoff,type,mean.path.length,
          mean.mean.degree) |> 
   distinct() |> 
   mutate(mean.deg.group=ifelse(mean.mean.degree<=5,"0-5",
@@ -540,7 +537,7 @@ sup_j <- df_DDI_tot |>
                                     ifelse(mean.mean.degree<=20,"10-20",
                                            ifelse(mean.mean.degree>=20,">20","error"))))) |> 
   mutate(mean.deg.group=factor(mean.deg.group,levels=c("0-5","5-10","10-20",">20","error"))) |>
-  ggline(x = "mean.deg.group", y = "sigma.rate", add = "mean_se",
+  ggline(x = "mean.deg.group", y = "sigma.rate_all", add = "mean_se",
          group = "network", col="network")+
   xlab("Average degree between target proteins")+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
@@ -580,19 +577,19 @@ df_DDI_tot |>
                       "Meropenem","Sulfamonomethoxine","Trimethoprim")) |>
   filter(Drug2 %in% c("A22","Novobiocin","Ciprofloxacin",
                       "Meropenem","Sulfamonomethoxine","Trimethoprim")) |> 
-  select(network,drug_pair,clusters,sigma.rate,
+  select(network,DRUG_ID,clusters,sigma.rate_all,
          mean.path.length,mean.k.edge,mean.mean.degree,
          starts_with("int"),starts_with("SR")) |> 
-  filter(drug_pair %in% c("Sulfamonomethoxine_Trimethoprim",
+  filter(DRUG_ID %in% c("Sulfamonomethoxine_Trimethoprim",
                           "A22_Novobiocin",
                           "Ciprofloxacin_Meropenem")) |> 
-  arrange(drug_pair,network) |> 
+  arrange(DRUG_ID,network) |> 
   write.csv("data/5.Targets_NetworkDistance/sup_table1.csv",row.names = FALSE)
 
 
 
 #Rates ~ interaction type and resistance type.
-df_DDI_tot |> ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
+df_DDI_tot |> ggline(x = "int_sign_ebw", y = "sigma.rate_all", add = "mean_se",
                      group = "network", palette = "jco")+
   stat_compare_means(aes(group = network), label = "p.signif",
                      label.y = c(40, 40, 40))+
@@ -604,6 +601,6 @@ df_DDI_tot |> ggline(x = "int_sign_ebw", y = "sigma.rate", add = "mean_se",
 
 df1 <- df_DDI_tot |> 
   filter(network==net[1]|network==net[3]) |> 
-  filter(drug_pair %in% c("A22_Novobiocin","Ciprofloxacin_Meropenem",
+  filter(DRUG_ID %in% c("A22_Novobiocin","Ciprofloxacin_Meropenem",
                           "Sulfamonomethoxine_Trimethoprim"))
 ```
