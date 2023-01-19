@@ -5,10 +5,12 @@
 #' 
 ## -----------------------------------------------------------------------------
 library(pacman)
+library(devtools)
 p_load(tidyverse,RColorBrewer,plotly,dendextend,ggrepel,hrbrthemes,
-       ggforce,ComplexHeatmap,ggbiplot,factoextra,OUwie,
+       ggforce,ggbiplot,factoextra,OUwie,
        ouch,geiger,ape,phangorn,phytools,treeio,ggtree)
-
+# install_github("jokergoo/ComplexHeatmap", ref = '3.14')
+# library(ComplexHeatmap)
 
 #' Input files, phylogenetic tree and matrix.
 #' 

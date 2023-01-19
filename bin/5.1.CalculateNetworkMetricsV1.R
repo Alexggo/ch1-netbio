@@ -12,12 +12,12 @@ p_load(igraph, tidyverse, matrixStats,future.apply)
 significant_figures <- 3
 
 full_df_all <- read.csv(paste0("results/","allddi","/","DDI_table_rates_","allddi",".csv")) |> 
-  rename(clusters_all=clusters) |> 
-  rename(sigma.rate_all=sigma.rate)
+  rename(clusters_all=clusters,
+         sigma.rate_all=sigma.rate) 
 
 full_df_set <- read.csv(paste0("results/","sen2in1","/","DDI_table_rates_","sen2in1",".csv"))|> 
-  rename(clusters_set=clusters) |> 
-  rename(sigma.rate_set=sigma.rate) |>
+  rename(clusters_set=clusters,
+         sigma.rate_set=sigma.rate) |> 
   select(drug_pair,clusters_set,sigma.rate_set) 
 
 full_df <- left_join(full_df_all,full_df_set,by="drug_pair") |> 
@@ -264,8 +264,8 @@ df_join1 <- df_join |>
   lapply(left_join,drug_mapping2, by = "KEGG2") |>
   lapply(distinct) |> 
   lapply(select,-c("is.target.1","is.target.2")) |> 
-  lapply(mutate,Drug1=ifelse(is.na(Drug1),"Sample_nodes",Drug1)) |> 
-  lapply(mutate,Drug2=ifelse(is.na(Drug2),"Sample_nodes",Drug2))
+  lapply(mutate,Drug1=ifelse(is.na(Drug1),"Non-target nodes",Drug1)) |> 
+  lapply(mutate,Drug2=ifelse(is.na(Drug2),"Non-target nodes",Drug2))
 
 df_join2 <- list()
 for (j in seq_along(df_join1)){
@@ -331,17 +331,17 @@ df_join3 <- df_join2 |>
   lapply(mutate, DRUG_ID=paste0(Drug1,"-",Drug2)) |>
   lapply(distinct) |>
   lapply(arrange,DRUG_ID) |> 
-  lapply(filter,Drug1<Drug2|Drug1=="Sample_nodes")
+  lapply(filter,Drug1<Drug2|Drug1=="Non-target nodes")
 
 dist_conn_deg_adj <- lapply(df_join3, left_join, full_df, by = "DRUG_ID") |>
   lapply(distinct) |> 
-  lapply(mutate,DRUG_ID=ifelse(DRUG_ID=="Sample_nodes-Sample_nodes","Sample_nodes",DRUG_ID)) |> 
-  lapply(mutate,int_sign_ebw=ifelse(is.na(int_sign_ebw),"Sample_nodes",int_sign_ebw)) |> 
-  lapply(mutate,int_sign_ecr=ifelse(is.na(int_sign_ecr),"Sample_nodes",int_sign_ecr)) |>
-  lapply(mutate,int_sign_seo=ifelse(is.na(int_sign_seo),"Sample_nodes",int_sign_seo)) |>
-  lapply(mutate,int_sign_stm=ifelse(is.na(int_sign_stm),"Sample_nodes",int_sign_stm)) |>
-  lapply(mutate,int_sign_pae=ifelse(is.na(int_sign_pae),"Sample_nodes",int_sign_pae)) |>
-  lapply(mutate,int_sign_pau=ifelse(is.na(int_sign_pau),"Sample_nodes",int_sign_pau)) 
+  lapply(mutate,DRUG_ID=ifelse(DRUG_ID=="Non-target nodes-Non-target nodes","Non-target nodes",DRUG_ID)) |> 
+  lapply(mutate,int_sign_ebw=ifelse(is.na(int_sign_ebw),"Non-target nodes",int_sign_ebw)) |> 
+  lapply(mutate,int_sign_ecr=ifelse(is.na(int_sign_ecr),"Non-target nodes",int_sign_ecr)) |>
+  lapply(mutate,int_sign_seo=ifelse(is.na(int_sign_seo),"Non-target nodes",int_sign_seo)) |>
+  lapply(mutate,int_sign_stm=ifelse(is.na(int_sign_stm),"Non-target nodes",int_sign_stm)) |>
+  lapply(mutate,int_sign_pae=ifelse(is.na(int_sign_pae),"Non-target nodes",int_sign_pae)) |>
+  lapply(mutate,int_sign_pau=ifelse(is.na(int_sign_pau),"Non-target nodes",int_sign_pau)) 
 names(dist_conn_deg_adj) <- net
 
 df_target_tot  <- bind_rows(dist_conn_deg_adj, .id = "network") |> 
@@ -365,7 +365,7 @@ df_target_tot |>
 # average of network metrics for each unique drug pair.
 
 network_values_targ <- df_target_tot  |> 
-  filter(DRUG_ID!="Sample_nodes") |> 
+  filter(DRUG_ID!="Non-target nodes") |> 
   group_by(network,DRUG_ID) |> 
   summarise(mean.path.length = ifelse(mean(path.length,na.rm=TRUE)==Inf,Inf,round(mean(path.length,na.rm=TRUE),significant_figures)),
             mean.k.edge = round(mean(K.edge, na.rm = TRUE),significant_figures),
@@ -399,7 +399,7 @@ df_DDI_targ  <- right_join(full_df,network_values_targ, by = "DRUG_ID") |>
 
 # df_nottarget_tot
 df_nottarget_tot <- df_target_tot |> 
-  filter(DRUG_ID=="Sample_nodes")|> 
+  filter(DRUG_ID=="Non-target nodes")|> 
   mutate(DRUG_ID=KEGG_ID)
 
 network_values_nottarg <- df_nottarget_tot |> 
