@@ -4,8 +4,6 @@
 #' title: "3.4.Modularity test comparison"
 #' author: "Alex Gil"
 #' date: "1/26/2021"
-#' output: html_document
-#' 
 #' 
 #' 
 ## -------------------------------------------------------------------------
@@ -36,8 +34,8 @@ for (i in 1:dim(labels_df)[2]){
 }
 
 number_of_clusters <- labels |> 
-  map(unique) |> 
-  map_dbl(length)
+  lapply(unique) |> 
+  lapply(length)
 
 CR <- c()
 CInterval <- list()
@@ -120,6 +118,8 @@ tree_nw$tip.label <- c("ebw","ecr","pae","pau","seo","stm")
 dat <- dataset %>%  
   select(ebw,ecr,seo,stm,pae,pau) %>% t() 
 
+#To load previous test
+#load(file = paste0('results/',set_name,'/rate_tests_most_modular.RData'))
 # To run test, run the following:
 RT_list <- list()
 for (i in 1:dim(filtered_df)[1]){
