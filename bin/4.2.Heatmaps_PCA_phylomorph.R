@@ -5,12 +5,9 @@
 #' 
 ## -----------------------------------------------------------------------------
 library(pacman)
-library(devtools)
 p_load(tidyverse,RColorBrewer,plotly,dendextend,ggrepel,hrbrthemes,
        ggforce,ggbiplot,factoextra,OUwie,
-       ouch,geiger,ape,phangorn,phytools,treeio,ggtree)
-# install_github("jokergoo/ComplexHeatmap", ref = '3.14')
-# library(ComplexHeatmap)
+       ouch,geiger,ape,phangorn,phytools,treeio,ggtree,ComplexHeatmap)
 
 #' Input files, phylogenetic tree and matrix.
 #' 
@@ -29,9 +26,10 @@ p_load(tidyverse,RColorBrewer,plotly,dendextend,ggrepel,hrbrthemes,
 #' 
 ## -----------------------------------------------------------------------------
 
-set_name <- "allddi" #allddi sen2in1
+set_name <- "allddi" #sen2in1 allddi
 full_df <- read.csv(paste0("results/",set_name,"/","DDI_table_rates_",set_name,".csv"))
 
+###
 # Read phylogenetic tree
 species <- c("Escherichia_coli_K-12_ebw",
              "Escherichia_coli_O8_IAI1_ecr",
@@ -48,31 +46,30 @@ not.species <- tree_nw$tip.label[!(tree_nw$tip.label %in% species)]
 tree_nw <- drop.tip(tree_nw,not.species)
 
 tree_nw$tip.label <- c("ebw","ecr","pae","pau","seo","stm")
-
+####
+sum_df <- full_df  |> 
+  group_by(clusters,sigma.rate) |> 
+  dplyr::summarize(n = n())|> 
+  arrange(desc(sigma.rate))
 
 mat_red <- full_df %>% select(ebw,ecr,stm,seo,pae,pau) %>%as.matrix |> t()
 colnames(mat_red) <- full_df$drug_pair
 
-dend <- hclust(dist(mat_red,method="euclidean"),method="average")  
-
-annot <- full_df %>% select(drug_pair,drug_category1,drug_category2,categorycategory,
+annot <- full_df |> 
+  select(drug_pair,drug_category1,drug_category2,categorycategory,
                             targeted_cellular_process1,targeted_cellular_process2,processprocess,
                             use1,use2,useuse,
                             clusters,
                             sigma.rate,
-                            SR_score_total,sum_g)   %>% 
+                            SR_score_total,sum_g)    |>  
   mutate(category=ifelse(drug_category1==drug_category2,"Same","Different"),
          use=ifelse(use1==use2,"Same","Different"),
          process=ifelse(targeted_cellular_process1==targeted_cellular_process2,"Same","Different")) |> 
-        as.matrix() |> t()
+  as.matrix() |> 
+  t()
 colnames(annot) <- annot[1,]
-
-row_bottom_ha1 = HeatmapAnnotation(category=annot[15],
-                                   col = list(category = c("Same" = "red", "Different" = "black")))
-row_bottom_ha2 = HeatmapAnnotation(process=annot[17,],
-                              col = list(process = c("Same" = "red", "Different" = "black")))
-row_bottom_ha3 = HeatmapAnnotation(use=annot[16,],
-                              col = list(use = c("Same" = "red", "Different" = "black")))
+annot[11,] <- as.character(as.numeric(annot[11,]))
+annot[12,] <- as.character(as.numeric(annot[12,]))
 
 anno_df = data.frame(
   category=annot[15,],
@@ -84,9 +81,9 @@ rates <- as.numeric(annot[12,])
 
 ha = HeatmapAnnotation(df = anno_df,
                        col = list(rates,
-                                  category = c("Same" = "red", "Different" = "black"),
-                                  process = c("Same" = "red", "Different" = "black"),
-                                  use = c("Same" = "red", "Different" = "black"))
+                                  category = c("Same" = "green", "Different" = "black"),
+                                  process = c("Same" = "green", "Different" = "black"),
+                                  use = c("Same" = "green", "Different" = "black"))
                        
 )
 
@@ -94,7 +91,25 @@ ha = HeatmapAnnotation(df = anno_df,
 bottom= HeatmapAnnotation(rate=anno_barplot(rates))
 
 h=c(ha,bottom)
-Heatmap(mat_red,
+
+cl_1 <- brewer.pal(length(sum_df$clusters)/2,"Reds")
+cl_2 <- brewer.pal(length(sum_df$clusters)/2,"Greens")
+cl_v <- c(cl_1,cl_2)
+cl_v <- cl_v[1:length(sum_df$clusters)]
+names(cl_v) <- sum_df$clusters
+t1 = HeatmapAnnotation(df = data.frame(clusters=annot[11,]),
+                      col=list(clusters=cl_v))
+
+list_clusters <- list(allddi=as.character(c(14,7,3,4,16,8,5,13,10,15,9,12,6,2,11,1)),
+                      sen2in1 = as.character(c(7,11,9,10,3,8,4,6,5,2,1)))
+t2 <- HeatmapAnnotation(cluster = anno_block(gp = gpar(fill = 1:length(sum_df$clusters)),
+                                             labels = list_clusters[[set_name]],
+                                             labels_gp = gpar(col = "white", fontsize = 14)))
+
+
+
+
+h1 <- Heatmap(mat_red,
         show_column_names = F,
         show_row_names = T,row_names_side = "left",
         column_dend_height = unit(3,"cm"),
@@ -108,23 +123,9 @@ Heatmap(mat_red,
         name = "Interaction score",
         col=rev(brewer.pal(10,'RdBu')),
         column_split = annot[11,],
-        show_heatmap_legend = F,
-        top_annotation = HeatmapAnnotation(cluster = anno_block(gp = gpar(fill = 1:8),
-                                                           labels = c("1", "2", "3","4",
-                                                                      "5","6","7","8"),
-                                                           labels_gp = gpar(col = "white", fontsize = 10))),
+        show_heatmap_legend = T,
+        top_annotation = t2,
         bottom_annotation = h)
-
-
-
-# top_annotation = HeatmapAnnotation(cluster = anno_block(gp = gpar(fill = 1:16),
-#                                                         labels = c("14", "8", "16","10",
-#                                                                    "13","5","3","7","4",
-#                                                                    "1","15","12","9",
-#                                                                    "6","2","11"),
-#                                                         labels_gp = gpar(col = "white", fontsize = 10))),
-
-
 
 ## Plot PCA DDI~strain.
 ## -----------------------------------------------------------------------------
@@ -160,7 +161,7 @@ pca.1.2=pca.x[,c(1,2)]
 
 
 #Phylomorphospace plots.
-p3 <- phylomorphospace(tree_nw, pca$x[,1:2], 
+phylomorphospace(tree_nw, pca$x[,1:2], 
                  label = "horizontal", node.size=c(.5,1),
                  xlim=c(-50,60),
                  xlab="PC1 (47.01%)",
@@ -168,15 +169,31 @@ p3 <- phylomorphospace(tree_nw, pca$x[,1:2],
 
 
 #phylomorphospace3d(tree_nw,pca.x[,c(1,2,3)],method="static")
-p4 <- fancyTree(tree_nw,X=pca.x[,c(1,2)],
+fancyTree(tree_nw,X=pca.x[,c(1,2)],
           type="traitgram3d",method="static")
 
 
+a <- 3
+pdf(paste0("results/",set_name,"/","fig1B_heatmap_",set_name,".pdf"),
+    width = 3*a,height = 2*a)
+h1
+dev.off()
 
-pdf(paste0("results/",set_name,"/","pca_plots_",set_name,".pdf"))
+pdf(paste0("results/",set_name,"/","fig1C_pca_",set_name,".pdf"),
+    height=5,width = 5)
 p1
 p2
-p3
-p4
+
+#Phylomorphospace plots.
+phylomorphospace(tree_nw, pca$x[,1:2], 
+                 label = "horizontal", node.size=c(.5,1),
+                 xlim=c(-50,60),
+                 xlab="PC1 (47.01%)",
+                 ylab="PC2 (21.54%)")
+
+
+#phylomorphospace3d(tree_nw,pca.x[,c(1,2,3)],method="static")
+fancyTree(tree_nw,X=pca.x[,c(1,2)],
+          type="traitgram3d",method="static")
 
 dev.off()

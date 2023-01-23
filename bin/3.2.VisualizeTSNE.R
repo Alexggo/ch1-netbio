@@ -1,7 +1,7 @@
 library(pacman)
 p_load(bigMap,bigmemory,tidyverse,rlist)
 
-set_name <- "onlysen" #allddi,sen2in1,onlysen
+set_name <- "sen2in1" #allddi,sen2in1,onlysen
 ptsne.ppx <- seq(5,2505,10)
 
 # Merge tsne
@@ -36,7 +36,7 @@ ptsne.ppx <- seq(5,2505,10)
 
 #Make figure
 
-pdf(paste0("results/",set_name,"/",set_name,".pdf"))
+pdf(paste0("results/",set_name,"/tsne_plots",set_name,".pdf"))
 
 for (i in 1:length(big_list)){
   bdm.cost(big_list[[i]])

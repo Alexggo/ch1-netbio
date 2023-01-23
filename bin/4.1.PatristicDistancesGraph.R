@@ -137,7 +137,8 @@ g2 <- ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   annotate("text", x=500, y=5.5, label= "Chemdist ~ log(PhyloDist)")+
   annotate("text", x=500, y=5.4, label= paste0("R squared:",round(gla2$r.squared,2),", p-value:",round(gla2$p.value,10)))
 
-pdf(paste0("results/",set_name,"/","distance_",set_name,".pdf"))
+pdf(paste0("results/",set_name,"/","fig1DE_dist_",set_name,".pdf"),
+    height=6,width=6)
 g1
 g2
 dev.off()
@@ -263,7 +264,8 @@ g2 <- ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   annotate("text", x=500, y=5.5, label= "Chemdist ~ log(PhyloDist)")+
   annotate("text", x=500, y=5.4, label= paste0("R squared:",round(gla2$r.squared,2),", p-value:",round(gla2$p.value,10)))
 
-pdf(paste0("results/","onlysen","/","distance_","onlysen",".pdf"))
+pdf(paste0("results/","onlysen","/","fig1DE_dist","onlysen",".pdf"),
+    height=15,width=15)
 g1
 g2
 dev.off()
