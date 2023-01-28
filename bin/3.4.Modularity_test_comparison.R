@@ -34,8 +34,8 @@ for (i in 1:dim(labels_df)[2]){
 }
 
 number_of_clusters <- labels |> 
-  lapply(unique) |> 
-  lapply(length)
+  map(unique) |> 
+  map_dbl(length)
 
 CR <- c()
 CInterval <- list()
@@ -93,7 +93,7 @@ broom::augment(test) |>
 
 filtered_df <- df |> 
   filter(p.value<0.05) |> 
-  slice_min(Z_effect,n=10)|> 
+  slice_min(Z_effect,n=5)|> 
   arrange(Z_effect)
 
 dataset <- full_dataset |> 
