@@ -10,13 +10,13 @@
 library(pacman)
 p_load(geomorph,tidyverse,broom,ape,ggx,geomorph,furrr,tictoc,patchwork,ggrepel)
 
-set_name <- "allddi"
-test <- "modularity_tests_allddippx_205-ppx_1455.RData"
-ptsne.ppx <- seq(205,1455,10) #251 ppx.
+# set_name <- "allddi"
+# test <- "modularity_tests_allddippx_205-ppx_1455.RData"
+# ptsne.ppx <- seq(205,1455,10) #251 ppx.
 
-# set_name <- "sen2in1"
-# test <- "modularity_tests_sen2in1ppx_115-ppx_455.RData"
-# ptsne.ppx <- seq(115,455,10) #135 ppx.
+set_name <- "sen2in1"
+test <- "modularity_tests_sen2in1ppx_115-ppx_455.RData"
+ptsne.ppx <- seq(115,455,10) #135 ppx.
 
 # ALL DDI. Good tsnes between 205-1455.
 # SEN2IN1. Good tsnes between 115-455.

@@ -9,8 +9,8 @@ library(pacman)
 p_load(igraph,tidyverse,BioNet,ape,geomorph,matrixStats,
        ggpubr,plotrix,tidymodels,patchwork,here,EnvStats)
 options(warn = -1)
-set_name <- "allddi" #allddi, sen2in1
-set_col <- "all" #all, set
+set_name <- "sen2in1" #allddi, sen2in1
+set_col <- "set" #all, set
 # VISUALIZATION/STATS
 
 # List 1 contains the complete dataset for each network.
@@ -738,11 +738,12 @@ df_DDI_tot |>
   select(network,DRUG_ID,clusters_all,sigma.rate_all,clusters_set,sigma.rate_set,
          mean.path.length,mean.k.edge,mean.mean.degree,
          starts_with("int"),starts_with("SR")) |> 
-  filter(DRUG_ID %in% c("Sulfamonomethoxine_Trimethoprim",
-                          "A22_Novobiocin",
-                          "Ciprofloxacin_Meropenem")) |> 
+  filter(DRUG_ID %in% c("Sulfamonomethoxine-Trimethoprim",
+                          "A22-Novobiocin",
+                          "Ciprofloxacin-Meropenem")) |> 
   arrange(DRUG_ID,network) |> 
-  write.csv("data/3.Targets_NetworkDistance/sup_table1.csv",row.names = FALSE)
+  t() |> 
+  write.csv(paste0("results/",set_name,"/sup_table1_",set_col,".csv"),col.names = FALSE)
 
 
 

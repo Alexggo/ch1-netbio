@@ -10,6 +10,7 @@ args = commandArgs(trailingOnly=TRUE)
 library(pacman)
 p_load(geomorph,tidyverse,broom,ape,ggx,geomorph,furrr,tictoc)
 
+
 availableCores()
 plan("multisession",workers=8)
 #plan("multicore",workers=8)
