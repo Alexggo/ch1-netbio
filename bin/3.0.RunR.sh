@@ -23,5 +23,5 @@ pwd
 
 
 #Rscript bin/3.1.tSNE_BigMap.R $from $to
-#Rscript bin/3.3.Modularity_test.R
-Rscript bin/3.4.Modularity_test_comparison.R
+Rscript bin/3.3.Modularity_test.R
+#Rscript bin/3.4.Modularity_test_comparison.R
