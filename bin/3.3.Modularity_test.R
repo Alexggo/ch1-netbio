@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
 args = commandArgs(trailingOnly=TRUE)
-#Rscript --vanilla 3.3.Modularity_test.R allddi ppx_205 ppx_215
+#Rscript --vanilla 3.3.Modularity_test.R set_name ppx ppx
+
 
 #' title: "3.2.Modularity_test"
 #' author: "Alex Gil"
