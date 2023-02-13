@@ -26,7 +26,7 @@ p_load(tidyverse,RColorBrewer,plotly,dendextend,ggrepel,hrbrthemes,
 #' 
 ## -----------------------------------------------------------------------------
 
-set_name <- "allddi" #sen2in1 allddi
+set_name <- "sen2in1" #sen2in1 allddi
 full_df <- read.csv(paste0("results/",set_name,"/","DDI_table_rates_",set_name,".csv"))
 
 ###
@@ -92,22 +92,20 @@ bottom= HeatmapAnnotation(rate=anno_barplot(rates))
 
 h=c(ha,bottom)
 
-cl_1 <- brewer.pal(length(sum_df$clusters)/2,"Reds")
-cl_2 <- brewer.pal(length(sum_df$clusters)/2,"Greens")
+cl_1 <- brewer.pal(9,"Reds")[1:(length(sum_df$clusters)/2)]
+cl_2 <- brewer.pal(9,"Greens")[1:(length(sum_df$clusters)/2)]
 cl_v <- c(cl_1,cl_2)
 cl_v <- cl_v[1:length(sum_df$clusters)]
 names(cl_v) <- sum_df$clusters
 t1 = HeatmapAnnotation(df = data.frame(clusters=annot[11,]),
                       col=list(clusters=cl_v))
 
+
 list_clusters <- list(allddi=as.character(c(14,7,3,4,16,8,5,13,10,15,9,12,6,2,11,1)),
                       sen2in1 = as.character(c(7,11,9,10,3,8,4,6,5,2,1)))
 t2 <- HeatmapAnnotation(cluster = anno_block(gp = gpar(fill = 1:length(sum_df$clusters)),
                                              labels = list_clusters[[set_name]],
                                              labels_gp = gpar(col = "white", fontsize = 14)))
-
-
-
 
 h1 <- Heatmap(mat_red,
         show_column_names = F,

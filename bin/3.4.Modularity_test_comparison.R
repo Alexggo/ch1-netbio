@@ -34,8 +34,8 @@ for (i in 1:dim(labels_df)[2]){
 }
 
 number_of_clusters <- labels |> 
-  map(unique) |> 
-  map_dbl(length)
+  purrr::map(unique) |> 
+  purrr::map_dbl(length)
 
 CR <- c()
 CInterval <- list()
@@ -150,7 +150,7 @@ df_rate_test <- data.frame(ptsne=filtered_df$ptsne,
 
 summary_test <- inner_join(filtered_df,df_rate_test,by="ptsne")
 
-best <- RT_list[["ppx_245"]]  #ALL DDI 245. SET2 PPX 135
+best <- RT_list[["ppx_135"]]  #ALL DDI 245. SET2 PPX 135
 summary(best)
 plot(best)
 
@@ -178,7 +178,7 @@ p4 <- ggplot(RT_result, aes(x = clusters, y = sigma.rate)) +
 RT_result <- RT_result |> 
   mutate(clusters=as.numeric(as.character(clusters)))
 
-full_dataset$clusters <- full_dataset$ppx_245 #245 or 135
+full_dataset$clusters <- full_dataset$ppx_135 #245 or 135
 full_df <- left_join(full_dataset,RT_result,by="clusters")
 full_df <- full_df |> select(!starts_with("ppx"))
 

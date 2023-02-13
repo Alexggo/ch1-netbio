@@ -32,7 +32,7 @@ hrbrthemes,ggforce,ComplexHeatmap,ggbiplot,patchwork,performance)
 #' 
 ## -----------------------------------------------------------------------------
 
-set_name <- "allddi" #allddi sen2in1
+set_name <- "sen2in1" #allddi sen2in1
 full_df <- read.csv(paste0("results/",set_name,"/","DDI_table_rates_",set_name,".csv"))
 
 
@@ -115,7 +115,7 @@ g1 <- ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   theme_ipsum_rc(grid="XY")+
   theme_minimal()+
   theme(axis.line = element_line(colour = "black"),
-        panel.border = element_rect(colour = "black", fill=NA, size=1))+
+        panel.border = element_rect(colour = "black", fill=NA))+
   theme(legend.position = "none")+
   geom_mark_circle(aes(fill = class,label=class))
 
@@ -131,7 +131,7 @@ g2 <- ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   theme_ipsum_rc(grid="XY")+
   theme_minimal()+
   theme(axis.line = element_line(colour = "black"),
-        panel.border = element_rect(colour = "black", fill=NA, size=1))+
+        panel.border = element_rect(colour = "black", fill=NA))+
   theme(legend.position = "none")+
   geom_mark_circle(aes(fill = class,label=class))+
   annotate("text", x=500, y=5.5, label= "Chemdist ~ log(PhyloDist)")+
@@ -242,7 +242,7 @@ g1 <- ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   theme_ipsum_rc(grid="XY")+
   theme_minimal()+
   theme(axis.line = element_line(colour = "black"),
-        panel.border = element_rect(colour = "black", fill=NA, size=1))+
+        panel.border = element_rect(colour = "black", fill=NA))+
   theme(legend.position = "none")+
   geom_mark_circle(aes(fill = class,label=class))
 
@@ -258,7 +258,7 @@ g2 <- ggplot(df,aes(x=PhyloDist,y=Chemdist,label=ID))+
   theme_ipsum_rc(grid="XY")+
   theme_minimal()+
   theme(axis.line = element_line(colour = "black"),
-        panel.border = element_rect(colour = "black", fill=NA, size=1))+
+        panel.border = element_rect(colour = "black", fill=NA))+
   theme(legend.position = "none")+
   geom_mark_circle(aes(fill = class,label=class))+
   annotate("text", x=500, y=5.5, label= "Chemdist ~ log(PhyloDist)")+
