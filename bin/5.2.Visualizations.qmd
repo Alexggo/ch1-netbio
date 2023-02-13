@@ -9,15 +9,15 @@ library(pacman)
 p_load(igraph,tidyverse,BioNet,ape,geomorph,matrixStats,
        ggpubr,plotrix,tidymodels,patchwork,here,EnvStats)
 options(warn = -1)
-set_name <- "sen2in1" #allddi, sen2in1
-set_col <- "set" #all, set
+set_name <- "allddi" #allddi, sen2in1
+set_col <- "all" #all, set
 # VISUALIZATION/STATS
 
 # List 1 contains the complete dataset for each network.
 # df_DDI_tot contains all networks combined.
 font_size=2
 
-df_DDI_tot <- read_csv2(paste0("results/","df_DDI_metrics",".csv")) |> 
+df_DDI_tot <- read_csv(paste0("results/","df_DDI_metrics",".csv")) |> 
   mutate(int_sign_ebw=factor(int_sign_ebw,levels=c("Synergy","Additivity","Antagonism","Non-targets"))) |> 
   mutate(int_sign_ecr=factor(int_sign_ecr,levels=c("Synergy","Additivity","Antagonism","Non-targets"))) |> 
   mutate(int_sign_stm=factor(int_sign_stm,levels=c("Synergy","Additivity","Antagonism","Non-targets"))) |> 
@@ -27,7 +27,7 @@ df_DDI_tot <- read_csv2(paste0("results/","df_DDI_metrics",".csv")) |>
   mutate(connection_onoff=ifelse(mean.k.edge==0,"FALSE","TRUE")) |> 
   mutate(connection_onoff=factor(connection_onoff,levels = c("TRUE","FALSE")))
 
-df_target_tot <- read_csv2(paste0("results/","df_target_metrics",".csv"))
+df_target_tot <- read_csv(paste0("results/","df_target_metrics",".csv"))
 ```
 
 # Figures Network metric \~ interaction score.
@@ -784,8 +784,8 @@ df_DDI_tot |> ggline(x = "int_sign_ebw", y = "sigma.rate_all", add = "mean_se",
 
 df1 <- df_DDI_tot |> 
   filter(network==net[1]|network==net[3]) |> 
-  filter(DRUG_ID %in% c("A22_Novobiocin","Ciprofloxacin_Meropenem",
-                          "Sulfamonomethoxine_Trimethoprim"))
+  filter(DRUG_ID %in% c("A22-Novobiocin","Ciprofloxacin-Meropenem",
+                          "Sulfamonomethoxine-Trimethoprim"))
 ```
 
 

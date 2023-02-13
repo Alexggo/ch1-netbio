@@ -355,7 +355,7 @@ df_target_tot |>
   arrange(K.edge) |> 
   arrange(DRUG_ID) |> 
   arrange(network) |>  
-  write_excel_csv2(paste0("results/","df_target_metrics",".csv"))
+  write_excel_csv(paste0("results/","df_target_metrics",".csv"))
 
 
 # Calculate the average per drug pair.
@@ -438,7 +438,7 @@ df_DDI_tot <- rbind(df_DDI_targ,df_DDI_nottarg)
 
 
 df_DDI_tot    |> 
-  write_excel_csv2(paste0("results/","df_DDI_metrics",".csv"))
+  write_excel_csv(paste0("results/","df_DDI_metrics",".csv"))
 
 
 # plot networks
