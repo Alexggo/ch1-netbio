@@ -442,7 +442,8 @@ df_DDI_tot    |>
 
 
 # plot networks
-pdf(paste0("results/","network_graph",".pdf"))
+pdf(paste0("results/","network_graph",".pdf"),
+    width=16,height=16)
 
 for (i in seq_along(list_graphs)) {
   g1 <- list_graphs[[i]]
@@ -465,14 +466,15 @@ for (i in seq_along(list_graphs)) {
                         round(mean.length, 4), ".Number of vertexes = ", v.number)
   mysubtitle2 <- paste0("Number of targets = ",
                         value1, ".Number of drugs = ", value2)
-  mtext(side = 3, line = 3, at = -0.07, adj = 0, cex = 1, mytitle)
-  mtext(side = 3, line = 2, at = -0.07, adj = 0, cex = 0.7, mysubtitle1)
-  mtext(side = 3, line = 1, at = -0.07, adj = 0, cex = 0.7, mysubtitle2)
+  mtext(mytitle,side = 3, line = 2.5, at = -0.07, adj = 0, cex = 2)
+  mtext(mysubtitle1,side = 3, line = 1, at = -0.07, adj = 0, cex = 1.5)
+  mtext(mysubtitle2,side = 3, line = -0.5, at = -0.07, adj = 0, cex = 1.5)
   print(paste("Nodes", v.number, "Targets", value1, "Drugs", value2))
 }
 dev.off()
 
-pdf(paste0("results/","network_graph","_notext.pdf"))
+pdf(paste0("results/","network_graph","_notext.pdf"),
+    width=16,height=16)
 
 for (i in seq_along(list_graphs)) {
   g1 <- list_graphs[[i]]
