@@ -7,7 +7,7 @@ editor: source
 ```{r}
 library(pacman)
 p_load(igraph,tidyverse,BioNet,ape,geomorph,matrixStats,
-       ggpubr,plotrix,tidymodels,patchwork,here,EnvStats)
+       ggpubr,plotrix,tidymodels,patchwork,here,EnvStats,report)
 options(warn = -1)
 set_name <- "allddi" #allddi, sen2in1
 set_col <- "all" #all, set
@@ -399,15 +399,48 @@ df <- read_csv(paste0("results/",set_name,"/","DDI_table_rates_",set_name,".csv"
 
 
 # Mean.rate. Fig4
-fig.4a <- df |>
+fig.4a.df <- df |>
   select(type,sigma.rate) |> 
-  filter(!is.na(type)) |> 
+  filter(!is.na(type)) 
+
+gr <- fig.4a.df$type |> unique()
+g1 <- fig.4a.df |> filter(type==gr[1]) |> select(sigma.rate) |> pull()
+g2 <- fig.4a.df |> filter(type==gr[2]) |> select(sigma.rate) |> pull()
+g3 <- fig.4a.df |> filter(type==gr[3]) |> select(sigma.rate) |> pull()
+g4 <- fig.4a.df |> filter(type==gr[4]) |> select(sigma.rate) |> pull()
+g5 <- fig.4a.df |> filter(type==gr[5]) |> select(sigma.rate) |> pull()
+g6 <- fig.4a.df |> filter(type==gr[6]) |> select(sigma.rate) |> pull()
+
+t_1_2 <- t.test(g1,g2) |> report() #p < 0.002
+t_1_3 <- t.test(g1,g3) |> report() #p < .001
+t_1_4 <- t.test(g1,g4) |> report() #p < .001
+t_1_5 <- t.test(g1,g5) |> report() #p < .001
+t_1_6 <- t.test(g1,g6) |> report() # Not enough observations
+
+t_2_3 <- t.test(g2,g3) |> report() #p < .001
+t_2_4 <- t.test(g2,g4) |> report() #p < 0.526. "Additivity-Antagonism-Synergy" vs "Additivity-Antagonism"
+t_2_5 <- t.test(g2,g5) |> report() #p < .001
+t_2_6 <- t.test(g2,g6) |> report() # Not enough observations
+
+t_3_4 <- t.test(g3,g4) |> report() #p < .001
+t_3_5 <- t.test(g3,g5) |> report() #p < .001
+t_3_6 <- t.test(g3,g6) |> report() # Not enough observations
+
+t_4_5 <- t.test(g4,g5) |> report() #p < .001
+t_4_6 <- t.test(g4,g6) |> report() # Not enough observations
+
+t_5_6 <- t.test(g5,g6) |> report() # Not enough observations
+
+
+fig.4a.df1 <- fig.4a.df|> 
   group_by(type) |> 
   summarise(Mean.rate=mean(sigma.rate),
             sem.rate=std.error(sigma.rate),
             count=n()) |> 
   ungroup() |> 
-  mutate(type=as.factor(type)) |> 
+  mutate(type=as.factor(type)) 
+
+fig.4a <- fig.4a.df1 |> 
   ggplot(aes(x=type,y=Mean.rate))+
   geom_bar(position=position_dodge(), stat="identity",
            fill='#6191F2',width=0.5)+
@@ -424,14 +457,17 @@ fig.4a <- df |>
 antagonism_score <- -1
 synergy_score <- +1
 
-fig.4b <- df |> 
+
+fig.4b.df <- df |> 
   select(sum_g,sigma.rate) |> 
   filter(!is.na(sum_g)) |> 
   group_by(sum_g) |> 
   summarise(Mean.rate=mean(sigma.rate),
             sem.rate=std.error(sigma.rate),
             count=n()) |> 
-  ungroup() |> 
+  ungroup() 
+
+fig.4b <- fig.4b.df |> 
   ggplot(aes(x=sum_g,y=Mean.rate))+
   geom_bar(position=position_dodge(), stat="identity",
            fill='#6191F2',width=0.5)+
@@ -443,12 +479,48 @@ fig.4b <- df |>
   theme(legend.position = "none")+
   geom_text(aes(label = paste0("n=",count)),vjust=-0.75)
 
+# Group fig 4b
+fig.4b.df <- df |> 
+  select(sum_g,sigma.rate) |> 
+  filter(!is.na(sum_g)) |> 
+  mutate(sum_g1=cut(sum_g,breaks=c(-7,-2,+2,+7))) 
+
+fig.4b.df1 <- fig.4b.df |> 
+  group_by(sum_g1) |> 
+  summarise(Mean.rate=mean(sigma.rate),
+            sem.rate=std.error(sigma.rate),
+            count=n()) |> 
+  ungroup() 
+
+s <- fig.4b.df |> filter(sum_g1=="(2,7]") |> select(sigma.rate) |> pull()
+ad <- fig.4b.df |> filter(sum_g1=="(-2,2]") |> select(sigma.rate) |> pull()
+an <- fig.4b.df |> filter(sum_g1=="(-7,-2]") |> select(sigma.rate) |> pull()
+
+t1 <- t.test(s,ad) #p < .001
+t2 <- t.test(s,an) #p < .001
+t3 <- t.test(ad,an) #p = 0.001
+
+fig.4b.2 <- fig.4b.df1 |> 
+  ggplot(aes(x=sum_g1,y=Mean.rate))+
+  geom_bar(position=position_dodge(), stat="identity",
+           fill='#6191F2',width=0.5)+
+  geom_errorbar(position=position_dodge(0.5),aes(ymin=Mean.rate-sem.rate, ymax=Mean.rate+sem.rate), width=.2)+
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 15, vjust = 1, hjust=1))+
+  xlab("Score (More synergistic <==> More antagonistic)")+
+  ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
+  theme(legend.position = "none")+
+  geom_text(aes(label = paste0("n=",count)),vjust=-0.75)
+
+
 # Rates ~ Interaction Type (ebw) (PPI). 5C
-fig.4c <- df_target_DDI |>
+fig.4c.df <- df_target_DDI |>
   select(network,int_sign_ebw.DDI,starts_with("sigma.rate")) |> 
   select(network,int_sign_ebw.DDI,ends_with(paste0(set_col,".DDI"))) |> 
   rename(sigma.rate=starts_with("sigma.rate")) |> 
-  filter(!is.na(int_sign_ebw.DDI)) |>
+  filter(!is.na(int_sign_ebw.DDI)) 
+
+fig.4c <- fig.4c.df |>
   ggline(x = "int_sign_ebw.DDI", y = "sigma.rate", add = "mean_se",
          group = "network", col="network")+
   xlab("Type of interaction (ebw)")+
@@ -456,10 +528,31 @@ fig.4c <- df_target_DDI |>
   theme_minimal()+
   theme(legend.position = "bottom")
 
+fig.4c.df.n1 <- fig.4c.df |> 
+  filter(network=="Co-functional (EcoCyc/GO-BP)") 
+
+n1.s <- fig.4c.df.n1 |> filter(int_sign_ebw.DDI=="Synergy") |> select(sigma.rate) |> pull()
+n1.ad <- fig.4c.df.n1 |> filter(int_sign_ebw.DDI=="Additivity") |> select(sigma.rate) |> pull()
+n1.an <- fig.4c.df.n1 |> filter(int_sign_ebw.DDI=="Antagonism") |> select(sigma.rate) |> pull()
+
+t1 <- t.test(n1.s,n1.ad) #p < .001
+t2 <- t.test(n1.s,n1.an) #p < .001
+t3 <- t.test(n1.ad,n1.an) #p = 0.001775
+
+fig.4c.df.n2 <- fig.4c.df |> 
+  filter(network=="Small/medium-scale PPI")
+n2.s <- fig.4c.df.n2 |> filter(int_sign_ebw.DDI=="Synergy") |> select(sigma.rate) |> pull()
+n2.ad <- fig.4c.df.n2 |> filter(int_sign_ebw.DDI=="Additivity") |> select(sigma.rate) |> pull()
+n2.an <- fig.4c.df.n2 |> filter(int_sign_ebw.DDI=="Antagonism") |> select(sigma.rate) |> pull()
+
+t1 <- t.test(n2.s,n2.ad) #p < .001
+t2 <- t.test(n2.s,n2.an) #p < .001
+t3 <- t.test(n2.ad,n2.an) #p = 0.852
+
 
 #Red:metabolic,blue:PPI
 # Rates ~ path length. 5D
-fig.4d <- df_target_DDI |>
+fig.4d.df <- df_target_DDI |>
   select(network,path.length,starts_with("sigma.rate")) |> 
   select(network,path.length,ends_with(paste0(set_col,".DDI"))) |> 
   rename(sigma.rate=starts_with("sigma.rate")) |> 
@@ -473,13 +566,39 @@ fig.4d <- df_target_DDI |>
                                                                     ifelse(path.length==4,"4",
                                                                            ifelse(path.length==5,"5",
                                                                                   ifelse(path.length>=6,">6","Error"))))))))) |> 
-  mutate(path.length.corr=factor(path.length.corr,levels=c("0","1","2","3","4","5",">6","Not connected","Error"))) |>
+  mutate(path.length.corr=factor(path.length.corr,levels=c("0","1","2","3","4","5",">6","Not connected","Error"))) 
+
+fig.4d.df1 <- fig.4d.df |> 
+  filter(path.length.corr!="Not connected") |> 
+  mutate(path.length.corr1=ifelse(path.length.corr==">6",6,path.length.corr)) |> 
+  select(network,sigma.rate,path.length.corr1)
+
+fig.4d.df1.n1 <- fig.4d.df1 |> filter(network=="Co-functional (EcoCyc/GO-BP)") |> group_by(path.length.corr1) |> summarise(Mean.sigma=mean(sigma.rate,na.rm=T),
+            sem.sigma=std.error(sigma.rate),
+            count=paste0("n=",n()))
+mod1 <- lm(Mean.sigma~path.length.corr1,fig.4d.df1.n1)
+mod1 |> tidy()
+mod1 |> glance()
+mod1 |> report()
+  
+fig.4d.df1.n2 <- fig.4d.df1 |> filter(network=="Small/medium-scale PPI") |> group_by(path.length.corr1) |> summarise(Mean.sigma=mean(sigma.rate,na.rm=T),
+            sem.sigma=std.error(sigma.rate),
+            count=paste0("n=",n()))
+mod2 <- lm(Mean.sigma~path.length.corr1,fig.4d.df1.n2)
+mod2 |> tidy()
+mod2 |> glance()
+mod2 |> report()
+
+
+
+fig.4d <- fig.4d.df |>
   ggline(x = "path.length.corr", y = "sigma.rate", add = c("mean_se"),
          group = "network", col="network",linetype = 1)+
   xlab("Minimum path length between connected targets")+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
   theme_minimal()+
-  theme(legend.position = "none")
+  theme(legend.position = "none")+ 
+  scale_x_discrete(labels = c("1","2","3","4","5", "\u2265 6","Not connected"))
 
 # Rates ~ Interaction Type (all strains) (all networks).
 df_target_DDI |> 
