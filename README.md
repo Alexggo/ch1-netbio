@@ -1,5 +1,3 @@
 README
 ================
-Alejandro Gil-Gomez
-4/24/2020
-
+Wiring between close nodes in biological networks evolves more quickly than between distant nodes.
