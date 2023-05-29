@@ -483,7 +483,7 @@ fig.4b <- fig.4b.df |>
 fig.4b.df <- df |> 
   select(sum_g,sigma.rate) |> 
   filter(!is.na(sum_g)) |> 
-  mutate(sum_g1=cut(sum_g,breaks=c(-7,-2,+2,+7))) 
+  mutate(sum_g1=cut(sum_g,breaks=c(-7,-3,+2,+7))) 
 
 fig.4b.df1 <- fig.4b.df |> 
   group_by(sum_g1) |> 
@@ -493,8 +493,8 @@ fig.4b.df1 <- fig.4b.df |>
   ungroup() 
 
 s <- fig.4b.df |> filter(sum_g1=="(2,7]") |> select(sigma.rate) |> pull()
-ad <- fig.4b.df |> filter(sum_g1=="(-2,2]") |> select(sigma.rate) |> pull()
-an <- fig.4b.df |> filter(sum_g1=="(-7,-2]") |> select(sigma.rate) |> pull()
+ad <- fig.4b.df |> filter(sum_g1=="(-3,2]") |> select(sigma.rate) |> pull()
+an <- fig.4b.df |> filter(sum_g1=="(-7,-3]") |> select(sigma.rate) |> pull()
 
 t1 <- t.test(s,ad) #p < .001
 t2 <- t.test(s,an) #p < .001
@@ -570,8 +570,8 @@ fig.4d.df <- df_target_DDI |>
 
 fig.4d.df1 <- fig.4d.df |> 
   filter(path.length.corr!="Not connected") |> 
-  mutate(path.length.corr1=ifelse(path.length.corr==">6",6,path.length.corr)) |> 
-  select(network,sigma.rate,path.length.corr1)
+  mutate(path.length.corr1=ifelse(path.length.corr==">6",6,ifelse(path.length.corr=="5",5,ifelse(path.length.corr=="4",4,ifelse(path.length.corr=="3",3,ifelse(path.length.corr=="2",2,ifelse(path.length.corr=="1",1,"error"))))))) |> 
+  select(network,sigma.rate,path.length.corr1) |> mutate(path.length.corr1=as.numeric(path.length.corr1))
 
 fig.4d.df1.n1 <- fig.4d.df1 |> filter(network=="Co-functional (EcoCyc/GO-BP)") |> group_by(path.length.corr1) |> summarise(Mean.sigma=mean(sigma.rate,na.rm=T),
             sem.sigma=std.error(sigma.rate),
@@ -588,8 +588,6 @@ mod2 <- lm(Mean.sigma~path.length.corr1,fig.4d.df1.n2)
 mod2 |> tidy()
 mod2 |> glance()
 mod2 |> report()
-
-
 
 fig.4d <- fig.4d.df |>
   ggline(x = "path.length.corr", y = "sigma.rate", add = c("mean_se"),

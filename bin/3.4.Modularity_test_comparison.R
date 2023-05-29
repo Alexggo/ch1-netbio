@@ -88,7 +88,7 @@ test <- lm(Z_effect~ptsne,df)
 broom::augment(test) |> 
   arrange(.resid)
 
-# Adams,2017. The 10 most negative effect size (ZCR) clustering solutions were identified, 
+# Adams,2017. The 5 most negative effect size (ZCR) clustering solutions were identified, 
 # these represented the hypotheses with the strongest modular signals.
 
 filtered_df <- df |> 
