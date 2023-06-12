@@ -1,37 +1,15 @@
-Fri, 19 Aug 2022 18:23:04 Checking organisms[line:185] [32mINFO[0m The organism: 272947 can't match in SSU rRNA database
-Fri, 19 Aug 2022 18:23:04 Checking organisms[line:186] [31mWARNING[0m These species can't match in SSU rRNA database so removing and reconstructing phylogenetic tree.
-Fri, 19 Aug 2022 18:23:04 SSU rRNA DB[line:49] [32mINFO[0m Read organisms names success
-Fri, 19 Aug 2022 18:23:05 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '208964' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:05 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '208963' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:06 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '99287' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:06 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '588858' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:06 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '585034' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:07 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '595496' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:07 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '1105102' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:08 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '272563' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:08 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '226900' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:08 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '158879' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:09 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '224324' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:09 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '224308' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:09 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '192222' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:10 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '196627' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:10 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '243230' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:10 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '190304' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:11 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '190192' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:11 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '188937' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:11 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '192952' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:12 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '122586' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:12 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '186497' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:13 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '273057' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:13 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '197221' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:13 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '273116' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:14 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '269084' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:14 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '243274' SSU rRNA sequence was successful
-Fri, 19 Aug 2022 18:23:14 Used time[line:280] [32mINFO[0m Retrieving SSU rRNA sequences used time: 9.773187160491943 Seconds
-Fri, 19 Aug 2022 18:23:23 muscle[line:61] DEBUG muscle result path:/home1/alex/projects/ch3-netbio/data/2.1.Phylogenetics_PhySpeTree/temp/rna_alignment20220819182314/rna_sequence.fasta
-Fri, 19 Aug 2022 18:23:23 muscle[line:62] [32mINFO[0m Multiple sequence alignment by Muscle was completed.
-Fri, 19 Aug 2022 18:23:23 Gblocks[line:63] [32mINFO[0m Select conserved blocks by Gblocks was completed
-Fri, 19 Aug 2022 18:23:23 Gblocks[line:64] DEBUG Gblocks path:/home1/alex/projects/ch3-netbio/data/2.1.Phylogenetics_PhySpeTree/temp/rna_alignment20220819182314/rna_sequence.fasta-gb1
-Fri, 19 Aug 2022 18:23:23 convert[line:71] [32mINFO[0m Fasta format converted to PHYLIP format was completed
-Fri, 19 Aug 2022 18:24:21 iqtree[line:50] [32mINFO[0m Phylogenetic species tree reconstructed by iqtree was completed
-Fri, 19 Aug 2022 18:24:21 Used time[line:313] [32mINFO[0m Constructing species tree used time: 66.62660574913025 Seconds
+Mon, 12 Jun 2023 10:55:43 SSU rRNA DB[line:49] [32mINFO[0m Read organisms names success
+Mon, 12 Jun 2023 10:55:43 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '208964' SSU rRNA sequence was successful
+Mon, 12 Jun 2023 10:55:44 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '208963' SSU rRNA sequence was successful
+Mon, 12 Jun 2023 10:55:44 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '99287' SSU rRNA sequence was successful
+Mon, 12 Jun 2023 10:55:45 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '588858' SSU rRNA sequence was successful
+Mon, 12 Jun 2023 10:55:45 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '585034' SSU rRNA sequence was successful
+Mon, 12 Jun 2023 10:55:45 SSU rRNA DB[line:75] [32mINFO[0m Retrieve and download of organism '595496' SSU rRNA sequence was successful
+Mon, 12 Jun 2023 10:55:45 Used time[line:280] [32mINFO[0m Retrieving SSU rRNA sequences used time: 2.6524791717529297 Seconds
+Mon, 12 Jun 2023 10:55:46 muscle[line:61] DEBUG muscle result path:/home1/alex/projects/ch3-netbio/data/2.1.Phylogenetics_PhySpeTree/temp/rna_alignment20230612105545/rna_sequence.fasta
+Mon, 12 Jun 2023 10:55:46 muscle[line:62] [32mINFO[0m Multiple sequence alignment by Muscle was completed.
+Mon, 12 Jun 2023 10:55:46 Gblocks[line:63] [32mINFO[0m Select conserved blocks by Gblocks was completed
+Mon, 12 Jun 2023 10:55:46 Gblocks[line:64] DEBUG Gblocks path:/home1/alex/projects/ch3-netbio/data/2.1.Phylogenetics_PhySpeTree/temp/rna_alignment20230612105545/rna_sequence.fasta-gb1
+Mon, 12 Jun 2023 10:55:46 convert[line:71] [32mINFO[0m Fasta format converted to PHYLIP format was completed
+Mon, 12 Jun 2023 10:55:47 iqtree[line:50] [32mINFO[0m Phylogenetic species tree reconstructed by iqtree was completed
+Mon, 12 Jun 2023 10:55:47 Used time[line:313] [32mINFO[0m Constructing species tree used time: 1.5335185527801514 Seconds
