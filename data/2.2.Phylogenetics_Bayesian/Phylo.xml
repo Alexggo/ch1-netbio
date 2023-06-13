@@ -676,14 +676,32 @@ dataType="aminoacid">
                         <taxon id="seo" spec="Taxon"/>
                                             
                         <taxon id="stm" spec="Taxon"/>
+                                        
+                    </taxonset>
+                                    
+                    <Uniform id="Uniform.81" lower="100.0" name="distr" upper="160.0"/>
+                                
+                </distribution>
+                            
+                <distribution id="ESP.prior" spec="beast.base.evolution.tree.MRCAPrior" tree="@Tree.t:p1">
+                                    
+                    <taxonset id="ESP" spec="TaxonSet">
+                                            
+                        <taxon idref="ebw"/>
+                                            
+                        <taxon idref="ecr"/>
                                             
                         <taxon id="pae" spec="Taxon"/>
                                             
                         <taxon id="pau" spec="Taxon"/>
+                                            
+                        <taxon idref="seo"/>
+                                            
+                        <taxon idref="stm"/>
                                         
                     </taxonset>
                                     
-                    <Uniform id="Uniform.81" lower="1350.0" name="distr" upper="1527.7"/>
+                    <Uniform id="Uniform.64" lower="1350.0" name="distr" upper="1527.0"/>
                                 
                 </distribution>
                         
@@ -1404,6 +1422,8 @@ dataType="aminoacid">
             <log idref="ES.prior"/>
                     
             <log idref="ORCucldMean.c:p1"/>
+                    
+            <log idref="ESP.prior"/>
                 
         </logger>
             
