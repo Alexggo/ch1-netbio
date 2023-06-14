@@ -44,8 +44,7 @@ species <- c("Escherichia_coli_K-12_ebw",
              "Pseudomonas_aeruginosa_PAO1_pae",
              "Pseudomonas_aeruginosa_UCBPP-PA14_pau")
 
-treetype <- "bac_species.txt.hcp"
-treefile <- file.path('data/2.2.Phylogenetics_Bayesian/DDI_BD_str',"concatenate.trees.tre")
+treefile <- file.path('data/2.2.Phylogenetics_Bayesian',"Phylo-p1.nwk.tree")
 tree_nw <- read.nexus(treefile)
 # Drop the species that are not needed.
 not.species <- tree_nw$tip.label[!(tree_nw$tip.label %in% species)]
@@ -172,8 +171,7 @@ species <- c("Escherichia_coli_K-12_ebw",
              "Pseudomonas_aeruginosa_PAO1_pae",
              "Pseudomonas_aeruginosa_UCBPP-PA14_pau")
 
-treetype <- "bac_species.txt.hcp"
-treefile <- file.path('data/2.2.Phylogenetics_Bayesian/DDI_BD_str',"concatenate.trees.tre")
+treefile <- file.path('data/2.2.Phylogenetics_Bayesian',"Phylo-p1.nwk.tree")
 tree_nw <- read.nexus(treefile)
 # Drop the species that are not needed.
 not.species <- tree_nw$tip.label[!(tree_nw$tip.label %in% species)]
