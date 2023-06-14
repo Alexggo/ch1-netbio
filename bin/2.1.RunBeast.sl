@@ -10,8 +10,11 @@
 
 ### LOAD MODULES
 cd /gpfs/projects/RestGroup/agilgomez/projects/ch3-netbio/data/2.2.Phylogenetics_Bayesian
+#cd /home1/alex/projects/ch1-netbio/data/2.2.Phylogenetics_Bayesian
 
 # Resume interrupted job:
 /gpfs/projects/RestGroup/agilgomez/tools/beast.2.7.4/bin/beast -resume -statefile ${name}.xml.state  ${name}.xml
+#../../../../tools/beast/bin/beast -resume -statefile ${name}.xml.state  ${name}.xml
 
 #/gpfs/projects/RestGroup/agilgomez/tools/beast.2.7.4/bin/beast ${name}.xml
+#../../../../tools/beast/bin/beast ${name}.xml
