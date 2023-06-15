@@ -1,7 +1,7 @@
 library(pacman)
 p_load(bigMap,bigmemory,tidyverse,rlist)
 
-set_name <- "sen2in1" #allddi,sen2in1,onlysen
+set_name <- "allddi" #allddi,sen2in1,onlysen
 ptsne.ppx <- seq(5,2505,10)
 
 # Merge tsne

@@ -8,13 +8,15 @@ args = commandArgs(trailingOnly=TRUE)
 #' date: "1/26/2021"
 #' output: html_document
 
+# Run with:
+# Rscript bin/3.3.Modularity_test.R allddi ppx_205 ppx_1455
+
 library(pacman)
-p_load(geomorph,tidyverse,broom,ape,ggx,geomorph,furrr,tictoc)
+p_load(geomorph,broom,ape,ggx,furrr,tictoc,dplyr,tidyr,readr,purrr)
 
 
 availableCores()
-plan("multisession",workers=8)
-#plan("multicore",workers=8)
+plan(multisession, workers = 28)
 
 # Read phylogenetic tree
 species <- c("Escherichia_coli_K-12_ebw",
@@ -35,7 +37,6 @@ tree_nw <- read.nexus(treefile)
 
 #get_ppx("allddi","ppx_205","ppx_1455")
 #get_ppx("sen2in1","ppx_115","ppx_455")
-#get_ppx("allddi",start="ppx_205",end="ppx_215")
 
 get_ppx <- function(set_name,start,end){
   print(paste(start,'to',end))

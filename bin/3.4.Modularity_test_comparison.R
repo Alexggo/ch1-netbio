@@ -8,15 +8,17 @@
 #' 
 ## -------------------------------------------------------------------------
 library(pacman)
-p_load(geomorph,tidyverse,broom,ape,ggx,geomorph,furrr,tictoc,patchwork,ggrepel)
+library(geomorph)
+p_load(broom,ape,ggx,furrr,tictoc,patchwork,dplyr,tidyr,readr,purrr,ggplot2,ggrepel)
 
-# set_name <- "allddi"
-# test <- "modularity_tests_allddippx_205-ppx_1455.RData"
-# ptsne.ppx <- seq(205,1455,10) #251 ppx.
 
-set_name <- "sen2in1"
-test <- "modularity_tests_sen2in1ppx_115-ppx_455.RData"
-ptsne.ppx <- seq(115,455,10) #135 ppx.
+set_name <- "allddi"
+test <- "modularity_tests_allddippx_205-ppx_1455.RData"
+ptsne.ppx <- seq(205,1455,10) #251 ppx.
+
+#set_name <- "sen2in1"
+#test <- "modularity_tests_sen2in1ppx_115-ppx_455.RData"
+#ptsne.ppx <- seq(115,455,10) #135 ppx.
 
 # ALL DDI. Good tsnes between 205-1455.
 # SEN2IN1. Good tsnes between 115-455.
@@ -109,10 +111,6 @@ species <- c("Escherichia_coli_K-12_ebw",
 
 treefile <- file.path('data/2.2.Phylogenetics_Bayesian',"Phylo-p1.nwk.tree")
 tree_nw <- read.nexus(treefile)
-# Drop the species that are not needed.
-not.species <- tree_nw$tip.label[!(tree_nw$tip.label %in% species)]
-tree_nw <- drop.tip(tree_nw,not.species)
-tree_nw$tip.label <- c("ebw","ecr","pae","pau","seo","stm")
 # Test differences in rates
 dat <- dataset %>%  
   select(ebw,ecr,seo,stm,pae,pau) %>% t() 
