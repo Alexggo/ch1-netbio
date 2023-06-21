@@ -12,7 +12,7 @@ library(geomorph)
 p_load(broom,ape,ggx,furrr,tictoc,patchwork,dplyr,tidyr,readr,purrr,ggplot2,ggrepel)
 
 
-set_name <- "allddi"
+set_name <- "allddi" #sen2in1
 test <- "modularity_tests_allddippx_205-ppx_1455.RData"
 ptsne.ppx <- seq(205,1455,10) #251 ppx.
 
@@ -115,8 +115,6 @@ tree_nw <- read.nexus(treefile)
 dat <- dataset %>%  
   select(ebw,ecr,seo,stm,pae,pau) %>% t() 
 
-#To load previous test
-#load(file = paste0('results/',set_name,'/rate_tests_most_modular.RData'))
 # To run test, run the following:
 RT_list <- list()
 for (i in 1:dim(filtered_df)[1]){
@@ -127,6 +125,9 @@ for (i in 1:dim(filtered_df)[1]){
 }
 names(RT_list) <- paste0("ppx_",filtered_df$ptsne)
 RT_list |> save(file = paste0('results/',set_name,'/rate_tests_most_modular.RData'))
+
+#To load previous test
+#load(file = paste0('results/',set_name,'/rate_tests_most_modular.RData'))
 
 sigma.d.ratio<- c()
 p.value_test<- c()
@@ -147,7 +148,10 @@ df_rate_test <- data.frame(ptsne=filtered_df$ptsne,
 
 summary_test <- inner_join(filtered_df,df_rate_test,by="ptsne")
 
-best <- RT_list[["ppx_135"]]  #ALL DDI 245. SET2 PPX 135
+#allddi
+best <- RT_list[["ppx_245"]]  #ALL DDI 245. SET2 PPX 125
+#sen2in1
+best <- RT_list[["ppx_125"]]  #ALL DDI 245. SET2 PPX 125
 summary(best)
 plot(best)
 

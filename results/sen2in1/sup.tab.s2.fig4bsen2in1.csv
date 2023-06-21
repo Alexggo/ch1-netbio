@@ -1,0 +1,4 @@
+"Group 1","Group 2","Statistical test","Statistic","p-value","df"
+"Synergy","Additivity","Welch Two Sample t-test","-4.977","0","424.251"
+"Synergy","Antagonism","Welch Two Sample t-test","3.083","0.003","68.115"
+"Additivity","Antagonism","Welch Two Sample t-test","5.626","0","91.328"

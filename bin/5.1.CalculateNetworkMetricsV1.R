@@ -9,13 +9,13 @@ p_load(igraph, tidyverse, matrixStats,future.apply)
 # Metabolic=1, PPI=10
 #Add rates and DDI info
 
-significant_figures <- 3
+significant_figures <- 4
 
-full_df_all <- read.csv(paste0("results/","allddi","/","DDI_table_rates_","allddi",".csv")) |> 
+full_df_all <- read.csv(paste0("results/allddi/DDI_table_rates_allddi.csv")) |> 
   rename(clusters_all=clusters,
          sigma.rate_all=sigma.rate) 
 
-full_df_set <- read.csv(paste0("results/","sen2in1","/","DDI_table_rates_","sen2in1",".csv"))|> 
+full_df_set <- read.csv(paste0("results/sen2in1/DDI_table_rates_sen2in1.csv"))|> 
   rename(clusters_set=clusters,
          sigma.rate_set=sigma.rate) |> 
   select(drug_pair,clusters_set,sigma.rate_set) 
@@ -431,7 +431,7 @@ df_DDI_nottarg  <- right_join(df_nottarget_tot,network_values_nottarg, by = "DRU
   distinct() |> 
   arrange(mean.k.edge) |> 
   arrange(DRUG_ID) |> 
-  select(colnames(df_DDI_targ))
+  select(colnames(df_DDI_targ)) 
 
 #rbind df_DDI_targ and df_DDI_nottarg
 df_DDI_tot <- rbind(df_DDI_targ,df_DDI_nottarg)
@@ -441,56 +441,97 @@ df_DDI_tot    |>
   write_excel_csv(paste0("results/","df_DDI_metrics",".csv"))
 
 
+
 # plot networks
-pdf(paste0("results/","network_graph",".pdf"),
-    width=16,height=16)
+p_load(ggraph,GGally,ggnet,
+       sna,network,ggplot2,patchwork,ggplotify)
+
+adj_mat <- list_graphs |> 
+  map(as_adjacency_matrix,sparse = FALSE) 
+
+plot_list <- list()  # List to store the plots
+num_targets <- list()
+num_drugs <- list()
+num_nodes <- list()
 
 for (i in seq_along(list_graphs)) {
-  g1 <- list_graphs[[i]]
-  names <- V(g1) |>names()
+  net_graph <- network(adj_mat[[i]], directed = is_directed(list_graphs[[i]]))
+  
+  names <- V(list_graphs[[i]]) |>names()
   print(net[i])
-  value1 <- names %in% all_targets |>
+  num_targets[[i]] <- names %in% all_targets |>
     sum()
-  value2 <- drug_mapping$Drug[all_targets %in% names] |>
+  num_drugs[[i]] <- drug_mapping$Drug[all_targets %in% names] |>
     unique() |>
     length()
-  V(g1)$color <- ifelse(names %in% all_targets, "red", "lightblue")
-  V(g1)$size <- ifelse(V(g1) %in% all_targets, 40, 5)
-  V(g1)$label.cex <- 0.3
-  v.number <- V(g1) |>
-    length()
-  mean.length <- average.path.length(g1)
-  plot(g1, vertex.label = "", vertex.size = 2)
-  mytitle <- paste(net[i])
-  mysubtitle1 <- paste0("Average path length = ",
-                        round(mean.length, 4), ".Number of vertexes = ", v.number)
-  mysubtitle2 <- paste0("Number of targets = ",
-                        value1, ".Number of drugs = ", value2)
-  mtext(mytitle,side = 3, line = 2.5, at = -0.07, adj = 0, cex = 2)
-  mtext(mysubtitle1,side = 3, line = 1, at = -0.07, adj = 0, cex = 1.5)
-  mtext(mysubtitle2,side = 3, line = -0.5, at = -0.07, adj = 0, cex = 1.5)
-  print(paste("Nodes", v.number, "Targets", value1, "Drugs", value2))
+  
+  col_vect <- ifelse(names %in% all_targets, "red", "lightblue")
+  V(list_graphs[[i]])$color <- col_vect
+  V(list_graphs[[i]])$size <- ifelse(V(list_graphs[[i]]) %in% all_targets, 40, 5)
+  V(list_graphs[[i]])$label.cex <- 0.3
+  num_nodes[[i]] <- V(list_graphs[[i]]) |>length()
+  mean.length <- average.path.length(list_graphs[[i]])
+  
+  plot_list[[i]] <- ggnet2(net_graph, label = FALSE, size = 2) +
+    geom_node_point(color = 'black',
+                    shape = 21, fill = col_vect, stroke = 0.5,
+                    size=2)
 }
-dev.off()
 
 pdf(paste0("results/","network_graph","_notext.pdf"),
-    width=16,height=16)
-
-for (i in seq_along(list_graphs)) {
-  g1 <- list_graphs[[i]]
-  names <- V(g1) |>names()
-  print(net[i])
-  value1 <- names %in% all_targets |>
-    sum()
-  value2 <- drug_mapping$Drug[all_targets %in% names] |>
-    unique() |>
-    length()
-  V(g1)$color <- ifelse(names %in% all_targets, "red", "lightblue")
-  V(g1)$size <- ifelse(V(g1) %in% all_targets, 40, 5)
-  V(g1)$label.cex <- 0.3
-  v.number <- V(g1) |>length()
-  mean.length <- average.path.length(g1)
-  plot(g1, vertex.label = "", vertex.size = 2)
-}
+    width=7,height=7)
+plot_list
 dev.off()
 
+fig2 <- wrap_plots(plot_list[[2]],plot_list[[3]])+ 
+  plot_annotation(tag_levels = 'A',tag_suffix = '.')&
+  theme(plot.tag.position = c(0, 1),
+        plot.tag = element_text(size = 15, hjust = 0, vjust = 2))
+
+ggsave(
+  filename = paste0("results/allddi/fig2.pdf"),
+  plot = fig2,
+  width = 10,
+  height = 5
+)
+
+## Figures with text
+plot_list <- list()  # List to store the plots
+num_targets <- list()
+num_drugs <- list()
+num_nodes <- list()
+
+for (i in seq_along(list_graphs)) {
+  net_graph <- network(adj_mat[[i]], directed = is_directed(list_graphs[[i]]))
+  
+  names <- V(list_graphs[[i]]) |>names()
+  print(net[i])
+  num_targets[[i]] <- names %in% all_targets |>
+    sum()
+  num_drugs[[i]] <- drug_mapping$Drug[all_targets %in% names] |>
+    unique() |>
+    length()
+  
+  col_vect <- ifelse(names %in% all_targets, "red", "lightblue")
+  V(list_graphs[[i]])$color <- col_vect
+  V(list_graphs[[i]])$size <- ifelse(V(list_graphs[[i]]) %in% all_targets, 40, 5)
+  V(list_graphs[[i]])$label.cex <- 0.3
+  num_nodes[[i]] <- V(list_graphs[[i]]) |>length()
+  mean.length <- round(average.path.length(list_graphs[[i]]),3)
+  
+  plot_list[[i]] <- ggnet2(net_graph, label = FALSE, size = 2) +
+    geom_node_point(color = 'black',
+                    shape = 21, fill = col_vect, stroke = 0.5,
+                    size=3)+
+    annotate("text", x=0.25, y=1.2, label= net[[i]],size=6)+
+    annotate("text", x=0.85, y=1.15, label= paste0("Average path length=",mean.length))+
+    annotate("text", x=0.85, y=1.1, label= paste0("Number of nodes=",num_nodes[[i]]))+
+    annotate("text", x=0.85, y=1.05, label= paste0("Number of targets=",num_targets[[i]]))+
+    annotate("text", x=0.85, y=1, label= paste0("Number of drugs=",num_drugs[[i]]))
+    
+}
+
+pdf(paste0("results/","network_graph",".pdf"),
+    width=7,height=7)
+plot_list
+dev.off()
