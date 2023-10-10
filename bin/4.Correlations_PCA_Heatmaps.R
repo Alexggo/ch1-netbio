@@ -280,6 +280,14 @@ PD_dist <- PatristicDistMatrix |> pivot_longer(names_to = "Sp2",
 g <- full_df %>% select(ebw,ecr,seo,stm,pae,pau) %>% t()
 dend <- hclust(dist(g,method="euclidean"),method="average")  %>% 
   as.phylo()
+
+dend2 <- rotate(dend,7)
+dend3 <- rotate(dend2,9)
+dend4 <- rotate(dend3,11)
+
+plot(dend4)
+add.scale.bar()
+
 PatristicDistMatrix<-cophenetic(dend)
 PatristicDistMatrix <- PatristicDistMatrix/2
 tabnew<- PatristicDistMatrix %>% as.data.frame()

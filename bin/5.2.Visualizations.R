@@ -3,7 +3,7 @@ library(pacman)
 p_load(igraph,tidyverse,BioNet,ape,geomorph,matrixStats,
        ggpubr,plotrix,tidymodels,patchwork,here,EnvStats,report)
 
-set_name <- "sen2in1" #allddi, sen2in1
+set_name <- "allddi" #allddi, sen2in1
 set_col <- "all" #all. #Run with the values for all in both allddi and sen2in
 # VISUALIZATION/STATS
 
@@ -514,7 +514,7 @@ fig.4a <- fig.4a.df1 |>
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
   theme(legend.position = "none")+
   geom_text(aes(label = paste0("n=",count)),vjust=-0.75)+
-  ylim(0,0.0020)+
+  ylim(0,0.0040)+
   scale_x_discrete(limits=rev)
 
 antagonism_score <- -1
