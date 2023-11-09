@@ -11,7 +11,7 @@ library(pacman)
 p_load(tidyverse, broom, ape, phangorn, phytools, treeio, ggtree, 
        plotly, dendextend, RColorBrewer, car, factoextra, OUwie, 
        ouch, geiger, ggrepel, hrbrthemes, ggforce, ComplexHeatmap, 
-       ggbiplot, patchwork, performance,pdftools,png,ggplotify)
+       ggbiplot, patchwork, performance,pdftools,png,ggplotify,plotrix)
 
 
 set_name <- "allddi" #allddi sen2in1
@@ -385,6 +385,268 @@ ggsave(
   width = 7,dpi=600
 )
 
+# Differences in rates among use?
+df.sum <- dataset1 |> 
+  summarise(Mean.rate=mean(sigma.rate,na.rm=TRUE),
+            sd.rate=sd(sigma.rate,na.rm=TRUE))
+
+values_df <- data.frame(
+  Value = c(df.sum$Mean.rate - 3 * df.sum$sd.rate, df.sum$Mean.rate - 2 * df.sum$sd.rate, df.sum$Mean.rate - df.sum$sd.rate,
+            df.sum$Mean.rate, 
+            df.sum$Mean.rate + df.sum$sd.rate, df.sum$Mean.rate + 2 * df.sum$sd.rate, df.sum$Mean.rate + 3 * df.sum$sd.rate),
+  SD_Multiplier = c(-3, -2, -1, 0, 1, 2, 3)
+)
+
+
+df.1 <- dataset1 |>  
+  group_by(useuse) |> 
+  summarise(Mean.rate=mean(sigma.rate,na.rm=TRUE),
+            sem.rate=std.error(sigma.rate,na.rm=TRUE),
+            count=n()) |> 
+  ungroup() |> 
+  mutate(type=as.factor(useuse)) 
+
+anova_result <- aov(Mean.rate ~ type, data = df.1)
+anova_tidy <- tidy(anova_result)
+anova_glance <- glance(anova_result)
+anova_augment <- augment(anova_result)
+residuals <- anova_augment$.resid
+# Create a histogram
+hist(residuals, main = "Residuals Histogram")
+plot(anova_augment$.fitted, residuals, 
+     main = "Residuals vs. Fitted Values",
+     xlab = "Fitted Values",
+     ylab = "Residuals")
+
+# Create a Q-Q plot
+qqnorm(residuals)
+qqline(residuals)
+
+fig1 <- df.1 |> 
+  ggplot(aes(x=type,y=Mean.rate))+
+  geom_bar(position=position_dodge(), stat="identity",
+           fill='#6191F2',width=0.5)+
+  geom_errorbar(position=position_dodge(0.5),aes(ymin=Mean.rate-sem.rate, ymax=Mean.rate+sem.rate), width=.2)+
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 15, vjust = 1, hjust=1))+
+  xlab("DDI Use1-Use2")+
+  ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
+  theme(legend.position = "none")+
+  geom_text(aes(label = paste0("n=",count)),vjust=-0.75)+
+  ylim(0,0.0040)+
+  scale_x_discrete(limits=rev)+ 
+  geom_hline(data = values_df, aes(yintercept = Value, color = ifelse(SD_Multiplier == 0, "Mean", "Red")), 
+             linetype = "dashed") +
+  scale_color_manual(values = c("Mean" = "blue", "Red" = "red"))
+
+df.2 <- dataset1 |>  
+  group_by(processprocess) |> 
+  summarise(Mean.rate=mean(sigma.rate,na.rm=TRUE),
+            sem.rate=std.error(sigma.rate,na.rm=TRUE),
+            count=n()) |> 
+  ungroup() |> 
+  mutate(type=as.factor(processprocess)) 
+
+anova_result <- aov(Mean.rate ~ type, data = df.2)
+anova_tidy <- tidy(anova_result)
+anova_glance <- glance(anova_result)
+anova_augment <- augment(anova_result)
+residuals <- anova_augment$.resid
+# Create a histogram
+hist(residuals, main = "Residuals Histogram")
+plot(anova_augment$.fitted, residuals, 
+     main = "Residuals vs. Fitted Values",
+     xlab = "Fitted Values",
+     ylab = "Residuals")
+
+# Create a Q-Q plot
+qqnorm(residuals)
+qqline(residuals)
+
+fig2 <- df.2 |> 
+  ggplot(aes(x=type,y=Mean.rate))+
+  geom_bar(position=position_dodge(), stat="identity",
+           fill='#6191F2',width=0.5)+
+  geom_errorbar(position=position_dodge(0.5),aes(ymin=Mean.rate-sem.rate, ymax=Mean.rate+sem.rate), width=.2)+
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 15, vjust = 1, hjust=1))+
+  xlab("DDI Process1-Process2")+
+  ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
+  theme(legend.position = "none")+
+  geom_text(aes(label = paste0("n=",count)),vjust=-0.75)+
+  ylim(0,0.0040)+
+  scale_x_discrete(limits=rev)+ 
+  geom_hline(data = values_df, aes(yintercept = Value, color = ifelse(SD_Multiplier == 0, "Mean", "Red")), 
+             linetype = "dashed") +
+  scale_color_manual(values = c("Mean" = "blue", "Red" = "red"))
+
+
+
+df.3 <- dataset1 |>  
+  group_by(categorycategory) |> 
+  summarise(Mean.rate=mean(sigma.rate,na.rm=TRUE),
+            sem.rate=std.error(sigma.rate,na.rm=TRUE),
+            count=n()) |> 
+  ungroup() |> 
+  mutate(type=as.factor(categorycategory)) 
+
+anova_result <- aov(Mean.rate ~ type, data = df.3)
+anova_tidy <- tidy(anova_result)
+anova_glance <- glance(anova_result)
+anova_augment <- augment(anova_result)
+residuals <- anova_augment$.resid
+# Create a histogram
+hist(residuals, main = "Residuals Histogram")
+plot(anova_augment$.fitted, residuals, 
+     main = "Residuals vs. Fitted Values",
+     xlab = "Fitted Values",
+     ylab = "Residuals")
+
+# Create a Q-Q plot
+qqnorm(residuals)
+qqline(residuals)
+
+fig3 <- df.3 |> 
+  ggplot(aes(x=type,y=Mean.rate))+
+  geom_bar(position=position_dodge(), stat="identity",
+           fill='#6191F2',width=0.5)+
+  geom_errorbar(position=position_dodge(0.5),aes(ymin=Mean.rate-sem.rate, ymax=Mean.rate+sem.rate), width=.2)+
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 15, vjust = 1, hjust=1))+
+  xlab("DDI Category1-Category2")+
+  ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
+  theme(legend.position = "none")+
+  geom_text(aes(label = paste0("n=",count)),vjust=-0.75)+
+  ylim(0,0.0040)+
+  scale_x_discrete(limits=rev)+ 
+  geom_hline(data = values_df, aes(yintercept = Value, color = ifelse(SD_Multiplier == 0, "Mean", "Red")), 
+             linetype = "dashed") +
+  scale_color_manual(values = c("Mean" = "blue", "Red" = "red"))
+
+
+df.1.1 <- dataset1 |>  
+  group_by(use1) |> 
+  summarise(Mean.rate=mean(sigma.rate,na.rm=TRUE),
+            sem.rate=std.error(sigma.rate,na.rm=TRUE),
+            count=n()) |> 
+  ungroup() |> 
+  mutate(type=as.factor(use1)) 
+
+
+anova_result <- aov(Mean.rate ~ type, data = df.1.1)
+anova_tidy <- tidy(anova_result)
+anova_glance <- glance(anova_result)
+anova_augment <- augment(anova_result)
+residuals <- anova_augment$.resid
+# Create a histogram
+hist(residuals, main = "Residuals Histogram")
+plot(anova_augment$.fitted, residuals, 
+     main = "Residuals vs. Fitted Values",
+     xlab = "Fitted Values",
+     ylab = "Residuals")
+
+# Create a Q-Q plot
+qqnorm(residuals)
+qqline(residuals)
+
+fig1 <- df.1.1 |> 
+  ggplot(aes(x=type,y=Mean.rate))+
+  geom_bar(position=position_dodge(), stat="identity",
+           fill='#6191F2',width=0.5)+
+  geom_errorbar(position=position_dodge(0.5),aes(ymin=Mean.rate-sem.rate, ymax=Mean.rate+sem.rate), width=.2)+
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 15, vjust = 1, hjust=1))+
+  xlab("Drug 1 Use")+
+  ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
+  theme(legend.position = "none")+
+  geom_text(aes(label = paste0("n=",count)),vjust=-0.75)+
+  ylim(0,0.0040)+
+  scale_x_discrete(limits=rev)+ 
+  geom_hline(data = values_df, aes(yintercept = Value, color = ifelse(SD_Multiplier == 0, "Mean", "Red")), 
+             linetype = "dashed") +
+  scale_color_manual(values = c("Mean" = "blue", "Red" = "red"))
+
+df.1.2 <- dataset1 |>  
+  group_by(targeted_cellular_process1) |> 
+  summarise(Mean.rate=mean(sigma.rate,na.rm=TRUE),
+            sem.rate=std.error(sigma.rate,na.rm=TRUE),
+            count=n()) |> 
+  ungroup() |> 
+  mutate(type=as.factor(targeted_cellular_process1)) 
+
+anova_result <- aov(Mean.rate ~ type, data = df.1.2)
+anova_tidy <- tidy(anova_result)
+anova_glance <- glance(anova_result)
+anova_augment <- augment(anova_result)
+residuals <- anova_augment$.resid
+# Create a histogram
+hist(residuals, main = "Residuals Histogram")
+plot(anova_augment$.fitted, residuals, 
+     main = "Residuals vs. Fitted Values",
+     xlab = "Fitted Values",
+     ylab = "Residuals")
+
+# Create a Q-Q plot
+qqnorm(residuals)
+qqline(residuals)
+
+fig2 <- df.1.2 |> 
+  ggplot(aes(x=type,y=Mean.rate))+
+  geom_bar(position=position_dodge(), stat="identity",
+           fill='#6191F2',width=0.5)+
+  geom_errorbar(position=position_dodge(0.5),aes(ymin=Mean.rate-sem.rate, ymax=Mean.rate+sem.rate), width=.2)+
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 15, vjust = 1, hjust=1))+
+  xlab("Drug 1 Process")+
+  ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
+  theme(legend.position = "none")+
+  geom_text(aes(label = paste0("n=",count)),vjust=-0.75)+
+  ylim(0,0.0040)+
+  scale_x_discrete(limits=rev)+ 
+  geom_hline(data = values_df, aes(yintercept = Value, color = ifelse(SD_Multiplier == 0, "Mean", "Red")), 
+             linetype = "dashed") +
+  scale_color_manual(values = c("Mean" = "blue", "Red" = "red"))
+
+df.1.3 <- dataset1 |>  
+  group_by(drug_category1) |> 
+  summarise(Mean.rate=mean(sigma.rate,na.rm=TRUE),
+            sem.rate=std.error(sigma.rate,na.rm=TRUE),
+            count=n()) |> 
+  ungroup() |> 
+  mutate(type=as.factor(drug_category1)) 
+
+anova_result <- aov(Mean.rate ~ type, data = df.1.3)
+anova_tidy <- tidy(anova_result)
+anova_glance <- glance(anova_result)
+anova_augment <- augment(anova_result)
+residuals <- anova_augment$.resid
+# Create a histogram
+hist(residuals, main = "Residuals Histogram")
+plot(anova_augment$.fitted, residuals, 
+     main = "Residuals vs. Fitted Values",
+     xlab = "Fitted Values",
+     ylab = "Residuals")
+
+# Create a Q-Q plot
+qqnorm(residuals)
+qqline(residuals)
+
+fig3 <- df.1.3 |> 
+  ggplot(aes(x=type,y=Mean.rate))+
+  geom_bar(position=position_dodge(), stat="identity",
+           fill='#6191F2',width=0.5)+
+  geom_errorbar(position=position_dodge(0.5),aes(ymin=Mean.rate-sem.rate, ymax=Mean.rate+sem.rate), width=.2)+
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 15, vjust = 1, hjust=1))+
+  xlab("Drug 1 Category")+
+  ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
+  theme(legend.position = "none")+
+  geom_text(aes(label = paste0("n=",count)),vjust=-0.75)+
+  ylim(0,0.0040)+
+  scale_x_discrete(limits=rev)+ 
+  geom_hline(data = values_df, aes(yintercept = Value, color = ifelse(SD_Multiplier == 0, "Mean", "Red")), 
+             linetype = "dashed") +
+  scale_color_manual(values = c("Mean" = "blue", "Red" = "red"))
 
 ###############
 
@@ -514,4 +776,5 @@ ggsave(
   height = 7,
   width = 7
 )
+
 
