@@ -1,0 +1,7 @@
+"Group 1","Group 2","Statistical test","Statistic","p-value","df","Network"
+"Synergy","Additivity","Welch Two Sample t-test","48.985","0","1542.953","Co-functional (EcoCyc/GO-BP)"
+"Synergy","Antagonism","Welch Two Sample t-test","27.983","0","226.056","Co-functional (EcoCyc/GO-BP)"
+"Additivity","Antagonism","Welch Two Sample t-test","5.113","0","188.331","Co-functional (EcoCyc/GO-BP)"
+"Synergy","Additivity","Welch Two Sample t-test","53.463","0","1233.005","Small/medium-scale PPI"
+"Synergy","Antagonism","Welch Two Sample t-test","25.244","0","224.621","Small/medium-scale PPI"
+"Additivity","Antagonism","Welch Two Sample t-test","1.45","0.148","205.288","Small/medium-scale PPI"

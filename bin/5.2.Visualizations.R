@@ -1011,7 +1011,8 @@ df_DDI_tot |> ggline(x = "int_sign_ebw", y = "sigma.rate_all", add = "mean_se",
 df1 <- df_DDI_tot |> 
   filter(network==net[1]|network==net[3]) |> 
   filter(DRUG_ID %in% c("A22-Novobiocin","Ciprofloxacin-Meropenem",
-                        "Sulfamonomethoxine-Trimethoprim","Doxycycline-Trimethoprim"))
+                        "Sulfamonomethoxine-Trimethoprim")) |> 
+  select(DRUG_ID,1,c(3:107))
 
 df1 |> t() |> write.csv("results/allddi/example_DDI.csv")
 
