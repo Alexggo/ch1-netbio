@@ -1019,9 +1019,9 @@ df1 |> t() |> write.csv("results/allddi/example_DDI.csv")
 
 
 
-a <- 8
+a <- 9
 ggsave(
-  filename = paste0("results/", set_name, "/supfig_1", set_name, ".pdf"),
+  filename = paste0("results/", set_name, "/supfig_2", set_name, ".pdf"),
   plot = SupFig,
   width = 2 * a,
   height = 3 * a,
@@ -1029,7 +1029,7 @@ ggsave(
 )
 
 ggsave(
-  filename = paste0("results/", set_name, "/supfig_1", set_name, ".png"),
+  filename = paste0("results/", set_name, "/supfig_2", set_name, ".png"),
   plot = SupFig,
   width = 2 * a,
   height = 3 * a,
