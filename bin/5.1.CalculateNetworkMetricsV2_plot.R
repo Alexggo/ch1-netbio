@@ -2,7 +2,7 @@
 
 ##----load---------------------------------------------------------------------
 library(pacman)
-p_load(igraph, tidyverse, matrixStats,future.apply,tictoc)
+p_load(igraph, tidyverse, matrixStats,future.apply)
 
 #Which proteins are targeted by drugs?
 drug_mapping_org <- read.csv("data/3.Targets_NetworkDistance/DrugTargets3_ecoli.csv") |>
@@ -104,7 +104,7 @@ drug_mapping_pae2 <- drug_mapping_pae |>
 all_targets_eco <- drug_mapping_eco$KEGG |>
   unique() |> sort()
 all_targets_eco |> length()
-# n!/(k!*(n-k)!)=n!/(2*n-2) possible pairwise combinations
+# 27*26/2=351 possible combinations
 
 all_targets_ecr <- drug_mapping_ecr$KEGG |>
   unique() |> sort()
@@ -226,7 +226,6 @@ list_graphs <- list_net |>
 
 list_path_conn_deg <- list()
 df_join <- list()
-
 for (i in seq_along(list_graphs)) {
   print(paste("current network:",i))
   # Calculate target combinations
@@ -249,7 +248,12 @@ for (i in seq_along(list_graphs)) {
   ##-----------------------------------------------------------------------------
   # Calculate path.length, k-edge connectivity,
   # and node degree for the possible targets.
-  total_sample <- T_num1
+  total_sample <- total_c
+  S_value1 <- (1+sqrt(8*total_sample+1))/2
+  S_value2 <- (1-sqrt(8*total_sample+1))/2
+  S_value <- max(S_value1,S_value2)
+  S_value <- round(S_value,0)
+  print(S_value)
   
   network <- list_graphs[[i]]
   nodes <- V(network) |> names()
@@ -289,67 +293,57 @@ for (i in seq_along(list_graphs)) {
   comb_nottargets |> dim() #net1=45, net2=190,net3=153 target combinations
   
   comb_targets <- cbind(comb_targets,rep(1,L_targets*(L_targets-1)/2))
+  
+  
   comb_nottargets <- cbind(comb_nottargets,rep(0,S_value*(S_value-1)/2))
   comb <- rbind(comb_targets,comb_nottargets)
   
+  
   # Calculate distance between node combinations
-  print("Now doing path length")
-  tic()
   allpath <- future_apply(comb,1,function(edges){
     shortest.paths(list_graphs[[i]],
                    v = edges[1], to = edges[2])
   })
-  toc()
-
+  
   # Calculate connectivity between node combinations
-  print("Now doing connectivity")
-  tic()
   kcon <- future_apply(comb,1,function(edges){
     edge_connectivity(list_graphs[[i]],
                       source = edges[1], target = edges[2])
   })
-  toc()
   
   # Calculate node degree number 1
-  print("Now doing degree 1")
-  tic()
   deg1 <- future_apply(comb,1,function(edges){
     igraph::degree(list_graphs[[i]],
                    v = edges[1])
   })
-  toc()
   
   # Calculate node degree number 1
-  print("Now doing degree 2")
-  tic()
   deg2 <- future_apply(comb,1,function(edges){
     igraph::degree(list_graphs[[i]],
                    v = edges[2])
   })
-  toc()
   
   # Calculate betweeness
-  print("Now doing betweeness")
-  unique_tar <- unique(c(comb[,1],comb[,2]))
-  tic()
-  bet <-  igraph::betweenness(list_graphs[[i]],
-                        v = unique_tar,directed=FALSE,cutoff = 15)
-  toc()
-
+  bet1 <-  future_apply(comb,1,function(edges){
+    igraph::betweenness(list_graphs[[i]],
+                        v = edges[1],directed=FALSE,cutoff = 15)
+    
+  })
+  
+  bet2 <-  future_apply(comb,1,function(edges){
+    igraph::betweenness(list_graphs[[i]],
+                        v = edges[2],directed=FALSE,cutoff = 15)
+    
+  })
+  
   #Are the two nodes adjacent?
-  print("Now doing adjancency")
-  tic()
   adj <-  future_apply(comb,1,function(edges){
     are_adjacent(list_graphs[[i]],
                  v1 = edges[1], v2 = edges[2])
   })
-  toc()
   
   # Calculate EV centrality
-  print("Now doing EV centrality")
-  tic()
   evcentr <- evcent(list_graphs[[i]])$vector
-  toc()
   
   net_results <- data.frame(N1=comb[,1],
                             N2=comb[,2],
@@ -409,9 +403,6 @@ for (i in seq_along(list_graphs)) {
     mutate(Drug2=ifelse(is.na(Drug2),"Non-targets",Drug2))
   
 }
-
-load(list_path_conn_deg,"results/list_path_conn_deg.R")
-load(df_join,"results/df_join.R")
 
 
 
