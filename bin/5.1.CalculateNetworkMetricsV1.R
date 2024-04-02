@@ -4,6 +4,143 @@
 library(pacman)
 p_load(igraph, tidyverse, matrixStats,future.apply)
 
+#Which proteins are targeted by drugs?
+drug_mapping_org <- read.csv("data/3.Targets_NetworkDistance/DrugTargets3_ecoli.csv") |>
+  select(Drug, KEGG_eco) |>
+  distinct() |>
+  arrange(Drug) |>
+  filter(KEGG_eco != "")
+
+ortho_kegg <- read.csv("data/3.Targets_NetworkDistance/ortholog_table.csv") |> 
+  select(2:3,5,6,8)|> 
+  mutate(KO_ID = strsplit(KO_ID, "\n")) |> 
+  mutate(KEGG_eco = strsplit(eco, "\n")) |> 
+  mutate(KEGG_ecr = strsplit(ecr, "\n")) |> 
+  mutate(KEGG_stm = strsplit(stm, "\n")) |> 
+  mutate(KEGG_pae = strsplit(pae, "\n"))  |> 
+  unnest(KO_ID) |> 
+  unnest(KEGG_eco) |> 
+  select(KEGG_eco,KEGG_ecr,
+         KEGG_stm,KEGG_pae)
+
+drug_mapping_ALL <- merge(drug_mapping_org,ortho_kegg,by="KEGG_eco")
+
+drug_mapping_eco <- drug_mapping_ALL |> 
+  select(Drug,KEGG_eco) |> 
+  unnest(KEGG_eco) |> 
+  mutate(KEGG=KEGG_eco) |> 
+  select(Drug,KEGG) |> 
+  distinct()
+
+drug_mapping_eco1 <- drug_mapping_eco |>
+  mutate(Drug1 = Drug,
+         KEGG1 = KEGG) |> 
+  select(Drug1,KEGG1) |> 
+  arrange(Drug1)
+
+drug_mapping_eco2 <- drug_mapping_eco |>
+  mutate(Drug2 = Drug,
+         KEGG2 = KEGG) |> 
+  select(Drug2,KEGG2)|> 
+  arrange(Drug2)
+
+drug_mapping_ecr <- drug_mapping_ALL |> 
+  select(Drug,KEGG_ecr) |> 
+  unnest(KEGG_ecr)|> 
+  mutate(KEGG=KEGG_ecr) |> 
+  select(Drug,KEGG) |> 
+  distinct()
+
+drug_mapping_ecr1 <- drug_mapping_ecr |>
+  mutate(Drug1 = Drug,
+         KEGG1 = KEGG) |> 
+  select(Drug1,KEGG1) |> 
+  arrange(Drug1)
+
+drug_mapping_ecr2 <- drug_mapping_ecr |>
+  mutate(Drug2 = Drug,
+         KEGG2 = KEGG) |> 
+  select(Drug2,KEGG2)|> 
+  arrange(Drug2)
+
+drug_mapping_stm <- drug_mapping_ALL |> 
+  select(Drug,KEGG_stm)|> 
+  unnest(KEGG_stm)|> 
+  mutate(KEGG=KEGG_stm) |> 
+  select(Drug,KEGG) |> 
+  distinct()
+
+drug_mapping_stm1 <- drug_mapping_stm |>
+  mutate(Drug1 = Drug,
+         KEGG1 = KEGG) |> 
+  select(Drug1,KEGG1) |> 
+  arrange(Drug1)
+
+drug_mapping_stm2 <- drug_mapping_stm |>
+  mutate(Drug2 = Drug,
+         KEGG2 = KEGG) |> 
+  select(Drug2,KEGG2)|> 
+  arrange(Drug2)
+
+drug_mapping_pae <- drug_mapping_ALL |> 
+  select(Drug,KEGG_pae)|> 
+  unnest(KEGG_pae)|> 
+  mutate(KEGG=KEGG_pae) |> 
+  select(Drug,KEGG) |> 
+  distinct()
+
+drug_mapping_pae1 <- drug_mapping_pae |>
+  mutate(Drug1 = Drug,
+         KEGG1 = KEGG) |> 
+  select(Drug1,KEGG1) |> 
+  arrange(Drug1)
+
+drug_mapping_pae2 <- drug_mapping_pae |>
+  mutate(Drug2 = Drug,
+         KEGG2 = KEGG) |> 
+  select(Drug2,KEGG2)|> 
+  arrange(Drug2)
+
+all_targets_eco <- drug_mapping_eco$KEGG |>
+  unique() |> sort()
+all_targets_eco |> length()
+# 27*26/2=351 possible combinations
+
+all_targets_ecr <- drug_mapping_ecr$KEGG |>
+  unique() |> sort()
+all_targets_ecr |> length()
+
+all_targets_stm <- drug_mapping_stm$KEGG |>
+  unique() |> sort()
+all_targets_stm |> length()
+
+all_targets_pae <- drug_mapping_pae$KEGG |>
+  unique() |> sort()
+all_targets_pae |> length()
+
+all_t <- list(all_targets_eco,
+              all_targets_eco,
+              all_targets_eco,
+              all_targets_eco,
+                    all_targets_ecr,
+                    all_targets_stm,
+                    all_targets_pae)
+
+all_d1_map <- list(drug_mapping_eco1,
+               drug_mapping_eco1,
+               drug_mapping_eco1,
+               drug_mapping_eco1,
+               drug_mapping_ecr1,
+               drug_mapping_stm1,
+               drug_mapping_pae1)
+
+all_d2_map <- list(drug_mapping_eco2,
+                   drug_mapping_eco2,
+                   drug_mapping_eco2,
+                   drug_mapping_eco2,
+                   drug_mapping_ecr2,
+                   drug_mapping_stm2,
+                   drug_mapping_pae2)
 
 ##-----------------------------------------------------------------------------
 # Metabolic=1, PPI=10
@@ -32,6 +169,7 @@ full_df <- left_join(full_df_all,full_df_set,by="drug_pair") |>
   mutate(clusters_set=factor(clusters_set,
                              levels = unique(full_df_set$clusters_set[order(full_df_set$sigma.rate_set)]))) 
 
+# Ecolinet networks
 filenames <- c("EcoCyc.goldstandardset.csv", "EcoliNet.v1.csv",
                "GN.INT.EcoliNet.3568gene.23439link.csv",
                "GO-BP.goldstandardset.csv",
@@ -63,46 +201,49 @@ net <- net[net %in% c("Co-functional(EcoCyc)",
                       "Co-functional (EcoCyc/GO-BP)",
                       "Small/medium-scale PPI")]
 
-list_net <- lapply(filepath_ecolinet,read_csv) |> 
-  lapply(mutate,node1=paste0("eco:", node1),
-         node2=paste0("eco:", node2)) |>
+list_net <- lapply(filepath_ecolinet,read_csv) |>
   lapply(select, node1, node2)
+
+# StringDB networks.
+filenamesSDB <- c("STRINGDB-E.coliK12.v12.0.txt", "STRINGDB-EcoliIAI1.v12.0.txt",
+               "STRINGDB-PAO1.v12.0.txt",
+               "STRINGDB-STLT2.protein.links.v12.0.txt")
+
+filepath_SDB <- file.path("data/3.Targets_NetworkDistance/STRINGDB", filenamesSDB)
+netSDB <- c("STRINGDB-ebw", "STRINGDB-ecr",
+         "STRINGDB-pae", "STRINGDB-stm")
+
+list_netSDB <- lapply(filepath_SDB,read_table) |>
+  lapply(select, node1, node2)
+
+list_net <- c(list_net,list_netSDB)
 
 #Create igraphs from tables.
 list_graphs <- list_net |>
   lapply(graph_from_data_frame, directed = FALSE, vertices = NULL)
 
-#Which proteins are targeted by drugs?
-drug_mapping <- read.csv("data/3.Targets_NetworkDistance/DrugTargets3_ecoli.csv") |>
-  select(Drug, KEGG_eco) |>
-  distinct() |>
-  arrange(Drug) |>
-  filter(KEGG_eco != "")
-all_targets <- drug_mapping$KEGG_eco |>
-  unique() |> sort()
-all_targets |> length()
-# 27*26/2=351 possible combinations
- 
-#All combinations of possible target nodes
-gr.vert <- t(combn(all_targets,2))
-gr.vert_same <- cbind(all_targets,all_targets)
-gr.vert <- rbind(gr.vert,gr.vert_same)
-gr.vert <- gr.vert[,]
-#Expecting maximum of 351+27=378 combinations
-
-##-----------------------------------------------------------------------------
-# Calculate path.length, k-edge connectivity,
-# and node degree for the possible targets.
-total_sample <- 378
-S_value1 <- (1+sqrt(8*total_sample+1))/2
-S_value2 <- (1-sqrt(8*total_sample+1))/2
-S_value <- max(S_value1,S_value2)
-S_value <- round(S_value,0)
-print(S_value)
-
 list_path_conn_deg <- list()
-
+df_join <- list()
 for (i in seq_along(list_graphs)) {
+  print(paste("current network:",i))
+  # Calculate target combinations
+  target_in_net <- all_t[[i]]
+  gr.vert <- t(combn(target_in_net,2))
+  gr.vert_same <- cbind(target_in_net,target_in_net)
+  gr.vert <- rbind(gr.vert,gr.vert_same)
+  gr.vert <- gr.vert[,]
+  #Expecting maximum of 351+27=378 combinations
+  
+  ##-----------------------------------------------------------------------------
+  # Calculate path.length, k-edge connectivity,
+  # and node degree for the possible targets.
+  total_sample <- 378
+  S_value1 <- (1+sqrt(8*total_sample+1))/2
+  S_value2 <- (1-sqrt(8*total_sample+1))/2
+  S_value <- max(S_value1,S_value2)
+  S_value <- round(S_value,0)
+  print(S_value)
+  
   network <- list_graphs[[i]]
   nodes <- V(network) |> names()
   ID <- seq_along(nodes)
@@ -110,7 +251,7 @@ for (i in seq_along(list_graphs)) {
   index_targets <- cbind(nodes,ID) |> 
     as.data.frame() |> 
     mutate(ID=as.numeric(ID)) |> 
-    mutate(target=ifelse(nodes%in%all_targets,TRUE,FALSE)) |> 
+    mutate(target=ifelse(nodes%in%target_in_net,TRUE,FALSE)) |> 
     arrange(desc(target))
   
   targets_in_net <- index_targets |> 
@@ -128,7 +269,7 @@ for (i in seq_along(list_graphs)) {
   index_nottargets <- cbind(nodes,ID) |> 
     as.data.frame() |> 
     mutate(ID=as.numeric(ID)) |> 
-    mutate(not_target=ifelse(nodes%in%all_targets,FALSE,TRUE)) |> 
+    mutate(not_target=ifelse(nodes%in%target_in_net,FALSE,TRUE)) |> 
     arrange(desc(not_target))
   nottargets_in_net <- index_nottargets |> 
     filter(not_target==TRUE) |> 
@@ -243,29 +384,15 @@ for (i in seq_along(list_graphs)) {
     ungroup() |> 
     distinct() |> 
     mutate(KEGG_ID=paste0(KEGG1,"_",KEGG2))
+  
+  df_join[[i]] <- left_join(list_path_conn_deg[[i]],all_d1_map[[i]], by = "KEGG1")|>
+    left_join(all_d2_map[[i]], by = "KEGG2") |>
+    distinct() |> 
+    select(-c("is.target.1","is.target.2")) |> 
+    mutate(Drug1=ifelse(is.na(Drug1),"Non-targets",Drug1)) |> 
+    mutate(Drug2=ifelse(is.na(Drug2),"Non-targets",Drug2))
 }
 
-drug_mapping1 <- drug_mapping |>
-  mutate(Drug1 = Drug,
-         KEGG1 = KEGG_eco) |> 
-  select(Drug1,KEGG1) |> 
-  arrange(Drug1)
-
-drug_mapping2 <- drug_mapping |>
-  mutate(Drug2 = Drug,
-         KEGG2 = KEGG_eco) |> 
-  select(Drug2,KEGG2)|> 
-  arrange(Drug2)
-
-df_join <- list_path_conn_deg |>
-  lapply(left_join,drug_mapping1, by = "KEGG1")
-
-df_join1 <- df_join |>
-  lapply(left_join,drug_mapping2, by = "KEGG2") |>
-  lapply(distinct) |> 
-  lapply(select,-c("is.target.1","is.target.2")) |> 
-  lapply(mutate,Drug1=ifelse(is.na(Drug1),"Non-targets",Drug1)) |> 
-  lapply(mutate,Drug2=ifelse(is.na(Drug2),"Non-targets",Drug2))
 
 df_join2 <- list()
 for (j in seq_along(df_join1)){
@@ -459,15 +586,15 @@ for (i in seq_along(list_graphs)) {
   
   names <- V(list_graphs[[i]]) |>names()
   print(net[i])
-  num_targets[[i]] <- names %in% all_targets |>
+  num_targets[[i]] <- names %in% target_in_net |>
     sum()
-  num_drugs[[i]] <- drug_mapping$Drug[all_targets %in% names] |>
+  num_drugs[[i]] <- drug_mapping$Drug[target_in_net %in% names] |>
     unique() |>
     length()
   
-  col_vect <- ifelse(names %in% all_targets, "red", "lightblue")
+  col_vect <- ifelse(names %in% target_in_net, "red", "lightblue")
   V(list_graphs[[i]])$color <- col_vect
-  V(list_graphs[[i]])$size <- ifelse(V(list_graphs[[i]]) %in% all_targets, 40, 5)
+  V(list_graphs[[i]])$size <- ifelse(V(list_graphs[[i]]) %in% target_in_net, 40, 5)
   V(list_graphs[[i]])$label.cex <- 0.3
   num_nodes[[i]] <- V(list_graphs[[i]]) |>length()
   mean.length <- average.path.length(list_graphs[[i]])
@@ -506,15 +633,15 @@ for (i in seq_along(list_graphs)) {
   
   names <- V(list_graphs[[i]]) |>names()
   print(net[i])
-  num_targets[[i]] <- names %in% all_targets |>
+  num_targets[[i]] <- names %in% target_in_net |>
     sum()
-  num_drugs[[i]] <- drug_mapping$Drug[all_targets %in% names] |>
+  num_drugs[[i]] <- drug_mapping$Drug[target_in_net %in% names] |>
     unique() |>
     length()
   
-  col_vect <- ifelse(names %in% all_targets, "red", "lightblue")
+  col_vect <- ifelse(names %in% target_in_net, "red", "lightblue")
   V(list_graphs[[i]])$color <- col_vect
-  V(list_graphs[[i]])$size <- ifelse(V(list_graphs[[i]]) %in% all_targets, 40, 5)
+  V(list_graphs[[i]])$size <- ifelse(V(list_graphs[[i]]) %in% target_in_net, 40, 5)
   V(list_graphs[[i]])$label.cex <- 0.3
   num_nodes[[i]] <- V(list_graphs[[i]]) |>length()
   mean.length <- round(average.path.length(list_graphs[[i]]),3)
@@ -535,3 +662,4 @@ pdf(paste0("results/","network_graph",".pdf"),
     width=7,height=7)
 plot_list
 dev.off()
+
