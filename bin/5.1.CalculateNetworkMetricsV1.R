@@ -226,7 +226,6 @@ list_graphs <- list_net |>
 
 list_path_conn_deg <- list()
 df_join <- list()
-
 for (i in seq_along(list_graphs)) {
   print(paste("current network:",i))
   # Calculate target combinations
@@ -240,10 +239,10 @@ for (i in seq_along(list_graphs)) {
 
   # next line for testing:
   #target_in_net <- target_in_net[1:2]  
-  gr.vert <- t(combn(target_in_net,2))
-  gr.vert_same <- cbind(target_in_net,target_in_net)
-  gr.vert <- rbind(gr.vert,gr.vert_same)
-  gr.vert <- gr.vert[,]
+  gr_vert <- t(combn(target_in_net,2))
+  gr_vert_same <- cbind(target_in_net,target_in_net)
+  gr_vert <- rbind(gr_vert,gr_vert_same)
+  gr_vert <- gr_vert[,]
   #Expecting maximum of 351+27=378 combinations
   
   ##-----------------------------------------------------------------------------
@@ -284,12 +283,12 @@ for (i in seq_along(list_graphs)) {
     unique() |> 
     pull() |> 
     sort() |> 
-    sample(size=S_value,replace = FALSE)
+    sample(size=T_num1,replace = FALSE)
   comb_nottargets <- t(combn(nottargets_in_net,2))
   comb_nottargets |> dim() #net1=45, net2=190,net3=153 target combinations
   
   comb_targets <- cbind(comb_targets,rep(1,L_targets*(L_targets-1)/2))
-  comb_nottargets <- cbind(comb_nottargets,rep(0,S_value*(S_value-1)/2))
+  comb_nottargets <- cbind(comb_nottargets,rep(0,L_targets*(L_targets-1)/2))
   comb <- rbind(comb_targets,comb_nottargets)
   
   # Calculate distance between node combinations
@@ -335,6 +334,8 @@ for (i in seq_along(list_graphs)) {
   bet <-  igraph::betweenness(list_graphs[[i]],
                         v = unique_tar,directed=FALSE,cutoff = 15)
   toc()
+  
+  
 
   #Are the two nodes adjacent?
   print("Now doing adjancency")
