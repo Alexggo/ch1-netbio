@@ -101,6 +101,42 @@ drug_mapping_pae2 <- drug_mapping_pae |>
   select(Drug2,KEGG2)|> 
   arrange(Drug2)
 
+d_map <- list(drug_mapping_eco,
+              drug_mapping_eco,
+              drug_mapping_eco,
+              drug_mapping_eco,
+              drug_mapping_eco,
+              drug_mapping_ecr,
+              drug_mapping_ecr,
+              drug_mapping_pae,
+              drug_mapping_pae,
+              drug_mapping_stm,
+              drug_mapping_stm)
+
+all_d1_map <- list(drug_mapping_eco1,
+               drug_mapping_eco1,
+               drug_mapping_eco1,
+               drug_mapping_eco1,
+               drug_mapping_eco1,
+               drug_mapping_ecr1,
+               drug_mapping_ecr1,
+               drug_mapping_pae1,
+               drug_mapping_pae1,
+               drug_mapping_stm1,
+               drug_mapping_stm1)
+
+all_d2_map <- list(drug_mapping_eco2,
+                   drug_mapping_eco2,
+                   drug_mapping_eco2,
+                   drug_mapping_eco2,
+                   drug_mapping_eco2,
+                   drug_mapping_ecr2,
+                   drug_mapping_ecr2,
+                   drug_mapping_pae2,
+                   drug_mapping_pae2,
+                   drug_mapping_stm2,
+                   drug_mapping_stm2)
+
 all_targets_eco <- drug_mapping_eco$KEGG |>
   unique() |> sort()
 all_targets_eco |> length()
@@ -122,25 +158,13 @@ all_t <- list(all_targets_eco,
               all_targets_eco,
               all_targets_eco,
               all_targets_eco,
+              all_targets_eco,
+                    all_targets_ecr,
                     all_targets_ecr,
                     all_targets_pae,
+                    all_targets_pae,
+                    all_targets_stm,
                     all_targets_stm)
-
-all_d1_map <- list(drug_mapping_eco1,
-               drug_mapping_eco1,
-               drug_mapping_eco1,
-               drug_mapping_eco1,
-               drug_mapping_ecr1,
-               drug_mapping_pae1,
-               drug_mapping_stm1)
-
-all_d2_map <- list(drug_mapping_eco2,
-                   drug_mapping_eco2,
-                   drug_mapping_eco2,
-                   drug_mapping_eco2,
-                   drug_mapping_ecr2,
-                   drug_mapping_pae2,
-                   drug_mapping_stm2)
 
 ##-----------------------------------------------------------------------------
 # Metabolic=1, PPI=10
@@ -205,20 +229,31 @@ list_net <- lapply(filepath_ecolinet,read_csv) |>
   lapply(select, node1, node2)
 
 # StringDB networks.
-filenamesSDB <- c("STRINGDB-E.coliK12.v12.0.txt", "STRINGDB-EcoliIAI1.v12.0.txt",
-               "STRINGDB-PAO1.v12.0.txt",
-               "STRINGDB-STLT2.protein.links.v12.0.txt")
+filenamesSDB <- c("STRINGDB-E.coliK12.protein.links.detailed.v12.0.txt", "STRINGDB-E.coliK12.protein.physical.links.detailed.v12.0.txt",
+                  "STRINGDB-EcoliIAI1.protein.links.detailed.v12.0.txt","STRINGDB-EcoliIAI1.protein.physical.links.detailed.v12.0.txt",
+               "STRINGDB-PAO1.protein.links.detailed.v12.0.txt","STRINGDB-PAO1.protein.physical.links.detailed.v12.0.txt",
+               "STRINGDB-STLT2.protein.links.detailed.v12.0.txt","STRINGDB-STLT2.protein.physical.links.detailed.v12.0.txt")
 
 filepath_SDB <- file.path("data/3.Targets_NetworkDistance/STRINGDB", filenamesSDB)
-netSDB <- c("STRINGDB-ebw", "STRINGDB-ecr",
-         "STRINGDB-pae", "STRINGDB-stm")
+netSDB <- c("STRINGDB-full-ebw", "STRINGDB-physical-ebw",
+            "STRINGDB-full-ecr", "STRINGDB-physical-ecr",
+            "STRINGDB-full-pae","STRINGDB-physical-pae",
+            "STRINGDB-full-stm","STRINGDB-physical-stm")
 
-list_netSDB <- lapply(filepath_SDB,read_table) |>
-  lapply(select, node1, node2)
+list_netSDB <- lapply(filepath_SDB,read_table)  
+
+# 0.9, 0.7 or 0.4 (see STRING-DB website)
+list_netSDB <- list_netSDB |> 
+  lapply(function(df) {
+    df %>%
+      filter(combined_score >= quantile(combined_score, 0.70)) %>%
+      select(node1, node2)
+  })
 
 list_net <- c(list_net,list_netSDB)
-
 net_names <- c(net,netSDB)
+
+lapply(list_net,dim)
 
 #Create igraphs from tables.
 list_graphs <- list_net |>
@@ -226,6 +261,7 @@ list_graphs <- list_net |>
 
 list_path_conn_deg <- list()
 df_join <- list()
+df_join2 <- list()
 for (i in seq_along(list_graphs)) {
   print(paste("current network:",i))
   # Calculate target combinations
@@ -309,34 +345,21 @@ for (i in seq_along(list_graphs)) {
   })
   toc()
   
-  # Calculate node degree number 1
-  print("Now doing degree 1")
+  # Calculate node degree number
+  unique_tar <- unique(c(comb[,1],comb[,2]))
+  print("Now doing degree")
   tic()
-  deg1 <- future_apply(comb,1,function(edges){
-    igraph::degree(list_graphs[[i]],
-                   v = edges[1])
-  })
-  toc()
-  
-  # Calculate node degree number 1
-  print("Now doing degree 2")
-  tic()
-  deg2 <- future_apply(comb,1,function(edges){
-    igraph::degree(list_graphs[[i]],
-                   v = edges[2])
-  })
+  deg <-  igraph::degree(list_graphs[[i]],
+                        v = unique_tar,mode="all")
   toc()
   
   # Calculate betweeness
   print("Now doing betweeness")
-  unique_tar <- unique(c(comb[,1],comb[,2]))
   tic()
   bet <-  igraph::betweenness(list_graphs[[i]],
                         v = unique_tar,directed=FALSE,cutoff = 15)
   toc()
   
-  
-
   #Are the two nodes adjacent?
   print("Now doing adjancency")
   tic()
@@ -357,11 +380,7 @@ for (i in seq_along(list_graphs)) {
                             is.target=comb[,3],
                             path.length=allpath,
                             adjacency=adj,
-                            K.edge=kcon,
-                            Degree1=deg1,
-                            Degree2=deg2,
-                            Between1=bet1,
-                            Between2=bet2)
+                            K.edge=kcon)
   index_targets1 <- index_targets
   colnames(index_targets1) <- c("KEGG1","N1","is.target.1")
   index_targets2 <- index_targets
@@ -369,17 +388,13 @@ for (i in seq_along(list_graphs)) {
   
   a <- left_join(net_results,index_targets1,by="N1")
   b <- left_join(a,index_targets2,by="N2")
-  
-  # Add EVC
-  for (j in 1:dim(b)[1]){
-    K1 <- b[j,11]
-    b[j,15] <- evcentr[K1]
-    
-    K2 <- b[j,13]
-    b[j,16] <- evcentr[K2]
-  }
-  colnames(b)[15] <- "EVC1"
-  colnames(b)[16] <- "EVC2"
+
+  b$Between1 <- bet[b$KEGG1]
+  b$Between2 <- bet[b$KEGG2]
+  b$Degree1 <- deg[b$KEGG1]
+  b$Degree2 <- deg[b$KEGG2]
+  b$EVC1 <- evcentr[b$KEGG1]
+  b$EVC2 <- evcentr[b$KEGG2]
   
   list_path_conn_deg[[i]] <- b |> 
     mutate(Between1=round(Between1,2),
@@ -408,72 +423,58 @@ for (i in seq_along(list_graphs)) {
     select(-c("is.target.1","is.target.2")) |> 
     mutate(Drug1=ifelse(is.na(Drug1),"Non-targets",Drug1)) |> 
     mutate(Drug2=ifelse(is.na(Drug2),"Non-targets",Drug2))
-  
-}
 
-load(list_path_conn_deg,"results/list_path_conn_deg.R")
-load(df_join,"results/df_join.R")
-
-
-
-df_join2 <- list()
-for (j in seq_along(df_join)){
-  
-  df_now <- df_join[[j]]
-  print(paste("Doing list",j))
-  
-  for (i in 1:dim(df_now)[1]){
-    z <- df_now[i,]
+  df_now <- df_join[[i]]
+  for (ind in 1:dim(df_now)[1]){
+    row_d <- df_now[ind,]
     
-    current <- paste0(z$Drug1,"-",z$Drug2)
-    sorted <- sort(c(z$Drug1,z$Drug2))
+    current <- paste0(row_d$Drug1,"-",row_d$Drug2)
+    sorted <- sort(c(row_d$Drug1,row_d$Drug2))
     sorted <- paste0(sorted[1],"-",sorted[2])
     
-    if (current!=sorted){
-      A <- z$Drug2
-      B <- z$Drug1
+    if (current==sorted){
+      print(paste("Row",ind,"is kept the same"))
+    } else {
+      A <- row_d$Drug2
+      B <- row_d$Drug1
       
-      df_now[i,26] <- A
-      df_now[i,27] <- B
+      df_now[ind,]$Drug1 <- A
+      df_now[ind,]$Drug2 <- B
       
-      A <- z$N2
-      B <- z$N1
+      A <- row_d$N2
+      B <- row_d$N1
       
-      df_now[i,1] <- A
-      df_now[i,2] <- B
+      df_now[ind,]$N1 <- A
+      df_now[ind,]$N2 <- B
       
-      A <- z$Degree2
-      B <- z$Degree1
+      A <- row_d$Degree2
+      B <- row_d$Degree1
       
-      df_now[i,7] <- A
-      df_now[i,8] <- B
+      df_now[ind,]$Degree1 <- A
+      df_now[ind,]$Degree2 <- B
       
-      A <- z$Between2
-      B <- z$Between1
+      A <- row_d$Between2
+      B <- row_d$Between1
       
-      df_now[i,9] <- A
-      df_now[i,10] <- B
+      df_now[ind,]$Between1 <- A
+      df_now[ind,]$Between2 <- B
       
-      A <- z$KEGG2
-      B <- z$KEGG1
+      A <- row_d$KEGG2
+      B <- row_d$KEGG1
       
-      df_now[i,11] <- A
-      df_now[i,12] <- B
+      df_now[ind,]$KEGG1 <- A
+      df_now[ind,]$KEGG2 <- B
       
-      A <- z$EVC2
-      B <- z$EVC1
+      A <- row_d$EVC2
+      B <- row_d$EVC1
       
-      df_now[i,13] <- A
-      df_now[i,14] <- B
+      df_now[ind,]$EVC1 <- A
+      df_now[ind,]$EVC2 <- B
       
-      print(paste("Row",i,"is rearranged"))
-      
-    }else{
-      print(paste("Row",i,"is kept the same"))
+      print(paste("Row",ind,"is rearranged")) 
     }
   }
-  df_join2[[j]] <- df_now
-  print(paste("Done with list",j))
+  df_join2[[i]] <- df_now
 }
 
 df_join3 <- df_join2 |>
@@ -492,15 +493,29 @@ dist_conn_deg_adj <- lapply(df_join3, left_join, full_df, by = "DRUG_ID") |>
   lapply(mutate,int_sign_pae=ifelse(is.na(int_sign_pae),"Non-targets",int_sign_pae)) |>
   lapply(mutate,int_sign_pau=ifelse(is.na(int_sign_pau),"Non-targets",int_sign_pau)) 
 
-
 names(dist_conn_deg_adj) <- net_names
 
 df_target_tot  <- bind_rows(dist_conn_deg_adj, .id = "network") |> 
   mutate(Drug1=Drug1.x,Drug2=Drug2.x) |> 
   select(!c("Drug2.x","Drug1.x","Drug2.y","Drug1.y")) |> 
   select(network,KEGG_ID,KEGG1,KEGG2,N1,N2,is.target,
-         DRUG_ID,Drug1,Drug2,112:117,
-         5:11,14:25,30:111)
+         DRUG_ID,Drug1,Drug2,
+         clusters_all,sigma.rate_all,type,clusters_set,sigma.rate_set,SET,
+         path.length,adjacency,K.edge,Degree1,Degree2,Between1,Between2,EVC1,EVC2,
+         min_deg,max_deg,mean_deg,min_bet,max_bet,mean_bet,min_EVC,max_EVC,mean_EVC,connection_onoff,
+         code_3letter1,code_3letter2,drug_cat,drug_category1,drug_category2,categorycategory,
+         targ,targeted_cellular_process1,targeted_cellular_process2,processprocess,us,
+         use1,use2,useuse,ebw,ecr,seo,stm,pae,pau,int_sign_ebw,int_sign_ecr,int_sign_seo,int_sign_stm,int_sign_pae,int_sign_pau,
+         ebw_g,ecr_g,seo_g,stm_g,pae_g,pau_g,sum_g,
+         SR_ebw_D1,SR_ecr_D1,SR_seo_D1,SR_stm_D1,SR_pae_D1,SR_pau_D1,
+         SR_ebw_D2,SR_ecr_D2,SR_seo_D2,SR_stm_D2,SR_pae_D2,SR_pau_D2,
+         SR_ebw,SR_ecr,SR_seo,SR_stm,SR_pae,SR_pau,
+         SR_score_ebw,SR_score_ecr,SR_score_seo,SR_score_stm,SR_score_pae,SR_score_pau,SR_score_total,
+         HDC_ebw_D1,HDC_ecr_D1,HDC_seo_D1,HDC_stm_D1,HDC_pae_D1,HDC_pau_D1,
+         LF_ebw_D1,LF_ecr_D1,LF_seo_D1,LF_stm_D1,LF_pae_D1,LF_pau_D1,
+         HDC_ebw_D2,HDC_ecr_D2,HDC_seo_D2,HDC_stm_D2,HDC_pae_D2,HDC_pau_D2,
+         LF_ebw_D2,LF_ecr_D2,LF_seo_D2,LF_stm_D2,LF_pae_D2,LF_pau_D2,
+         )
 
 df_target_tot |> 
   arrange(K.edge) |> 
@@ -508,6 +523,7 @@ df_target_tot |>
   arrange(network) |>  
   write_excel_csv(paste0("results/","df_target_metrics",".csv"))
 
+save(df_target_tot,file="results/df_target_tot.R")
 
 # Calculate the average per drug pair.
 # One target pair can have more than one drug pair.
@@ -545,8 +561,23 @@ df_DDI_targ  <- right_join(full_df,network_values_targ, by = "DRUG_ID") |>
   filter(!is.na(Drug1))|> 
   arrange(mean.k.edge) |> 
   arrange(DRUG_ID) |> 
-  select(network,DRUG_ID,Drug1,Drug2,SET,
-         87:91,5:86,95:109)
+  select(network,DRUG_ID,Drug1,Drug2,
+        clusters_all,sigma.rate_all,type,clusters_set,sigma.rate_set,SET,
+        code_3letter1,code_3letter2,drug_cat,drug_category1,drug_category2,categorycategory,
+         targ,targeted_cellular_process1,targeted_cellular_process2,processprocess,us,
+         use1,use2,useuse,ebw,ecr,seo,stm,pae,pau,int_sign_ebw,int_sign_ecr,int_sign_seo,int_sign_stm,int_sign_pae,int_sign_pau,
+         ebw_g,ecr_g,seo_g,stm_g,pae_g,pau_g,sum_g,
+         SR_ebw_D1,SR_ecr_D1,SR_seo_D1,SR_stm_D1,SR_pae_D1,SR_pau_D1,
+         SR_ebw_D2,SR_ecr_D2,SR_seo_D2,SR_stm_D2,SR_pae_D2,SR_pau_D2,
+         SR_ebw,SR_ecr,SR_seo,SR_stm,SR_pae,SR_pau,
+         SR_score_ebw,SR_score_ecr,SR_score_seo,SR_score_stm,SR_score_pae,SR_score_pau,SR_score_total,
+         HDC_ebw_D1,HDC_ecr_D1,HDC_seo_D1,HDC_stm_D1,HDC_pae_D1,HDC_pau_D1,
+         LF_ebw_D1,LF_ecr_D1,LF_seo_D1,LF_stm_D1,LF_pae_D1,LF_pau_D1,
+         HDC_ebw_D2,HDC_ecr_D2,HDC_seo_D2,HDC_stm_D2,HDC_pae_D2,HDC_pau_D2,
+         LF_ebw_D2,LF_ecr_D2,LF_seo_D2,LF_stm_D2,LF_pae_D2,LF_pau_D2,
+         mean.path.length,mean.k.edge,mean.min.degree,mean.max.degree,
+         mean.mean.degree,max.adjacency,mean.min.bet,mean.max.bet,mean.mean.bet,mean.min.EVC,
+         mean.max.EVC,mean.mean.EVC,mean.sigma_all,mean.sigma_set,connection_onoff)
 
 # df_nottarget_tot
 df_nottarget_tot <- df_target_tot |> 
@@ -587,10 +618,10 @@ df_DDI_nottarg  <- right_join(df_nottarget_tot,network_values_nottarg, by = "DRU
 #rbind df_DDI_targ and df_DDI_nottarg
 df_DDI_tot <- rbind(df_DDI_targ,df_DDI_nottarg)
 
-
 df_DDI_tot    |> 
   write_excel_csv(paste0("results/","df_DDI_metrics",".csv"))
 
+save(df_DDI_tot,file="results/df_DDI_tot.R")
 
 
 # plot networks
@@ -607,12 +638,12 @@ num_nodes <- list()
 
 for (i in seq_along(list_graphs)) {
   net_graph <- network(adj_mat[[i]], directed = is_directed(list_graphs[[i]]))
-  
+  target_in_net <- all_t[[i]]
   names <- V(list_graphs[[i]]) |>names()
-  print(net[i])
+  print(net_names[i])
   num_targets[[i]] <- names %in% target_in_net |>
     sum()
-  num_drugs[[i]] <- drug_mapping$Drug[target_in_net %in% names] |>
+  num_drugs[[i]] <- d_map[[i]]$Drug[target_in_net %in% names] |>
     unique() |>
     length()
   
@@ -626,7 +657,8 @@ for (i in seq_along(list_graphs)) {
   plot_list[[i]] <- ggnet2(net_graph, label = FALSE, size = 2) +
     geom_node_point(color = 'black',
                     shape = 21, fill = col_vect, stroke = 0.5,
-                    size=2)
+                    size=2)+
+                    ggtitle(net_names[i])
 }
 
 pdf(paste0("results/","network_graph","_notext.pdf"),
@@ -654,12 +686,12 @@ num_nodes <- list()
 
 for (i in seq_along(list_graphs)) {
   net_graph <- network(adj_mat[[i]], directed = is_directed(list_graphs[[i]]))
-  
+  target_in_net <- all_t[[i]]
   names <- V(list_graphs[[i]]) |>names()
-  print(net[i])
+  print(net_names[i])
   num_targets[[i]] <- names %in% target_in_net |>
     sum()
-  num_drugs[[i]] <- drug_mapping$Drug[target_in_net %in% names] |>
+  num_drugs[[i]] <- d_map[[i]]$Drug[target_in_net %in% names] |>
     unique() |>
     length()
   
@@ -674,16 +706,15 @@ for (i in seq_along(list_graphs)) {
     geom_node_point(color = 'black',
                     shape = 21, fill = col_vect, stroke = 0.5,
                     size=3)+
-    annotate("text", x=0.25, y=1.2, label= net[[i]],size=6)+
+    annotate("text", x=0.25, y=1.2, label= net_names[[i]],size=6)+
     annotate("text", x=0.85, y=1.15, label= paste0("Average path length=",mean.length))+
     annotate("text", x=0.85, y=1.1, label= paste0("Number of nodes=",num_nodes[[i]]))+
     annotate("text", x=0.85, y=1.05, label= paste0("Number of targets=",num_targets[[i]]))+
-    annotate("text", x=0.85, y=1, label= paste0("Number of drugs=",num_drugs[[i]]))
-    
+    annotate("text", x=0.85, y=1, label= paste0("Number of drugs=",num_drugs[[i]]))+
+    ggtitle(net_names[i])    
 }
 
 pdf(paste0("results/","network_graph",".pdf"),
     width=7,height=7)
 plot_list
 dev.off()
-
