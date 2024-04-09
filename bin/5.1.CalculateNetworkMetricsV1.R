@@ -477,7 +477,7 @@ for (i in seq_along(list_graphs)) {
   df_join2[[i]] <- df_now
 }
 
-save(df_join2,file="results/df_join2.R")
+#save(df_join2,file="results/df_join2.R")
 #load(file="results/df_join2.R")
 
 

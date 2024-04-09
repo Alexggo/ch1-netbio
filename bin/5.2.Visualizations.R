@@ -1144,15 +1144,79 @@ df1 |> t() |> write.csv("results/allddi/example_DDI.csv")
 # Calculate the standard deviation across networks and compare it to DDI rate.
 
 # PPI networks
-df_across <- df_DDI_tot |> 
+df_across <- df_target_tot |> 
   filter(network%in% net_names[c(3,5,7,9,11)]) |> 
   select(network,DRUG_ID,Drug1,Drug2,
-         sigma.rate_all,93:107) |> 
-  group_by(DRUG_ID)
+         sigma.rate_all,17:34) |>
+  filter(Drug1 != "Non-targets") 
 
-df_count <- df_across |> 
-  summarize(count = n())
+ddis_5 <- df_across %>%
+  group_by(DRUG_ID) %>%
+  summarise(n_distinct_values = n_distinct(network)) %>%
+  filter(n_distinct_values == 5)|> 
+  select(DRUG_ID) |> 
+  pull() |> 
+  sort() |> unique()
 
+# 210 DDIs appear in all of the 5 PPI networks
+df_in_5 <- df_across |> 
+  filter(DRUG_ID %in% ddis_5) |> 
+  group_by(DRUG_ID) |> 
+  summarise(m.sigma.rate_all = mean(sigma.rate_all),
+            sd.path.length=sd(path.length),
+            sd.k.edge=sd(K.edge),
+            sd.min.deg=sd(min_deg),
+            sd.max.deg=sd(max_deg),
+            sd.mean.deg=sd(mean_deg),
+            sd.min.bet=sd(min_bet),
+            sd.max.bet=sd(max_bet),
+            sd.mean.bet=sd(mean_bet),
+            sd.min.EVC=sd(min_EVC),
+            sd.max.EVC=sd(max_EVC),
+            sd.mean.EVC=sd(mean_EVC))
 
-#
+df_in_5 |> 
+ggplot(aes(x=sd.path.length,y=m.sigma.rate_all))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_minimal()
+
+mod1 <- lm(m.sigma.rate_all~sd.path.length,df_in_5)
+glance(mod1)
+
+df_in_5 |> 
+  ggplot(aes(x=sd.k.edge,y=m.sigma.rate_all))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_minimal()
+
+mod1 <- lm(m.sigma.rate_all~sd.k.edge,df_in_5)
+glance(mod1)
+
+df_in_5 |> 
+  ggplot(aes(x=sd.mean.deg,y=m.sigma.rate_all))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_minimal()
+
+mod1 <- lm(m.sigma.rate_all~sd.mean.deg,df_in_5)
+glance(mod1)
+
+df_in_5 |> 
+  ggplot(aes(x=sd.mean.bet,y=m.sigma.rate_all))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_minimal()
+
+mod1 <- lm(m.sigma.rate_all~sd.mean.bet,df_in_5)
+glance(mod1)
+
+df_in_5 |> 
+  ggplot(aes(x=sd.mean.EVC,y=m.sigma.rate_all))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_minimal()
+
+mod1 <- lm(m.sigma.rate_all~sd.mean.EVC,df_in_5)
+glance(mod1)
 
