@@ -21,84 +21,85 @@ ortho_kegg <- read.csv("data/3.Targets_NetworkDistance/ortholog_table.csv") |>
   unnest(KO_ID) |> 
   unnest(KEGG_eco) |> 
   select(KEGG_eco,KEGG_ecr,
-         KEGG_stm,KEGG_pae)
+         KEGG_stm,KEGG_pae) |> 
+  mutate(KEGG_ortho=KEGG_eco)
 
 drug_mapping_ALL <- merge(drug_mapping_org,ortho_kegg,by="KEGG_eco")
 
 drug_mapping_eco <- drug_mapping_ALL |> 
-  select(Drug,KEGG_eco) |> 
+  select(Drug,KEGG_ortho,KEGG_eco) |> 
   unnest(KEGG_eco) |> 
   mutate(KEGG=KEGG_eco) |> 
-  select(Drug,KEGG) |> 
+  select(Drug,KEGG,KEGG_ortho) |> 
   distinct()
 
 drug_mapping_eco1 <- drug_mapping_eco |>
   mutate(Drug1 = Drug,
          KEGG1 = KEGG) |> 
-  select(Drug1,KEGG1) |> 
+  select(Drug1,KEGG1,KEGG_ortho) |> 
   arrange(Drug1)
 
 drug_mapping_eco2 <- drug_mapping_eco |>
   mutate(Drug2 = Drug,
          KEGG2 = KEGG) |> 
-  select(Drug2,KEGG2)|> 
+  select(Drug2,KEGG2,KEGG_ortho)|> 
   arrange(Drug2)
 
 drug_mapping_ecr <- drug_mapping_ALL |> 
-  select(Drug,KEGG_ecr) |> 
+  select(Drug,KEGG_ortho,KEGG_ecr) |> 
   unnest(KEGG_ecr)|> 
   mutate(KEGG=KEGG_ecr) |> 
-  select(Drug,KEGG) |> 
+  select(Drug,KEGG,KEGG_ortho) |> 
   distinct()
 
 drug_mapping_ecr1 <- drug_mapping_ecr |>
   mutate(Drug1 = Drug,
          KEGG1 = KEGG) |> 
-  select(Drug1,KEGG1) |> 
+  select(Drug1,KEGG1,KEGG_ortho) |> 
   arrange(Drug1)
 
 drug_mapping_ecr2 <- drug_mapping_ecr |>
   mutate(Drug2 = Drug,
          KEGG2 = KEGG) |> 
-  select(Drug2,KEGG2)|> 
+  select(Drug2,KEGG2,KEGG_ortho)|> 
   arrange(Drug2)
 
 drug_mapping_stm <- drug_mapping_ALL |> 
-  select(Drug,KEGG_stm)|> 
+  select(Drug,KEGG_ortho,KEGG_stm)|> 
   unnest(KEGG_stm)|> 
   mutate(KEGG=KEGG_stm) |> 
-  select(Drug,KEGG) |> 
+  select(Drug,KEGG,KEGG_ortho) |> 
   distinct()
 
 drug_mapping_stm1 <- drug_mapping_stm |>
   mutate(Drug1 = Drug,
          KEGG1 = KEGG) |> 
-  select(Drug1,KEGG1) |> 
+  select(Drug1,KEGG1,KEGG_ortho) |> 
   arrange(Drug1)
 
 drug_mapping_stm2 <- drug_mapping_stm |>
   mutate(Drug2 = Drug,
          KEGG2 = KEGG) |> 
-  select(Drug2,KEGG2)|> 
+  select(Drug2,KEGG2,KEGG_ortho)|> 
   arrange(Drug2)
 
-drug_mapping_pae <- drug_mapping_ALL |> 
-  select(Drug,KEGG_pae)|> 
+drug_mapping_pae <- drug_mapping_ALL |>
+  select(Drug,KEGG_ortho,KEGG_pae)|> 
   unnest(KEGG_pae)|> 
   mutate(KEGG=KEGG_pae) |> 
-  select(Drug,KEGG) |> 
+  select(Drug,KEGG,KEGG_ortho) |> 
   distinct()
 
 drug_mapping_pae1 <- drug_mapping_pae |>
   mutate(Drug1 = Drug,
          KEGG1 = KEGG) |> 
-  select(Drug1,KEGG1) |> 
+  select(Drug1,KEGG1,KEGG_ortho) |> 
   arrange(Drug1)
 
 drug_mapping_pae2 <- drug_mapping_pae |>
   mutate(Drug2 = Drug,
          KEGG2 = KEGG) |> 
-  select(Drug2,KEGG2)|> 
+  select(Drug2,KEGG2,KEGG_ortho)|> 
   arrange(Drug2)
 
 d_map <- list(drug_mapping_eco,

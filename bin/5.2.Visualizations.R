@@ -1136,8 +1136,6 @@ df1 <- df_DDI_tot |>
 
 df1 |> t() |> write.csv("results/allddi/example_DDI.csv")
 
-
-
 # Comparison between network rates of change and DDI rates of change
 # 1. For all DDIs that are found across multiple networks.
 # Compute the length, connectivity, ... for each network (done).
@@ -1145,22 +1143,96 @@ df1 |> t() |> write.csv("results/allddi/example_DDI.csv")
 
 # PPI networks
 df_across <- df_target_tot |> 
-  filter(network%in% net_names[c(3,5,7,9,11)]) |> 
-  select(network,DRUG_ID,Drug1,Drug2,
+  filter(network%in% net_names[c(5,7,9,11)]) |> 
+  select(network,KEGG_ID,DRUG_ID,Drug1,Drug2,
          sigma.rate_all,17:34) |>
   filter(Drug1 != "Non-targets") 
 
-ddis_5 <- df_across %>%
+# 204 DDIs appear in all of the 4 PPI networks
+ddis_4 <- df_across %>%
   group_by(DRUG_ID) %>%
   summarise(n_distinct_values = n_distinct(network)) %>%
-  filter(n_distinct_values == 5)|> 
+  filter(n_distinct_values == 4)|> 
   select(DRUG_ID) |> 
   pull() |> 
   sort() |> unique()
 
-# 210 DDIs appear in all of the 5 PPI networks
+# Brownian motion
+library(geomorph)
+treefile <- file.path('data/2.2.Phylogenetics_Bayesian',"Phylo-p1.nwk.tree")
+tree_nw <- read.nexus(treefile)
+tree2 <- keep.tip(tree_nw,c("ebw","ecr","stm","pae"))
+
+library(geiger)
+
+df_in_4 <- df_across |> 
+  filter(DRUG_ID %in% ddis_4) |> 
+  mutate(spp = str_sub(network,-3,-1))
+
+drug_rates <- df_DDI_tot |> 
+  select(DRUG_ID,sigma.rate_all) |> 
+  distinct()
+
+# For every network measurement
+mod_list1 <- list()
+sigma_list2 <- list()
+drug_pair_sigma <- list()
+var_names <- colnames(df_in_4)[6:17]
+for (i in seq_along(var_names)){
+  fil <- df_in_4 |> 
+    mutate(var=!!sym(var_names[i])) |> 
+    select(spp,KEGG_ID,var) |> 
+    pivot_wider(names_from =KEGG_ID,values_from =var)
+  
+  nam <- fil$spp
+  
+  fil_mat <- fil |> 
+    select(-spp) |> 
+    as.matrix()
+  
+  row.names(fil_mat) <- nam
+  
+  mod_list1[[i]] <- list()
+  sigma_list2[[i]] <- data.frame(measurement=as.character(),
+                                 ddi=as.character(),
+                                 sigma=as.numeric())
+  for (j in 1:dim(fil_mat)[2]){
+    mod_list1[[i]][[j]] <- fitContinuous(tree2,
+                     fil_mat[,j],
+                     model="BM")
+    
+    ddi <- colnames(fil_mat)[j]
+    sigma <- mod_list1[[i]][[j]]$opt$sigsq
+    v <- var_names[i]
+
+    row1 <- c(v,ddi,sigma)
+    sigma_list2[[i]] <- rbind(sigma_list2[[i]],row1)
+  }
+  colnames(sigma_list2[[i]]) <- c("var","DRUG_ID","sigma")
+  
+  drug_pair_sigma[[i]] <- left_join(sigma_list2[[i]],
+            drug_rates,by="DRUG_ID")
+}
+
+
+list_plots <- list()
+model <- list()
+for (i in seq_along(drug_pair_sigma)){
+  model[[i]] <- lm(sigma.rate_all~log(as.numeric(sigma)),drug_pair_sigma[[i]])
+  
+  
+  list_plots[[i]] <- drug_pair_sigma[[i]] |> 
+    mutate(sigma=as.numeric(sigma)) |> 
+    ggplot(aes(y=sigma.rate_all,x=log(sigma)))+
+    geom_point()+
+    geom_smooth(method = "lm", se = FALSE)+
+    theme_minimal()
+  
+}
+
+
 df_in_5 <- df_across |> 
-  filter(DRUG_ID %in% ddis_5) |> 
+  filter(DRUG_ID %in% ddis_4) |> 
   group_by(DRUG_ID) |> 
   summarise(m.sigma.rate_all = mean(sigma.rate_all),
             sd.path.length=sd(path.length),
