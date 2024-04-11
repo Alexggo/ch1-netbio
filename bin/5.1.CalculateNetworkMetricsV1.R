@@ -35,14 +35,16 @@ drug_mapping_eco <- drug_mapping_ALL |>
 
 drug_mapping_eco1 <- drug_mapping_eco |>
   mutate(Drug1 = Drug,
-         KEGG1 = KEGG) |> 
-  select(Drug1,KEGG1,KEGG_ortho) |> 
+         KEGG1 = KEGG,
+         KEGG_ortho1=KEGG_ortho) |> 
+  select(Drug1,KEGG1,KEGG_ortho1) |> 
   arrange(Drug1)
 
 drug_mapping_eco2 <- drug_mapping_eco |>
   mutate(Drug2 = Drug,
-         KEGG2 = KEGG) |> 
-  select(Drug2,KEGG2,KEGG_ortho)|> 
+         KEGG2 = KEGG, 
+         KEGG_ortho2=KEGG_ortho) |> 
+  select(Drug2,KEGG2,KEGG_ortho2) |> 
   arrange(Drug2)
 
 drug_mapping_ecr <- drug_mapping_ALL |> 
@@ -54,14 +56,16 @@ drug_mapping_ecr <- drug_mapping_ALL |>
 
 drug_mapping_ecr1 <- drug_mapping_ecr |>
   mutate(Drug1 = Drug,
-         KEGG1 = KEGG) |> 
-  select(Drug1,KEGG1,KEGG_ortho) |> 
+         KEGG1 = KEGG,
+         KEGG_ortho1=KEGG_ortho) |> 
+  select(Drug1,KEGG1,KEGG_ortho1) |> 
   arrange(Drug1)
 
 drug_mapping_ecr2 <- drug_mapping_ecr |>
   mutate(Drug2 = Drug,
-         KEGG2 = KEGG) |> 
-  select(Drug2,KEGG2,KEGG_ortho)|> 
+         KEGG2 = KEGG, 
+         KEGG_ortho2=KEGG_ortho) |> 
+  select(Drug2,KEGG2,KEGG_ortho2) |> 
   arrange(Drug2)
 
 drug_mapping_stm <- drug_mapping_ALL |> 
@@ -73,14 +77,16 @@ drug_mapping_stm <- drug_mapping_ALL |>
 
 drug_mapping_stm1 <- drug_mapping_stm |>
   mutate(Drug1 = Drug,
-         KEGG1 = KEGG) |> 
-  select(Drug1,KEGG1,KEGG_ortho) |> 
+         KEGG1 = KEGG,
+         KEGG_ortho1=KEGG_ortho) |> 
+  select(Drug1,KEGG1,KEGG_ortho1) |> 
   arrange(Drug1)
 
 drug_mapping_stm2 <- drug_mapping_stm |>
   mutate(Drug2 = Drug,
-         KEGG2 = KEGG) |> 
-  select(Drug2,KEGG2,KEGG_ortho)|> 
+         KEGG2 = KEGG, 
+         KEGG_ortho2=KEGG_ortho) |> 
+  select(Drug2,KEGG2,KEGG_ortho2) |> 
   arrange(Drug2)
 
 drug_mapping_pae <- drug_mapping_ALL |>
@@ -92,14 +98,16 @@ drug_mapping_pae <- drug_mapping_ALL |>
 
 drug_mapping_pae1 <- drug_mapping_pae |>
   mutate(Drug1 = Drug,
-         KEGG1 = KEGG) |> 
-  select(Drug1,KEGG1,KEGG_ortho) |> 
+         KEGG1 = KEGG,
+         KEGG_ortho1=KEGG_ortho) |> 
+  select(Drug1,KEGG1,KEGG_ortho1) |> 
   arrange(Drug1)
 
 drug_mapping_pae2 <- drug_mapping_pae |>
   mutate(Drug2 = Drug,
-         KEGG2 = KEGG) |> 
-  select(Drug2,KEGG2,KEGG_ortho)|> 
+         KEGG2 = KEGG, 
+         KEGG_ortho2=KEGG_ortho) |> 
+  select(Drug2,KEGG2,KEGG_ortho2) |> 
   arrange(Drug2)
 
 d_map <- list(drug_mapping_eco,
@@ -481,7 +489,6 @@ for (i in seq_along(list_graphs)) {
 #save(df_join2,file="results/df_join2.R")
 #load(file="results/df_join2.R")
 
-
 df_join3 <- df_join2 |>
   lapply(mutate, DRUG_ID=paste0(Drug1,"-",Drug2)) |>
   lapply(distinct) |>
@@ -503,7 +510,7 @@ names(dist_conn_deg_adj) <- net_names
 df_target_tot  <- bind_rows(dist_conn_deg_adj, .id = "network") |> 
   mutate(Drug1=Drug1.x,Drug2=Drug2.x) |> 
   select(!c("Drug2.x","Drug1.x","Drug2.y","Drug1.y")) |> 
-  select(network,KEGG_ID,KEGG1,KEGG2,N1,N2,is.target,
+  select(network,KEGG_ID,KEGG1,KEGG2,KEGG_ortho1,KEGG_ortho2,N1,N2,is.target,
          DRUG_ID,Drug1,Drug2,
          clusters_all,sigma.rate_all,type,clusters_set,sigma.rate_set,SET,
          path.length,adjacency,K.edge,Degree1,Degree2,Between1,Between2,EVC1,EVC2,
