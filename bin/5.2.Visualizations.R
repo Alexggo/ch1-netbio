@@ -1144,16 +1144,18 @@ df1 |> t() |> write.csv("results/allddi/example_DDI.csv")
 # PPI networks
 df_across <- df_target_tot |> 
   filter(network%in% net_names[c(5,7,9,11)]) |> 
-  select(network,KEGG_ID,DRUG_ID,Drug1,Drug2,
-         sigma.rate_all,17:34) |>
-  filter(Drug1 != "Non-targets") 
+  select(network,KEGG_ortho1,KEGG_ortho2,DRUG_ID,Drug1,Drug2,
+         sigma.rate_all,19,20:36) |>
+  mutate(KEGG_orthoID=paste0(KEGG_ortho1,"-",KEGG_ortho2)) |> 
+  filter(Drug1 != "Non-targets") |> 
+  mutate(DRUG_KEGG=paste0(DRUG_ID,"_",KEGG_orthoID))
 
 # 204 DDIs appear in all of the 4 PPI networks
 ddis_4 <- df_across %>%
-  group_by(DRUG_ID) %>%
+  group_by(DRUG_KEGG) %>%
   summarise(n_distinct_values = n_distinct(network)) %>%
   filter(n_distinct_values == 4)|> 
-  select(DRUG_ID) |> 
+  select(DRUG_KEGG) |> 
   pull() |> 
   sort() |> unique()
 
@@ -1166,23 +1168,25 @@ tree2 <- keep.tip(tree_nw,c("ebw","ecr","stm","pae"))
 library(geiger)
 
 df_in_4 <- df_across |> 
-  filter(DRUG_ID %in% ddis_4) |> 
+  filter(DRUG_KEGG %in% ddis_4) |> 
   mutate(spp = str_sub(network,-3,-1))
 
-drug_rates <- df_DDI_tot |> 
-  select(DRUG_ID,sigma.rate_all) |> 
+ddi_rates <- df_across |> 
+  select(DRUG_KEGG,sigma.rate_all) |> 
   distinct()
 
 # For every network measurement
 mod_list1 <- list()
 sigma_list2 <- list()
 drug_pair_sigma <- list()
-var_names <- colnames(df_in_4)[6:17]
+var_names <- colnames(df_in_4)[c(8,10,17:25)]
+
 for (i in seq_along(var_names)){
   fil <- df_in_4 |> 
     mutate(var=!!sym(var_names[i])) |> 
-    select(spp,KEGG_ID,var) |> 
-    pivot_wider(names_from =KEGG_ID,values_from =var)
+    select(spp,DRUG_KEGG,var) |> 
+    distinct() |> 
+    pivot_wider(names_from =DRUG_KEGG,values_from =var)
   
   nam <- fil$spp
   
@@ -1197,8 +1201,11 @@ for (i in seq_along(var_names)){
                                  ddi=as.character(),
                                  sigma=as.numeric())
   for (j in 1:dim(fil_mat)[2]){
+    
+   
+    
     mod_list1[[i]][[j]] <- fitContinuous(tree2,
-                     fil_mat[,j],
+                     unlist(fil_mat[,j]),
                      model="BM")
     
     ddi <- colnames(fil_mat)[j]
@@ -1208,87 +1215,56 @@ for (i in seq_along(var_names)){
     row1 <- c(v,ddi,sigma)
     sigma_list2[[i]] <- rbind(sigma_list2[[i]],row1)
   }
-  colnames(sigma_list2[[i]]) <- c("var","DRUG_ID","sigma")
+  colnames(sigma_list2[[i]]) <- c("var","DRUG_KEGG","sigma")
+  
+  sigma_list2[[i]] <- sigma_list2[[i]]
   
   drug_pair_sigma[[i]] <- left_join(sigma_list2[[i]],
-            drug_rates,by="DRUG_ID")
+                                    ddi_rates,by="DRUG_KEGG")
 }
 
 
 list_plots <- list()
 model <- list()
 for (i in seq_along(drug_pair_sigma)){
-  model[[i]] <- lm(sigma.rate_all~log(as.numeric(sigma)),drug_pair_sigma[[i]])
+  model[[i]] <- lm(sigma.rate_all~as.numeric(sigma),drug_pair_sigma[[i]])
   
   
   list_plots[[i]] <- drug_pair_sigma[[i]] |> 
     mutate(sigma=as.numeric(sigma)) |> 
+    ggplot(aes(y=sigma.rate_all,x=sigma))+
+    geom_point()+
+    geom_smooth(method = "lm", se = FALSE)+
+    theme_minimal()+
+    ggtitle(var_names[[i]])+
+    labs(subtitle = paste0("R.squared=",round(glance(model[[i]])$r.squared,4)," p.value=",
+                           glance(model[[i]])$p.value))
+    
+}
+
+pdf("results/allddi/rate_comp.pdf",width = 15,height = 15)
+list_plots
+dev.off()
+
+
+list_plots_log <- list()
+model <- list()
+for (i in seq_along(drug_pair_sigma)){
+  model[[i]] <- lm(sigma.rate_all~log(as.numeric(sigma)),drug_pair_sigma[[i]])
+  
+  
+  list_plots_log[[i]] <- drug_pair_sigma[[i]] |> 
+    mutate(sigma=as.numeric(sigma)) |> 
     ggplot(aes(y=sigma.rate_all,x=log(sigma)))+
     geom_point()+
     geom_smooth(method = "lm", se = FALSE)+
-    theme_minimal()
+    theme_minimal()+
+    ggtitle(var_names[[i]])+
+    labs(subtitle = paste0("R.squared=",round(glance(model[[i]])$r.squared,4)," p.value=",
+                           glance(model[[i]])$p.value))
   
 }
 
-
-df_in_5 <- df_across |> 
-  filter(DRUG_ID %in% ddis_4) |> 
-  group_by(DRUG_ID) |> 
-  summarise(m.sigma.rate_all = mean(sigma.rate_all),
-            sd.path.length=sd(path.length),
-            sd.k.edge=sd(K.edge),
-            sd.min.deg=sd(min_deg),
-            sd.max.deg=sd(max_deg),
-            sd.mean.deg=sd(mean_deg),
-            sd.min.bet=sd(min_bet),
-            sd.max.bet=sd(max_bet),
-            sd.mean.bet=sd(mean_bet),
-            sd.min.EVC=sd(min_EVC),
-            sd.max.EVC=sd(max_EVC),
-            sd.mean.EVC=sd(mean_EVC))
-
-df_in_5 |> 
-ggplot(aes(x=sd.path.length,y=m.sigma.rate_all))+
-  geom_point()+
-  geom_smooth(method = "lm", se = FALSE)+
-  theme_minimal()
-
-mod1 <- lm(m.sigma.rate_all~sd.path.length,df_in_5)
-glance(mod1)
-
-df_in_5 |> 
-  ggplot(aes(x=sd.k.edge,y=m.sigma.rate_all))+
-  geom_point()+
-  geom_smooth(method = "lm", se = FALSE)+
-  theme_minimal()
-
-mod1 <- lm(m.sigma.rate_all~sd.k.edge,df_in_5)
-glance(mod1)
-
-df_in_5 |> 
-  ggplot(aes(x=sd.mean.deg,y=m.sigma.rate_all))+
-  geom_point()+
-  geom_smooth(method = "lm", se = FALSE)+
-  theme_minimal()
-
-mod1 <- lm(m.sigma.rate_all~sd.mean.deg,df_in_5)
-glance(mod1)
-
-df_in_5 |> 
-  ggplot(aes(x=sd.mean.bet,y=m.sigma.rate_all))+
-  geom_point()+
-  geom_smooth(method = "lm", se = FALSE)+
-  theme_minimal()
-
-mod1 <- lm(m.sigma.rate_all~sd.mean.bet,df_in_5)
-glance(mod1)
-
-df_in_5 |> 
-  ggplot(aes(x=sd.mean.EVC,y=m.sigma.rate_all))+
-  geom_point()+
-  geom_smooth(method = "lm", se = FALSE)+
-  theme_minimal()
-
-mod1 <- lm(m.sigma.rate_all~sd.mean.EVC,df_in_5)
-glance(mod1)
-
+pdf("results/allddi/rate_comp_log.pdf",width = 15,height = 15)
+list_plots_log
+dev.off()

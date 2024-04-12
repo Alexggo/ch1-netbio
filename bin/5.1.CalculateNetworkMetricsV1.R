@@ -730,3 +730,6 @@ pdf(paste0("results/","network_graph",".pdf"),
     width=7,height=7)
 plot_list
 dev.off()
+
+
+
