@@ -52,15 +52,17 @@ y_var <- c("mean.path.length","mean.k.edge","mean.mean.degree",
 # set_sel is TRUE if the DDI is in the SET, and FALSE if not.
 # set_sel = TRUE, or set_sel = c(TRUE,FALSE)
 plot_net_int <- function(net_sel,var_sel,str_name,set_sel){
+
+  abb <- str_split(str_name,"_")[[1]][3]
   max_k <- df_DDI_tot |> 
-    filter(network==net[net_sel]) |> 
+    filter(network==net_sel) |> 
     filter(mean.path.length!="Inf") |> 
     filter(is.na(SET)|SET %in% set_sel) |> 
     select(y_var[var_sel]) |> 
     max()
   
   min_k <- df_DDI_tot |> 
-    filter(network==net[net_sel]) |> 
+    filter(network==net_sel) |> 
     filter(is.na(SET)|SET %in% set_sel) |> 
     filter(mean.path.length!="Inf") |> 
     select(y_var[var_sel]) |> 
@@ -70,22 +72,19 @@ plot_net_int <- function(net_sel,var_sel,str_name,set_sel){
   top <- max_k +len_k*0.7
   bot1 <- min_k - len_k*0.1
   bot2 <- min_k - len_k*0.2
-  net_name <- net[net_sel]
-  
+
   df1 <- df_DDI_tot |> 
-    filter(network==net[net_sel]) |> 
+    filter(network==net_sel) |> 
     filter(is.na(SET)|SET %in% set_sel) |>
-    select(strains[str_name],y_var[var_sel],network)  |> 
+    select(!!sym(str_name),y_var[var_sel],network)  |> 
     filter(y_var[var_sel]!="Inf")
   
   colnames(df1) <- c("int_type","variable_name","network")
   
-  net_name <- df1$network |> unique()
-  
   pl1 <- df1 |> 
     ggplot(aes(x=int_type,y=variable_name,
                fill=int_type))+
-    xlab(paste0("Type of interaction (",short_str[str_name],")"))+
+    xlab(paste0("Type of interaction (",abb,")"))+
     ylab(y_axis[var_sel])+
     geom_violin()+
     geom_boxplot(width=0.01,fill="white")+
@@ -94,22 +93,38 @@ plot_net_int <- function(net_sel,var_sel,str_name,set_sel){
     stat_summary(fun=mean, geom="point", shape=23, size=4, col="black",fill="red")+
     theme_minimal()+
     theme(legend.position = "none")+
-    ggtitle(label  = element_text(net_name))+
+    ggtitle(label  = element_text(net_sel))+
     stat_n_text(y.pos = bot2)+
     ylim(bot2,top)+
     scale_fill_brewer(palette = "Set2")+
     theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=0))
   
+  
   plot(pl1)
 }
 
 fig3_allnetworks <- list()
-str_fig_vec <- c(1,1,1,1,1,2,2,3,3,6,6)
-for (net_now in seq_along(net_names)){
-  str_fig <- str_fig_vec[net_now]
-fig3_allnetworks[[net_now]] <-   wrap_plots(plot_net_int(net_now,1,1,c(T,F)),plot_net_int(net_now,2,str_fig,c(T,F)),
-             plot_net_int(net_now,3,str_fig,c(T,F)),plot_net_int(net_now,4,str_fig,c(T,F)),
-             plot_net_int(net_now,5,str_fig,c(T,F)),plot_net_int(net_now,6,str_fig,c(T,F)))+ 
+str_fig_vec <-  c("int_sign_ebw","int_sign_ebw","int_sign_ebw","int_sign_ebw","int_sign_ebw",
+             "int_sign_ecr","int_sign_ecr",
+             "int_sign_pae","int_sign_pae",
+             "int_sign_stm","int_sign_stm")
+
+for (net_now in net_names){
+  net_in <- which(net_names==net_now)
+  
+  str_fig <- str_fig_vec[net_in]
+  print(net_now)
+  print(str_fig)
+  
+  p1 <- plot_net_int(net_now,1,str_fig,c(T,F))
+  p2 <- plot_net_int(net_now,2,str_fig,c(T,F))
+  p3 <- plot_net_int(net_now,3,str_fig,c(T,F))
+  p4 <- plot_net_int(net_now,4,str_fig,c(T,F))
+  p5 <- plot_net_int(net_now,5,str_fig,c(T,F))
+  p6 <- plot_net_int(net_now,6,str_fig,c(T,F))
+  
+fig3_allnetworks[[net_now]] <-   wrap_plots(p1,p2,p3,p4,
+             p5,p6)+ 
   plot_annotation(tag_levels = 'A',tag_suffix = '.')&
   theme(plot.tag.position = c(0, 1),
         plot.tag = element_text(size = 15, hjust = 0, vjust = 0))+
@@ -122,33 +137,31 @@ pdf("results/allddi/fig3_allnetworks.pdf",width = 15,height = 15)
 fig3_allnetworks
 dev.off()
 
-
-
 # For all DDIs.
 # Results per strain:
-str_fig <- 1
-fig3_str <- wrap_plots(plot_net_int(1,1,str_fig,c(T,F)),plot_net_int(3,1,str_fig,c(T,F)),
-                       plot_net_int(1,2,str_fig,c(T,F)),plot_net_int(3,2,str_fig,c(T,F)),
-                       plot_net_int(1,3,str_fig,c(T,F)),plot_net_int(3,3,str_fig,c(T,F)),
-                       plot_net_int(1,4,str_fig,c(T,F)),plot_net_int(3,4,str_fig,c(T,F)),
-                       plot_net_int(1,5,str_fig,c(T,F)),plot_net_int(3,5,str_fig,c(T,F)),
-                       plot_net_int(1,6,str_fig,c(T,F)),plot_net_int(3,6,str_fig,c(T,F)),
+str_fig <- "int_sign_ebw"
+fig3_str <- wrap_plots(plot_net_int(net_names[1],1,str_fig,c(T,F)),plot_net_int(net_names[3],1,str_fig,c(T,F)),
+                       plot_net_int(net_names[1],2,str_fig,c(T,F)),plot_net_int(net_names[3],2,str_fig,c(T,F)),
+                       plot_net_int(net_names[1],3,str_fig,c(T,F)),plot_net_int(net_names[3],3,str_fig,c(T,F)),
+                       plot_net_int(net_names[1],4,str_fig,c(T,F)),plot_net_int(net_names[3],4,str_fig,c(T,F)),
+                       plot_net_int(net_names[1],5,str_fig,c(T,F)),plot_net_int(net_names[3],5,str_fig,c(T,F)),
+                       plot_net_int(net_names[1],6,str_fig,c(T,F)),plot_net_int(net_names[3],6,str_fig,c(T,F)),
                        nrow = 2, byrow = FALSE)
 
 var_fig <- 1
-fig3_var <- wrap_plots(plot_net_int(1,var_fig,1,c(T,F)),plot_net_int(3,var_fig,1,c(T,F)),
-                       plot_net_int(1,var_fig,2,c(T,F)),plot_net_int(3,var_fig,2,c(T,F)),
-                       plot_net_int(1,var_fig,3,c(T,F)),plot_net_int(3,var_fig,3,c(T,F)),
-                       plot_net_int(1,var_fig,4,c(T,F)),plot_net_int(3,var_fig,4,c(T,F)),
-                       plot_net_int(1,var_fig,5,c(T,F)),plot_net_int(3,var_fig,5,c(T,F)),
-                       plot_net_int(1,var_fig,6,c(T,F)),plot_net_int(3,var_fig,6,c(T,F)),
+fig3_var <- wrap_plots(plot_net_int(net_names[1],var_fig,1,c(T,F)),plot_net_int(net_names[3],var_fig,1,c(T,F)),
+                       plot_net_int(net_names[1],var_fig,2,c(T,F)),plot_net_int(net_names[3],var_fig,2,c(T,F)),
+                       plot_net_int(net_names[1],var_fig,3,c(T,F)),plot_net_int(net_names[3],var_fig,3,c(T,F)),
+                       plot_net_int(net_names[1],var_fig,4,c(T,F)),plot_net_int(net_names[3],var_fig,4,c(T,F)),
+                       plot_net_int(net_names[1],var_fig,5,c(T,F)),plot_net_int(net_names[3],var_fig,5,c(T,F)),
+                       plot_net_int(net_names[1],var_fig,6,c(T,F)),plot_net_int(net_names[3],var_fig,6,c(T,F)),
                        nrow = 2, byrow = FALSE)
 
 # Fig 3: combines two networks (Eco-Cyc and PPI)
-fig3 <- wrap_plots(plot_net_int(1,1,str_fig,c(T,F)),plot_net_int(3,1,str_fig,c(T,F)),
-                   plot_net_int(1,2,str_fig,c(T,F)),plot_net_int(3,2,str_fig,c(T,F)),
-                   plot_net_int(1,3,str_fig,c(T,F)),plot_net_int(3,3,str_fig,c(T,F)),
-                   plot_net_int(1,4,str_fig,c(T,F)),plot_net_int(3,4,str_fig,c(T,F)),plot_net_int(1,5,str_fig,c(T,F)),plot_net_int(3,5,str_fig,c(T,F)),
+fig3 <- wrap_plots(plot_net_int(net_names[1],1,str_fig,c(T,F)),plot_net_int(net_names[3],1,str_fig,c(T,F)),
+                   plot_net_int(net_names[1],2,str_fig,c(T,F)),plot_net_int(net_names[3],2,str_fig,c(T,F)),
+                   plot_net_int(net_names[1],3,str_fig,c(T,F)),plot_net_int(net_names[3],3,str_fig,c(T,F)),
+                   plot_net_int(net_names[1],4,str_fig,c(T,F)),plot_net_int(net_names[3],4,str_fig,c(T,F)),plot_net_int(1,5,str_fig,c(T,F)),plot_net_int(3,5,str_fig,c(T,F)),
                    ncol = 4)+ 
   plot_annotation(tag_levels = 'A',tag_suffix = '.')&
   theme(plot.tag.position = c(0, 1),
