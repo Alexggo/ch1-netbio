@@ -675,9 +675,10 @@ fig.4d.allnetworks <- fig.4d.df |>
   theme_minimal()+
   theme(legend.position = "none")+ 
   facet_wrap(.~network)+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))+
   scale_x_discrete(labels = c("1","2","3","4","5", "\u2265 6","Not connected"))
 
-pdf("results/allddi/fig4d_networks.pdf",width = 15,height = 15)
+pdf("results/allddi/fig4d_networks.pdf",width = 10,height = 10)
 fig.4d.allnetworks
 dev.off()
 
