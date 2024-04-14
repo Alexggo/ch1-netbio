@@ -255,7 +255,7 @@ list_netSDB <- lapply(filepath_SDB,read_table)
 list_netSDB <- list_netSDB |> 
   lapply(function(df) {
     df %>%
-      filter(combined_score >= quantile(combined_score, 0.95)) %>%
+      filter(combined_score >= quantile(combined_score, 0.7)) %>%
       select(node1, node2)
   })
 
@@ -271,8 +271,19 @@ list_graphs <- list_net |>
 list_path_conn_deg <- list()
 df_join <- list()
 df_join2 <- list()
+times_list <- list()
+
+times_per_network <- list()
 for (i in seq_along(list_graphs)) {
+  tic()
   print(paste("current network:",i))
+
+  times_vec <- data.frame(measurement=character(),
+                        time=numeric(),
+                        comb=numeric())
+
+  times_list[[i]]<-times_vec
+
   # Calculate target combinations
   target_in_net <- all_t[[i]]
 
@@ -316,6 +327,8 @@ for (i in seq_along(list_graphs)) {
   comb_targets <- t(combn(targets_in_net,2))
   comb_targets |> dim() #net1=45, net2=190,net3=153 target combinations
 
+  comb_num <- dim(comb_targets)[1]
+
   # For a small sample of non-targets
   index_nottargets <- cbind(nodes,ID) |> 
     as.data.frame() |> 
@@ -343,7 +356,11 @@ for (i in seq_along(list_graphs)) {
     shortest.paths(list_graphs[[i]],
                    v = edges[1], to = edges[2])
   })
-  toc()
+  x=toc()$callback_msg
+
+  times_list[[i]] <- rbind(times_list[[i]],
+  c("path.length",x,comb_num))
+  colnames(times_list[[i]])=c("measurement","time_elapsed","comb")
 
   # Calculate connectivity between node combinations
   print("Now doing connectivity")
@@ -352,7 +369,11 @@ for (i in seq_along(list_graphs)) {
     edge_connectivity(list_graphs[[i]],
                       source = edges[1], target = edges[2])
   })
-  toc()
+   x=toc()$callback_msg
+
+  times_list[[i]] <- rbind(times_list[[i]],
+  c("k.edge",x,comb_num))
+  colnames(times_list[[i]])=c("measurement","time_elapsed","comb")
   
   # Calculate node degree number
   unique_tar <- unique(c(comb[,1],comb[,2]))
@@ -360,14 +381,20 @@ for (i in seq_along(list_graphs)) {
   tic()
   deg <-  igraph::degree(list_graphs[[i]],
                         v = unique_tar,mode="all")
-  toc()
-  
+  x=toc()$callback_msg
+  times_list[[i]] <- rbind(times_list[[i]],
+  c("node.deg",x,comb_num))
+  colnames(times_list[[i]])=c("measurement","time_elapsed","comb")  
+
   # Calculate betweeness
   print("Now doing betweeness")
   tic()
   bet <-  igraph::betweenness(list_graphs[[i]],
                         v = unique_tar,directed=FALSE,cutoff = 15)
-  toc()
+  x=toc()$callback_msg
+  times_list[[i]] <- rbind(times_list[[i]],
+  c("betweeness",x,comb_num))
+  colnames(times_list[[i]])=c("measurement","time_elapsed","comb")  
   
   #Are the two nodes adjacent?
   print("Now doing adjancency")
@@ -376,13 +403,19 @@ for (i in seq_along(list_graphs)) {
     are_adjacent(list_graphs[[i]],
                  v1 = edges[1], v2 = edges[2])
   })
-  toc()
+  x=toc()$callback_msg
+  times_list[[i]] <- rbind(times_list[[i]],
+  c("adjacency",x,comb_num))
+  colnames(times_list[[i]])=c("measurement","time_elapsed","comb")  
   
   # Calculate EV centrality
   print("Now doing EV centrality")
   tic()
   evcentr <- evcent(list_graphs[[i]])$vector
-  toc()
+  x=toc()$callback_msg
+  times_list[[i]] <- rbind(times_list[[i]],
+  c("evcentrality",x,comb_num))
+  colnames(times_list[[i]])=c("measurement","time_elapsed","comb")
   
   net_results <- data.frame(N1=comb[,1],
                             N2=comb[,2],
@@ -484,7 +517,11 @@ for (i in seq_along(list_graphs)) {
     }
   }
   df_join2[[i]] <- df_now
+
+  times_per_network[[i]]=toc()$callback_msg
 }
+
+map(times_list,separate,time_elapsed,sep=" ",into=c("time","unit","elapsed"))
 
 #save(df_join2,file="results/df_join2.R")
 #load(file="results/df_join2.R")
