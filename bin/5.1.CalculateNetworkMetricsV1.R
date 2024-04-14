@@ -255,7 +255,7 @@ list_netSDB <- lapply(filepath_SDB,read_table)
 list_netSDB <- list_netSDB |> 
   lapply(function(df) {
     df %>%
-      filter(combined_score >= quantile(combined_score, 0.70)) %>%
+      filter(combined_score >= quantile(combined_score, 0.95)) %>%
       select(node1, node2)
   })
 
