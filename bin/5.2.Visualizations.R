@@ -668,17 +668,18 @@ mod2 |> report()
 mod2.t <- mod2 |> tidy()
 
 fig.4d.allnetworks <- fig.4d.df |>
+  filter(!network%in%net[c(1:3)]) |> 
   ggline(x = "path.length.corr", y = "sigma.rate", add = c("mean_se"),
          group = "network", col="network",linetype = 1)+
   xlab("Minimum path length between connected targets")+
   ylab(expression("Sigma rate ("~Bliss^2/MYA~")"))+
   theme_minimal()+
   theme(legend.position = "none")+ 
-  facet_wrap(.~network)+
+  facet_wrap(.~network,ncol = 4)+
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))+
   scale_x_discrete(labels = c("1","2","3","4","5", "\u2265 6","Not connected"))
 
-pdf("results/allddi/fig4d_networks.pdf",width = 10,height = 10)
+pdf("results/allddi/fig4d_networks.pdf",width = 10,height = 5)
 fig.4d.allnetworks
 dev.off()
 
